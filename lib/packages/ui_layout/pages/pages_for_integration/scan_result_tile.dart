@@ -56,7 +56,7 @@ class ScanResultTile extends StatelessWidget {
                       result.device.disconnect();
                       FlutterBlue.instance.startScan();
                     };
-                    iconState = const Icon(
+                    iconState = Icon(
                       Icons.check,
                     );
                     text = Text(
@@ -70,7 +70,6 @@ class ScanResultTile extends StatelessWidget {
                   case BluetoothDeviceState.disconnected:
                     onPressed = () async {
                       await result.device.connect(
-                        // timeout: Duration(seconds: 2),
                         autoConnect: false,
                       );
 
@@ -130,11 +129,11 @@ class ScanResultTile extends StatelessWidget {
                     Expanded(
                       flex: 10,
                       child: Align(
+                        alignment: Alignment.centerRight,
                         child: ElevatedButton(
                           onPressed: onPressed,
                           child: text,
                         ),
-                        alignment: Alignment.centerRight,
                       ),
                     ),
                   ],

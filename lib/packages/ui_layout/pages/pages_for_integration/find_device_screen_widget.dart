@@ -51,28 +51,28 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ...snapshot.data!.map((r) {
-                          return ScanResultTile(
-                              result: r); //это удалить и добавить ниже
+                          // return ScanResultTile(
+                          //     result: r); //это удалить и добавить ниже
                           ///
-                          //   if (r.device.name.length > 0) {
-                          //     barrier = false;
-                          //     return ScanResultTile(result: r);
-                          //   } else {
-                          //     return Container();
-                          //   }
+                          if (r.device.name.length > 0) {
+                            barrier = false;
+                            return ScanResultTile(result: r);
+                          } else {
+                            return Container();
+                          }
                         }).toList(),
 
                         ///добавиь
-                        // if (barrier)
-                        //   Padding(
-                        //     padding: const EdgeInsets.only(top: 28.0),
-                        //     child: Center(
-                        //       child: CircularProgressIndicator(
-                        //         color: myColorActivity,
-                        //         strokeWidth: 2,
-                        //       ),
-                        //     ),
-                        //   ),
+                        if (barrier)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 28.0),
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: myColorActivity,
+                                strokeWidth: 2,
+                              ),
+                            ),
+                          ),
                       ],
                     );
                   },

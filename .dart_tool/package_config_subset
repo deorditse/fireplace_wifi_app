@@ -222,10 +222,6 @@ mime
 2.12
 file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/mime-1.0.2/
 file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/mime-1.0.2/lib/
-oscilloscope
-2.12
-file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/oscilloscope-0.2.0+1/
-file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/oscilloscope-0.2.0+1/lib/
 package_config
 2.12
 file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/package_config-2.1.0/
@@ -426,6 +422,10 @@ wifi_iot
 2.12
 file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/wifi_iot-0.3.17/
 file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/wifi_iot-0.3.17/lib/
+wifi_scan
+2.12
+file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/wifi_scan-0.4.0+1/
+file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/wifi_scan-0.4.0+1/lib/
 win32
 2.17
 file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/win32-2.7.0/
