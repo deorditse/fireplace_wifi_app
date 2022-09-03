@@ -8,18 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
-class ScanResultTile extends StatefulWidget {
+class ScanResultTile extends StatelessWidget {
   const ScanResultTile({Key? key, required this.result}) : super(key: key);
 
   final ScanResult result;
-
-  @override
-  State<ScanResultTile> createState() => _ScanResultTileState();
-}
-
-class _ScanResultTileState extends State<ScanResultTile> {
-  Text text = Text('');
-  Icon? iconState;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +26,13 @@ class _ScanResultTileState extends State<ScanResultTile> {
               child: Column(
                 children: [
                   Text(
-                    widget.result.device.name,
+                    result.device.name,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   FittedBox(
                     child: Text(
-                      widget.result.device.id.toString(),
+                      result.device.id.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.headline3,
                     ),
@@ -52,33 +44,32 @@ class _ScanResultTileState extends State<ScanResultTile> {
           Expanded(
             flex: 5,
             child: StreamBuilder<BluetoothDeviceState>(
-              stream: widget.result.device.state,
+              stream: result.device.state,
               initialData: BluetoothDeviceState.connecting,
               builder: (c, snapshot) {
                 VoidCallback? onPressed;
-
+                Text text;
+                Icon? iconState;
                 switch (snapshot.data) {
                   case BluetoothDeviceState.connected:
                     onPressed = () {
-                      widget.result.device.disconnect();
+                      result.device.disconnect();
                       FlutterBlue.instance.startScan();
                     };
-                    setState(() {
-                      iconState = const Icon(
-                        Icons.check,
-                      );
-                      text = Text(
-                        'подключено',
-                        style: Theme.of(context).textTheme.headline2!.copyWith(
-                              color: myColorActivity,
-                            ),
-                      );
-                    });
+                    iconState = const Icon(
+                      Icons.check,
+                    );
+                    text = Text(
+                      'подключено',
+                      style: Theme.of(context).textTheme.headline2!.copyWith(
+                            color: myColorActivity,
+                          ),
+                    );
 
                     break;
                   case BluetoothDeviceState.disconnected:
                     onPressed = () async {
-                      await widget.result.device.connect(
+                      await result.device.connect(
                         // timeout: Duration(seconds: 2),
                         autoConnect: false,
                       );
@@ -90,34 +81,31 @@ class _ScanResultTileState extends State<ScanResultTile> {
                       // }
                       Get.to(
                         () => SensorPage(
-                          device: widget.result.device,
+                          device: result.device,
                         ),
                       );
 
                       FlutterBlue.instance.stopScan();
                     };
-                    setState(() {
-                      iconState = null;
-                      text = Text(
-                        'подключить',
-                        style: Theme.of(context).textTheme.headline2!,
-                      );
-                    });
+
+                    iconState = null;
+                    text = Text(
+                      'подключить',
+                      style: Theme.of(context).textTheme.headline2!,
+                    );
 
                     break;
                   case BluetoothDeviceState.connecting:
-                    setState(() {
-                      iconState = const Icon(
-                        Icons.bluetooth_audio_outlined,
-                      );
+                    iconState = const Icon(
+                      Icons.bluetooth_audio_outlined,
+                    );
 
-                      text = Text(
-                        'подключение',
-                        style: Theme.of(context).textTheme.headline2!.copyWith(
-                              color: myColorActivity,
-                            ),
-                      );
-                    });
+                    text = Text(
+                      'подключение',
+                      style: Theme.of(context).textTheme.headline2!.copyWith(
+                            color: myColorActivity,
+                          ),
+                    );
 
                     onPressed = null;
                     break;

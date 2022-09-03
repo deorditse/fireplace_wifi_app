@@ -57,7 +57,7 @@ dependencies:
   hive: ^2.0.6
   hive_flutter: ^1.1.0
   flutter_native_splash: ^2.1.6
-
+  wifi_iot: ^0.3.17
   # для блютуза
   flutter_blue: ^0.8.0
   permission_handler: ^10.0.0 # Разрешение

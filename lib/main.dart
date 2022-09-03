@@ -2,6 +2,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/smartPrime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
+import 'package:fireplace_wifi_app/test_page/test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,6 @@ import 'packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.
 import 'packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/GetX/blue_binding.dart';
 
 Future<void> main() async {
-
   runApp(MainPage());
 }
 
@@ -25,6 +25,7 @@ class MainPage extends StatelessWidget {
       builder: (c, snapshot) {
         final state = snapshot.data;
         return MyGetApp();
+        // return FlutterWifiIoT();
 
         ///расскомментировать
         // return state == BluetoothState.on
