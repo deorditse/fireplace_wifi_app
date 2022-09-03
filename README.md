@@ -1,4 +1,4 @@
-# fire_ble_app
+# fireplace_wifi_app
 
 A new Flutter project.
 

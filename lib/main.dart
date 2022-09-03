@@ -1,23 +1,18 @@
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/main_smartFireA3_1000.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/smartPrime_1000.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
-import 'package:fire_ble_app/packages/ui_layout/test_page/modul_list_devices.dart';
-import 'package:fire_ble_app/packages/ui_layout/widgets/bluetooth_off_screen.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/main_smartFireA3_1000.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/smartPrime_1000.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
-import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fire_ble_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
+import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
 import 'packages/ui_layout/pages/all_pages/smartFireA7_1000/main_smartFireA7_1000.dart';
 import 'packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
 import 'packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/GetX/blue_binding.dart';
 
 Future<void> main() async {
-  // await Hive.initFlutter();
-  // Services.sharedPrefs = await SharedPreferences.getInstance();
-  // WidgetsFlutterBinding.ensureInitialized();
-  // Get.put(BleGetXController());
+
   runApp(MainPage());
 }
 
@@ -52,8 +47,8 @@ class MyGetApp extends StatelessWidget {
       initialBinding: BasicsExampleBinding(),
       //инициируем страницу для проверки подключения блютуза и на все настройки
       theme: themeDark,
-      initialRoute: SmartPrime1000Page.id,
-      // initialRoute: ConnectionToTheFireplacePage.id,
+      // initialRoute: SmartPrime1000Page.id,
+      initialRoute: ConnectionToTheFireplacePage.id,
       getPages: [
         GetPage(
           name: ConnectionToTheFireplacePage.id,

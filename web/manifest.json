@@ -1,6 +1,6 @@
 {
-    "name": "fire_ble_app",
-    "short_name": "fire_ble_app",
+    "name": "fireplace_wifi_app",
+    "short_name": "fireplace_wifi_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

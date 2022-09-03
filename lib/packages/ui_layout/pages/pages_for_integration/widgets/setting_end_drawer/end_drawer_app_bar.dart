@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/business_layout/lib/src/getX/getx_controllers/controller_setting.dart';
+import 'package:fireplace_wifi_app/packages/business_layout/lib/src/getX/getx_controllers/controller_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';

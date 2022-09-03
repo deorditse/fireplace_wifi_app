@@ -1,9 +1,9 @@
-import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
-import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
-import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
-import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar/myAppBar.dart';
-import 'package:fire_ble_app/packages/ui_layout/widgets/navigation_bar/my_navigation_bar.dart';
+import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/widgets/app_bar/myAppBar.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/widgets/navigation_bar/my_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';

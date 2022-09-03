@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/widgets/setting_end_drawer/end_drawer_app_bar.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/setting_end_drawer/end_drawer_app_bar.dart';
 import 'package:flutter/material.dart';
 
 SliverAppBar mySliverMainAppBar(context) => SliverAppBar(

@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 
 Widget myNavigationBar(context) {

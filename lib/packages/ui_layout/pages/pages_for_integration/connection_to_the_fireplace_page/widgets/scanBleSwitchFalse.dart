@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/style_page.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/style_page.dart';
 import 'package:flutter/material.dart';
 
 scanBleSwitchFalse({required context}) {

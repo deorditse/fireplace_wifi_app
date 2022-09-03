@@ -1,10 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fire_ble_app">
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <application
-        android:label="fire_ble_app"
+    package="com.example.fireplace_wifi_app">
+   <application
+        android:label="fireplace_wifi_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -33,6 +30,5 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-
     </application>
 </manifest>

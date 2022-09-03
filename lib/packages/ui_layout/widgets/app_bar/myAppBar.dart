@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
