@@ -3,7 +3,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/smartPrime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/widgets/bluetooth_off_screen.dart';
-import 'package:fireplace_wifi_app/test_page/scan.dart';
+import 'package:fireplace_wifi_app/test_page/scan_result.dart';
 import 'package:fireplace_wifi_app/test_page/wifi_iot.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,10 +23,10 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<ConnectivityResult>(
       stream: Connectivity().onConnectivityChanged,
-      builder: (c,AsyncSnapshot<ConnectivityResult>  snapshot) {
+      builder: (c, AsyncSnapshot<ConnectivityResult> snapshot) {
         final state = snapshot.data;
         return state == ConnectivityResult.wifi
-            ? /*MyGetApp()*/ FlutterWifiIoT()
+            ? /*MyGetApp()*/ MyApp() //FlutterWifiIoT()
             : BluetoothOffScreen(
                 state: state,
                 myContext: context,
