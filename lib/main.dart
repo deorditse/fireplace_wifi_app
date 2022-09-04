@@ -26,7 +26,7 @@ class MainPage extends StatelessWidget {
       builder: (c,AsyncSnapshot<ConnectivityResult>  snapshot) {
         final state = snapshot.data;
         return state == ConnectivityResult.wifi
-            ? /*MyGetApp()*/ MyApp()
+            ? /*MyGetApp()*/ FlutterWifiIoT()
             : BluetoothOffScreen(
                 state: state,
                 myContext: context,
