@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/widgets/rowWithDomain.dart';
@@ -8,10 +9,15 @@ class BluetoothOffScreen extends StatelessWidget {
   BluetoothOffScreen({Key? key, this.state, required BuildContext myContext})
       : super(key: key);
 
-  final BluetoothState? state;
+  final ConnectivityResult? state;
 
   @override
   Widget build(BuildContext context) {
+    final subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      // Got a new connectivity status!
+    });
     return MaterialApp(
       theme: themeDark,
       home: Scaffold(
@@ -27,13 +33,13 @@ class BluetoothOffScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Icon(
-                            Icons.bluetooth_disabled,
+                            Icons.wifi_off,
                             size: 200,
                             color: Colors.white54,
                           ),
                           FittedBox(
                             child: Text(
-                              'Bluetooth ${state != null ? state.toString().substring(15) : 'не включен'}',
+                              'включите Wi-Fi',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline2!

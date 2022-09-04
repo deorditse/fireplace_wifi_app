@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wifi_scan/wifi_scan.dart';
+
 
 /// Example app for wifi_scan plugin.
 class MyApp extends StatefulWidget {
@@ -14,11 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  initState() {
-    super.initState();
-  }
-
   List<WiFiAccessPoint> accessPoints = <WiFiAccessPoint>[];
   StreamSubscription<List<WiFiAccessPoint>>? subscription;
   bool shouldCheckCan = true;
@@ -30,14 +25,13 @@ class _MyAppState extends State<MyApp> {
     if (shouldCheckCan) {
       // check if can-startScan
       final can = await WiFiScan.instance.canStartScan();
-      final result = await WiFiScan.instance.startScan();
-      print(result);
       // if can-not, then show error
       if (can != CanStartScan.yes) {
         if (mounted) kShowSnackBar(context, "Cannot start scan: $can");
         return;
       }
     }
+
     // call startScan API
     final result = await WiFiScan.instance.startScan();
     if (mounted) kShowSnackBar(context, "startScan: $result");
@@ -149,9 +143,9 @@ class _MyAppState extends State<MyApp> {
                     child: accessPoints.isEmpty
                         ? const Text("NO SCANNED RESULTS")
                         : ListView.builder(
-                            itemCount: accessPoints.length,
-                            itemBuilder: (context, i) =>
-                                _AccessPointTile(accessPoint: accessPoints[i])),
+                        itemCount: accessPoints.length,
+                        itemBuilder: (context, i) =>
+                            _AccessPointTile(accessPoint: accessPoints[i])),
                   ),
                 ),
               ],
@@ -174,19 +168,19 @@ class _AccessPointTile extends StatelessWidget {
 
   // build row that can display info, based on label: value pair.
   Widget _buildInfo(String label, dynamic value) => Container(
-        decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.grey)),
+    decoration: const BoxDecoration(
+      border: Border(bottom: BorderSide(color: Colors.grey)),
+    ),
+    child: Row(
+      children: [
+        Text(
+          "$label: ",
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        child: Row(
-          children: [
-            Text(
-              "$label: ",
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Expanded(child: Text(value.toString()))
-          ],
-        ),
-      );
+        Expanded(child: Text(value.toString()))
+      ],
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {

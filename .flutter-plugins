@@ -1,4 +1,9 @@
 # This is a generated file; do not edit or check into version control.
+connectivity_plus=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.6+1/
+connectivity_plus_linux=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_linux-1.3.1/
+connectivity_plus_macos=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_macos-1.2.4/
+connectivity_plus_web=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_web-1.2.3/
+connectivity_plus_windows=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_windows-1.2.2/
 flutter_blue=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/flutter_blue-0.8.0/
 flutter_native_splash=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.2.8/
 path_provider=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11/
@@ -6,7 +11,7 @@ path_provider_android=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/p
 path_provider_ios=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/
 path_provider_linux=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7/
 path_provider_macos=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6/
-path_provider_windows=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.2/
+path_provider_windows=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.3/
 permission_handler=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/permission_handler-10.0.0/
 permission_handler_android=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/permission_handler_android-10.0.0/
 permission_handler_apple=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/permission_handler_apple-9.0.4/

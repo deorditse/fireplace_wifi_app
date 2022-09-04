@@ -2,9 +2,9 @@ import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/smartPrime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
-import 'package:fireplace_wifi_app/test_page/test_page.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/widgets/bluetooth_off_screen.dart';
+import 'package:fireplace_wifi_app/test_page/scan.dart';
 import 'package:fireplace_wifi_app/test_page/wifi_iot.dart';
-import 'package:fireplace_wifi_app/test_page/wifi_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
@@ -12,6 +12,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/style_app/theme_app/custom
 import 'packages/ui_layout/pages/all_pages/smartFireA7_1000/main_smartFireA7_1000.dart';
 import 'packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
 import 'packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/GetX/blue_binding.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 Future<void> main() async {
   runApp(MainPage());
@@ -20,25 +21,18 @@ Future<void> main() async {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FlutterWifiIoT();
-    // return Testic();
-    // return MyApp();
-
-    // return StreamBuilder<BluetoothState>(
-    //   stream: FlutterBlue.instance.state,
-    //   initialData: BluetoothState.unknown,
-    //   builder: (c, snapshot) {
-    //     final state = snapshot.data;
-    //     // return MyGetApp();
-    //     ///расскомментировать
-    //     // return state == BluetoothState.on
-    //     //     ? MyGetApp()
-    //     //     : BluetoothOffScreen(
-    //     //         state: state,
-    //     //         myContext: context,
-    //     //       );
-    //   },
-    // );
+    return StreamBuilder<ConnectivityResult>(
+      stream: Connectivity().onConnectivityChanged,
+      builder: (c,AsyncSnapshot<ConnectivityResult>  snapshot) {
+        final state = snapshot.data;
+        return state == ConnectivityResult.wifi
+            ? /*MyGetApp()*/ MyApp()
+            : BluetoothOffScreen(
+                state: state,
+                myContext: context,
+              );
+      },
+    );
   }
 }
 
