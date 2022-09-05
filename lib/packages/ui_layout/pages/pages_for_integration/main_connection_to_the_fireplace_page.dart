@@ -132,8 +132,14 @@ TextField _myTextField() {
     onSubmitted: (SsidWifi) {
       FireplaceConnectionGetXController.instance
           .searchFireplaceInlistWithIdWifi(wifiBSSID: SsidWifi);
-      String? namePage = FireplaceConnectionGetXController.instance.namePage;
-      namePage != null ? Get.toNamed(namePage, preventDuplicates: false) : null;
+      try {
+        String? namePage = FireplaceConnectionGetXController.instance.namePage;
+        namePage != null
+            ? Get.toNamed(namePage, preventDuplicates: false)
+            : null;
+      } catch (error) {
+        print(error);
+      }
     },
     textAlign: TextAlign.center,
     style: myTextStyleFontRoboto(textColor: myColorActivity, fontSize: 24),

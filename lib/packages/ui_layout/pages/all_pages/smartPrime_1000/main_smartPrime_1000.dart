@@ -22,6 +22,10 @@ class SmartPrime1000Page extends StatefulWidget {
 class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
   @override
   Widget build(BuildContext context) {
+
+    /// обернуть чтобы не было перехода назад
+    // WillPopScope(
+    //       onWillPop: () async => true,
     return Container(
       decoration: myDecorationBackground,
       child: Scaffold(

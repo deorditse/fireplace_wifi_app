@@ -8,14 +8,17 @@ class BlockFireplace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _blockFirePlace(context),
-        SizedBox(height: 15),
-        _timeWork(context),
-        SizedBox(height: 30),
-        Expanded(child: _textField(context)),
-      ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Column(
+        children: [
+          _blockFirePlace(context),
+          SizedBox(height: 15),
+          _timeWork(context),
+          SizedBox(height: 30),
+          Expanded(child: _textField(context)),
+        ],
+      ),
     );
   }
 

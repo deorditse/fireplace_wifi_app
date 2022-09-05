@@ -38,11 +38,15 @@ class FindDeviceScreenWidget extends StatelessWidget {
             if (controllerApp.isFireplaceDetectedInDatabase) {
               return GestureDetector(
                 onTap: () {
-                  String? namePage =
-                      FireplaceConnectionGetXController.instance.namePage;
-                  namePage != null
-                      ? Get.toNamed(namePage, preventDuplicates: false)
-                      : null;
+                  try {
+                    String? namePage =
+                        FireplaceConnectionGetXController.instance.namePage;
+                    namePage != null
+                        ? Get.toNamed(namePage, preventDuplicates: false)
+                        : null;
+                  } catch (error) {
+                    print(error);
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

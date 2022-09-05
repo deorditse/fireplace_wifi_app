@@ -45,6 +45,8 @@ class FireplaceConnectionGetXController extends GetxController {
 
   searchFireplaceInlistWithIdWifi({String? wifiName, String? wifiBSSID}) {
     isLoadingDataIdWifi = true;
+    namePage = null;
+    isFireplaceDetectedInDatabase = false;
     update();
     if (wifiBSSID == listWithIdWifi.elementAt(0)) {
       //smartPrime_1000
