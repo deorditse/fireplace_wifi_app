@@ -28,6 +28,16 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9EFD9D2628C543FC00BAE1FA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +59,10 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EF4F97328C51E1C00A4270F /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		9EF4F97428C51E1C00A4270F /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		9EFD9D1828C543FC00BAE1FA /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		9EFD9D1B28C543FC00BAE1FA /* AppProxyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProxyProvider.swift; sourceTree = "<group>"; };
+		9EFD9D1D28C543FC00BAE1FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EFD9D1E28C543FC00BAE1FA /* test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = test.entitlements; sourceTree = "<group>"; };
 		E4CFA743A0BF0A43DAF5D2D8 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +84,7 @@
 			children = (
 				9EF4F97428C51E1C00A4270F /* ExternalAccessory.framework */,
 				1F125AC6356E864108AF8FF1 /* Pods_Runner.framework */,
+				9EFD9D1828C543FC00BAE1FA /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -90,6 +105,7 @@
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
+				9EFD9D1A28C543FC00BAE1FA /* test */,
 				97C146EF1CF9000F007C117D /* Products */,
 				C869B7561B47E622E3466DF0 /* Pods */,
 				939C9CE83237F66EF82049BC /* Frameworks */,
@@ -120,6 +136,16 @@
 			path = Runner;
 			sourceTree = "<group>";
 		};
+		9EFD9D1A28C543FC00BAE1FA /* test */ = {
+			isa = PBXGroup;
+			children = (
+				9EFD9D1B28C543FC00BAE1FA /* AppProxyProvider.swift */,
+				9EFD9D1D28C543FC00BAE1FA /* Info.plist */,
+				9EFD9D1E28C543FC00BAE1FA /* test.entitlements */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
 		C869B7561B47E622E3466DF0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +171,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				3025A7367E7B45F28D272628 /* [CP] Embed Pods Frameworks */,
+				9EFD9D2628C543FC00BAE1FA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -161,6 +188,10 @@
 		97C146E61CF9000F007C117D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
@@ -360,6 +391,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 71C3618B16BC4FC65EC58A96 /* Pods-Runner.profile.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
@@ -428,7 +460,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -490,6 +522,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4CF34ED8693E0C39BE28E3EA /* Pods-Runner.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
@@ -514,6 +547,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4CFA743A0BF0A43DAF5D2D8 /* Pods-Runner.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;

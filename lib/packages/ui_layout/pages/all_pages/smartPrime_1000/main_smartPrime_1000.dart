@@ -1,18 +1,17 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/myAppBar.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/navigation_bar/my_navigation_bar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/widgets/app_bar/myAppBar.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/widgets/navigation_bar/my_navigation_bar.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
 class SmartPrime1000Page extends StatefulWidget {
   static const String id = '/smartPrime1000Page';
 
-  SmartPrime1000Page({Key? key, this.device}) : super(key: key);
-  BluetoothDevice? device;
+  SmartPrime1000Page({Key? key,}) : super(key: key);
 
   @override
   State<SmartPrime1000Page> createState() => _SmartPrime1000PageState();
@@ -24,6 +23,8 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
     return Container(
       decoration: myDecorationBackground,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        //чтобы клава не сдвигала контент
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Padding(

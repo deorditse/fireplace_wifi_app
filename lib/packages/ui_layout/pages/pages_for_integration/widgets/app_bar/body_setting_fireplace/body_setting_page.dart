@@ -1,5 +1,5 @@
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/rowWithDomain.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/widgets/rowWithDomain.dart';
 import 'package:flutter/material.dart';
 
 class BodySettingPage extends StatelessWidget {

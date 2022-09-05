@@ -1,10 +1,9 @@
+import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/rowWithDomain.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/widgets/switch.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/find_device_screen_widget.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/setting_end_drawer/end_drawer_app_bar.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/widgets/rowWithDomain.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class ConnectionToTheFireplacePage extends StatefulWidget {
   static const String id = '/connectionToTheFireplacePage';
@@ -18,21 +17,13 @@ class ConnectionToTheFireplacePage extends StatefulWidget {
 
 class _ConnectionToTheFireplacePageState
     extends State<ConnectionToTheFireplacePage> {
-
-
-  @override
-  void dispose() {
-    super.dispose();
-    FlutterBlue.instance.stopScan();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: myDecorationBackground,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
-        endDrawer: MyEndDrawer(),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -102,9 +93,15 @@ class _ConnectionToTheFireplacePageState
                 SizedBox(
                   height: 40,
                 ),
-                mySwitchRow(context: context),
                 SizedBox(
                   height: 40,
+                ),
+                Text(
+                  'для теста доступны номера от 1 до 4',
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                  child: _myTextField(),
                 ),
                 FindDeviceScreenWidget(),
                 Expanded(child: SizedBox()),
@@ -116,4 +113,43 @@ class _ConnectionToTheFireplacePageState
       ),
     );
   }
+}
+
+TextField _myTextField() {
+  final textController = TextEditingController();
+  return TextField(
+    controller: textController,
+    onSubmitted: (SsidWifi) {
+      FireplaceConnectionGetXController.instance
+          .searchFireplaceInlistWithIdWifi(wifiBSSID: SsidWifi);
+      String? namePage = FireplaceConnectionGetXController.instance.namePage;
+      namePage != null ? Get.toNamed(namePage, preventDuplicates: false) : null;
+    },
+    textAlign: TextAlign.center,
+    style: myTextStyleFontRoboto(textColor: myColorActivity, fontSize: 24),
+    decoration: InputDecoration(
+      focusColor: myColorActivity,
+      hoverColor: myColorActivity,
+      filled: true,
+      fillColor: myTwoColor,
+      border: UnderlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+    ),
+    // keyboardType: TextInputType.number,
+    keyboardType: TextInputType.visiblePassword,
+    inputFormatters: <TextInputFormatter>[
+      FilteringTextInputFormatter.singleLineFormatter,
+    ],
+    // obscureText: false,
+
+    //
+    // keyboardType: TextInputType.number,
+    // inputFormatters: <TextInputFormatter>[
+    //   FilteringTextInputFormatter.singleLineFormatter,
+    // ],
+    // obscureText: true,
+    // obscuringCharacter: '*',
+
+    cursorColor: myColorActivity,
+  );
 }
