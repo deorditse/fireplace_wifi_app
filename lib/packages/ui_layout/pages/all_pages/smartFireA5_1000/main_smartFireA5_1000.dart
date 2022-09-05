@@ -1,3 +1,4 @@
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 
 class SmartFireA51000Page extends StatefulWidget {
@@ -14,7 +15,8 @@ class _SmartFireA51000PageState extends State<SmartFireA51000Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text('hello'),
+        decoration: myDecorationBackground,
+        child: Text('smartFireA51000Page'),
       ),
     );
   }

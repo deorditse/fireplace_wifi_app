@@ -9,8 +9,8 @@ class FindDeviceScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.width / 2,
+    return SizedBox(
+      height: MediaQuery.of(context).size.width / 3,
       width: MediaQuery.of(context).size.width,
       child: MyContainerAlert(
         child: GetBuilder<FireplaceConnectionGetXController>(
@@ -36,7 +36,48 @@ class FindDeviceScreenWidget extends StatelessWidget {
             );
           } else {
             if (controllerApp.isFireplaceDetectedInDatabase) {
-              return Text('подключено');
+              return GestureDetector(
+                onTap: () {
+                  String? namePage =
+                      FireplaceConnectionGetXController.instance.namePage;
+                  namePage != null
+                      ? Get.toNamed(namePage, preventDuplicates: false)
+                      : null;
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${controllerApp.wifiName}',
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.headline2,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: FittedBox(
+                          child: Text(
+                            'подключено',
+                            style:
+                                Theme.of(context).textTheme.headline2!.copyWith(
+                                      color: myColorActivity,
+                                    ),
+                          ),
+                        ),
+                      ),
+                      FittedBox(
+                        child: Icon(
+                          Icons.keyboard_arrow_right,
+                          color: myColorActivity,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             } else {
               return Text(
                 'Камин ${controllerApp.wifiName} не распознан',

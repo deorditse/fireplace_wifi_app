@@ -97,13 +97,22 @@ class _ConnectionToTheFireplacePageState
                 SizedBox(
                   height: 40,
                 ),
+
+                ///delete
                 Text(
-                  'для теста доступны номера от 1 до 4',
+                  'имитация получения SSID, для теста номера от 1 до 4',
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 120.0,
+                  ),
                   child: _myTextField(),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+
+                ///
                 FindDeviceScreenWidget(),
                 Expanded(child: SizedBox()),
                 rowWithDomain(context: context),
