@@ -105,22 +105,6 @@ class MainContent1000Page extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              MyContainerAlert(
-                child: Text(
-                  'камин готов к работе',
-                  style: myTextStyleFontRoboto(
-                    fontSize: 24,
-                    textColor: myTwoColor,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              timeWorkFireplace(context),
-              SizedBox(
-                height: 20,
-              ),
               Expanded(
                 child: ButtonPlayStopPauseFireplace(),
               ),
@@ -141,30 +125,71 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
     return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) {
         if (controllerApp.isPlayFireplace == false) {
-          return Align(
-            alignment: Alignment.topCenter,
-            child: GestureDetector(
-              onTap: () {
-                controllerApp.playFireplace();
-              },
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: MediaQuery.of(context).size.width / 8,
-                child: Image.asset(
-                  'assets/button_fireplace/play.png',
-                  fit: BoxFit.none,
-                  scale: 2.7,
-                ),
+          return noIsPlayFireplaceBodyScreen(context);
+        } else {
+          return playFireplaceBodyScreen(context);
+        }
+      },
+    );
+  }
+
+  alertAndTimerOnBodyScreen(context, {required String textAlert}) {
+    return Column(
+      children: [
+        MyContainerAlert(
+          child: Text(
+            textAlert,
+            style: myTextStyleFontRoboto(
+              fontSize: 24,
+              textColor: myTwoColor,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        timeWorkFireplace(context),
+      ],
+    );
+  }
+
+  Column noIsPlayFireplaceBodyScreen(context) {
+    return Column(
+      children: [
+        alertAndTimerOnBodyScreen(context, textAlert: 'камин готов к работе'),
+        Align(
+          alignment: Alignment.topCenter,
+          child: GestureDetector(
+            onTap: () {
+              FireplaceConnectionGetXController.instance.playFireplace();
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              radius: MediaQuery.of(context).size.width / 4,
+              child: Image.asset(
+                'assets/button_fireplace/play.png',
+                fit: BoxFit.cover,
+                // scale: 2.7,
               ),
             ),
-          );
-        } else {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column playFireplaceBodyScreen(context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        alertAndTimerOnBodyScreen(context, textAlert: 'уровень пламени NORM'),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
                 onTap: () {
-                  controllerApp.stopFireplace();
+                  FireplaceConnectionGetXController.instance.stopFireplace();
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
@@ -178,7 +203,7 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  controllerApp.stopFireplace();
+                  FireplaceConnectionGetXController.instance.stopFireplace();
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
@@ -192,7 +217,7 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  controllerApp.stopFireplace();
+                  FireplaceConnectionGetXController.instance.stopFireplace();
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
@@ -204,20 +229,10 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Align(
-              //   alignment: Alignment.bottomCenter,
-              //   child: Image.asset(
-              //     'assets/button_fireplace/eco.png',
-              //     fit: BoxFit.cover,
-              //     width: MediaQuery.of(context).size.width / 2,
-              //     height: MediaQuery.of(context).size.width / 2, // width: 50,
-              //   ),
-              // ),
             ],
-          );
-        }
-      },
+          ),
+        ),
+      ],
     );
   }
 }
