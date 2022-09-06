@@ -8,10 +8,9 @@ import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:io';
 
-//каждый раз при изменении запускать кодогенерацию
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
-//чтобы зарегистрировать как фабрику для GetIt и обращаться к сервис локатору через  MainSimpleStateManagement
 
+// в этом файле лежат общие настройки состояний для всех моделей, c отдельными модификациями будет свои контроллеры у каждой модели
 class FireplaceConnectionGetXController extends GetxController {
   static FireplaceConnectionGetXController instance = Get.find();
 
@@ -21,9 +20,16 @@ class FireplaceConnectionGetXController extends GetxController {
     //сразу проверю данные сети, в которой нахожусь
     _initNetworkInfo().then((_) {
       ///сделать поиск по id камина вызовом searchFireplaceInlistWithIdWifi
+      ///первым делом проверять id локальной сети телефона mapLocalNetworkNameAndIdWifi, только потом иммутабельные данные listWithIdWifi
       //  searchFireplaceInlistWithIdWifi(wifiName: wifiName, wifiBSSID: wifiBSSID);
     });
   }
+
+  //тут будут лежать id каминов
+  Set<String> listWithIdWifi = {'1', '2', '3', '4'};
+
+  //для локальной сети id каминов - сравнение в первую очередь
+  Map<String, String> mapLocalNetworkNameAndIdWifi = {};
 
   //кнопка настроек нажата?
   Rx<bool> isSettingButton = false.obs;
@@ -55,12 +61,23 @@ class FireplaceConnectionGetXController extends GetxController {
   //если ошибка топливной системы
   bool fuelSystemError = false;
 
-  playFireplace() {
+  //звук нажатия кнопок
+  bool isButtonClickSound = true;
+
+  String wifiName = '';
+  String wifiBSSID = '';
+
+  void enableButtonPressSound() {
+    isButtonClickSound = !isButtonClickSound;
+    update();
+  }
+
+  void playFireplace() {
     isPlayFireplace = true;
     update();
   }
 
-  stopFireplace() async {
+  void stopFireplace() async {
     //запуск озлаждения камина
     await startCoolingFireplace();
     //после чего обновляем стейт
@@ -80,16 +97,7 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
-  String wifiName = '';
-  String wifiBSSID = '';
-
-  //тут будут лежать id каминов
-  Set<String> listWithIdWifi = {'1', '2', '3', '4'};
-
-  //для локальной сети id каминов - сравнение в первую очередь
-  Map<String, String> mapLocalNetworkNameAndIdWifi = {};
-
-  searchFireplaceInlistWithIdWifi({String? wifiName, String? wifiBSSID}) {
+  void searchFireplaceInListWithIdWifi({String? wifiName, String? wifiBSSID}) {
     isLoadingDataIdWifi = true;
     namePage = null;
     isFireplaceDetectedInDatabase = false;
@@ -134,7 +142,7 @@ class FireplaceConnectionGetXController extends GetxController {
     update();
   }
 
-  //получение данных о сети wifi
+  //получение данных о сети wifi через пакет network_info_plus
   Future<void> _initNetworkInfo() async {
     final NetworkInfo _networkInfo = NetworkInfo();
     String? thisWifiName,

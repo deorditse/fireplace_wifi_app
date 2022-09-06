@@ -5,5 +5,6 @@ import 'package:get/get.dart';
 //чтобы зарегистрировать как фабрику для GetIt и обращаться к сервис локатору через  MainSimpleStateManagement
 
 class MyGetXControllerSmartFireA31000 extends GetxController {
-
+//отдельный функционал для этой модели
+//после тестов вынести на слой бизнес логики
 }

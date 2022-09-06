@@ -98,7 +98,7 @@ class _ConnectionToTheFireplacePageState
                   height: 40,
                 ),
 
-                ///delete
+                ///delete after testing
                 Text(
                   'имитация получения SSID, для теста номера от 1 до 4',
                 ),
@@ -125,13 +125,14 @@ class _ConnectionToTheFireplacePageState
   }
 }
 
+///delete after testing
 TextField _myTextField() {
   final textController = TextEditingController();
   return TextField(
     controller: textController,
     onSubmitted: (SsidWifi) {
       FireplaceConnectionGetXController.instance
-          .searchFireplaceInlistWithIdWifi(wifiBSSID: SsidWifi);
+          .searchFireplaceInListWithIdWifi(wifiBSSID: SsidWifi);
       try {
         String? namePage = FireplaceConnectionGetXController.instance.namePage;
         namePage != null
@@ -151,21 +152,10 @@ TextField _myTextField() {
       border: UnderlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
     ),
-    // keyboardType: TextInputType.number,
     keyboardType: TextInputType.visiblePassword,
     inputFormatters: <TextInputFormatter>[
       FilteringTextInputFormatter.singleLineFormatter,
     ],
-    // obscureText: false,
-
-    //
-    // keyboardType: TextInputType.number,
-    // inputFormatters: <TextInputFormatter>[
-    //   FilteringTextInputFormatter.singleLineFormatter,
-    // ],
-    // obscureText: true,
-    // obscuringCharacter: '*',
-
     cursorColor: myColorActivity,
   );
 }

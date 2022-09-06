@@ -124,10 +124,12 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) {
-        if (controllerApp.isPlayFireplace == false) {
+        if (controllerApp.isPlayFireplace == false &&
+            !controllerApp.fuelSystemError) {
           //если камин не запущен
           return const NoIsPlayFireplaceBodyScreen();
-        } else if (controllerApp.isCoolingFireplace) {
+        } else if (controllerApp.isCoolingFireplace &&
+            !controllerApp.fuelSystemError) {
           //если камин в режиме охлаждения
           return Announcement(
             message: 'охлаждение камина',
@@ -159,9 +161,7 @@ alertAndTimerOnBodyScreen(context, {required String textAlert}) {
           ),
         ),
       ),
-      SizedBox(
-        height: 10,
-      ),
+      SizedBox(height: 10),
       timeWorkFireplace(context),
     ],
   );
@@ -324,7 +324,7 @@ class Announcement extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         MyContainerAlert(
-          colorBorder: borderColor ?? myTwoColor,
+          colorBorder: borderColor ?? Theme.of(context).primaryColor,
           child: Text(
             message,
             style: myTextStyleFontRoboto(
