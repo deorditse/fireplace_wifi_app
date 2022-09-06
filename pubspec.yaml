@@ -92,6 +92,7 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/button_fireplace/
   fonts:
     - family: Roboto
       fonts:

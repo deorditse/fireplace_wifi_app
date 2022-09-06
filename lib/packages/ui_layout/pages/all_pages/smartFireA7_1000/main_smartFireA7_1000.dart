@@ -1,3 +1,4 @@
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/myAppBar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
@@ -35,4 +36,8 @@ class _SmartFireA71000PageState extends State<SmartFireA71000Page> {
       ),
     );
   }
+}
+
+class TestFire extends SmartPrime1000Page{
+  TestFire({super.key});
 }

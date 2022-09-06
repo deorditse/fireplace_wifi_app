@@ -7,9 +7,10 @@ class BodySettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SafeArea(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
@@ -36,6 +37,7 @@ class BodySettingPage extends StatelessWidget {
             child: SizedBox(),
           ),
           rowWithDomain(context: context),
+
         ],
       ),
     );

@@ -3,10 +3,14 @@ import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integratio
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/myAppBar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/navigation_bar/my_navigation_bar.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/time_work_fiireplace.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/tittle_fireplace_model_name.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+String _titleModel = 'Модель: Smart Prime 1000';
 
 class SmartPrime1000Page extends StatefulWidget {
   static const String id = '/smartPrime1000Page';
@@ -22,7 +26,6 @@ class SmartPrime1000Page extends StatefulWidget {
 class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
   @override
   Widget build(BuildContext context) {
-
     /// обернуть чтобы не было перехода назад
     // WillPopScope(
     //       onWillPop: () async => true,
@@ -49,16 +52,6 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
   }
 }
 
-myTitleModel() {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 8.0),
-    child: Text(
-      'Модель: Smart Prime 1000',
-      style: myTextStyleFontRoboto(fontSize: 14),
-    ),
-  );
-}
-
 class BodyContent extends StatelessWidget {
   const BodyContent({Key? key}) : super(key: key);
 
@@ -70,11 +63,12 @@ class BodyContent extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Obx(() {
             if (FireplaceConnectionGetXController.instance.isBlocButton.value) {
+              //если камин заблокирован
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  myTitleModel(),
-                  Expanded(
+                  myTitleModel(titleModel: _titleModel),
+                  const Expanded(
                     child: Center(
                       child: BlockFireplace(),
                     ),
@@ -85,24 +79,145 @@ class BodyContent extends StatelessWidget {
             } else {
               if (FireplaceConnectionGetXController
                   .instance.isSettingButton.value) {
-                return BodySettingPage();
+                //если нажата кнопка настройки
+                return const BodySettingPage();
               } else {
-                return Column(
-                  children: [
-                    myTitleModel(),
-                    Expanded(
-                      child: Center(
-                        child: Text('основной контент'),
-                      ),
-                    ),
-                    myNavigationBar(context),
-                  ],
-                );
+                //основной контент
+                return MainContent1000Page();
               }
             }
           }),
         ),
       ),
+    );
+  }
+}
+
+class MainContent1000Page extends StatelessWidget {
+  const MainContent1000Page({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        myTitleModel(titleModel: _titleModel),
+        Expanded(
+          child: Column(
+            children: [
+              MyContainerAlert(
+                child: Text(
+                  'камин готов к работе',
+                  style: myTextStyleFontRoboto(
+                    fontSize: 24,
+                    textColor: myTwoColor,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              timeWorkFireplace(context),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: ButtonPlayStopPauseFireplace(),
+              ),
+            ],
+          ),
+        ),
+        myNavigationBar(context),
+      ],
+    );
+  }
+}
+
+class ButtonPlayStopPauseFireplace extends StatelessWidget {
+  const ButtonPlayStopPauseFireplace({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<FireplaceConnectionGetXController>(
+      builder: (controllerApp) {
+        if (controllerApp.isPlayFireplace == false) {
+          return Align(
+            alignment: Alignment.topCenter,
+            child: GestureDetector(
+              onTap: () {
+                controllerApp.playFireplace();
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: MediaQuery.of(context).size.width / 8,
+                child: Image.asset(
+                  'assets/button_fireplace/play.png',
+                  fit: BoxFit.none,
+                  scale: 2.7,
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  controllerApp.stopFireplace();
+                },
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: MediaQuery.of(context).size.width / 8,
+                  child: Image.asset(
+                    'assets/button_fireplace/stop.png',
+                    fit: BoxFit.none,
+                    scale: 2.7,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  controllerApp.stopFireplace();
+                },
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: MediaQuery.of(context).size.width / 8,
+                  child: Image.asset(
+                    'assets/button_fireplace/norm.png',
+                    fit: BoxFit.none,
+                    scale: 2.7,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  controllerApp.stopFireplace();
+                },
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: MediaQuery.of(context).size.width / 8,
+                  child: Image.asset(
+                    'assets/button_fireplace/eco.png',
+                    fit: BoxFit.none,
+                    scale: 2.7,
+                  ),
+                ),
+              ),
+
+              // Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Image.asset(
+              //     'assets/button_fireplace/eco.png',
+              //     fit: BoxFit.cover,
+              //     width: MediaQuery.of(context).size.width / 2,
+              //     height: MediaQuery.of(context).size.width / 2, // width: 50,
+              //   ),
+              // ),
+            ],
+          );
+        }
+      },
     );
   }
 }

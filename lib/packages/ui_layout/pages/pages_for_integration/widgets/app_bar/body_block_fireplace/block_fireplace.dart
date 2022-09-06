@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/time_work_fiireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,14 +11,16 @@ class BlockFireplace extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
-      child: Column(
-        children: [
-          _blockFirePlace(context),
-          SizedBox(height: 15),
-          _timeWork(context),
-          SizedBox(height: 30),
-          Expanded(child: _textField(context)),
-        ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            _blockFirePlace(context),
+            SizedBox(height: 15),
+            timeWorkFireplace(context),
+            SizedBox(height: 30),
+            Expanded(child: _textField(context)),
+          ],
+        ),
       ),
     );
   }
@@ -30,32 +33,6 @@ class BlockFireplace extends StatelessWidget {
             fontSize: 24,
             textColor: myColorActivity,
           )),
-    );
-  }
-
-  Widget _timeWork(BuildContext context) {
-    return MyContainerAlert(
-      width: MediaQuery.of(context).size.width * 0.7,
-      child: FittedBox(
-        child: Column(
-          children: [
-            Text(
-              'время работы',
-              style: myTextStyleFontSarpanch(
-                fontSize: 24,
-                textColor: myTwoColor,
-              ),
-            ),
-            Text(
-              '00:00:00',
-              style: myTextStyleFontSarpanch(
-                fontSize: 24,
-                textColor: myTwoColor,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

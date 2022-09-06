@@ -28,6 +28,17 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isLoadingDataIdWifi = true;
   bool isFireplaceDetectedInDatabase = false;
   String? namePage;
+  bool isPlayFireplace = false;
+
+  playFireplace() {
+    isPlayFireplace = true;
+    update();
+  }
+
+  stopFireplace() {
+    isPlayFireplace = false;
+    update();
+  }
 
   String wifiName = '';
   String wifiBSSID = '';

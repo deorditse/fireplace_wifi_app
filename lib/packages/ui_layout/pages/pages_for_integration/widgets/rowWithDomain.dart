@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 rowWithDomain({context}) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Image.asset(
           'assets/icons/premium-icon-internet-3710036 1 (Traced).png',
