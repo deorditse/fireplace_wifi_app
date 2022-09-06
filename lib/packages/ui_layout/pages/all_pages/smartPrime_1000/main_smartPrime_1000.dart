@@ -125,35 +125,53 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
     return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) {
         if (controllerApp.isPlayFireplace == false) {
-          return noIsPlayFireplaceBodyScreen(context);
+          //если камин не запущен
+          return const NoIsPlayFireplaceBodyScreen();
+        } else if (controllerApp.isCoolingFireplace) {
+          //если камин в режиме охлаждения
+          return Announcement(
+            message: 'охлаждение камина',
+          );
+        } else if (controllerApp.fuelSystemError) {
+          //если ОШИБКА
+          return Announcement(
+            message: 'ОШИБКА: неисправность\nтопливной системы!!!',
+            borderColor: myColorActivity,
+          );
         } else {
-          return playFireplaceBodyScreen(context);
+          //если камин запущен
+          return const PlayFireplaceBodyScreen();
         }
       },
     );
   }
+}
 
-  alertAndTimerOnBodyScreen(context, {required String textAlert}) {
-    return Column(
-      children: [
-        MyContainerAlert(
-          child: Text(
-            textAlert,
-            style: myTextStyleFontRoboto(
-              fontSize: 24,
-              textColor: myTwoColor,
-            ),
+alertAndTimerOnBodyScreen(context, {required String textAlert}) {
+  return Column(
+    children: [
+      MyContainerAlert(
+        child: Text(
+          textAlert,
+          style: myTextStyleFontRoboto(
+            fontSize: 24,
+            textColor: myTwoColor,
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
-        timeWorkFireplace(context),
-      ],
-    );
-  }
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      timeWorkFireplace(context),
+    ],
+  );
+}
 
-  Column noIsPlayFireplaceBodyScreen(context) {
+class NoIsPlayFireplaceBodyScreen extends StatelessWidget {
+  const NoIsPlayFireplaceBodyScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         alertAndTimerOnBodyScreen(context, textAlert: 'камин готов к работе'),
@@ -161,6 +179,7 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: GestureDetector(
             onTap: () {
+              //playFireplace
               FireplaceConnectionGetXController.instance.playFireplace();
             },
             child: CircleAvatar(
@@ -177,8 +196,24 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
       ],
     );
   }
+}
 
-  Column playFireplaceBodyScreen(context) {
+class FuelSystemError extends StatelessWidget {
+  const FuelSystemError({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class PlayFireplaceBodyScreen extends StatelessWidget {
+  const PlayFireplaceBodyScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Rx<bool> _diactivateButton = true.obs;
+    Color _colorTextButtonBlack = Color.fromRGBO(25, 25, 25, 1);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -189,6 +224,7 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
+                  //stopFireplace
                   FireplaceConnectionGetXController.instance.stopFireplace();
                 },
                 child: CircleAvatar(
@@ -203,33 +239,99 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  FireplaceConnectionGetXController.instance.stopFireplace();
+                  _diactivateButton.value = !_diactivateButton.value;
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   radius: MediaQuery.of(context).size.width / 8,
-                  child: Image.asset(
-                    'assets/button_fireplace/norm.png',
-                    fit: BoxFit.none,
-                    scale: 2.7,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Image.asset(
+                        'assets/button_fireplace/clear_button.png',
+                        fit: BoxFit.none,
+                        scale: 2.7,
+                      ),
+                      Obx(
+                        () => Positioned(
+                          top: MediaQuery.of(context).size.width / 10,
+                          child: Text(
+                            'NORM',
+                            style: myTextStyleFontRoboto(
+                              fontSize: 12,
+                              textColor: _diactivateButton.value
+                                  ? myColorActivity
+                                  : _colorTextButtonBlack,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  FireplaceConnectionGetXController.instance.stopFireplace();
+                  // FireplaceConnectionGetXController.instance.stopFireplace();
+                  _diactivateButton.value = !_diactivateButton.value;
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   radius: MediaQuery.of(context).size.width / 8,
-                  child: Image.asset(
-                    'assets/button_fireplace/eco.png',
-                    fit: BoxFit.none,
-                    scale: 2.7,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Image.asset(
+                        'assets/button_fireplace/clear_button.png',
+                        fit: BoxFit.none,
+                        scale: 2.7,
+                      ),
+                      Obx(
+                        () => Positioned(
+                          top: MediaQuery.of(context).size.width / 10,
+                          child: Text(
+                            'ECO',
+                            style: myTextStyleFontRoboto(
+                              fontSize: 12,
+                              textColor: _diactivateButton.value
+                                  ? _colorTextButtonBlack
+                                  : myColorActivity,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Announcement extends StatelessWidget {
+  Announcement({Key? key, this.borderColor, required this.message})
+      : super(key: key);
+  Color? borderColor;
+  String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        MyContainerAlert(
+          colorBorder: borderColor ?? myTwoColor,
+          child: Text(
+            message,
+            style: myTextStyleFontRoboto(
+              fontSize: 24,
+              textColor: borderColor ?? myTwoColor,
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
       ],

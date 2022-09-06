@@ -25,19 +25,59 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
+  //кнопка настроек нажата?
+  Rx<bool> isSettingButton = false.obs;
+
+  //кнопка блокирования экрана нажата?
+  Rx<bool> isBlocButton = false.obs;
+
+  //заданный пользователем пароль - сохранить в локальную базу
+  int? passwordBlock = 5539;
+
+  //пароль, который приходит с тектового поля
+  TextEditingController textFieldPassword = TextEditingController();
+
+  //загрузка данных фай фай
   bool isLoadingDataIdWifi = true;
+
+  //если обнаружен id в базе
   bool isFireplaceDetectedInDatabase = false;
+
+  //имя страницы для перехода к модели камина
   String? namePage;
+
+  //камин запущен?
   bool isPlayFireplace = false;
+
+  //охлаждение камина начато?
+  bool isCoolingFireplace = false;
+
+  //если ошибка топливной системы
+  bool fuelSystemError = false;
 
   playFireplace() {
     isPlayFireplace = true;
     update();
   }
 
-  stopFireplace() {
+  stopFireplace() async {
+    //запуск озлаждения камина
+    await startCoolingFireplace();
+    //после чего обновляем стейт
     isPlayFireplace = false;
     update();
+  }
+
+  //запуск озлаждения камина
+  Future<void> startCoolingFireplace() async {
+    isCoolingFireplace = true;
+    update();
+    await Future.delayed(
+      Duration(seconds: 3),
+    ).then((value) {
+      isCoolingFireplace = false;
+      update();
+    });
   }
 
   String wifiName = '';
@@ -46,13 +86,8 @@ class FireplaceConnectionGetXController extends GetxController {
   //тут будут лежать id каминов
   Set<String> listWithIdWifi = {'1', '2', '3', '4'};
 
-  //для локальной сети
+  //для локальной сети id каминов - сравнение в первую очередь
   Map<String, String> mapLocalNetworkNameAndIdWifi = {};
-
-  Rx<bool> isSettingButton = false.obs;
-  Rx<bool> isBlocButton = false.obs;
-  int? passwordBlock = 5539;
-  TextEditingController textFieldPassword = TextEditingController();
 
   searchFireplaceInlistWithIdWifi({String? wifiName, String? wifiBSSID}) {
     isLoadingDataIdWifi = true;
