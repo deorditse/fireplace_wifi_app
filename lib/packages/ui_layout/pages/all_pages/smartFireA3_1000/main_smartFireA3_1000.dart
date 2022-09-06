@@ -27,7 +27,7 @@ class _SmartFireA31000PageState extends State<SmartFireA31000Page> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 mySettingAppBar(context: context),
-                Text('smartFireA31000Page'),
+                const Text('smartFireA31000Page'),
               ],
             ),
           ),

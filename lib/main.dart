@@ -1,7 +1,11 @@
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/GetX_state_device_smartFireA3_1000/binding_smartFireA3_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/main_smartFireA3_1000.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/GetX_state_device_smartFireA5_1000/binding_smartFireA5_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA7_1000/GetX_state_device_smartFireA7_1000/binding_smartFireA7_1000.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/GetX_state_device_smartPrime_1000/binding_smartPrime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/wifi_off_screen.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/wifi_off_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
@@ -47,25 +51,14 @@ class MyGetApp extends StatelessWidget {
         GetPage(
           name: ConnectionToTheFireplacePage.id,
           page: () => ConnectionToTheFireplacePage(),
-          bindings: [
-            BasicsExampleBinding(),
-            // BleBinding(),
-          ],
+          binding: BasicsExampleBinding(),
         ),
         GetPage(
           name: SmartPrime1000Page.id,
           page: () => SmartPrime1000Page(),
           bindings: [
             BasicsExampleBinding(),
-            // BleBinding(),
-          ],
-        ),
-
-        GetPage(
-          name: SmartPrime1000Page.id,
-          page: () => SmartPrime1000Page(),
-          bindings: [
-            // BleBinding(),
+            BindingSmartPrime1000(),
           ],
         ),
         GetPage(
@@ -73,7 +66,7 @@ class MyGetApp extends StatelessWidget {
           page: () => SmartFireA71000Page(),
           bindings: [
             BasicsExampleBinding(),
-            // BleBinding(),
+            BindingSmartFireA71000(),
           ],
         ),
         GetPage(
@@ -81,7 +74,7 @@ class MyGetApp extends StatelessWidget {
           page: () => SmartFireA51000Page(),
           bindings: [
             BasicsExampleBinding(),
-            // BleBinding(),
+            BindingSmartFireA51000(),
           ],
         ),
         GetPage(
@@ -89,14 +82,9 @@ class MyGetApp extends StatelessWidget {
           page: () => SmartFireA31000Page(),
           bindings: [
             BasicsExampleBinding(),
-            // BleBinding(),
+            BindingSmartFireA31000(),
           ],
         ),
-        // GetPage(
-        //   name: FlutterBlueApp.id,
-        //   page: () => FlutterBlueApp(),
-        //   // binding: BasicsExampleBinding(),
-        // ),
       ],
     );
   }

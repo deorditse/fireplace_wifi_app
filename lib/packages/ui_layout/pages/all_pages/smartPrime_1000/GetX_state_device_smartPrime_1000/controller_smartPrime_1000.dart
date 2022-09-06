@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 //чтобы зарегистрировать как фабрику для GetIt и обращаться к сервис локатору через  MainSimpleStateManagement
 
 class MyGetXControllerSmartPrime1000 extends GetxController {
+  MyGetXControllerSmartPrime1000 instance = Get.find();
+
 //отдельный функционал для этой модели
 //после тестов вынести на слой бизнес логики
 }

@@ -5,8 +5,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/style_app/theme_app/custom
 import 'package:flutter/material.dart';
 
 class WifiOffScreen extends StatelessWidget {
-  WifiOffScreen({Key? key, this.state})
-      : super(key: key);
+  const WifiOffScreen({Key? key, this.state}) : super(key: key);
 
   final ConnectivityResult? state;
 
@@ -26,7 +25,7 @@ class WifiOffScreen extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Icon(
+                          const Icon(
                             Icons.wifi_off,
                             size: 200,
                             color: Colors.white54,

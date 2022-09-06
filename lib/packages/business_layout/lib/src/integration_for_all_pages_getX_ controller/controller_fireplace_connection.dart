@@ -90,7 +90,7 @@ class FireplaceConnectionGetXController extends GetxController {
     isCoolingFireplace = true;
     update();
     await Future.delayed(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
     ).then((value) {
       isCoolingFireplace = false;
       update();
