@@ -1,5 +1,4 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/navigation_bar/my_navigation_bar.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 
 Widget navigationBarSmartFireA5_1000(BuildContext context) {
@@ -25,8 +24,16 @@ Widget navigationBarSmartFireA5_1000(BuildContext context) {
               SizedBox(
                 width: 20,
               ),
-              temperature(),
-              wet(),
+              iconValueDescription(
+                iconPath: 'assets/icons/temperature.png',
+                value: '24°C',
+                description: 'температура',
+              ),
+              iconValueDescription(
+                iconPath: 'assets/icons/wet.png',
+                value: '45%',
+                description: 'влажность',
+              ),
             ],
           ),
         )

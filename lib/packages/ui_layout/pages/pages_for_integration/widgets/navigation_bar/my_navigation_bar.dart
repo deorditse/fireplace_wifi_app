@@ -3,33 +3,30 @@ import 'package:flutter/cupertino.dart';
 
 Image imageOil() => Image.asset(
       'assets/icons/oil.png',
-      fit: BoxFit.fill,
+      fit: BoxFit.cover,
     );
 
 Text percentOil() => Text(
       '100%',
-      style: myTextStyleFontSarpanch(fontSize: 36),
+      style: myTextStyleFontSarpanch(fontSize: 30),
+      textAlign: TextAlign.center,
     );
 
 Widget myNavigationBar(context) {
   return SizedBox(
     height: MediaQuery.of(context).size.height / 9,
     child: Row(
-      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Flexible(
+        Expanded(
           flex: 2,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: imageOil(),
-                ),
+                child: imageOil(),
               ),
               SizedBox(
                 width: 10,
@@ -41,17 +38,25 @@ Widget myNavigationBar(context) {
             ],
           ),
         ),
-        Flexible(
+        Expanded(
           flex: 1,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              temperature(),
+              iconValueDescription(
+                iconPath: 'assets/icons/temperature.png',
+                value: '24°C',
+                description: 'температура',
+              ),
               SizedBox(
                 height: 15,
               ),
-              wet(),
+              iconValueDescription(
+                iconPath: 'assets/icons/wet.png',
+                value: '45%',
+                description: 'влажность',
+              ),
             ],
           ),
         ),
@@ -60,97 +65,49 @@ Widget myNavigationBar(context) {
   );
 }
 
-temperature() {
+Widget iconValueDescription(
+    {required String iconPath, required value, required String description}) {
   return Flexible(
-    child: Column(
-      // crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.end,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Flexible(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(
-                width: 20,
-                child: FittedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/icons/temperature.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: Text(
-                  '24°C',
-                  style: myTextStyleFontSarpanch(fontSize: 24),
-                ),
-              ),
-            ],
+        FittedBox(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 18.0, right: 8.0, bottom: 18),
+            child: Image.asset(
+              iconPath,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-        // SizedBox(height: 10,),
-        Text(
-          'температура',
-          style: myTextStyleFontSarpanch(
-            fontSize: 14,
-            textColor: myTreeColor,
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-wet() {
-  return Flexible(
-    child: Column(
-      // crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
         Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
+          // flex: 3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                width: 20,
-                child: FittedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/icons/wet.png',
-                      fit: BoxFit.contain,
-                      // width: 50,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
               Expanded(
                 child: Text(
-                  '45%',
+                  '$value',
                   style: myTextStyleFontSarpanch(fontSize: 24),
+                ),
+              ),
+              FittedBox(
+                child: Text(
+                  '$description',
+                  style: myTextStyleFontSarpanch(
+                    fontSize: 14,
+                    textColor: myTreeColor,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        Text(
-          'влажность',
-          style: myTextStyleFontSarpanch(
-            fontSize: 14,
-            textColor: myTreeColor,
-          ),
-        ),
+
+        // SizedBox(height: 10,),
       ],
     ),
   );
