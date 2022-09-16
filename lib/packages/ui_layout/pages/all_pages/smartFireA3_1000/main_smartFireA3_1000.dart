@@ -1,5 +1,4 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/body_page_smart_fireA3_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/myAppBar.dart';
@@ -95,7 +94,7 @@ class BodyContentSmartFireA31000Page extends StatelessWidget {
                   return const BodySettingPage();
                 } else {
                   //основной контент body
-                  return BodyPageSmartFireA31000Page(titleModel: _titleModel);
+                  return Container(); //BodyPageSmartFireA31000Page(titleModel: _titleModel);
                 }
               }
             },

@@ -1,6 +1,6 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/alert_with_message_and_timer_on_body_screen.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/if_the_fireplace_is_NOT_running_body/if_the_fireplace_is_NOT_running_body.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/if_the_fireplace_is_NOT_running_body.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/navigation_bar/my_navigation_bar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/tittle_fireplace_model_name.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
@@ -19,13 +19,7 @@ class BodyPageSmartPrime1000Page extends StatelessWidget {
       children: [
         myTitleModel(titleModel: titleModel),
         Expanded(
-          child: Column(
-            children: [
-              Expanded(
-                child: ButtonPlayStopPauseFireplace(),
-              ),
-            ],
-          ),
+          child: ButtonPlayStopPauseFireplace(),
         ),
         myNavigationBar(context),
       ],
@@ -47,14 +41,14 @@ class ButtonPlayStopPauseFireplace extends StatelessWidget {
         } else if (controllerApp.isCoolingFireplace &&
             !controllerApp.fuelSystemError) {
 //если камин в режиме охлаждения
-          return Announcement(
+          return MyContainerAlert(
             message: 'охлаждение камина',
           );
         } else if (controllerApp.fuelSystemError) {
 //если ОШИБКА
-          return Announcement(
-            message: 'ОШИБКА: неисправность\nтопливной системы!!!',
+          return MyContainerAlert(
             borderColor: myColorActivity,
+            message: 'ОШИБКА: неисправность\nтопливной системы!!!',
           );
         } else {
 //если камин запущен
@@ -166,28 +160,6 @@ class PlayFireplaceBodyScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class Announcement extends StatelessWidget {
-  Announcement({Key? key, this.borderColor, required this.message})
-      : super(key: key);
-  Color? borderColor;
-  String message;
-
-  @override
-  Widget build(BuildContext context) {
-    return MyContainerAlert(
-      colorBorder: borderColor ?? Theme.of(context).primaryColor,
-      child: Text(
-        message,
-        style: myTextStyleFontRoboto(
-          fontSize: 24,
-          textColor: borderColor ?? myTwoColor,
-        ),
-        textAlign: TextAlign.center,
-      ),
     );
   }
 }

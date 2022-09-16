@@ -27,7 +27,7 @@ class BlockFireplace extends StatelessWidget {
 
   Widget _blockFirePlace(context) {
     return MyContainerAlert(
-      colorBorder: myColorActivity,
+      borderColor: myColorActivity,
       child: Text('камин заблокирован',
           style: myTextStyleFontRoboto(
             fontSize: 24,

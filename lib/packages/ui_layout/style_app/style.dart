@@ -5,18 +5,55 @@ Color myTwoColor = Color.fromRGBO(196, 196, 196, 1);
 Color myTreeColor = Color.fromRGBO(176, 172, 165, 1);
 
 class MyContainerAlert extends StatelessWidget {
-  MyContainerAlert(
-      {Key? key,
-      required this.child,
-      this.colorBorder,
-      this.height,
-      this.width})
-      : super(key: key);
-
-  Widget child;
-  Color? colorBorder;
+  MyContainerAlert({
+    Key? key,
+    this.borderColor,
+    this.message,
+    this.height,
+    this.width,
+    this.child,
+  }) : super(key: key);
   double? height;
   double? width;
+  Color? borderColor;
+  String? message;
+  Widget? child;
+
+  @override
+  Widget build(BuildContext context) {
+    Color _mainColor = borderColor ?? Theme.of(context).primaryColor;
+    return _MyContainerAlert(
+      height: height,
+      width: width,
+      borderColor: _mainColor,
+      child: (message != null)
+          ? Text(
+              message!,
+              style: myTextStyleFontRoboto(
+                fontSize: 24,
+                textColor: _mainColor,
+              ),
+              textAlign: TextAlign.center,
+            )
+          : child!,
+    );
+  }
+}
+
+class _MyContainerAlert extends StatelessWidget {
+  _MyContainerAlert({
+    Key? key,
+    required this.child,
+    this.borderColor,
+    this.height,
+    this.width,
+  }) : super(key: key);
+
+  Widget child;
+  Color? borderColor;
+  double? height;
+  double? width;
+  String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +63,8 @@ class MyContainerAlert extends StatelessWidget {
         Container(
           height: height ?? MediaQuery.of(context).size.height / 10,
           width: width ?? MediaQuery.of(context).size.width,
-          decoration:
-              _myBoxDecorationBorder(context: context, colorBorder: colorBorder),
+          decoration: _myBoxDecorationBorder(
+              context: context, colorBorder: borderColor),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
