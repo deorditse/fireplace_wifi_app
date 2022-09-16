@@ -15,6 +15,12 @@ class FireplaceConnectionGetXController extends GetxController {
   static FireplaceConnectionGetXController instance = Get.find();
 
   @override
+  void onClose() {
+    super.onClose();
+    print('onClose onCloseonCloseonCloseonClose');
+  }
+
+  @override
   void onInit() {
     super.onInit();
     //сразу проверю данные сети, в которой нахожусь

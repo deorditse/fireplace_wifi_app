@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 //каждый раз при изменении запускать кодогенерацию
@@ -9,4 +10,18 @@ class MyGetXControllerSmartPrime1000 extends GetxController {
 
 //отдельный функционал для этой модели
 //после тестов вынести на слой бизнес логики
+
+  String? dataFromServer;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // getDataFromServer();
+  }
+
+  Future<void> getDataFromServer() async {
+    final response = await Dio().get('path');
+    print(response.data);
+    // dataFromServer =
+  }
 }

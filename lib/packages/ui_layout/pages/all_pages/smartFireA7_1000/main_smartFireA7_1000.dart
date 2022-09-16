@@ -3,6 +3,9 @@ import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integratio
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 
+String _titleModel = 'Модель: Smart Fire A7 1000';
+
+
 class SmartFireA71000Page extends StatefulWidget {
   static const String id = '/smartFireA71000Page';
 

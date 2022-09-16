@@ -20,17 +20,22 @@ class MyContainerAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height ?? MediaQuery.of(context).size.height / 10,
-      width: width ?? MediaQuery.of(context).size.width,
-      decoration:
-          _myBoxDecorationBorder(context: context, colorBorder: colorBorder),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: child,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          height: height ?? MediaQuery.of(context).size.height / 10,
+          width: width ?? MediaQuery.of(context).size.width,
+          decoration:
+              _myBoxDecorationBorder(context: context, colorBorder: colorBorder),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: child,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 

@@ -19,6 +19,11 @@ class ConnectionToTheFireplacePage extends StatefulWidget {
 class _ConnectionToTheFireplacePageState
     extends State<ConnectionToTheFireplacePage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: myDecorationBackground,
