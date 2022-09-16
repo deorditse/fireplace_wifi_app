@@ -1,6 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/alert_with_message_and_timer_on_body_screen.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/if_the_fireplace_is_NOT_running_body.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/navigation_bar/my_navigation_bar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/tittle_fireplace_model_name.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
@@ -35,11 +34,7 @@ class ButtonPlayStopPauseFireplaceSmartPrime1000 extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) {
-        if (controllerApp.isPlayFireplace == false &&
-            !controllerApp.fuelSystemError) {
-//если камин не запущен
-          return  IfTheFireplaceIsNotRunningBody();
-        } else if (controllerApp.isCoolingFireplace &&
+        if (controllerApp.isCoolingFireplace &&
             !controllerApp.fuelSystemError) {
 //если камин в режиме охлаждения
           return MyContainerAlert(
@@ -52,122 +47,155 @@ class ButtonPlayStopPauseFireplaceSmartPrime1000 extends StatelessWidget {
             message: 'ОШИБКА: неисправность\nтопливной системы!!!',
           );
         } else {
-//если камин запущен
-          return const PlayFireplaceBodyScreen();
+          //если камин не запущен и хотим запустить
+          return _StartBodyScreenFireplace(
+            alertMessage: 'уровень пламени NORM',
+          );
         }
       },
     );
   }
 }
 
-class PlayFireplaceBodyScreen extends StatelessWidget {
-  const PlayFireplaceBodyScreen({Key? key}) : super(key: key);
+class _StartBodyScreenFireplace extends StatelessWidget {
+  _StartBodyScreenFireplace({Key? key, required this.alertMessage})
+      : super(key: key);
+  String alertMessage;
 
   @override
   Widget build(BuildContext context) {
-    Rx<bool> _diactivateButton = true.obs;
-    Color _colorTextButtonBlack = Color.fromRGBO(25, 25, 25, 1);
+    return GetBuilder<FireplaceConnectionGetXController>(
+      builder: (controllerApp) => Column(
+        children: [
+          MyContainerAlert(
+            child: Text(
+              //камин готов к работе
+              controllerApp.alertMessage,
+              style: myTextStyleFontRoboto(
+                fontSize: 24,
+                textColor: myTwoColor,
+              ),
+            ),
+          ),
+          SizedBox(height: mySizedHeigtBetweenAlert),
+          timeWorkFireplace(context),
+          SizedBox(
+            height: 40,
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: GestureDetector(
+              onTap: () {
+                //playAndStopFireplace
+                controllerApp.changeButtonPlayStopFireplace(
+                    message: alertMessage);
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: MediaQuery.of(context).size.width / 6,
+                child: Image.asset(
+                  (controllerApp.isPlayFireplace == false &&
+                          !controllerApp.fuelSystemError)
+                      ? 'assets/button_fireplace/play.png'
+                      : 'assets/button_fireplace/stop.png',
+                  fit: BoxFit.none,
+                  scale: 2.4,
+                ),
+              ),
+            ),
+          ),
+
+          if ((!controllerApp.isPlayFireplace &&
+              !controllerApp.fuelSystemError))
+            Flexible(child: _ColumnButton()),
+
+          // PlayFireplaceBodyScreenSmartPrime1000(),
+        ],
+      ),
+    );
+  }
+}
+
+class _ColumnButton extends StatelessWidget {
+  _ColumnButton({Key? key}) : super(key: key);
+
+  Rx<bool> _diactivateButton = true.obs;
+  Color _colorTextButtonBlack = Color.fromRGBO(25, 25, 25, 1);
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        MyContainerAlert(
-          child: Text(
-            'уровень пламени NORM',
-            style: myTextStyleFontRoboto(
-              fontSize: 24,
-              textColor: myTwoColor,
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        timeWorkFireplace(context),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-//stopFireplace
-                  FireplaceConnectionGetXController.instance.stopFireplace();
-                },
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: MediaQuery.of(context).size.width / 8,
-                  child: Image.asset(
-                    'assets/button_fireplace/stop.png',
+        Flexible(
+          child: GestureDetector(
+            onTap: () {
+              _diactivateButton.value = !_diactivateButton.value;
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              radius: MediaQuery.of(context).size.width / 8,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Image.asset(
+                    'assets/button_fireplace/clear_button.png',
                     fit: BoxFit.none,
                     scale: 2.7,
                   ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  _diactivateButton.value = !_diactivateButton.value;
-                },
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: MediaQuery.of(context).size.width / 8,
-                  child: Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      Image.asset(
-                        'assets/button_fireplace/clear_button.png',
-                        fit: BoxFit.none,
-                        scale: 2.7,
-                      ),
-                      Obx(
-                        () => Positioned(
-                          top: MediaQuery.of(context).size.width / 10,
-                          child: Text(
-                            'NORM',
-                            style: myTextStyleFontRoboto(
-                              fontSize: 12,
-                              textColor: _diactivateButton.value
-                                  ? myColorActivity
-                                  : _colorTextButtonBlack,
-                            ),
-                          ),
+                  Obx(
+                    () => Positioned(
+                      top: MediaQuery.of(context).size.width / 10,
+                      child: Text(
+                        'NORM',
+                        style: myTextStyleFontRoboto(
+                          fontSize: 12,
+                          textColor: _diactivateButton.value
+                              ? myColorActivity
+                              : _colorTextButtonBlack,
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              GestureDetector(
-                onTap: () {
+            ),
+          ),
+        ),
+        Flexible(
+          child: GestureDetector(
+            onTap: () {
 // FireplaceConnectionGetXController.instance.stopFireplace();
-                  _diactivateButton.value = !_diactivateButton.value;
-                },
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: MediaQuery.of(context).size.width / 8,
-                  child: Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      Image.asset(
-                        'assets/button_fireplace/clear_button.png',
-                        fit: BoxFit.none,
-                        scale: 2.7,
-                      ),
-                      Obx(
-                        () => Positioned(
-                          top: MediaQuery.of(context).size.width / 10,
-                          child: Text(
-                            'ECO',
-                            style: myTextStyleFontRoboto(
-                              fontSize: 12,
-                              textColor: _diactivateButton.value
-                                  ? _colorTextButtonBlack
-                                  : myColorActivity,
-                            ),
-                          ),
+              _diactivateButton.value = !_diactivateButton.value;
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              radius: MediaQuery.of(context).size.width / 8,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Image.asset(
+                    'assets/button_fireplace/clear_button.png',
+                    fit: BoxFit.none,
+                    scale: 2.7,
+                  ),
+                  Obx(
+                    () => Positioned(
+                      top: MediaQuery.of(context).size.width / 10,
+                      child: Text(
+                        'ECO',
+                        style: myTextStyleFontRoboto(
+                          fontSize: 12,
+                          textColor: _diactivateButton.value
+                              ? _colorTextButtonBlack
+                              : myColorActivity,
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ],

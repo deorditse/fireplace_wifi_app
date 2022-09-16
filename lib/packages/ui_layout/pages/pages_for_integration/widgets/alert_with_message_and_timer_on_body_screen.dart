@@ -1,5 +1,7 @@
+import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Widget timeWorkFireplace(BuildContext context, {bool? isIconTimer}) {
   return MyContainerAlert(
@@ -36,12 +38,14 @@ Widget timeWorkFireplace(BuildContext context, {bool? isIconTimer}) {
                   ),
                 ),
               ),
-              Flexible(
-                child: Text(
-                  '00:00:00',
-                  style: myTextStyleFontSarpanch(
-                    fontSize: 28,
-                    textColor: myTwoColor,
+              GetBuilder<FireplaceConnectionGetXController>(
+                builder: (controllerApp) => Flexible(
+                  child: Text(
+                    controllerApp.dataTimer.toString(),
+                    style: myTextStyleFontSarpanch(
+                      fontSize: 28,
+                      textColor: myTwoColor,
+                    ),
                   ),
                 ),
               ),

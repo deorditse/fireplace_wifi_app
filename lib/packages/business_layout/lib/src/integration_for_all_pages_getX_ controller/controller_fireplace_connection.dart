@@ -31,6 +31,9 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
+  String alertMessage = 'камин готов к работе';
+  String dataTimer = '00 : 00 : 00';
+
   //тут будут лежать id каминов
   Set<String> listWithIdWifi = {'1', '2', '3', '4'};
 
@@ -78,7 +81,12 @@ class FireplaceConnectionGetXController extends GetxController {
     update();
   }
 
-  void playFireplace() {
+  changeButtonPlayStopFireplace({required message}) {
+    isPlayFireplace ? stopFireplace() : playFireplace(message: message);
+  }
+
+  void playFireplace({required message}) {
+    alertMessage = message;
     isPlayFireplace = true;
     update();
   }
@@ -87,6 +95,7 @@ class FireplaceConnectionGetXController extends GetxController {
     //запуск озлаждения камина
     await startCoolingFireplace();
     //после чего обновляем стейт
+    alertMessage = 'камин готов к работе';
     isPlayFireplace = false;
     update();
   }
