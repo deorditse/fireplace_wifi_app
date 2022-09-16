@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/body_page_smartFireA3_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/body_page_smart_prime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
@@ -55,7 +56,7 @@ class _SmartFireA31000PageState extends State<SmartFireA31000Page> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 mySettingAppBar(context: context),
-                BodyContentSmartFireA31000Page(),
+                BodyPageSmartFireA31000(),
               ],
             ),
           ),
@@ -65,8 +66,8 @@ class _SmartFireA31000PageState extends State<SmartFireA31000Page> {
   }
 }
 
-class BodyContentSmartFireA31000Page extends StatelessWidget {
-  BodyContentSmartFireA31000Page({Key? key}) : super(key: key);
+class BodyPageSmartFireA31000 extends StatelessWidget {
+  BodyPageSmartFireA31000({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,8 @@ class BodyContentSmartFireA31000Page extends StatelessWidget {
                   return const BodySettingPage();
                 } else {
                   //основной контент
-                  return BodyPageSmartPrime1000Page(titleModel: _titleModel);
+                  return MainContentBodySmartFireA31000(
+                      titleModel: _titleModel);
                 }
               }
             },

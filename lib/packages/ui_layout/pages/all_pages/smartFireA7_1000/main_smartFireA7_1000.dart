@@ -1,3 +1,4 @@
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA7_1000/body_page_smartFireA7_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/myAppBar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _SmartFireA71000PageState extends State<SmartFireA71000Page> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 mySettingAppBar(context: context),
-                BodyContentSmartFireA71000Page(),
+                BodyPageSmartFireA71000(),
               ],
             ),
           ),
@@ -49,8 +50,8 @@ class _SmartFireA71000PageState extends State<SmartFireA71000Page> {
   }
 }
 
-class BodyContentSmartFireA71000Page extends StatelessWidget {
-  BodyContentSmartFireA71000Page({Key? key}) : super(key: key);
+class BodyPageSmartFireA71000 extends StatelessWidget {
+  BodyPageSmartFireA71000({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class BodyContentSmartFireA71000Page extends StatelessWidget {
                 return const BodySettingPage();
               } else {
                 //основной контент
-                return BodyPageSmartPrime1000Page(titleModel: _titleModel);
+                return MainContentBodySmartFireA71000(titleModel: _titleModel);
               }
             }
           }),

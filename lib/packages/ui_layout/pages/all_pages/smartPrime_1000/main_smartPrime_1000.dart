@@ -41,7 +41,7 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 mySettingAppBar(context: context),
-                BodyContentSmartPrime1000Page(),
+                BodyPageSmartPrime1000(),
               ],
             ),
           ),
@@ -51,8 +51,8 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
   }
 }
 
-class BodyContentSmartPrime1000Page extends StatelessWidget {
-  BodyContentSmartPrime1000Page({Key? key}) : super(key: key);
+class BodyPageSmartPrime1000 extends StatelessWidget {
+  BodyPageSmartPrime1000({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class BodyContentSmartPrime1000Page extends StatelessWidget {
                 return const BodySettingPage();
               } else {
                 //основной контент
-                return BodyPageSmartPrime1000Page(titleModel: _titleModel);
+                return MainContentBodySmartPrime1000(titleModel: _titleModel);
               }
             }
           }),

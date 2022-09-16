@@ -7,8 +7,8 @@ import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BodyPageSmartPrime1000Page extends StatelessWidget {
-  BodyPageSmartPrime1000Page({Key? key, required this.titleModel})
+class MainContentBodySmartPrime1000 extends StatelessWidget {
+  MainContentBodySmartPrime1000({Key? key, required this.titleModel})
       : super(key: key);
   String titleModel;
 
@@ -19,7 +19,7 @@ class BodyPageSmartPrime1000Page extends StatelessWidget {
       children: [
         myTitleModel(titleModel: titleModel),
         Expanded(
-          child: ButtonPlayStopPauseFireplace(),
+          child: ButtonPlayStopPauseFireplaceSmartPrime1000(),
         ),
         myNavigationBar(context),
       ],
@@ -27,8 +27,9 @@ class BodyPageSmartPrime1000Page extends StatelessWidget {
   }
 }
 
-class ButtonPlayStopPauseFireplace extends StatelessWidget {
-  const ButtonPlayStopPauseFireplace({Key? key}) : super(key: key);
+class ButtonPlayStopPauseFireplaceSmartPrime1000 extends StatelessWidget {
+  const ButtonPlayStopPauseFireplaceSmartPrime1000({Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
