@@ -94,19 +94,18 @@ class _StartBodyScreenFireplace extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 radius: MediaQuery.of(context).size.width / 6,
                 child: Image.asset(
-                  (controllerApp.isPlayFireplace == false &&
+                  (!controllerApp.isPlayFireplace &&
                           !controllerApp.fuelSystemError)
                       ? 'assets/button_fireplace/play.png'
                       : 'assets/button_fireplace/stop.png',
                   fit: BoxFit.none,
-                  scale: 2.4,
+                  scale: 2,
                 ),
               ),
             ),
           ),
 
-          if ((!controllerApp.isPlayFireplace &&
-              !controllerApp.fuelSystemError))
+          if ((controllerApp.isPlayFireplace && !controllerApp.fuelSystemError))
             Flexible(child: _ColumnButton()),
 
           // PlayFireplaceBodyScreenSmartPrime1000(),
@@ -119,7 +118,9 @@ class _StartBodyScreenFireplace extends StatelessWidget {
 class _ColumnButton extends StatelessWidget {
   _ColumnButton({Key? key}) : super(key: key);
 
-  Rx<bool> _diactivateButton = true.obs;
+  Rx<bool> _buttonNorm = true.obs;
+  Rx<bool> _buttonEco = false.obs;
+
   Color _colorTextButtonBlack = Color.fromRGBO(25, 25, 25, 1);
 
   @override
@@ -130,18 +131,21 @@ class _ColumnButton extends StatelessWidget {
         Flexible(
           child: GestureDetector(
             onTap: () {
-              _diactivateButton.value = !_diactivateButton.value;
+              if (!_buttonNorm.value) {
+                _buttonNorm.value = !_buttonNorm.value;
+              }
+              _buttonEco.value = false;
             },
             child: CircleAvatar(
               backgroundColor: Colors.transparent,
-              radius: MediaQuery.of(context).size.width / 8,
+              radius: MediaQuery.of(context).size.width / 6,
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
                   Image.asset(
                     'assets/button_fireplace/clear_button.png',
                     fit: BoxFit.none,
-                    scale: 2.7,
+                    scale: 2,
                   ),
                   Obx(
                     () => Positioned(
@@ -150,7 +154,7 @@ class _ColumnButton extends StatelessWidget {
                         'NORM',
                         style: myTextStyleFontRoboto(
                           fontSize: 12,
-                          textColor: _diactivateButton.value
+                          textColor: _buttonNorm.value
                               ? myColorActivity
                               : _colorTextButtonBlack,
                         ),
@@ -165,19 +169,21 @@ class _ColumnButton extends StatelessWidget {
         Flexible(
           child: GestureDetector(
             onTap: () {
-// FireplaceConnectionGetXController.instance.stopFireplace();
-              _diactivateButton.value = !_diactivateButton.value;
+              if (!_buttonEco.value) {
+                _buttonEco.value = !_buttonEco.value;
+              }
+              _buttonNorm.value = false;
             },
             child: CircleAvatar(
               backgroundColor: Colors.transparent,
-              radius: MediaQuery.of(context).size.width / 8,
+              radius: MediaQuery.of(context).size.width / 6,
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
                   Image.asset(
                     'assets/button_fireplace/clear_button.png',
                     fit: BoxFit.none,
-                    scale: 2.7,
+                    scale: 2,
                   ),
                   Obx(
                     () => Positioned(
@@ -186,9 +192,9 @@ class _ColumnButton extends StatelessWidget {
                         'ECO',
                         style: myTextStyleFontRoboto(
                           fontSize: 12,
-                          textColor: _diactivateButton.value
-                              ? _colorTextButtonBlack
-                              : myColorActivity,
+                          textColor: _buttonEco.value
+                              ? myColorActivity
+                              : _colorTextButtonBlack,
                         ),
                       ),
                     ),

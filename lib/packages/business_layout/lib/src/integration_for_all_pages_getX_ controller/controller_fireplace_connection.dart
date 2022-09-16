@@ -31,7 +31,10 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
+  //окно с информационным сообщением
   String alertMessage = 'камин готов к работе';
+
+  //данные таймера
   String dataTimer = '00 : 00 : 00';
 
   //тут будут лежать id каминов
