@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/body_page_smart_prime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/myAppBar.dart';
@@ -38,6 +39,9 @@ class _SmartFireA31000PageState extends State<SmartFireA31000Page> {
 
   @override
   Widget build(BuildContext context) {
+    /// обернуть чтобы не было перехода назад
+    // WillPopScope(
+    //       onWillPop: () async => true,
     return Container(
       decoration: myDecorationBackground,
       child: Scaffold(
@@ -51,7 +55,7 @@ class _SmartFireA31000PageState extends State<SmartFireA31000Page> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 mySettingAppBar(context: context),
-                const BodyContentSmartFireA31000Page(),
+                BodyContentSmartFireA31000Page(),
               ],
             ),
           ),
@@ -62,7 +66,7 @@ class _SmartFireA31000PageState extends State<SmartFireA31000Page> {
 }
 
 class BodyContentSmartFireA31000Page extends StatelessWidget {
-  const BodyContentSmartFireA31000Page({Key? key}) : super(key: key);
+  BodyContentSmartFireA31000Page({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +78,8 @@ class BodyContentSmartFireA31000Page extends StatelessWidget {
             () {
               if (FireplaceConnectionGetXController
                   .instance.isBlocButton.value) {
+                //если камин заблокирован
                 return Column(
-                  //если камин заблокирован
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     myTitleModel(titleModel: _titleModel),
@@ -93,8 +97,8 @@ class BodyContentSmartFireA31000Page extends StatelessWidget {
                   //если нажата кнопка настройки
                   return const BodySettingPage();
                 } else {
-                  //основной контент body
-                  return Container(); //BodyPageSmartFireA31000Page(titleModel: _titleModel);
+                  //основной контент
+                  return BodyPageSmartPrime1000Page(titleModel: _titleModel);
                 }
               }
             },
