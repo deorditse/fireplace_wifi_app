@@ -21,7 +21,7 @@ class MainContentBodySmartFireA51000 extends StatelessWidget {
         Expanded(
           child: ButtonPlayStopPauseFireplaceSmartFireA51000(),
         ),
-        myNavigationBar(context),
+        myNavigationBar(context, isRowNavigator: true),
       ],
     );
   }
@@ -38,7 +38,7 @@ class ButtonPlayStopPauseFireplaceSmartFireA51000 extends StatelessWidget {
         if (controllerApp.isPlayFireplace == false &&
             !controllerApp.fuelSystemError) {
 //если камин не запущен
-          return const IfTheFireplaceIsNotRunningBody();
+          return IfTheFireplaceIsNotRunningBody(isIconTimer: true);
         } else if (controllerApp.isCoolingFireplace &&
             !controllerApp.fuelSystemError) {
 //если камин в режиме охлаждения

@@ -1,53 +1,94 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 
-Widget myNavigationBar(context) {
-  return Container(
-    height: MediaQuery.of(context).size.height / 9,
-    child: Row(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          flex: 2,
+Widget myNavigationBar(context, {bool? isRowNavigator}) {
+  return (isRowNavigator == true)
+      ? ifRowNavigator(context)
+      : SizedBox(
+          height: MediaQuery.of(context).size.height / 9,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Image.asset(
-                  'assets/icons/oil.png',
-                  fit: BoxFit.contain,
-                  // width: 50,
+                flex: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Flexible(
+                      child: Image.asset(
+                        'assets/icons/oil.png',
+                        fit: BoxFit.contain,
+                        // width: 50,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        '100%',
+                        style: myTextStyleFontSarpanch(fontSize: 36),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  '100%',
-                  style: myTextStyleFontSarpanch(fontSize: 36),
+              Flexible(
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    _temperature(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    _wet(),
+                  ],
                 ),
               ),
             ],
           ),
+        );
+}
+
+ifRowNavigator(BuildContext context) {
+  return SizedBox(
+    height: MediaQuery.of(context).size.width / 3,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Expanded(
+          // alignment: Alignment.topLeft,
+          child: Image.asset(
+            'assets/icons/oil.png',
+            fit: BoxFit.fill,
+            // width: 50,
+          ),
         ),
-        Flexible(
-            flex: 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                _temperature(),
-                SizedBox(
-                  height: 15,
+        SizedBox(
+          height: 40,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FittedBox(
+                child: Text(
+                  '100%',
+                  style: myTextStyleFontSarpanch(
+                      fontSize: 36, textColor: myTwoColor),
                 ),
-                _wet(),
-              ],
-            )),
+              ),
+              _temperature(),
+              _wet(),
+            ],
+          ),
+        )
       ],
     ),
   );
@@ -57,7 +98,8 @@ _temperature() {
   return Flexible(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.end,
-      // mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Flexible(
           child: Row(
@@ -104,7 +146,8 @@ _wet() {
   return Flexible(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.end,
-      // mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
           child: Row(

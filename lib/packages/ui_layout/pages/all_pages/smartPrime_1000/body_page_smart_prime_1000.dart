@@ -38,7 +38,7 @@ class ButtonPlayStopPauseFireplaceSmartPrime1000 extends StatelessWidget {
         if (controllerApp.isPlayFireplace == false &&
             !controllerApp.fuelSystemError) {
 //если камин не запущен
-          return const IfTheFireplaceIsNotRunningBody();
+          return  IfTheFireplaceIsNotRunningBody();
         } else if (controllerApp.isCoolingFireplace &&
             !controllerApp.fuelSystemError) {
 //если камин в режиме охлаждения
@@ -70,7 +70,17 @@ class PlayFireplaceBodyScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        alertAndTimerOnBodyScreen(context, textAlert: 'уровень пламени NORM'),
+        MyContainerAlert(
+          child: Text(
+            'уровень пламени NORM',
+            style: myTextStyleFontRoboto(
+              fontSize: 24,
+              textColor: myTwoColor,
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        timeWorkFireplace(context),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

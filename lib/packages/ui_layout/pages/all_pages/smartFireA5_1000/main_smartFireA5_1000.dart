@@ -3,7 +3,6 @@ import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integratio
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/body_page_smart_prime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/navigation_bar/my_navigation_bar.dart';
@@ -73,7 +72,7 @@ class BodyPageSmartFireA51000 extends StatelessWidget {
                         child: BlockFireplace(),
                       ),
                     ),
-                    myNavigationBar(context),
+                    myNavigationBar(context, isRowNavigator: true),
                   ],
                 );
               } else {
@@ -83,7 +82,8 @@ class BodyPageSmartFireA51000 extends StatelessWidget {
                   return const BodySettingPage();
                 } else {
                   //основной контент
-                  return MainContentBodySmartFireA51000(titleModel: _titleModel);
+                  return MainContentBodySmartFireA51000(
+                      titleModel: _titleModel);
                 }
               }
             },

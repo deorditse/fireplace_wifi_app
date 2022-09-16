@@ -38,7 +38,7 @@ class ButtonPlayStopPauseFireplaceSmartFireA31000 extends StatelessWidget {
         if (controllerApp.isPlayFireplace == false &&
             !controllerApp.fuelSystemError) {
 //если камин не запущен
-          return const IfTheFireplaceIsNotRunningBody();
+          return IfTheFireplaceIsNotRunningBody();
         } else if (controllerApp.isCoolingFireplace &&
             !controllerApp.fuelSystemError) {
 //если камин в режиме охлаждения

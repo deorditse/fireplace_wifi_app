@@ -71,7 +71,7 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
                       child: BlockFireplace(),
                     ),
                   ),
-                  myNavigationBar(context),
+                  myNavigationBar(context, isRowNavigator: true),
                 ],
               );
             } else {
