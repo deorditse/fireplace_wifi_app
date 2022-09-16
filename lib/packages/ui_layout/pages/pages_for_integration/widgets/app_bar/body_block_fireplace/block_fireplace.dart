@@ -15,7 +15,7 @@ class BlockFireplace extends StatelessWidget {
         child: Column(
           children: [
             _blockFirePlace(context),
-            SizedBox(height: 15),
+            SizedBox(height: mySizedHeigtBetweenAlert),
             timeWorkFireplace(context),
             SizedBox(height: 30),
             Expanded(child: _textField(context)),

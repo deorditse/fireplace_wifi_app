@@ -21,7 +21,7 @@ class IfTheFireplaceIsNotRunningBody extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: mySizedHeigtBetweenAlert),
         timeWorkFireplace(context, isIconTimer: isIconTimer),
         Align(
           alignment: Alignment.topCenter,

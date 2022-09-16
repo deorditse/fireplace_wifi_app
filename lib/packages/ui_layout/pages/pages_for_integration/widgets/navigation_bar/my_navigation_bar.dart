@@ -1,62 +1,64 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 
+Image imageOil() => Image.asset(
+      'assets/icons/oil.png',
+      fit: BoxFit.fill,
+    );
+
+Text percentOil() => Text(
+      '100%',
+      style: myTextStyleFontSarpanch(fontSize: 36),
+    );
+
 Widget myNavigationBar(context) {
-  return  SizedBox(
-          height: MediaQuery.of(context).size.height / 9,
+  return SizedBox(
+    height: MediaQuery.of(context).size.height / 9,
+    child: Row(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          flex: 2,
           child: Row(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Image.asset(
-                          'assets/icons/oil.png',
-                          fit: BoxFit.contain,
-                          // width: 50,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        '100%',
-                        style: myTextStyleFontSarpanch(fontSize: 36),
-                      ),
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: imageOil(),
                 ),
               ),
-              Flexible(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    temperature(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    wet(),
-                  ],
-                ),
+              SizedBox(
+                width: 10,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: percentOil(),
               ),
             ],
           ),
-        );
+        ),
+        Flexible(
+          flex: 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              temperature(),
+              SizedBox(
+                height: 15,
+              ),
+              wet(),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
-
 
 temperature() {
   return Flexible(

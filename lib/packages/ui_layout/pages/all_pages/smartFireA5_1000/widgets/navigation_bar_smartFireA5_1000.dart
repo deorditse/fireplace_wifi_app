@@ -11,11 +11,7 @@ Widget navigationBarSmartFireA5_1000(BuildContext context) {
       children: [
         Expanded(
           // alignment: Alignment.topLeft,
-          child: Image.asset(
-            'assets/icons/oil.png',
-            fit: BoxFit.fill,
-            // width: 50,
-          ),
+          child: imageOil(),
         ),
         SizedBox(
           height: MediaQuery.of(context).size.width / 10,
@@ -24,10 +20,7 @@ Widget navigationBarSmartFireA5_1000(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FittedBox(
-                child: Text(
-                  '100%',
-                  style: myTextStyleFontSarpanch(fontSize: 36),
-                ),
+                child: percentOil(),
               ),
               SizedBox(
                 width: 20,
