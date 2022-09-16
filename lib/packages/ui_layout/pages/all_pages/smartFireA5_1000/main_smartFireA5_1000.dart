@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/body_page_smartFireA5_1000.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/widgets/navigation_bar_smartFireA5_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/myAppBar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,7 @@ class BodyPageSmartFireA51000 extends StatelessWidget {
                         child: BlockFireplace(),
                       ),
                     ),
-                    myNavigationBar(context, isRowNavigator: true),
+                    navigationBarSmartFireA5_1000(context),
                   ],
                 );
               } else {

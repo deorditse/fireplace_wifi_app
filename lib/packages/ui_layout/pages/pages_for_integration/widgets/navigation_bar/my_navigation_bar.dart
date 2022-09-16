@@ -1,10 +1,8 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 
-Widget myNavigationBar(context, {bool? isRowNavigator}) {
-  return (isRowNavigator == true)
-      ? ifRowNavigator(context)
-      : SizedBox(
+Widget myNavigationBar(context) {
+  return  SizedBox(
           height: MediaQuery.of(context).size.height / 9,
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -18,10 +16,13 @@ Widget myNavigationBar(context, {bool? isRowNavigator}) {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Flexible(
-                      child: Image.asset(
-                        'assets/icons/oil.png',
-                        fit: BoxFit.contain,
-                        // width: 50,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Image.asset(
+                          'assets/icons/oil.png',
+                          fit: BoxFit.contain,
+                          // width: 50,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -43,11 +44,11 @@ Widget myNavigationBar(context, {bool? isRowNavigator}) {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    _temperature(),
+                    temperature(),
                     SizedBox(
                       height: 15,
                     ),
-                    _wet(),
+                    wet(),
                   ],
                 ),
               ),
@@ -56,54 +57,17 @@ Widget myNavigationBar(context, {bool? isRowNavigator}) {
         );
 }
 
-ifRowNavigator(BuildContext context) {
-  return SizedBox(
-    height: MediaQuery.of(context).size.width / 3,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Expanded(
-          // alignment: Alignment.topLeft,
-          child: Image.asset(
-            'assets/icons/oil.png',
-            fit: BoxFit.fill,
-            // width: 50,
-          ),
-        ),
-        SizedBox(
-          height: 40,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FittedBox(
-                child: Text(
-                  '100%',
-                  style: myTextStyleFontSarpanch(
-                      fontSize: 36, textColor: myTwoColor),
-                ),
-              ),
-              _temperature(),
-              _wet(),
-            ],
-          ),
-        )
-      ],
-    ),
-  );
-}
 
-_temperature() {
+temperature() {
   return Flexible(
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      // crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
-      mainAxisSize: MainAxisSize.min,
       children: [
         Flexible(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SizedBox(
                 width: 20,
@@ -142,16 +106,16 @@ _temperature() {
   );
 }
 
-_wet() {
+wet() {
   return Flexible(
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      // crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
-      mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SizedBox(
                 width: 20,
