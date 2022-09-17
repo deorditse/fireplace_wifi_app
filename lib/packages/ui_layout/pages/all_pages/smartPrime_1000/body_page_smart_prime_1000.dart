@@ -104,11 +104,8 @@ class _StartBodyScreenFireplace extends StatelessWidget {
               ),
             ),
           ),
-
           if ((controllerApp.isPlayFireplace && !controllerApp.fuelSystemError))
             Flexible(child: _ColumnButton()),
-
-          // PlayFireplaceBodyScreenSmartPrime1000(),
         ],
       ),
     );

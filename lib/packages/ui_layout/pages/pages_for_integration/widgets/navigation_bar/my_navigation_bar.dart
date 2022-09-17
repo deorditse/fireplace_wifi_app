@@ -1,5 +1,6 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 Image imageOil() => Image.asset(
       'assets/icons/oil.png',
@@ -13,53 +14,56 @@ Text percentOil() => Text(
     );
 
 Widget myNavigationBar(context) {
-  return SizedBox(
-    height: MediaQuery.of(context).size.width / 3,
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          flex: 2,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Flexible(
-                child: imageOil(),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: percentOil(),
-              ),
-            ],
+  return Container(
+    // color: Colors.teal,
+    child: SizedBox(
+      height: MediaQuery.of(context).size.width / 3,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Flexible(
+                  child: imageOil(),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: percentOil(),
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              iconValueDescription(
-                iconPath: 'assets/icons/temperature.png',
-                value: '24°C',
-                description: 'температура',
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              iconValueDescription(
-                iconPath: 'assets/icons/wet.png',
-                value: '45%',
-                description: 'влажность',
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                iconValueDescription(
+                  iconPath: 'assets/icons/temperature.png',
+                  value: '24°C',
+                  description: 'температура',
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                iconValueDescription(
+                  iconPath: 'assets/icons/wet.png',
+                  value: '45%',
+                  description: 'влажность',
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
