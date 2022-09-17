@@ -17,7 +17,7 @@ class ButtonPlayStopPauseFireplaceForAllPages extends StatelessWidget {
       builder: (controllerApp) {
         if (controllerApp.isCoolingFireplace &&
             !controllerApp.fuelSystemError) {
-//если камин в режиме охлаждения
+//если камин в режиме охлаждения - можно конечно просто менять сообщение на экране
           return MyContainerAlert(
             message: 'охлаждение камина',
           );
