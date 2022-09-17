@@ -67,9 +67,11 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   myTitleModel(titleModel: _titleModel),
-                  const Expanded(
+                  Expanded(
                     child: Center(
-                      child: BlockFireplace(),
+                      child: BlockFireplace(
+                        isIconTimer: true,
+                      ),
                     ),
                   ),
                   navigationBarsmartFireA7_1000(context),

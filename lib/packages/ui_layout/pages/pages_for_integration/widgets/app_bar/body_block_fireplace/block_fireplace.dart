@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BlockFireplace extends StatelessWidget {
-  const BlockFireplace({Key? key}) : super(key: key);
+  BlockFireplace({Key? key, this.isIconTimer}) : super(key: key);
+  bool? isIconTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class BlockFireplace extends StatelessWidget {
           children: [
             _blockFirePlace(context),
             SizedBox(height: mySizedHeigtBetweenAlert),
-            timeWorkFireplace(context),
+            timeWorkFireplace(context, isIconTimer: isIconTimer),
             SizedBox(height: 20),
             Expanded(child: _textField(context)),
           ],

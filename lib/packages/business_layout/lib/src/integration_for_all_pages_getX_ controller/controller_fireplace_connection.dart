@@ -84,6 +84,11 @@ class FireplaceConnectionGetXController extends GetxController {
     update();
   }
 
+  void ifFuelSystemError() {
+    alertMessage = 'ОШИБКА: неисправность\nтопливной системы!!!';
+    update();
+  }
+
   changeButtonPlayStopFireplace({required message}) {
     isPlayFireplace ? stopFireplace() : playFireplace(message: message);
   }

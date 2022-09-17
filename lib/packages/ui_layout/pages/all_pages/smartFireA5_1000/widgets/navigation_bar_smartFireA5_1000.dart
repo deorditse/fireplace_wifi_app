@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 Widget navigationBarSmartFireA5_1000(BuildContext context) {
   return Container(
-    color: Colors.teal,
+    // color: Colors.teal,
     child: SizedBox(
       height: MediaQuery.of(context).size.width / 2.3,
       child: Column(

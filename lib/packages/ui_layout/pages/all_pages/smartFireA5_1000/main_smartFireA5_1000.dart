@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/navigation_bar/my_navigation_bar.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/tittle_fireplace_model_name.dart';
 import 'package:get/get.dart';
 
@@ -68,9 +67,11 @@ class BodyPageSmartFireA51000 extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     myTitleModel(titleModel: _titleModel),
-                    const Expanded(
+                    Expanded(
                       child: Center(
-                        child: BlockFireplace(),
+                        child: BlockFireplace(
+                          isIconTimer: true,
+                        ),
                       ),
                     ),
                     navigationBarSmartFireA5_1000(context),

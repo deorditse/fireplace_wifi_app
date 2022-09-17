@@ -84,7 +84,7 @@ class BodyPageSmartFireA31000 extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     myTitleModel(titleModel: _titleModel),
-                    const Expanded(
+                    Expanded(
                       child: Center(
                         child: BlockFireplace(),
                       ),
