@@ -3,26 +3,27 @@ import 'package:flutter/cupertino.dart';
 
 Widget navigationBarSmartFireA5_1000(BuildContext context) {
   return SizedBox(
-    height: MediaQuery.of(context).size.width / 3.5,
+    height: MediaQuery.of(context).size.width / 2.3,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Expanded(
-          // alignment: Alignment.topLeft,
+        Flexible(
           child: imageOil(),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.width / 10,
+          height: MediaQuery.of(context).size.width / 9,
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FittedBox(
-                child: percentOil(),
+              Flexible(
+                child: FittedBox(
+                  child: percentOil(),
+                ),
               ),
               SizedBox(
-                width: 20,
+                width: 15,
               ),
               iconValueDescription(
                 iconPath: 'assets/icons/temperature.png',

@@ -17,7 +17,7 @@ class BlockFireplace extends StatelessWidget {
             _blockFirePlace(context),
             SizedBox(height: mySizedHeigtBetweenAlert),
             timeWorkFireplace(context),
-            SizedBox(height: 30),
+            SizedBox(height: 20),
             Expanded(child: _textField(context)),
           ],
         ),
@@ -53,26 +53,19 @@ Widget _textField(context) {
       Expanded(
         child: Column(
           children: [
-            Flexible(
-              flex: 2,
-              child: SizedBox(
-                // height: 40,
-                width: MediaQuery.of(context).size.width / 2.5,
-                child: _myTextField(),
-              ),
+            SizedBox(
+              // height: 40,
+              width: MediaQuery.of(context).size.width / 2.5,
+              child: _myTextField(),
             ),
             SizedBox(
               height: 20,
             ),
             Flexible(
-              flex: 6,
               child: Image.asset(
                 'assets/icons/mainBlock.png',
                 fit: BoxFit.cover,
               ),
-            ),
-            SizedBox(
-              height: 20,
             ),
           ],
         ),

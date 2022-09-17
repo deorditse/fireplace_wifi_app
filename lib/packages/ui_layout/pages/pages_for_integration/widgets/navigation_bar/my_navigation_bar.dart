@@ -14,7 +14,7 @@ Text percentOil() => Text(
 
 Widget myNavigationBar(context) {
   return SizedBox(
-    height: MediaQuery.of(context).size.height / 9,
+    height: MediaQuery.of(context).size.width / 3,
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +39,6 @@ Widget myNavigationBar(context) {
           ),
         ),
         Expanded(
-          flex: 1,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -86,9 +85,10 @@ Widget iconValueDescription(
           // flex: 3,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
+              Flexible(
                 child: Text(
                   '$value',
                   style: myTextStyleFontSarpanch(fontSize: 24),

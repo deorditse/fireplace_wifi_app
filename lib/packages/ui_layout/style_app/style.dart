@@ -50,7 +50,7 @@ class MyContainerAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _mainColor = borderColor ?? Theme.of(context).primaryColor;
+    Color _mainColor = borderColor ?? myTwoColor;
     return _MyContainerAlert(
       height: height,
       width: width,
@@ -93,7 +93,8 @@ class _MyContainerAlert extends StatelessWidget {
           height: height ?? MediaQuery.of(context).size.height / 10,
           width: width ?? MediaQuery.of(context).size.width,
           decoration: _myBoxDecorationBorder(
-              context: context, colorBorder: borderColor),
+              context: context,
+              colorBorder: borderColor ?? myTwoColor), // myTwoColor),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(

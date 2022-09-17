@@ -80,7 +80,7 @@ class _StartBodyScreenFireplace extends StatelessWidget {
           SizedBox(height: mySizedHeigtBetweenAlert),
           timeWorkFireplace(context),
           SizedBox(
-            height: 40,
+            height: 10,
           ),
           Align(
             alignment: Alignment.topCenter,
