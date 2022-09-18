@@ -11,13 +11,13 @@ Widget timeWorkFireplace(BuildContext context, {bool? isIconTimer}) {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         if (isIconTimer == true)
-          Expanded(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                defaultDialogIfDayHasNotCome(context: context);
-                print('timeWorkFireplace open');
-              },
+          GestureDetector(
+            onTap: () {
+              defaultDialogIfDayHasNotCome(context: context);
+              print('timeWorkFireplace open');
+            },
+            child: Expanded(
+              flex: 1,
               child: Image.asset(
                 'assets/icons/icon_timer.png',
                 fit: BoxFit.cover,
