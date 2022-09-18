@@ -5,6 +5,23 @@ Color myTwoColor = Color.fromRGBO(196, 196, 196, 1);
 Color myTreeColor = Color.fromRGBO(176, 172, 165, 1);
 double mySizedHeigtBetweenAlert = 10;
 
+BoxDecoration myDefaultDialogBackground(
+        {required BuildContext context, colorBorder}) =>
+    myBoxDecorationBorder(
+      colorBorder: colorBorder,
+      context: context,
+      myGradient: LinearGradient(
+        begin: Alignment.centerRight,
+        end: Alignment.centerLeft,
+        stops: [0.0, 1.0],
+        colors: [
+          Color.fromRGBO(43, 42, 42, 1),
+          Color.fromRGBO(35, 35, 35, 1),
+        ],
+        tileMode: TileMode.clamp,
+      ),
+    );
+
 TextStyle myTextStyleFontSarpanch({double? fontSize, Color? textColor}) =>
     TextStyle(
       color: textColor ?? Colors.white,
@@ -32,6 +49,19 @@ BoxDecoration get myDecorationBackground => const BoxDecoration(
         tileMode: TileMode.clamp,
       ),
     );
+
+BoxDecoration myBoxDecorationBorder(
+    {Color? colorBorder, required BuildContext context, Gradient? myGradient}) {
+  return BoxDecoration(
+    border: Border.all(
+      color: colorBorder ?? Theme.of(context).primaryColor,
+      width: 1,
+      style: BorderStyle.solid,
+    ),
+    borderRadius: BorderRadius.circular(10),
+    gradient: myGradient ?? null,
+  );
+}
 
 class MyContainerAlert extends StatelessWidget {
   MyContainerAlert({
@@ -92,7 +122,7 @@ class _MyContainerAlert extends StatelessWidget {
         Container(
           height: height ?? MediaQuery.of(context).size.height / 10,
           width: width ?? MediaQuery.of(context).size.width,
-          decoration: _myBoxDecorationBorder(
+          decoration: myBoxDecorationBorder(
               context: context,
               colorBorder: borderColor ?? myTwoColor), // myTwoColor),
           child: Padding(
@@ -103,17 +133,6 @@ class _MyContainerAlert extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  BoxDecoration _myBoxDecorationBorder({Color? colorBorder, context}) {
-    return BoxDecoration(
-      border: Border.all(
-        color: colorBorder ?? Theme.of(context).primaryColor,
-        width: 1,
-        style: BorderStyle.solid,
-      ),
-      borderRadius: BorderRadius.circular(10),
     );
   }
 }

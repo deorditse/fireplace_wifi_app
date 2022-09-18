@@ -35,7 +35,10 @@ class FireplaceConnectionGetXController extends GetxController {
   String alertMessage = 'камин готов к работе';
 
   //данные таймера
-  String dataTimer = '00 : 00 : 00';
+  String dataTimeWorkFireplace = '00 : 00 : 00';
+
+  //данные таймера
+  String dataTimer = '01 : 25 : 00';
 
   //тут будут лежать id каминов
   Set<String> listWithIdWifi = {'1', '2', '3', '4'};

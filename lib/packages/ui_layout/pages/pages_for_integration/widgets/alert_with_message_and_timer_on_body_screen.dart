@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/widgets/default_dialog_for_timer.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ Widget timeWorkFireplace(BuildContext context, {bool? isIconTimer}) {
             flex: 1,
             child: GestureDetector(
               onTap: () {
+                defaultDialogIfDayHasNotCome(context: context);
                 print('timeWorkFireplace open');
               },
               child: Image.asset(
@@ -41,7 +43,7 @@ Widget timeWorkFireplace(BuildContext context, {bool? isIconTimer}) {
               GetBuilder<FireplaceConnectionGetXController>(
                 builder: (controllerApp) => Flexible(
                   child: Text(
-                    controllerApp.dataTimer.toString(),
+                    controllerApp.dataTimeWorkFireplace.toString(),
                     style: myTextStyleFontSarpanch(
                       fontSize: 28,
                       textColor: myTwoColor,
