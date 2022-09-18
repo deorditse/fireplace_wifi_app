@@ -22,7 +22,7 @@ class MainContentBodySmartFireA71000 extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: myTitleModel(titleModel: titleModel),
             ),
-            Expanded(
+            const Expanded(
               child: ButtonPlayStopPauseFireplaceForAllPages(
                 alertMessage: 'розжиг камина',
                 isIconTimer: true,

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 Widget navigationBarsmartFireA7_1000(BuildContext context) {
   return SizedBox(
-    height: MediaQuery.of(context).size.width / 2.4,
+    height: MediaQuery.of(context).size.width / 2,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
@@ -16,11 +16,11 @@ Widget navigationBarsmartFireA7_1000(BuildContext context) {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                FittedBox(child: imageOil()),
-                SizedBox(
-                  width: 10,
-                ),
-                percentOil(),
+                Flexible(child: imageOil()),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: percentOil(),
+                )
               ],
             ),
           ),
@@ -49,7 +49,7 @@ Widget navigationBarsmartFireA7_1000(BuildContext context) {
               ),
             ],
           ),
-        )
+        ),
       ],
     ),
   );

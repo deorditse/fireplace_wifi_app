@@ -6,6 +6,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartFireA
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/all_pages/smartPrime_1000/GetX_state_device_smartPrime_1000/binding_smartPrime_1000.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/pages/pages_for_integration/wifi_off_screen.dart';
+import 'package:fireplace_wifi_app/test_page/Test_timer/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
@@ -15,7 +16,10 @@ import 'packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 Future<void> main() async {
-  runApp(MainPage());
+  runApp(
+    // MaterialApp(home: MyAppTimerTest()),
+    MainPage(),
+  );
 }
 
 class MainPage extends StatelessWidget {

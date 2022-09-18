@@ -10,7 +10,7 @@ class FindDeviceScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.width / 3,
+      // height: MediaQuery.of(context).size.width / 2.5,
       width: MediaQuery.of(context).size.width,
       child: MyContainerAlert(
         child: GetBuilder<FireplaceConnectionGetXController>(
@@ -20,12 +20,12 @@ class FindDeviceScreenWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircularProgressIndicator(
-                  color: myColorActivity,
+                FittedBox(
+                  child: CircularProgressIndicator(
+                    color: myColorActivity,
+                  ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 18.0, left: 8, right: 8, bottom: 8),
+                Flexible(
                   child: Text(
                     'Подключение к камину ${controllerApp.wifiName}',
                     style: Theme.of(context).textTheme.headline2,

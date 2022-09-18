@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_countdown_timer/countdown.dart';
+import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:network_info_plus/network_info_plus.dart';
@@ -38,7 +41,56 @@ class FireplaceConnectionGetXController extends GetxController {
   String dataTimeWorkFireplace = '00 : 00 : 00';
 
   //данные таймера
-  String dataTimer = '01 : 25 : 00';
+  List<String> dataTimer = ['00', '00', '00']; //часы _ минуты _секунды
+  bool timerIsRunning = false;
+
+  CountdownController? _countdownController;
+
+  void dataTimerStart({int? hours, int? minutes, int? seconds}) {
+    dataTimer[0] = '${hours ?? dataTimer[0]}';
+    dataTimer[1] = '${minutes ?? dataTimer[1]}';
+    dataTimer[2] = '${seconds ?? dataTimer[2]}';
+    update();
+
+    if (dataTimer[0] == '00' && dataTimer[1] == '00' && dataTimer[2] == '00') {
+      Get.snackbar('Установите таймер', 'не может быть 00 : 00 : 00');
+    } else {
+      timerIsRunning = true;
+      update();
+    }
+
+    _countdownController = CountdownController(
+        duration: Duration(
+          hours: hours ?? 0,
+          minutes: minutes ?? 0,
+          seconds: seconds ?? 0,
+        ),
+        onEnd: () {
+          print('onEnd');
+        });
+    update();
+    Countdown(
+      countdownController: _countdownController!,
+      builder: (_, Duration time) {
+        return Container();
+      },
+    );
+  }
+
+  void dataTimerStop() {
+    timerIsRunning = false;
+    update();
+  }
+
+  void updateDataTimer({String? hour, String? minutes, String? seconds}) {
+    dataTimer = [
+      hour ?? dataTimer[0],
+      minutes ?? dataTimer[1],
+      seconds ?? dataTimer[2],
+    ];
+    print('newDataTimer');
+    update();
+  }
 
   //тут будут лежать id каминов
   Set<String> listWithIdWifi = {'1', '2', '3', '4'};
