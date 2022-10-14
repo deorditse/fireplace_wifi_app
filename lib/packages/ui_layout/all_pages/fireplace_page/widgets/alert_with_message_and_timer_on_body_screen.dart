@@ -1,6 +1,7 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'timer/default_dialog_for_timer.dart';
@@ -20,11 +21,11 @@ Widget timeWorkFireplace(BuildContext context) {
                 print('timeWorkFireplace open');
               },
               child: GetBuilder<FireplaceConnectionGetXController>(
-                builder: (controllerApp) => Image.asset(
-                  controllerApp.timerIsRunning
-                      ? 'assets/icons/timer_active.png'
-                      : 'assets/icons/icon_timer.png',
-                  fit: BoxFit.cover,
+                builder: (controllerApp) => SvgPicture.asset(
+                  'assets/icons/timer.svg',
+                  semanticsLabel: 'icon_bottom',
+                  color: controllerApp.timerIsRunning ? myColorActivity : null,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),

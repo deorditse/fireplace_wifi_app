@@ -2,13 +2,15 @@ import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'my_navigation_bar.dart';
 
-Image imageOil() => Image.asset(
-      'assets/icons/oil.png',
-      fit: BoxFit.cover,
+Widget imageOil() => SvgPicture.asset(
+      'assets/icons/oil.svg',
+      semanticsLabel: 'icon_bottom',
+      fit: BoxFit.contain,
     );
 
 Widget percentOil() =>
@@ -55,14 +57,14 @@ Widget bottomRowWithParameters(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   iconValueDescription(
-                    iconPath: 'assets/icons/temperature.png',
+                    iconPath: 'assets/icons/temperature.svg',
                     value: controllerApp.temperature != null
                         ? '${controllerApp.temperature!.toInt()}°C'
                         : '. . .',
                     description: 'температура',
                   ),
                   iconValueDescription(
-                    iconPath: 'assets/icons/wet.png',
+                    iconPath: 'assets/icons/wet.svg',
                     value: controllerApp.wet != null
                         ? '${controllerApp.wet!.toInt()}%'
                         : '. . .',
@@ -70,7 +72,7 @@ Widget bottomRowWithParameters(BuildContext context) {
                   ),
                   if (controllerApp.isOptionCO2level)
                     iconValueDescription(
-                      iconPath: 'assets/icons/level_CO2.png',
+                      iconPath: 'assets/icons/level_CO2.svg',
                       value: controllerApp.CO2value != null
                           ? '${controllerApp.CO2value!.toInt()}%'
                           : '. . .',

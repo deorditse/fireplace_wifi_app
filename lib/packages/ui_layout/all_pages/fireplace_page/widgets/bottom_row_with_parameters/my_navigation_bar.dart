@@ -2,6 +2,7 @@ import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 // Widget myNavigationBar(context) {
@@ -70,9 +71,10 @@ Widget iconValueDescription(
         FittedBox(
           child: Padding(
             padding: const EdgeInsets.only(top: 18.0, right: 8.0, bottom: 18),
-            child: Image.asset(
+            child: SvgPicture.asset(
               iconPath,
-              fit: BoxFit.cover,
+              semanticsLabel: 'icon_bottom',
+              fit: BoxFit.contain,
             ),
           ),
         ),

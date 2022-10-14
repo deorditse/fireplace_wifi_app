@@ -1,6 +1,7 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 defaultDialogIfDayHasNotCome({required context}) {
@@ -50,11 +51,11 @@ class _DefaultDialogIfDayHasNotComeState
                           alignment: Alignment.topLeft,
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 12.0),
-                            child: Image.asset(
-                              isRunning
-                                  ? 'assets/icons/timer_active.png'
-                                  : 'assets/icons/icon_timer.png',
+                            child: SvgPicture.asset(
+                              'assets/icons/timer.svg',
+                              semanticsLabel: 'timer',
                               fit: BoxFit.contain,
+                              color: isRunning ? myColorActivity : null,
                             ),
                           ),
                         ),
@@ -73,8 +74,9 @@ class _DefaultDialogIfDayHasNotComeState
                           child: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Image.asset(
-                              'assets/icons/icon_up.png',
+                            child: SvgPicture.asset(
+                              'assets/icons/icon_up.svg',
+                              semanticsLabel: 'icon_bottom',
                               fit: BoxFit.contain,
                             ),
                           ),
@@ -159,8 +161,9 @@ class _DefaultDialogIfDayHasNotComeState
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Image.asset(
-                                'assets/icons/icon_up.png',
+                              child: SvgPicture.asset(
+                                'assets/icons/icon_up.svg',
+                                semanticsLabel: 'icon_bottom',
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -186,7 +189,7 @@ class _DefaultDialogIfDayHasNotComeState
                                 fontSize: 24,
                                 textColor: !isRunning
                                     ? const Color.fromRGBO(0, 255, 71, 1)
-                                    : const Color.fromRGBO(253, 133, 0, 1),
+                                    : myColorActivity, //const Color.fromRGBO(253, 133, 0, 1),
                               ),
                             ),
                           ),

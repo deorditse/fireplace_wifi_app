@@ -3,6 +3,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_page/w
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BlockFireplace extends StatelessWidget {
   BlockFireplace({Key? key}) : super(key: key);
@@ -62,9 +63,10 @@ Widget _textField(context) {
               height: 20,
             ),
             Flexible(
-              child: Image.asset(
-                'assets/icons/mainBlock.png',
-                fit: BoxFit.cover,
+              child: SvgPicture.asset(
+                'assets/icons/mainBlock.svg',
+                semanticsLabel: 'icon_bottom',
+                fit: BoxFit.contain,
               ),
             ),
           ],

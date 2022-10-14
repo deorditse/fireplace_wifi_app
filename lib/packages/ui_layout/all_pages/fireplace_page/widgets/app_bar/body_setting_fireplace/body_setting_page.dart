@@ -2,6 +2,7 @@ import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.
 import 'package:fireplace_wifi_app/packages/ui_layout/widgets_for_all_pages/rowWithDomain.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class BodySettingPage extends StatelessWidget {
@@ -49,10 +50,10 @@ class BodySettingPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          'assets/icons/closeFireplace.png',
+        SvgPicture.asset(
+          'assets/icons/closeFireplace.svg',
+          semanticsLabel: 'icon_bottom',
           fit: BoxFit.contain,
-          width: 20,
         ),
         SizedBox(
           width: 14,
@@ -228,10 +229,10 @@ class BodySettingPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/icons/mail.png',
+            SvgPicture.asset(
+              'assets/icons/mail.svg',
+              semanticsLabel: 'header_logo',
               fit: BoxFit.contain,
-              width: 20,
             ),
             SizedBox(width: 10),
             Text(
@@ -243,10 +244,10 @@ class BodySettingPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/icons/phone.png',
+            SvgPicture.asset(
+              'assets/icons/phone.svg',
+              semanticsLabel: 'icon_bottom',
               fit: BoxFit.contain,
-              width: 20,
             ),
             SizedBox(width: 10),
             Text(

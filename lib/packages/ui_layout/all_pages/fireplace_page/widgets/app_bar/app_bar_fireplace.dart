@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -22,12 +23,12 @@ Widget appBarFireplace({context}) {
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8.0, right: 8),
-                child: Image.asset(
+                child: SvgPicture.asset(
                   _controllerFireplace.isBlocButton.value
-                      ? 'assets/icons/blocs_2.png'
-                      : 'assets/icons/blocs.png',
+                      ? 'assets/icons/blocs_2.svg'
+                      : 'assets/icons/blocs.svg',
+                  semanticsLabel: 'premium-icon-internet',
                   fit: BoxFit.contain,
-                  // width: 50,
                 ),
               ),
             ),
@@ -53,12 +54,13 @@ Widget appBarFireplace({context}) {
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8.0, left: 8),
-                child: Image.asset(
-                  _controllerFireplace.isSettingButton.value
-                      ? 'assets/icons/setting_2.png'
-                      : 'assets/icons/setting.png',
+                child: SvgPicture.asset(
+                  'assets/icons/setting.svg',
+                  semanticsLabel: 'setting',
+                  color: _controllerFireplace.isSettingButton.value
+                      ? myColorActivity
+                      : null,
                   fit: BoxFit.contain,
-                  // width: 50,
                 ),
               ),
             ),

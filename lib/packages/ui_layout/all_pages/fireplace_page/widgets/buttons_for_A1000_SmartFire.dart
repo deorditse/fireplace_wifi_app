@@ -1,6 +1,7 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ButtonsIfFireplaceSmartPrime1000 extends StatelessWidget {
@@ -24,13 +25,13 @@ class ButtonsIfFireplaceSmartPrime1000 extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   radius: MediaQuery.of(context).size.width / 6,
-                  child: Image.asset(
+                  child: SvgPicture.asset(
                     (!controllerApp.isPlayFireplace &&
                             !controllerApp.isFuelSystemError)
-                        ? 'assets/button_fireplace/play.png'
-                        : 'assets/button_fireplace/stop.png',
-                    fit: BoxFit.none,
-                    scale: 2,
+                        ? 'assets/button_fireplace/play.svg'
+                        : 'assets/button_fireplace/stop.svg',
+                    semanticsLabel: 'icon_bottom',
+                    // fit: BoxFit.contain,
                   ),
                 ),
               ),
@@ -82,10 +83,10 @@ class _ColumnButtonState extends State<_ColumnButton> {
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: [
-                    Image.asset(
-                      'assets/button_fireplace/clear_button.png',
-                      fit: BoxFit.none,
-                      scale: 2,
+                    SvgPicture.asset(
+                      'assets/button_fireplace/clear_button.svg',
+                      semanticsLabel: 'icon_bottom',
+                      fit: BoxFit.contain,
                     ),
                     Obx(
                       () => Positioned(
@@ -123,10 +124,10 @@ class _ColumnButtonState extends State<_ColumnButton> {
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: [
-                    Image.asset(
-                      'assets/button_fireplace/clear_button.png',
-                      fit: BoxFit.none,
-                      scale: 2,
+                    SvgPicture.asset(
+                      'assets/button_fireplace/clear_button.svg',
+                      semanticsLabel: 'icon_bottom',
+                      fit: BoxFit.contain,
                     ),
                     Obx(
                       () => Positioned(
