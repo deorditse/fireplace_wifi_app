@@ -1,6 +1,26 @@
+import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'my_navigation_bar.dart';
+
+Image imageOil() => Image.asset(
+      'assets/icons/oil.png',
+      fit: BoxFit.cover,
+    );
+
+Widget percentOil() =>
+    GetBuilder<FireplaceConnectionGetXController>(builder: (controllerApp) {
+      final percentOil = controllerApp.percentOil;
+
+      return Text(
+        percentOil != null ? '${percentOil.toInt()}%' : '. . .',
+        style: myTextStyleFontSarpanch(fontSize: 30),
+        textAlign: TextAlign.center,
+      );
+    });
 
 Widget bottomRowWithParameters(BuildContext context) {
   return SizedBox(
@@ -28,27 +48,41 @@ Widget bottomRowWithParameters(BuildContext context) {
         ),
         Flexible(
           flex: 2,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              iconValueDescription(
-                iconPath: 'assets/icons/temperature.png',
-                value: '24°C',
-                description: 'температура',
-              ),
-              iconValueDescription(
-                iconPath: 'assets/icons/wet.png',
-                value: '45%',
-                description: 'влажность',
-              ),
-              iconValueDescription(
-                iconPath: 'assets/icons/level_CO2.png',
-                value: '45%',
-                description: 'уровень CO2',
-              ),
-            ],
+          child: GetBuilder<FireplaceConnectionGetXController>(
+            builder: (controllerApp) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  iconValueDescription(
+                    iconPath: 'assets/icons/temperature.png',
+                    value: controllerApp.temperature != null
+                        ? '${controllerApp.temperature!.toInt()}°C'
+                        : '. . .',
+                    description: 'температура',
+                  ),
+                  iconValueDescription(
+                    iconPath: 'assets/icons/wet.png',
+                    value: controllerApp.wet != null
+                        ? '${controllerApp.wet!.toInt()}%'
+                        : '. . .',
+                    description: 'влажность',
+                  ),
+                  if (controllerApp.isOptionCO2level)
+                    iconValueDescription(
+                      iconPath: 'assets/icons/level_CO2.png',
+                      value: controllerApp.CO2value != null
+                          ? '${controllerApp.CO2value!.toInt()}%'
+                          : '. . .',
+                      description: 'уровень CO2',
+                    )
+                  else
+                    Flexible(
+                      child: Container(),
+                    )
+                ],
+              );
+            },
           ),
         ),
       ],

@@ -1,3 +1,4 @@
+import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_page/widgets/sliders/style/gradient_slider.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
@@ -8,42 +9,53 @@ class SliderSmartFireA71000 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 2.4,
-      width: MediaQuery.of(context).size.width / 8,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ..._labels.map(
-                        (e) => Text(
-                      e,
-                      style: myTextStyleFontRoboto(fontSize: 20),
+    return GetBuilder<FireplaceConnectionGetXController>(
+      builder: (controllerApp) {
+        final List<int> _labels = List.generate(
+            controllerApp.maxLevelSliderFireplace.toInt(),
+            (index) => index.toInt() + 1);
+        //Слайдер (убераю его с экрана, когда идет охдажение камина)
+        return !controllerApp.isCoolingFireplace
+            ? SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (controllerApp.maxLevelSliderFireplace > 3 ? 2.4 : 3.1),
+                width: MediaQuery.of(context).size.width / 8,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ..._labels.reversed.map(
+                              (e) => Text(
+                                e.toString(),
+                                style: myTextStyleFontRoboto(fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: _SliderSmartFireA71000(),
-          ),
-        ],
-      ),
+                    Expanded(
+                      child: _SliderSmartFireA71000(),
+                    ),
+                  ],
+                ),
+              )
+            : Container();
+      },
     );
   }
 }
 
-final List<String> _labels = ['7','6','5', '4', '3', '2', '1'];
-
 class _SliderSmartFireA71000 extends StatefulWidget {
-  const _SliderSmartFireA71000({Key? key}) : super(key: key);
+  const _SliderSmartFireA71000({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<_SliderSmartFireA71000> createState() => _SliderSmartFireA71000State();
@@ -52,15 +64,15 @@ class _SliderSmartFireA71000 extends StatefulWidget {
 class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
   Rx<double> sliderValue = 1.0.obs;
   final double min = 1.0;
-  late final double max;
   late final divisions;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    max = _labels.length.toDouble();
-    divisions = _labels.length - 1;
+
+    divisions =
+        FireplaceConnectionGetXController.instance.maxLevelSliderFireplace - 1;
   }
 
   @override
@@ -80,13 +92,15 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
         ),
       ),
       child: Obx(
-            () => RotatedBox(
+        () => RotatedBox(
           quarterTurns: 3,
           child: Slider(
             divisions: divisions * 2,
             // label: '${sliderValue.value}',
             min: min,
-            max: max,
+            max: FireplaceConnectionGetXController
+                .instance.maxLevelSliderFireplace
+                .toDouble(),
             value: sliderValue.value,
             onChangeEnd: (double value) {
               print(value);

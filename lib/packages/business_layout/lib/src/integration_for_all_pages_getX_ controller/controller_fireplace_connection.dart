@@ -34,10 +34,22 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
-  bool isButtonForA3Fireplace = false;
+  bool isButtonFor1000Fireplace = false;
 
-  //камин запущен?
+  //значение уровня топлива
+  double? percentOil;
+
+  //значение температуры
+  double? temperature;
+
+  //опция isOptionCO2level
   bool isOptionCO2level = false;
+
+  //значение CO2
+  double? CO2value;
+
+//значение влажности
+  double? wet;
 
   ///для информационных сообщений___________________________________________________
   //окно с информационным сообщением
@@ -113,12 +125,13 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isOptionSliderFireplace = false;
   int maxLevelSliderFireplace = 3;
 
-  changeButtonPlayStopFireplace({required message}) {
-    isPlayFireplace ? stopFireplace() : playFireplace(message: message);
+  changeButtonPlayStopFireplace() {
+    isPlayFireplace ? stopFireplace() : playFireplace();
   }
 
-  void playFireplace({required message}) {
-    alertMessage = message;
+  void playFireplace() {
+    alertMessage =
+        isButtonFor1000Fireplace ? 'уровень пламени NORM' : 'розжиг камина';
     isPlayFireplace = true;
     update();
   }
@@ -135,6 +148,7 @@ class FireplaceConnectionGetXController extends GetxController {
   //запуск озлаждения камина
   Future<void> startCoolingFireplace() async {
     isCoolingFireplace = true;
+    alertMessage = 'охлаждение камина';
     update();
     await Future.delayed(
       const Duration(seconds: 3),
@@ -236,7 +250,11 @@ class FireplaceConnectionGetXController extends GetxController {
         isOptionTimer = false;
         isOptionVoicePrompts = false;
         //
-        isButtonForA3Fireplace = false;
+        temperature = 20;
+        percentOil = 90;
+        wet = 10;
+        // CO2value = 45;
+        isButtonFor1000Fireplace = true;
         maxLevelSliderFireplace = 0;
         serialNumber = 'smartPrime_1000';
         dcCode = 'smartPrime_1000';
@@ -250,6 +268,7 @@ class FireplaceConnectionGetXController extends GetxController {
         isCoolingFireplace = false;
         isLoadingDataIdWifi = false;
         update();
+        // await getDataForFireplace();
         return;
       } catch (error) {
         print(
@@ -269,9 +288,13 @@ class FireplaceConnectionGetXController extends GetxController {
         isOptionFirewoodCracklingSoundEffect = true;
         isOptionTimer = true;
         isOptionVoicePrompts = true;
-        isOptionSliderFireplace = false;
+        isOptionSliderFireplace = true;
         //
-        isButtonForA3Fireplace = false;
+        wet = 45;
+        CO2value = 45;
+        temperature = 40;
+        percentOil = 50;
+        isButtonFor1000Fireplace = false;
         maxLevelSliderFireplace = 7;
         serialNumber = 'smartFireA7_1000';
         dcCode = 'smartFireA7_1000';
@@ -306,7 +329,11 @@ class FireplaceConnectionGetXController extends GetxController {
         isOptionVoicePrompts = false;
         isOptionSliderFireplace = true;
         //
-        isButtonForA3Fireplace = false;
+        // CO2value = 45;
+        wet = 15;
+        temperature = 120;
+        percentOil = 10;
+        isButtonFor1000Fireplace = false;
         maxLevelSliderFireplace = 5;
         serialNumber = 'smartFireA5_1000';
         dcCode = 'smartFireA5_1000';
@@ -341,7 +368,11 @@ class FireplaceConnectionGetXController extends GetxController {
         isOptionVoicePrompts = false;
         isOptionSliderFireplace = true;
         //
-        isButtonForA3Fireplace = false;
+        // CO2value = 45;
+        wet = 75;
+        temperature = 50;
+        percentOil = 100;
+        isButtonFor1000Fireplace = false;
         maxLevelSliderFireplace = 3;
         serialNumber = 'smartFireA3_1000';
         dcCode = 'smartFireA3_1000';
@@ -466,6 +497,17 @@ class FireplaceConnectionGetXController extends GetxController {
     ///все доступные данные
     wifiName = thisWifiName ?? '';
     wifiBSSID = thisWifiBSSID ?? '';
+    update();
+  }
+
+  ///отдельно для контроллера SmartA1000
+  setNormModeForSmartA1000() {
+    alertMessage = 'уровень пламени NORM';
+    update();
+  }
+
+  setEcoModeForSmartA1000() {
+    alertMessage = 'уровень пламени Eco';
     update();
   }
 }

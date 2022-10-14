@@ -10,7 +10,6 @@ import 'widgets/tittle_fireplace_model_name.dart';
 class BodyFireplacePage extends StatelessWidget {
   BodyFireplacePage({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -23,10 +22,7 @@ class BodyFireplacePage extends StatelessWidget {
               child: myTitleModel(),
             ),
             const Expanded(
-              child: MainBodyStateFireplace(
-                alertMessage: 'розжиг камина',
-                isIconTimer: true,
-              ),
+              child: MainBodyStateFireplace(),
             ),
           ],
         ),
@@ -34,19 +30,9 @@ class BodyFireplacePage extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: bottomRowWithParameters(context),
         ),
-
-        //Слайдер (убераю его с экрана, когда идет охдажение камина)
-        GetBuilder<FireplaceConnectionGetXController>(
-          builder: (controllerApp) {
-            return !controllerApp.isCoolingFireplace
-                ? Positioned(
-                    right: 0,
-                    bottom: 70,
-                    child: SliderSmartFireA71000(),
-                  )
-                : Container();
-          },
-        ),
+        // если опция слайдера включена isOptionSliderFireplace
+        if (FireplaceConnectionGetXController.instance.isOptionSliderFireplace)
+          Positioned(right: 0, bottom: 70, child: SliderSmartFireA71000()),
       ],
     );
   }

@@ -3,53 +3,57 @@ import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_page/w
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-class StartBodyScreenFireplace extends StatelessWidget {
-  StartBodyScreenFireplace(
-      {Key? key, required this.alertMessage})
-      : super(key: key);
 
-  String alertMessage;
+import 'widgets/buttons_for_A1000_SmartFire.dart';
+
+class StartBodyScreenFireplace extends StatelessWidget {
+  StartBodyScreenFireplace({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FireplaceConnectionGetXController>(
-      builder: (controllerApp) => Column(
-        children: [
-          MyContainerAlert(
-            child: Text(
-              //камин готов к работе
-              controllerApp.alertMessage,
-              style: myTextStyleFontRoboto(
-                fontSize: 24,
-                textColor: myTwoColor,
-              ),
-            ),
-          ),
-          SizedBox(height: mySizedHeigtBetweenAlert),
-          timeWorkFireplace(context),
-          Align(
-            alignment: Alignment.topCenter,
-            child: GestureDetector(
-              onTap: () {
-                //playAndStopFireplace
-                controllerApp.changeButtonPlayStopFireplace(
-                    message: alertMessage);
-              },
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: MediaQuery.of(context).size.width / 4,
-                child: Image.asset(
-                  (controllerApp.isPlayFireplace == false &&
-                          !controllerApp.isFuelSystemError)
-                      ? 'assets/button_fireplace/play.png'
-                      : 'assets/button_fireplace/stop.png',
-                  fit: BoxFit.cover,
+      builder: (controllerApp) {
+        String alertMessage = controllerApp.alertMessage;
+        return Column(
+          children: [
+            MyContainerAlert(
+              child: Text(
+                alertMessage,
+                style: myTextStyleFontRoboto(
+                  fontSize: 24,
+                  textColor: myTwoColor,
                 ),
               ),
             ),
-          ),
-        ],
-      ),
+            SizedBox(height: mySizedHeigtBetweenAlert),
+            timeWorkFireplace(context),
+            controllerApp.isButtonFor1000Fireplace
+                ? ButtonsIfFireplaceSmartPrime1000()
+                : Align(
+                    alignment: Alignment.topCenter,
+                    child: GestureDetector(
+                      onTap: () {
+                        //playAndStopFireplace
+                        controllerApp.changeButtonPlayStopFireplace();
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: MediaQuery.of(context).size.width / 4,
+                        child: Image.asset(
+                          (controllerApp.isPlayFireplace == false &&
+                                  !controllerApp.isFuelSystemError)
+                              ? 'assets/button_fireplace/play.png'
+                              : 'assets/button_fireplace/stop.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+          ],
+        );
+      },
     );
   }
 }

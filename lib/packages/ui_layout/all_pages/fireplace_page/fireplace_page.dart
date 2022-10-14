@@ -68,9 +68,7 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
                   myTitleModel(),
                   Expanded(
                     child: Center(
-                      child: BlockFireplace(
-                        isIconTimer: true,
-                      ),
+                      child: BlockFireplace(),
                     ),
                   ),
                   bottomRowWithParameters(context),

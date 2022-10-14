@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BlockFireplace extends StatelessWidget {
-  BlockFireplace({Key? key, this.isIconTimer}) : super(key: key);
-  bool? isIconTimer;
+  BlockFireplace({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
