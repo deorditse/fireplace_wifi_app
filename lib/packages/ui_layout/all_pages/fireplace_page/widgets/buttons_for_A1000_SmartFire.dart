@@ -37,7 +37,7 @@ class ButtonsIfFireplaceSmartPrime1000 extends StatelessWidget {
             ),
             if ((controllerApp.isPlayFireplace &&
                 !controllerApp.isFuelSystemError))
-              Flexible(child: _ColumnButton()),
+              _ColumnButton(),
           ],
         ),
       ),
@@ -45,101 +45,110 @@ class ButtonsIfFireplaceSmartPrime1000 extends StatelessWidget {
   }
 }
 
-class _ColumnButton extends StatelessWidget {
+class _ColumnButton extends StatefulWidget {
   _ColumnButton({Key? key}) : super(key: key);
 
-  Rx<bool> _buttonNorm = true.obs;
-  Rx<bool> _buttonEco = false.obs;
+  @override
+  State<_ColumnButton> createState() => _ColumnButtonState();
+}
 
-  Color _colorTextButtonBlack = Color.fromRGBO(25, 25, 25, 1);
+class _ColumnButtonState extends State<_ColumnButton> {
+  final Rx<bool> _buttonNorm = true.obs;
+
+  final Rx<bool> _buttonEco = false.obs;
+
+  final Color _colorTextButtonBlack = Color.fromRGBO(25, 25, 25, 1);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Flexible(
-          child: GestureDetector(
-            onTap: () {
-              if (!_buttonNorm.value) {
-                _buttonNorm.value = !_buttonNorm.value;
-              }
-              _buttonEco.value = false;
+    return Flexible(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Flexible(
+            child: GestureDetector(
+              onTap: () {
+                if (!_buttonNorm.value) {
+                  _buttonNorm.value = !_buttonNorm.value;
 
-              FireplaceConnectionGetXController.instance
-                  .setNormModeForSmartA1000();
-            },
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              radius: MediaQuery.of(context).size.width / 8,
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Image.asset(
-                    'assets/button_fireplace/clear_button.png',
-                    fit: BoxFit.none,
-                    scale: 2,
-                  ),
-                  Obx(
-                    () => Positioned(
-                      top: MediaQuery.of(context).size.width / 10,
-                      child: Text(
-                        'NORM',
-                        style: myTextStyleFontRoboto(
-                          fontSize: 12,
-                          textColor: _buttonNorm.value
-                              ? myColorActivity
-                              : _colorTextButtonBlack,
+                  FireplaceConnectionGetXController.instance
+                      .setNormModeForSmartA1000();
+                }
+                _buttonEco.value = false;
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: MediaQuery.of(context).size.width / 8,
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Image.asset(
+                      'assets/button_fireplace/clear_button.png',
+                      fit: BoxFit.none,
+                      scale: 2,
+                    ),
+                    Obx(
+                      () => Positioned(
+                        top: MediaQuery.of(context).size.width / 10,
+                        child: Text(
+                          'NORM',
+                          style: myTextStyleFontRoboto(
+                            fontSize: 12,
+                            textColor: _buttonNorm.value
+                                ? myColorActivity
+                                : _colorTextButtonBlack,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Flexible(
-          child: GestureDetector(
-            onTap: () {
-              if (!_buttonEco.value) {
-                _buttonEco.value = !_buttonEco.value;
-              }
-              _buttonNorm.value = false;
-              FireplaceConnectionGetXController.instance
-                  .setEcoModeForSmartA1000();
-            },
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              radius: MediaQuery.of(context).size.width / 8,
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Image.asset(
-                    'assets/button_fireplace/clear_button.png',
-                    fit: BoxFit.none,
-                    scale: 2,
-                  ),
-                  Obx(
-                    () => Positioned(
-                      top: MediaQuery.of(context).size.width / 10,
-                      child: Text(
-                        'ECO',
-                        style: myTextStyleFontRoboto(
-                          fontSize: 12,
-                          textColor: _buttonEco.value
-                              ? myColorActivity
-                              : _colorTextButtonBlack,
+          Flexible(
+            child: GestureDetector(
+              onTap: () {
+                if (!_buttonEco.value) {
+                  _buttonEco.value = !_buttonEco.value;
+
+                  FireplaceConnectionGetXController.instance
+                      .setEcoModeForSmartA1000();
+                }
+                _buttonNorm.value = false;
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: MediaQuery.of(context).size.width / 8,
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Image.asset(
+                      'assets/button_fireplace/clear_button.png',
+                      fit: BoxFit.none,
+                      scale: 2,
+                    ),
+                    Obx(
+                      () => Positioned(
+                        top: MediaQuery.of(context).size.width / 10,
+                        child: Text(
+                          'ECO',
+                          style: myTextStyleFontRoboto(
+                            fontSize: 12,
+                            textColor: _buttonEco.value
+                                ? myColorActivity
+                                : _colorTextButtonBlack,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

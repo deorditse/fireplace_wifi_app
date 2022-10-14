@@ -125,13 +125,13 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isOptionSliderFireplace = false;
   int maxLevelSliderFireplace = 3;
 
-  changeButtonPlayStopFireplace() {
+  void changeButtonPlayStopFireplace() {
     isPlayFireplace ? stopFireplace() : playFireplace();
   }
 
   void playFireplace() {
     alertMessage =
-        isButtonFor1000Fireplace ? 'уровень пламени NORM' : 'розжиг камина';
+       /* isButtonFor1000Fireplace ? 'уровень пламени NORM' :*/ 'розжиг камина';
     isPlayFireplace = true;
     update();
   }
@@ -501,13 +501,13 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   ///отдельно для контроллера SmartA1000
-  setNormModeForSmartA1000() {
+  void setNormModeForSmartA1000() {
     alertMessage = 'уровень пламени NORM';
     update();
   }
 
-  setEcoModeForSmartA1000() {
-    alertMessage = 'уровень пламени Eco';
+  void setEcoModeForSmartA1000() {
+    alertMessage = 'уровень пламени ECO';
     update();
   }
 }
