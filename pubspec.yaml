@@ -57,8 +57,8 @@ dependencies:
   hive: ^2.0.6
   hive_flutter: ^1.1.0
   flutter_native_splash: ^2.1.6
-#  wifi_iot: ^0.3.17
-#  wifi_scan: ^0.4.0+1
+  #  wifi_iot: ^0.3.17
+  #  wifi_scan: ^0.4.0+1
   connectivity_plus: ^2.3.6+1
   # для блютуза
   permission_handler: ^10.0.0 # Разрешение
@@ -67,6 +67,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   network_info_plus: ^2.1.4+1
   flutter_countdown_timer: ^4.1.0
+  flutter_svg: ^1.1.5
 
 dev_dependencies:
   flutter_test:
@@ -94,6 +95,9 @@ flutter:
   assets:
     - assets/icons/
     - assets/button_fireplace/
+    - assets/slivers_fireplace_control/sliderSmartFireA31000/
+    - assets/slivers_fireplace_control/
+
   fonts:
     - family: Roboto
       fonts:

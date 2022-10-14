@@ -1,0 +1,57 @@
+import 'package:flutter/cupertino.dart';
+
+import 'my_navigation_bar.dart';
+
+Widget bottomRowWithParameters(BuildContext context) {
+  return SizedBox(
+    height: MediaQuery.of(context).size.width / 2,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Flexible(
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Flexible(child: imageOil()),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: percentOil(),
+                )
+              ],
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              iconValueDescription(
+                iconPath: 'assets/icons/temperature.png',
+                value: '24°C',
+                description: 'температура',
+              ),
+              iconValueDescription(
+                iconPath: 'assets/icons/wet.png',
+                value: '45%',
+                description: 'влажность',
+              ),
+              iconValueDescription(
+                iconPath: 'assets/icons/level_CO2.png',
+                value: '45%',
+                description: 'уровень CO2',
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}

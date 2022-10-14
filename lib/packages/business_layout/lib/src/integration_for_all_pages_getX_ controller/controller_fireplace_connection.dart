@@ -34,16 +34,122 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
+  bool isButtonForA3Fireplace = false;
+
+  //камин запущен?
+  bool isOptionCO2level = false;
+
+  ///для информационных сообщений___________________________________________________
   //окно с информационным сообщением
   String alertMessage = 'камин готов к работе';
 
-  //данные таймера
-  String dataTimeWorkFireplace = '00 : 00 : 00';
+  void ifFuelSystemError() {
+    alertMessage = 'ОШИБКА: неисправность\nтопливной системы!!!';
+    update();
+  }
 
+  ///для экрана настройки___________________________________________________
+  //кнопка настроек нажата?
+  Rx<bool> isSettingButton = false.obs;
+
+  //серийный номер
+  String serialNumber = '';
+
+  //Дс code
+  String dcCode = '';
+
+  //дата производства
+  String dateOfManufacture = '';
+
+  //звук нажатия кнопок
+  bool isButtonClickSound = false;
+
+  void changeSwitchButtonSound() {
+    isButtonClickSound = !isButtonClickSound;
+    update();
+  }
+
+  //Звуковой эффект потрескивание дров
+  bool isOptionFirewoodCracklingSoundEffect = false;
+  bool isButtonCracklingSoundEffect = false;
+  double sliderValueCracklingSoundEffect = 0;
+
+  void changeSwitchCracklingSoundEffect() {
+    isButtonCracklingSoundEffect = !isButtonCracklingSoundEffect;
+    update();
+  }
+
+  //Голосовые подсказки
+  bool isOptionVoicePrompts = false;
+  double sliderValueVoicePrompts = 0;
+
+  void changeSwitchButtonClickSound() {
+    isButtonClickSound = !isButtonClickSound;
+    update();
+  }
+
+  ///для экрана блокировки___________________________________________________
+  //кнопка блокирования экрана нажата?
+  Rx<bool> isBlocButton = false.obs;
+
+  //заданный пользователем пароль - сохранить в локальную базу
+  int? passwordBlock = 5539;
+
+  //пароль, который приходит с тектового поля
+  TextEditingController textFieldPassword = TextEditingController();
+
+  ///для запуска и управления камином___________________________________________________
+
+  //камин запущен?
+  bool isPlayFireplace = false;
+
+  //охлаждение камина начато?
+  bool isCoolingFireplace = false;
+
+  //если ошибка топливной системы
+  bool isFuelSystemError = false;
+
+  //для слайдера / максимальное значение
+  bool isOptionSliderFireplace = false;
+  int maxLevelSliderFireplace = 3;
+
+  changeButtonPlayStopFireplace({required message}) {
+    isPlayFireplace ? stopFireplace() : playFireplace(message: message);
+  }
+
+  void playFireplace({required message}) {
+    alertMessage = message;
+    isPlayFireplace = true;
+    update();
+  }
+
+  void stopFireplace() async {
+    //запуск озлаждения камина
+    await startCoolingFireplace();
+    //после чего обновляем стейт
+    alertMessage = 'камин готов к работе';
+    isPlayFireplace = false;
+    update();
+  }
+
+  //запуск озлаждения камина
+  Future<void> startCoolingFireplace() async {
+    isCoolingFireplace = true;
+    update();
+    await Future.delayed(
+      const Duration(seconds: 3),
+    ).then((value) {
+      isCoolingFireplace = false;
+      update();
+    });
+  }
+
+  ///для таймера___________________________________________________
   //данные таймера
+  bool isOptionTimer = false;
+  String dataTimeWorkFireplace = '00 : 00 : 00';
   List<String> dataTimer = ['00', '00', '00']; //часы _ минуты _секунды
   bool timerIsRunning = false;
-
   CountdownController? _countdownController;
 
   void dataTimerStart({int? hours, int? minutes, int? seconds}) {
@@ -92,132 +198,172 @@ class FireplaceConnectionGetXController extends GetxController {
     update();
   }
 
+  ///для поиска и подключение к камину с установкой параметров___________________________________________________
   //тут будут лежать id каминов
   Set<String> listWithIdWifi = {'1', '2', '3', '4'};
+
+  String titleModel = '';
 
   //для локальной сети id каминов - сравнение в первую очередь
   Map<String, String> mapLocalNetworkNameAndIdWifi = {};
 
-  //кнопка настроек нажата?
-  Rx<bool> isSettingButton = false.obs;
-
-  //кнопка блокирования экрана нажата?
-  Rx<bool> isBlocButton = false.obs;
-
-  //заданный пользователем пароль - сохранить в локальную базу
-  int? passwordBlock = 5539;
-
-  //пароль, который приходит с тектового поля
-  TextEditingController textFieldPassword = TextEditingController();
-
-  //загрузка данных фай фай
+  //загрузка данных фай фай чтобы отобразить circular progress indicator
   bool isLoadingDataIdWifi = true;
 
   //если обнаружен id в базе
   bool isFireplaceDetectedInDatabase = false;
 
-  //имя страницы для перехода к модели камина
-  String? namePage;
-
-  //камин запущен?
-  bool isPlayFireplace = false;
-
-  //охлаждение камина начато?
-  bool isCoolingFireplace = false;
-
-  //если ошибка топливной системы
-  bool fuelSystemError = false;
-
-  //звук нажатия кнопок
-  bool isButtonClickSound = true;
-
   String wifiName = '';
   String wifiBSSID = '';
 
-  void enableButtonPressSound() {
-    isButtonClickSound = !isButtonClickSound;
-    update();
-  }
-
-  void ifFuelSystemError() {
-    alertMessage = 'ОШИБКА: неисправность\nтопливной системы!!!';
-    update();
-  }
-
-  changeButtonPlayStopFireplace({required message}) {
-    isPlayFireplace ? stopFireplace() : playFireplace(message: message);
-  }
-
-  void playFireplace({required message}) {
-    alertMessage = message;
-    isPlayFireplace = true;
-    update();
-  }
-
-  void stopFireplace() async {
-    //запуск озлаждения камина
-    await startCoolingFireplace();
-    //после чего обновляем стейт
-    alertMessage = 'камин готов к работе';
-    isPlayFireplace = false;
-    update();
-  }
-
-  //запуск озлаждения камина
-  Future<void> startCoolingFireplace() async {
-    isCoolingFireplace = true;
-    update();
-    await Future.delayed(
-      const Duration(seconds: 3),
-    ).then((value) {
-      isCoolingFireplace = false;
-      update();
-    });
-  }
-
   void searchFireplaceInListWithIdWifi({String? wifiName, String? wifiBSSID}) {
+    //загрузка камина
     isLoadingDataIdWifi = true;
-    namePage = null;
+    //перевожу в состояние не найден с начала
     isFireplaceDetectedInDatabase = false;
     update();
     if (wifiBSSID == listWithIdWifi.elementAt(0)) {
       //smartPrime_1000
-      print('smartPrime_1000');
-      isLoadingDataIdWifi = false;
-      isFireplaceDetectedInDatabase = true;
-      namePage = '/smartPrime1000Page';
-      update();
-      return;
+      try {
+        print('detected fireplace from searchFireplaceInListWithIdWifi el 0');
+        titleModel = 'smartPrime_1000';
+        //камин обнаружен и идет переход на главную страницу
+        isFireplaceDetectedInDatabase = true;
+        //опции для камина
+        isOptionCO2level = false;
+        isOptionSliderFireplace = false;
+        isOptionFirewoodCracklingSoundEffect = false;
+        isOptionTimer = false;
+        isOptionVoicePrompts = false;
+        //
+        isButtonForA3Fireplace = false;
+        maxLevelSliderFireplace = 0;
+        serialNumber = 'smartPrime_1000';
+        dcCode = 'smartPrime_1000';
+        dateOfManufacture = '21.08.2022';
+        isButtonClickSound = true;
+        isButtonCracklingSoundEffect = false;
+        sliderValueCracklingSoundEffect = 0;
+        sliderValueVoicePrompts = 0;
+        alertMessage = 'камин готов к работе';
+        isFuelSystemError = false;
+        isCoolingFireplace = false;
+        isLoadingDataIdWifi = false;
+        update();
+        return;
+      } catch (error) {
+        print(
+            'error from searchFireplaceInListWithIdWifi smartPrime_1000 $error');
+        return;
+      }
     }
     if (wifiBSSID == listWithIdWifi.elementAt(1)) {
       //smartFireA7_1000
-      print('smartFireA7_1000');
-      isLoadingDataIdWifi = false;
-      isFireplaceDetectedInDatabase = true;
-      namePage = '/smartFireA71000Page';
-      update();
-      return;
+      try {
+        print('detected fireplace from searchFireplaceInListWithIdWifi el 1');
+        titleModel = 'smartFireA7_1000';
+        //камин обнаружен и идет переход на главную страницу
+        isFireplaceDetectedInDatabase = true;
+        //опции для камина
+        isOptionCO2level = true;
+        isOptionFirewoodCracklingSoundEffect = true;
+        isOptionTimer = true;
+        isOptionVoicePrompts = true;
+        isOptionSliderFireplace = false;
+        //
+        isButtonForA3Fireplace = false;
+        maxLevelSliderFireplace = 7;
+        serialNumber = 'smartFireA7_1000';
+        dcCode = 'smartFireA7_1000';
+        dateOfManufacture = '11.01.2022';
+        isButtonClickSound = true;
+        isButtonCracklingSoundEffect = false;
+        sliderValueCracklingSoundEffect = 0;
+        sliderValueVoicePrompts = 0;
+        alertMessage = 'камин готов к работе';
+        isFuelSystemError = false;
+        isCoolingFireplace = false;
+        isLoadingDataIdWifi = false;
+        update();
+        return;
+      } catch (error) {
+        print(
+            'error from searchFireplaceInListWithIdWifi smartFireA7_1000 $error');
+        return;
+      }
     }
     if (wifiBSSID == listWithIdWifi.elementAt(2)) {
       //smartFireA5_1000
-      print('smartFireA5_1000');
-      isLoadingDataIdWifi = false;
-      isFireplaceDetectedInDatabase = true;
-      namePage = '/smartFireA51000Page';
-      update();
-      return;
+      try {
+        print('detected fireplace from searchFireplaceInListWithIdWifi el 2');
+        titleModel = 'smartFireA5_1000';
+        //камин обнаружен и идет переход на главную страницу
+        isFireplaceDetectedInDatabase = true;
+        //опции для камина
+        isOptionCO2level = false;
+        isOptionFirewoodCracklingSoundEffect = true;
+        isOptionTimer = true;
+        isOptionVoicePrompts = false;
+        isOptionSliderFireplace = true;
+        //
+        isButtonForA3Fireplace = false;
+        maxLevelSliderFireplace = 5;
+        serialNumber = 'smartFireA5_1000';
+        dcCode = 'smartFireA5_1000';
+        dateOfManufacture = '12.05.2022';
+        isButtonClickSound = true;
+        isButtonCracklingSoundEffect = false;
+        sliderValueCracklingSoundEffect = 0;
+        sliderValueVoicePrompts = 0;
+        alertMessage = 'камин готов к работе';
+        isFuelSystemError = false;
+        isCoolingFireplace = false;
+        isLoadingDataIdWifi = false;
+        update();
+        return;
+      } catch (error) {
+        print(
+            'error from searchFireplaceInListWithIdWifi smartFireA5_1000 $error');
+        return;
+      }
     }
     if (wifiBSSID == listWithIdWifi.elementAt(3)) {
       //smartFireA3_1000
-      print('smartFireA3_1000');
-      isLoadingDataIdWifi = false;
-      isFireplaceDetectedInDatabase = true;
-      namePage = '/smartFireA31000Page';
-      update();
-      return;
+      try {
+        print('detected fireplace from searchFireplaceInListWithIdWifi el 3');
+        titleModel = 'smartFireA3_1000';
+        //камин обнаружен и идет переход на главную страницу
+        isFireplaceDetectedInDatabase = true;
+        //опции для камина
+        isOptionCO2level = false;
+        isOptionFirewoodCracklingSoundEffect = false;
+        isOptionTimer = false;
+        isOptionVoicePrompts = false;
+        isOptionSliderFireplace = true;
+        //
+        isButtonForA3Fireplace = false;
+        maxLevelSliderFireplace = 3;
+        serialNumber = 'smartFireA3_1000';
+        dcCode = 'smartFireA3_1000';
+        dateOfManufacture = '10.08.2022';
+        isButtonClickSound = true;
+        isButtonCracklingSoundEffect = false;
+        sliderValueCracklingSoundEffect = 0;
+        sliderValueVoicePrompts = 0;
+        alertMessage = 'камин готов к работе';
+        isFuelSystemError = false;
+        isCoolingFireplace = false;
+        isLoadingDataIdWifi = false;
+        update();
+        return;
+      } catch (error) {
+        print(
+            'error from searchFireplaceInListWithIdWifi smartFireA3_1000 $error');
+        return;
+      }
     }
-    isLoadingDataIdWifi = false;
-    update();
+    // isLoadingDataIdWifi = false;
+    // update();
   }
 
   //получение данных о сети wifi через пакет network_info_plus

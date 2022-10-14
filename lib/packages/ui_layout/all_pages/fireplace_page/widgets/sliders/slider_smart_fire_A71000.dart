@@ -3,13 +3,13 @@ import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SliderSmartFireA31000 extends StatelessWidget {
-  const SliderSmartFireA31000({Key? key}) : super(key: key);
+class SliderSmartFireA71000 extends StatelessWidget {
+  const SliderSmartFireA71000({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3.5,
+      height: MediaQuery.of(context).size.height / 2.4,
       width: MediaQuery.of(context).size.width / 8,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,7 +22,7 @@ class SliderSmartFireA31000 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ..._labels.map(
-                    (e) => Text(
+                        (e) => Text(
                       e,
                       style: myTextStyleFontRoboto(fontSize: 20),
                     ),
@@ -32,7 +32,7 @@ class SliderSmartFireA31000 extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: _SiderSmartFireA31000(),
+            child: _SliderSmartFireA71000(),
           ),
         ],
       ),
@@ -40,16 +40,16 @@ class SliderSmartFireA31000 extends StatelessWidget {
   }
 }
 
-final List<String> _labels = ['3', '2', '1'];
+final List<String> _labels = ['7','6','5', '4', '3', '2', '1'];
 
-class _SiderSmartFireA31000 extends StatefulWidget {
-  const _SiderSmartFireA31000({Key? key}) : super(key: key);
+class _SliderSmartFireA71000 extends StatefulWidget {
+  const _SliderSmartFireA71000({Key? key}) : super(key: key);
 
   @override
-  State<_SiderSmartFireA31000> createState() => _SiderSmartFireA31000State();
+  State<_SliderSmartFireA71000> createState() => _SliderSmartFireA71000State();
 }
 
-class _SiderSmartFireA31000State extends State<_SiderSmartFireA31000> {
+class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
   Rx<double> sliderValue = 1.0.obs;
   final double min = 1.0;
   late final double max;
@@ -80,7 +80,7 @@ class _SiderSmartFireA31000State extends State<_SiderSmartFireA31000> {
         ),
       ),
       child: Obx(
-        () => RotatedBox(
+            () => RotatedBox(
           quarterTurns: 3,
           child: Slider(
             divisions: divisions * 2,
