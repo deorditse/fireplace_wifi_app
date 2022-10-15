@@ -25,7 +25,7 @@ class MainBodyStateFireplace extends StatelessWidget {
           //прописать логику ошибки
           return MyContainerAlert(
             borderColor: myColorActivity,
-            message: alertMessage,
+            message: 'ОШИБКА: неисправность\nтопливной системы!!!',
           );
         } else {
 //если камин не запущен и хотим запустить

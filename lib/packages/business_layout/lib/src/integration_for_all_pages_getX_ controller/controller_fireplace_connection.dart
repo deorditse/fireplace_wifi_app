@@ -55,10 +55,10 @@ class FireplaceConnectionGetXController extends GetxController {
   //окно с информационным сообщением
   String alertMessage = 'камин готов к работе';
 
-  void ifFuelSystemError() {
-    alertMessage = 'ОШИБКА: неисправность\nтопливной системы!!!';
-    update();
-  }
+  // void ifFuelSystemError() {
+  //   alertMessage = 'ОШИБКА: неисправность\nтопливной системы!!!';
+  //   update();
+  // }
 
   ///для экрана настройки___________________________________________________
   //кнопка настроек нажата?
@@ -100,7 +100,6 @@ class FireplaceConnectionGetXController extends GetxController {
     isSwitchVoicePrompts = !isSwitchVoicePrompts;
     update();
   }
-
 
   ///для экрана блокировки___________________________________________________
   //кнопка блокирования экрана нажата?
@@ -256,7 +255,7 @@ class FireplaceConnectionGetXController extends GetxController {
         percentOil = 90;
         wet = 10;
         // CO2value = 45;
-        isButtonFor1000Fireplace = true;
+        isButtonFor1000Fireplace = false;
         maxLevelSliderFireplace = 0;
         serialNumber = 'smartPrime_1000';
         dcCode = 'smartPrime_1000';

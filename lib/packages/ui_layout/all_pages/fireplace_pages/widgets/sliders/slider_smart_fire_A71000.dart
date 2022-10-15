@@ -80,8 +80,10 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
     return SliderTheme(
       data: SliderThemeData().copyWith(
         trackHeight: 15,
-        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
-        overlayShape: RoundSliderThumbShape(enabledThumbRadius: 10),
+        thumbShape:
+            RoundSliderThumbShape(enabledThumbRadius: 15, elevation: 10),
+        overlayShape:
+            RoundSliderThumbShape(enabledThumbRadius: 10, elevation: 10),
         activeTickMarkColor: Colors.transparent,
         inactiveTickMarkColor: myTreeColor,
         thumbColor: Color.fromRGBO(113, 109, 109, 1),
