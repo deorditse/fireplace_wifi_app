@@ -1,5 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_page/widgets/alert_with_message_and_timer_on_body_screen.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/alert_with_message_and_timer_on_body_screen.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,27 +28,26 @@ class StartBodyScreenFireplace extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: mySizedHeigtBetweenAlert),
+            SizedBox(height: mySizedHeightBetweenAlert),
             timeWorkFireplace(context),
             controllerApp.isButtonFor1000Fireplace
                 ? ButtonsIfFireplaceSmartPrime1000()
                 : Align(
                     alignment: Alignment.topCenter,
-                    child: GestureDetector(
-                      onTap: () {
-                        //playAndStopFireplace
-                        controllerApp.changeButtonPlayStopFireplace();
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        radius: MediaQuery.of(context).size.width / 4,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: MediaQuery.of(context).size.width / 5,
+                      child: TextButton(
+                        onPressed: () {
+                          controllerApp.changeButtonPlayStopFireplace();
+                        },
                         child: SvgPicture.asset(
                           (controllerApp.isPlayFireplace == false &&
                                   !controllerApp.isFuelSystemError)
                               ? 'assets/button_fireplace/play.svg'
                               : 'assets/button_fireplace/stop.svg',
                           semanticsLabel: 'icon_bottom',
-                          fit: BoxFit.contain,
+                          fit: BoxFit.none,
                         ),
                       ),
                     ),

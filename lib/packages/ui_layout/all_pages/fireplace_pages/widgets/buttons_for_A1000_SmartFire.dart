@@ -22,16 +22,24 @@ class ButtonsIfFireplaceSmartPrime1000 extends StatelessWidget {
                   //playAndStopFireplace
                   controllerApp.changeButtonPlayStopFireplace();
                 },
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: MediaQuery.of(context).size.width / 6,
-                  child: SvgPicture.asset(
-                    (!controllerApp.isPlayFireplace &&
+                child: AnimatedContainer(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.fastOutSlowIn,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: (!controllerApp.isPlayFireplace &&
                             !controllerApp.isFuelSystemError)
-                        ? 'assets/button_fireplace/play.svg'
-                        : 'assets/button_fireplace/stop.svg',
-                    semanticsLabel: 'icon_bottom',
-                    // fit: BoxFit.contain,
+                        ? MediaQuery.of(context).size.width / 5
+                        : MediaQuery.of(context).size.width / 6,
+                    child: SvgPicture.asset(
+                      (!controllerApp.isPlayFireplace &&
+                              !controllerApp.isFuelSystemError)
+                          ? 'assets/button_fireplace/play.svg'
+                          : 'assets/button_fireplace/stop.svg',
+                      fit: BoxFit.none,
+                      semanticsLabel: 'icon_bottom',
+                      // fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
@@ -86,7 +94,7 @@ class _ColumnButtonState extends State<_ColumnButton> {
                     SvgPicture.asset(
                       'assets/button_fireplace/clear_button.svg',
                       semanticsLabel: 'icon_bottom',
-                      fit: BoxFit.contain,
+                      fit: BoxFit.none,
                     ),
                     Obx(
                       () => Positioned(
@@ -127,7 +135,7 @@ class _ColumnButtonState extends State<_ColumnButton> {
                     SvgPicture.asset(
                       'assets/button_fireplace/clear_button.svg',
                       semanticsLabel: 'icon_bottom',
-                      fit: BoxFit.contain,
+                      fit: BoxFit.none,
                     ),
                     Obx(
                       () => Positioned(

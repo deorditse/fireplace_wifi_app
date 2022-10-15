@@ -68,7 +68,7 @@ dependencies:
   network_info_plus: ^2.1.4+1
   flutter_countdown_timer: ^4.1.0
   flutter_svg: ^1.1.5
-
+  flutter_switch: ^0.3.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 
 ///Theme Material Dark__________________________________________________________________________________________________________________________________________
@@ -15,8 +16,20 @@ ThemeData themeDark = _themeDark.copyWith(
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle().copyWith(
-      backgroundColor: MaterialStatePropertyAll(Colors.black),
-      foregroundColor: MaterialStatePropertyAll(Colors.white),
+      // backgroundColor: MaterialStatePropertyAll(Colors.transparent),
+      // foregroundColor: MaterialStatePropertyAll(Colors.white),
+      // padding: MaterialStateProperty.all(
+      //   EdgeInsets.zero,
+      // ),
+
+      // backgroundColor: MaterialStatePropertyAll(Colors.green),
+      foregroundColor: MaterialStatePropertyAll(myColorActivity),
+      textStyle: MaterialStateProperty.all(myTextStyleFontRoboto()),
+      padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      ),
+      overlayColor: MaterialStatePropertyAll(myTreeColor.withOpacity(0.05)),
     ),
   ),
 

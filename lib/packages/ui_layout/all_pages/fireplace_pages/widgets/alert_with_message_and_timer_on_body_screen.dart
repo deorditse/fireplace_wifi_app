@@ -15,13 +15,13 @@ Widget timeWorkFireplace(BuildContext context) {
         if (FireplaceConnectionGetXController.instance.isOptionTimer == true)
           Expanded(
             flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                defaultDialogIfDayHasNotCome(context: context);
-                print('timeWorkFireplace open');
-              },
-              child: GetBuilder<FireplaceConnectionGetXController>(
-                builder: (controllerApp) => SvgPicture.asset(
+            child: GetBuilder<FireplaceConnectionGetXController>(
+              builder: (controllerApp) => TextButton(
+                onPressed: () {
+                  defaultDialogIfDayHasNotCome(context: context);
+                  print('timeWorkFireplace open');
+                },
+                child: SvgPicture.asset(
                   'assets/icons/timer.svg',
                   semanticsLabel: 'icon_bottom',
                   color: controllerApp.timerIsRunning ? myColorActivity : null,

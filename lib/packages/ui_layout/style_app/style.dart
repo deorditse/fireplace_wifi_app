@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 Color myColorActivity = Color.fromRGBO(253, 98, 0, 1);
 Color myTwoColor = Color.fromRGBO(196, 196, 196, 1);
 Color myTreeColor = Color.fromRGBO(176, 172, 165, 1);
-double mySizedHeigtBetweenAlert = 10;
+double mySizedHeightBetweenAlert = 10;
 
 BoxDecoration myDefaultDialogBackground(
         {required BuildContext context, colorBorder}) =>

@@ -61,8 +61,8 @@ class _DefaultDialogIfDayHasNotComeState
                         ),
                       ),
                       Expanded(
-                        child: GestureDetector(
-                          onTap: () {
+                        child: TextButton(
+                          onPressed: () {
                             if (!isRunning) {
                               int _hour = int.parse(controllerApp.dataTimer[0]);
                               if (_hour < 24) {
@@ -147,8 +147,8 @@ class _DefaultDialogIfDayHasNotComeState
                       Expanded(
                         child: RotatedBox(
                           quarterTurns: 2,
-                          child: GestureDetector(
-                            onTap: () {
+                          child: TextButton(
+                            onPressed: () {
                               if (!isRunning) {
                                 int _hour =
                                     int.parse(controllerApp.dataTimer[0]);

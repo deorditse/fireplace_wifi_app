@@ -1,12 +1,13 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_page/widgets/alert_with_message_and_timer_on_body_screen.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/alert_with_message_and_timer_on_body_screen.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BlockFireplace extends StatelessWidget {
-  BlockFireplace({Key? key}) : super(key: key);
+class BodyBlockFireplace extends StatelessWidget {
+  static const String id = '/bodyBlockFireplace';
+  BodyBlockFireplace({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class BlockFireplace extends StatelessWidget {
         child: Column(
           children: [
             _blockFirePlace(context),
-            SizedBox(height: mySizedHeigtBetweenAlert),
+            SizedBox(height: mySizedHeightBetweenAlert),
             timeWorkFireplace(context),
             SizedBox(height: 20),
             Expanded(child: _textField(context)),

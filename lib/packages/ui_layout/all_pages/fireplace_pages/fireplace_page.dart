@@ -1,15 +1,13 @@
-import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_page/body_fireplace_page.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_page/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/body_fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:get/get.dart';
+import 'pages/block_page/block_page.dart';
+import 'pages/setting_page/setting_page.dart';
 import 'widgets/app_bar/app_bar_fireplace.dart';
-import 'widgets/app_bar/body_block_fireplace/block_fireplace.dart';
 import 'widgets/bottom_row_with_parameters/bottom_row_with_parameters.dart';
 import 'widgets/tittle_fireplace_model_name.dart';
-
-
 
 class FireplacePage extends StatefulWidget {
   static const String id = '/fireplacePage';
@@ -68,7 +66,7 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
                   myTitleModel(),
                   Expanded(
                     child: Center(
-                      child: BlockFireplace(),
+                      child: BodyBlockFireplace(),
                     ),
                   ),
                   bottomRowWithParameters(context),

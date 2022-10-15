@@ -74,31 +74,33 @@ class FireplaceConnectionGetXController extends GetxController {
   String dateOfManufacture = '';
 
   //звук нажатия кнопок
-  bool isButtonClickSound = false;
+  bool isSwitchClickSound = false;
 
-  void changeSwitchButtonSound() {
-    isButtonClickSound = !isButtonClickSound;
+  void changeSwitchButtonClickSound() {
+    isSwitchClickSound = !isSwitchClickSound;
     update();
   }
 
   //Звуковой эффект потрескивание дров
   bool isOptionFirewoodCracklingSoundEffect = false;
-  bool isButtonCracklingSoundEffect = false;
-  double sliderValueCracklingSoundEffect = 0;
+  bool isSwitchCracklingSoundEffect = false;
+  double sliderValueCracklingSoundEffect = 0.0;
 
   void changeSwitchCracklingSoundEffect() {
-    isButtonCracklingSoundEffect = !isButtonCracklingSoundEffect;
+    isSwitchCracklingSoundEffect = !isSwitchCracklingSoundEffect;
     update();
   }
 
   //Голосовые подсказки
   bool isOptionVoicePrompts = false;
+  bool isSwitchVoicePrompts = false;
   double sliderValueVoicePrompts = 0;
 
-  void changeSwitchButtonClickSound() {
-    isButtonClickSound = !isButtonClickSound;
+  void changeSwitchVoicePrompts() {
+    isSwitchVoicePrompts = !isSwitchVoicePrompts;
     update();
   }
+
 
   ///для экрана блокировки___________________________________________________
   //кнопка блокирования экрана нажата?
@@ -131,7 +133,7 @@ class FireplaceConnectionGetXController extends GetxController {
 
   void playFireplace() {
     alertMessage =
-       /* isButtonFor1000Fireplace ? 'уровень пламени NORM' :*/ 'розжиг камина';
+        /* isButtonFor1000Fireplace ? 'уровень пламени NORM' :*/ 'розжиг камина';
     isPlayFireplace = true;
     update();
   }
@@ -259,9 +261,9 @@ class FireplaceConnectionGetXController extends GetxController {
         serialNumber = 'smartPrime_1000';
         dcCode = 'smartPrime_1000';
         dateOfManufacture = '21.08.2022';
-        isButtonClickSound = true;
-        isButtonCracklingSoundEffect = false;
-        sliderValueCracklingSoundEffect = 0;
+        isSwitchClickSound = true;
+        isSwitchCracklingSoundEffect = false;
+        sliderValueCracklingSoundEffect = 5;
         sliderValueVoicePrompts = 0;
         alertMessage = 'камин готов к работе';
         isFuelSystemError = false;
@@ -299,8 +301,8 @@ class FireplaceConnectionGetXController extends GetxController {
         serialNumber = 'smartFireA7_1000';
         dcCode = 'smartFireA7_1000';
         dateOfManufacture = '11.01.2022';
-        isButtonClickSound = true;
-        isButtonCracklingSoundEffect = false;
+        isSwitchClickSound = true;
+        isSwitchCracklingSoundEffect = false;
         sliderValueCracklingSoundEffect = 0;
         sliderValueVoicePrompts = 0;
         alertMessage = 'камин готов к работе';
@@ -338,9 +340,9 @@ class FireplaceConnectionGetXController extends GetxController {
         serialNumber = 'smartFireA5_1000';
         dcCode = 'smartFireA5_1000';
         dateOfManufacture = '12.05.2022';
-        isButtonClickSound = true;
-        isButtonCracklingSoundEffect = false;
-        sliderValueCracklingSoundEffect = 0;
+        isSwitchClickSound = true;
+        isSwitchCracklingSoundEffect = false;
+        sliderValueCracklingSoundEffect = 20;
         sliderValueVoicePrompts = 0;
         alertMessage = 'камин готов к работе';
         isFuelSystemError = false;
@@ -377,9 +379,9 @@ class FireplaceConnectionGetXController extends GetxController {
         serialNumber = 'smartFireA3_1000';
         dcCode = 'smartFireA3_1000';
         dateOfManufacture = '10.08.2022';
-        isButtonClickSound = true;
-        isButtonCracklingSoundEffect = false;
-        sliderValueCracklingSoundEffect = 0;
+        isSwitchClickSound = true;
+        isSwitchCracklingSoundEffect = false;
+        sliderValueCracklingSoundEffect = 20;
         sliderValueVoicePrompts = 0;
         alertMessage = 'камин готов к работе';
         isFuelSystemError = false;
