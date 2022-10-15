@@ -1,5 +1,6 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/alert_with_message_and_timer_on_body_screen.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/container_alert.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/time_work_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class BodyBlockFireplace extends StatelessWidget {
   static const String id = '/bodyBlockFireplace';
+
   BodyBlockFireplace({Key? key}) : super(key: key);
 
   @override
@@ -30,11 +32,10 @@ class BodyBlockFireplace extends StatelessWidget {
   Widget _blockFirePlace(context) {
     return MyContainerAlert(
       borderColor: myColorActivity,
-      child: Text('камин заблокирован',
-          style: myTextStyleFontRoboto(
-            fontSize: 24,
-            textColor: myColorActivity,
-          )),
+      child: Text(
+        'камин заблокирован',
+        style: myTextStyleFontRoboto(fontSize: 24, textColor: myColorActivity),
+      ),
     );
   }
 }

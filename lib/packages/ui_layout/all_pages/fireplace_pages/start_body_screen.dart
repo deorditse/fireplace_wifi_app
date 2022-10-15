@@ -1,11 +1,12 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/alert_with_message_and_timer_on_body_screen.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/time_work_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'widgets/buttons_for_A1000_SmartFire.dart';
+import 'widgets/container_alert.dart';
 
 class StartBodyScreenFireplace extends StatelessWidget {
   StartBodyScreenFireplace({
@@ -22,10 +23,7 @@ class StartBodyScreenFireplace extends StatelessWidget {
             MyContainerAlert(
               child: Text(
                 alertMessage,
-                style: myTextStyleFontRoboto(
-                  fontSize: 24,
-                  textColor: myTwoColor,
-                ),
+                style: myTextStyleFontRoboto(fontSize: 24),
               ),
             ),
             SizedBox(height: mySizedHeightBetweenAlert),

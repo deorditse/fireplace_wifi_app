@@ -1,5 +1,6 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/pages/setting_page/widgets/service_center_contacts.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/search_fireplace_page/search_fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/widgets_for_all_pages/rowWithDomain.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,9 @@ class BodySettingPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: mySizedHeightBetweenAlert),
+          // SizedBox(height: mySizedHeightBetweenAlert),
           _closeFirepca(),
-          SizedBox(height: mySizedHeightBetweenAlert * 2),
+          SizedBox(height: mySizedHeightBetweenAlert),
           AboutDeviceWidget(),
           SizedBox(height: mySizedHeightBetweenAlert),
           myDivider(),
@@ -51,29 +52,34 @@ class BodySettingPage extends StatelessWidget {
     );
   }
 
-  _closeFirepca() {
-    return Row(
-      // crossAxisAlignment: CrossAxisAlignment.end,
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          'assets/icons/closeFireplace.svg',
-          semanticsLabel: 'icon_bottom',
-          fit: BoxFit.contain,
-        ),
-        SizedBox(
-          width: 14,
-        ),
-        Expanded(
-          child: Text(
-            'Отключение от камина',
-            style: myTextStyleFontRoboto(
-              fontSize: 16,
-              textColor: myColorActivity,
+  Widget _closeFirepca() {
+    return TextButton(
+      onPressed: () {
+        Get.offNamed(SearchFireplacePage.id);
+      },
+      child: Row(
+        // crossAxisAlignment: CrossAxisAlignment.end,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            'assets/icons/closeFireplace.svg',
+            semanticsLabel: 'icon_bottom',
+            fit: BoxFit.contain,
+          ),
+          SizedBox(
+            width: 14,
+          ),
+          Expanded(
+            child: Text(
+              'Отключение от камина',
+              style: myTextStyleFontRoboto(
+                fontSize: 16,
+                textColor: myColorActivity,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
