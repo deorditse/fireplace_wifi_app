@@ -8,6 +8,7 @@ import 'pages/setting_page/setting_page.dart';
 import 'widgets/app_bar/app_bar_fireplace.dart';
 import 'widgets/bottom_row_with_parameters/bottom_row_with_parameters.dart';
 import 'widgets/tittle_fireplace_model_name.dart';
+import 'package:dio/dio.dart';
 
 class FireplacePage extends StatefulWidget {
   static const String id = '/fireplacePage';
@@ -19,6 +20,48 @@ class FireplacePage extends StatefulWidget {
 }
 
 class _FireplacePageState extends State<FireplacePage> {
+  String errorMessage = '';
+  bool hasError = false;
+  bool isLoading = false;
+  List<dynamic> dataList = [];
+  Dio _dio = Dio();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDataDio();
+  }
+
+  void getDataDio() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final response = await _dio
+          .get('https://run.mocky.io/v3/ac888dc5-d193-4700-b12c-abb43e289301');
+      var data = response.data;
+      print('_______________________test get data dio from server __________ : ${data}');
+      dataList = data;
+          // .map<String>((hotel) => HotelPreview.fromJson(hotel))
+          // .toList();
+      // print('test get data dio from server __________ : ${dataList.toString()}');
+    } on DioError catch (error) {
+      setState(() {
+        errorMessage =
+            "Контент временно недоступен \nstatus ${error.response?.statusCode!}";
+        print('${error.message}');
+        hasError = true;
+        isLoading = false;
+      });
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     /// обернуть чтобы не было перехода назад
