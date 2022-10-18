@@ -28,7 +28,6 @@ class _FireplacePageState extends State<FireplacePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getDataDio();
   }
