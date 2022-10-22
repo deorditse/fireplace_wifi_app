@@ -137,9 +137,11 @@ TextField _myTextField() {
   final textController = TextEditingController();
   return TextField(
     controller: textController,
-    onSubmitted: (SsidWifi) {
+    onSubmitted: (wifiName) {
       FireplaceConnectionGetXController.instance
-          .searchFireplaceInListWithIdWifi(wifiBSSID: SsidWifi);
+          .searchFireplaceInListWithIdWifi(
+        wifiName: wifiName,
+      );
       try {
         FireplaceConnectionGetXController.instance.isFireplaceDetectedInDatabase
             ? Get.toNamed(FireplacePage.id, preventDuplicates: false)

@@ -18,38 +18,36 @@ class BodySettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // SizedBox(height: mySizedHeightBetweenAlert),
-            _closeFirepca(),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            AboutDeviceWidget(),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            myDivider(),
-            SizedBox(height: mySizedHeightBetweenAlert),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // SizedBox(height: mySizedHeightBetweenAlert),
+          _closeFirepca(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          AboutDeviceWidget(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          myDivider(),
+          SizedBox(height: mySizedHeightBetweenAlert),
 
-            ///подключение опций тут
-            SetVolumeWidget(),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            myDivider(),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            _instructionUser(),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            myDivider(),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            ServiceCenterContacts(),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            myDivider(),
-            Expanded(
-              child: SizedBox(),
-            ),
-            SizedBox(height: mySizedHeightBetweenAlert),
-            rowWithDomain(context: context),
-          ],
-        ),
+          ///подключение опций тут
+          SetVolumeWidget(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          myDivider(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          _instructionUser(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          myDivider(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          ServiceCenterContacts(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          myDivider(),
+          Expanded(
+            child: SizedBox(),
+          ),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          rowWithDomain(context: context),
+        ],
       ),
     );
   }
