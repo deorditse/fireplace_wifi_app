@@ -10,10 +10,19 @@ import '../api/storage_test.dart';
 //при использовании пакета freezed будет реализовано
 //регистрируем как LazySingleton (одиночный) но вытаскиваем по запросу ShoppingData
 class ImplementationFireplaceServices {
+  Future<String> getStringWithFireplaceData({required String url}) async {
+    await Future.delayed(Duration(seconds: 2));
+    //последовательность данных
+    return '';
+  }
+
+  ///то что ниже вообще не нужно______________________________________________________________________________________________________
+
   ///общие параметры__________________________________
 
   Future<double> getDataPercentOil({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return 99.0;
     } catch (error) {
       throw Exception('$error from getDataPercentOil Data Layout');
@@ -22,6 +31,7 @@ class ImplementationFireplaceServices {
 
   Future<double> getDataTemperature({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return 10.0;
     } catch (error) {
       throw Exception('$error from getDataTemperature Data Layout');
@@ -30,6 +40,7 @@ class ImplementationFireplaceServices {
 
   Future<double> getDataCO2value({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return 10.0;
     } catch (error) {
       throw Exception('$error from getDataCO2value Data Layout');
@@ -48,6 +59,7 @@ class ImplementationFireplaceServices {
 
   Future<String> getDataSerialNumber({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return 'test';
     } catch (error) {
       throw Exception('$error from getDataSerialNumber Data Layout');
@@ -56,6 +68,7 @@ class ImplementationFireplaceServices {
 
   Future<String> getDataDcCode({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return '1324r5432';
     } catch (error) {
       throw Exception('$error from getDataDcCode Data Layout');
@@ -64,6 +77,7 @@ class ImplementationFireplaceServices {
 
   Future<String> getDataDateOfManufacture({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return '21.01.1997';
     } catch (error) {
       throw Exception('$error from getDataDateOfManufacture Data Layout');
@@ -72,6 +86,7 @@ class ImplementationFireplaceServices {
 
   Future<bool> getDataIsSwitchClickSound({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return true;
     } catch (error) {
       throw Exception('$error from getDataIsSwitchClickSound Data Layout');
@@ -81,6 +96,7 @@ class ImplementationFireplaceServices {
   Future<bool> getDataIsSwitchCracklingSoundEffect(
       {required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return true;
     } catch (error) {
       throw Exception(
@@ -91,6 +107,7 @@ class ImplementationFireplaceServices {
   Future<double> getDataSliderValueCracklingSoundEffect(
       {required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return 3.0;
     } catch (error) {
       throw Exception(
@@ -109,6 +126,7 @@ class ImplementationFireplaceServices {
 
   Future<double> getDataSliderValueVoicePrompts({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return 3.0;
     } catch (error) {
       throw Exception('$error from getDataSliderValueVoicePrompts Data Layout');
@@ -119,6 +137,7 @@ class ImplementationFireplaceServices {
 
   Future<String> getDataPasswordBlock({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return '5539';
     } catch (error) {
       throw Exception('$error from getDataPasswordBlock Data Layout');
@@ -136,6 +155,7 @@ class ImplementationFireplaceServices {
 
   Future<bool> getDataIsCoolingFireplace({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return false;
     } catch (error) {
       throw Exception('$error from getDataIsCoolingFireplace Data Layout');
@@ -144,6 +164,7 @@ class ImplementationFireplaceServices {
 
   Future<bool> getDataIsFuelSystemError({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return false;
     } catch (error) {
       throw Exception('$error from getDataIsFuelSystemError Data Layout');
@@ -153,6 +174,7 @@ class ImplementationFireplaceServices {
   //для слайдера / максимальное значение
   Future<double> getDataSliderValueMainScreen({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return 2.0;
     } catch (error) {
       throw Exception('$error from getDataSliderValueMainScreen Data Layout');
@@ -162,6 +184,7 @@ class ImplementationFireplaceServices {
   ///для таймера___________________________________________________
   Future<String> getDataTimeWorkFireplace({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return '00 : 00 : 00';
     } catch (error) {
       throw Exception('$error from getDataTimeWorkFireplace Data Layout');
@@ -170,6 +193,7 @@ class ImplementationFireplaceServices {
 
   Future<String> getDataCountdownTimer({required String url}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
       return '00 : 10 : 00';
     } catch (error) {
       throw Exception('$error from getDataCountdownTimer Data Layout');
@@ -181,6 +205,8 @@ class ImplementationFireplaceServices {
   Future<Map<String, String>>
       getDataMapWithWifiNameHomeNetworkAndNameFromListWifiName() async {
     try {
+      await Future.delayed(Duration(seconds: 2));
+
       ///ToDo: create инициализация данных из локальной памяти
       return {'wifiName': '1'};
     } catch (error) {
@@ -193,6 +219,8 @@ class ImplementationFireplaceServices {
       saveInLocalStorageInMapWithWifiNameHomeNetworkAndNameFromListWifiName(
           {required Map<String, String> newMapHomeWifi}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
+
       ///ToDo: create сохранение данных из локальной памяти
     } catch (error) {
       throw Exception(
@@ -204,6 +232,8 @@ class ImplementationFireplaceServices {
       deleteFromLocalStorageFromMapWithWifiNameHomeNetworkAndNameFromListWifiName(
           {required Map<String, String> newMapHomeWifi}) async {
     try {
+      await Future.delayed(Duration(seconds: 2));
+
       ///ToDo: create удаление данных из локальной памяти
     } catch (error) {
       throw Exception(

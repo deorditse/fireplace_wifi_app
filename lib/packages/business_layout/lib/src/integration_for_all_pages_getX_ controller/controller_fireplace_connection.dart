@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_countdown_timer/countdown.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:get/get.dart';
+import 'package:model/model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:flutter/foundation.dart';
@@ -343,8 +344,37 @@ class FireplaceConnectionGetXController extends GetxController {
   String wifiName = '';
   String wifiBSSID = '';
 
-  void searchFireplaceInListWithIdWifi(
-      {required String wifiName, String? wifiBSSID}) {
+  FireplaceDataModel fireplaceDataModel = FireplaceDataModel();
+
+  _parsingDataFireplace({required String url}) async {
+    String stringWithData = await services.getStringWithFireplaceData(url: url);
+    List<String> listWithData = stringWithData.split(';').toList();
+    fireplaceDataModel.temperature = '';
+    fireplaceDataModel.copyWith(
+      temperature: listWithData[0],
+    );
+    CO2value = double.parse(listWithData[1]);
+    percentOil = 90;
+    wet = 10;
+    // CO2value = 45;
+    isButtonFor1000Fireplace = true;
+    maxLevelSliderFireplace = 0;
+    serialNumber = 'smartPrime_1000';
+    dcCode = 'smartPrime_1000';
+    dateOfManufacture = '21.08.2022';
+    isSwitchClickSound = true;
+    isSwitchCracklingSoundEffect = false;
+    sliderValueCracklingSoundEffect = 5;
+    sliderValueVoicePrompts = 0;
+    alertMessage = 'камин готов к работе';
+    isFuelSystemError = false;
+    isCoolingFireplace = false;
+  }
+
+  Future<void> searchFireplaceInListWithIdWifi({
+    required String wifiName,
+    /*String? wifiBSSID*/
+  }) async {
     try {
       //загрузка камина
       isLoadingDataIdWifi = true;
@@ -368,6 +398,8 @@ class FireplaceConnectionGetXController extends GetxController {
         });
       }
 
+      String url = 'url';
+
       //первым делом проверю на данные из локальной памяти
       if (wifiName == _wifiNameHomeNetworkFromLocalStorage ||
           wifiName == _listWifiName.elementAt(0)) {
@@ -386,10 +418,11 @@ class FireplaceConnectionGetXController extends GetxController {
           isOptionVoicePrompts = false;
           //
           temperature = 20;
+          CO2value = null;
           percentOil = 90;
           wet = 10;
           // CO2value = 45;
-          isButtonFor1000Fireplace = false;
+          isButtonFor1000Fireplace = true;
           maxLevelSliderFireplace = 0;
           serialNumber = 'smartPrime_1000';
           dcCode = 'smartPrime_1000';

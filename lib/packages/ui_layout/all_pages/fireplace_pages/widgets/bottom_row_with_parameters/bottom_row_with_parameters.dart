@@ -18,7 +18,7 @@ Widget percentOil() =>
       final percentOil = controllerApp.percentOil;
 
       return Text(
-        percentOil != null ? '${percentOil.toInt()}%' : '. . .',
+        percentOil != null ? '${percentOil.toInt()}%' : '...%',
         style: myTextStyleFontSarpanch(fontSize: 30),
         textAlign: TextAlign.center,
       );
@@ -60,14 +60,14 @@ Widget bottomRowWithParameters(BuildContext context) {
                     iconPath: 'assets/icons/temperature.svg',
                     value: controllerApp.temperature != null
                         ? '${controllerApp.temperature!.toInt()}°C'
-                        : '. . .',
+                        : '...°C',
                     description: 'температура',
                   ),
                   iconValueDescription(
                     iconPath: 'assets/icons/wet.svg',
                     value: controllerApp.wet != null
                         ? '${controllerApp.wet!.toInt()}%'
-                        : '. . .',
+                        : '...%',
                     description: 'влажность',
                   ),
                   if (controllerApp.isOptionCO2level)
@@ -75,7 +75,7 @@ Widget bottomRowWithParameters(BuildContext context) {
                       iconPath: 'assets/icons/level_CO2.svg',
                       value: controllerApp.CO2value != null
                           ? '${controllerApp.CO2value!.toInt()}%'
-                          : '. . .',
+                          : '...%',
                       description: 'уровень CO2',
                     )
                   else

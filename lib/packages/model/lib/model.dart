@@ -1,4 +1,2 @@
-//оставлю этот слой тут, вдруг нужны будут модели пользователя и тд
-//для кодогенерации
-//  flutter pub run build_runner build --delete-conflicting-outputs
-// export 'src/';
+
+export 'src/list_fireplace_data_model/fireplace_data_model.dart';
