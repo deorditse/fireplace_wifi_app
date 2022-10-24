@@ -100,32 +100,33 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Obx(() {
-            if (FireplaceConnectionGetXController.instance.isBlocButton.value) {
-              //если камин заблокирован
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  myTitleModel(),
-                  Expanded(
-                    child: Center(
-                      child: BodyBlockFireplace(),
+          child: GetBuilder<FireplaceConnectionGetXController>(
+            builder: (controllerApp) {
+              if (controllerApp.isBlocButton) {
+                //если камин заблокирован
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    myTitleModel(),
+                    Expanded(
+                      child: Center(
+                        child: BodyBlockFireplace(),
+                      ),
                     ),
-                  ),
-                  bottomRowWithParameters(context),
-                ],
-              );
-            } else {
-              if (FireplaceConnectionGetXController
-                  .instance.isSettingButton.value) {
-                //если нажата кнопка настройки
-                return const BodySettingPage();
+                    bottomRowWithParameters(context),
+                  ],
+                );
               } else {
-                //основной контент
-                return BodyFireplacePage();
+                if (controllerApp.isSettingButton) {
+                  //если нажата кнопка настройки
+                  return const BodySettingPage();
+                } else {
+                  //основной контент
+                  return BodyFireplacePage();
+                }
               }
-            }
-          }),
+            },
+          ),
         ),
       ),
     );

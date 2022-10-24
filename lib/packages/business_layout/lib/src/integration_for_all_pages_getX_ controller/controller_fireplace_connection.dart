@@ -51,7 +51,6 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///инициализация данных на экране
 
-
   ///общие параметры__________________________________
   bool isButtonFor1000Fireplace = false;
 
@@ -81,7 +80,12 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///для экрана настройки___________________________________________________
   //кнопка настроек нажата?
-  Rx<bool> isSettingButton = false.obs;
+  bool isSettingButton = false;
+
+  void changeIsSettingButton({bool? newIsSettingButton}) {
+    isSettingButton = newIsSettingButton ?? !isSettingButton;
+    update();
+  }
 
   //серийный номер
   String serialNumber = '';
@@ -122,7 +126,11 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///для экрана блокировки___________________________________________________
   //кнопка блокирования экрана нажата?
-  Rx<bool> isBlocButton = false.obs;
+ bool isBlocButton = false;
+  void changeIsBlocButton({bool? newIsBlocButton}) {
+    isBlocButton = newIsBlocButton ?? !isBlocButton;
+    update();
+  }
 
   //заданный пользователем пароль - сохранить в локальную базу
   int? passwordBlock = 5539;
@@ -264,26 +272,25 @@ class FireplaceConnectionGetXController extends GetxController {
   String wifiName = '';
   String wifiBSSID = '';
 
-
+  //получение листа данных с сервера для обновления или получения данных камина
   _parsingDataFireplace({required String url}) async {
     String stringWithData = await services.getStringWithFireplaceData(url: url);
     List<String> listWithData = stringWithData.split(';').toList();
+
+    temperature = double.parse(listWithData[0]);
     CO2value = double.parse(listWithData[1]);
-    percentOil = 90;
-    wet = 10;
-    // CO2value = 45;
-    isButtonFor1000Fireplace = true;
-    maxLevelSliderFireplace = 0;
-    serialNumber = 'smartPrime_1000';
-    dcCode = 'smartPrime_1000';
-    dateOfManufacture = '21.08.2022';
+    percentOil = double.parse(listWithData[3]);
+    wet = double.parse(listWithData[4]);
+    serialNumber = listWithData[6];
+    dcCode = listWithData[7];
+    dateOfManufacture = listWithData[8];
     isSwitchClickSound = true;
     isSwitchCracklingSoundEffect = false;
     sliderValueCracklingSoundEffect = 5;
     sliderValueVoicePrompts = 0;
-    alertMessage = 'камин готов к работе';
     isFuelSystemError = false;
     isCoolingFireplace = false;
+    update();
   }
 
   Future<void> searchFireplaceInListWithIdWifi({
@@ -297,8 +304,8 @@ class FireplaceConnectionGetXController extends GetxController {
       isFireplaceDetectedInDatabase = false;
       update();
 
+      //сначала проверяю по сохраненному в память листу с именами домашних сетей
       String? _wifiNameHomeNetworkFromLocalStorage;
-
       if (_mapWithWifiNameHomeNetworkAndNameFromListWifiName != null &&
           _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
               .contains(wifiName)) {
@@ -307,19 +314,19 @@ class FireplaceConnectionGetXController extends GetxController {
             .forEach((key) {
           if (key == wifiName) {
             _wifiNameHomeNetworkFromLocalStorage =
-                _mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
+            _mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
             update();
           }
         });
       }
-
-      String url = 'url';
 
       //первым делом проверю на данные из локальной памяти
       if (wifiName == _wifiNameHomeNetworkFromLocalStorage ||
           wifiName == _listWifiName.elementAt(0)) {
         //smartPrime_1000
         try {
+          _parsingDataFireplace(url: '');
+
           ///перенесено в отдельный метод куда нужно отправлять SSID wifi data
           print('detected fireplace from searchFireplaceInListWithIdWifi el 0');
           titleModel = 'smartPrime_1000';

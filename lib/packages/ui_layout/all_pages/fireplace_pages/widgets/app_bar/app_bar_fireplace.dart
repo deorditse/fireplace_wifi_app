@@ -16,16 +16,17 @@ Widget appBarFireplace({context}) {
       children: [
         Expanded(
           flex: 1,
-          child: Obx(
-            () => Padding(
+          child: GetBuilder<FireplaceConnectionGetXController>(
+            builder: (controllerApp) => Padding(
               padding: const EdgeInsets.only(bottom: 8.0, right: 8),
               child: TextButton(
                 onPressed: () {
-                  _controllerFireplace.isSettingButton.value = false;
-                  _controllerFireplace.isBlocButton.value = true;
+                  controllerApp.changeIsBlocButton(newIsBlocButton: true);
+                  controllerApp.changeIsSettingButton(
+                      newIsSettingButton: false);
                 },
                 child: SvgPicture.asset(
-                  _controllerFireplace.isBlocButton.value
+                  controllerApp.isBlocButton
                       ? 'assets/icons/blocs_2.svg'
                       : 'assets/icons/blocs.svg',
                   semanticsLabel: 'premium-icon-internet',
@@ -45,22 +46,19 @@ Widget appBarFireplace({context}) {
         ),
         Expanded(
           flex: 1,
-          child: Obx(
-            () => Padding(
+          child: GetBuilder<FireplaceConnectionGetXController>(
+            builder: (controllerApp) => Padding(
               padding: const EdgeInsets.only(bottom: 8.0, left: 8),
               child: TextButton(
-                onPressed: (){
-                  if (!_controllerFireplace.isBlocButton.value) {
-                    _controllerFireplace.isSettingButton.value =
-                    !_controllerFireplace.isSettingButton.value;
+                onPressed: () {
+                  if (!controllerApp.isBlocButton) {
+                    controllerApp.changeIsSettingButton();
                   }
                 },
                 child: SvgPicture.asset(
                   'assets/icons/setting.svg',
                   semanticsLabel: 'setting',
-                  color: _controllerFireplace.isSettingButton.value
-                      ? myColorActivity
-                      : null,
+                  color: controllerApp.isSettingButton ? myColorActivity : null,
                   fit: BoxFit.contain,
                 ),
               ),
