@@ -344,15 +344,10 @@ class FireplaceConnectionGetXController extends GetxController {
   String wifiName = '';
   String wifiBSSID = '';
 
-  FireplaceDataModel fireplaceDataModel = FireplaceDataModel();
 
   _parsingDataFireplace({required String url}) async {
     String stringWithData = await services.getStringWithFireplaceData(url: url);
     List<String> listWithData = stringWithData.split(';').toList();
-    fireplaceDataModel.temperature = '';
-    fireplaceDataModel.copyWith(
-      temperature: listWithData[0],
-    );
     CO2value = double.parse(listWithData[1]);
     percentOil = 90;
     wet = 10;
