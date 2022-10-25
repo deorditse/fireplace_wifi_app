@@ -51,7 +51,17 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///инициализация данных на экране
 
+  Future<void> initialFireplaceData({required String url}) async {
+    fireplaceData = await services.getFireplaceData(url: url);
+    print(fireplaceData);
+    update();
+  }
+
   ///общие параметры__________________________________
+  //при первом входе в приложение - либо сделать linear bar при загрузке данных
+
+  FireplaceDataModel? fireplaceData;
+
   bool isButtonFor1000Fireplace = false;
 
   //значение уровня топлива
@@ -126,7 +136,8 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///для экрана блокировки___________________________________________________
   //кнопка блокирования экрана нажата?
- bool isBlocButton = false;
+  bool isBlocButton = false;
+
   void changeIsBlocButton({bool? newIsBlocButton}) {
     isBlocButton = newIsBlocButton ?? !isBlocButton;
     update();
@@ -272,27 +283,6 @@ class FireplaceConnectionGetXController extends GetxController {
   String wifiName = '';
   String wifiBSSID = '';
 
-  //получение листа данных с сервера для обновления или получения данных камина
-  _parsingDataFireplace({required String url}) async {
-    String stringWithData = await services.getStringWithFireplaceData(url: url);
-    List<String> listWithData = stringWithData.split(';').toList();
-
-    temperature = double.parse(listWithData[0]);
-    CO2value = double.parse(listWithData[1]);
-    percentOil = double.parse(listWithData[3]);
-    wet = double.parse(listWithData[4]);
-    serialNumber = listWithData[6];
-    dcCode = listWithData[7];
-    dateOfManufacture = listWithData[8];
-    isSwitchClickSound = true;
-    isSwitchCracklingSoundEffect = false;
-    sliderValueCracklingSoundEffect = 5;
-    sliderValueVoicePrompts = 0;
-    isFuelSystemError = false;
-    isCoolingFireplace = false;
-    update();
-  }
-
   Future<void> searchFireplaceInListWithIdWifi({
     required String wifiName,
     /*String? wifiBSSID*/
@@ -314,7 +304,7 @@ class FireplaceConnectionGetXController extends GetxController {
             .forEach((key) {
           if (key == wifiName) {
             _wifiNameHomeNetworkFromLocalStorage =
-            _mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
+                _mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
             update();
           }
         });
@@ -325,8 +315,6 @@ class FireplaceConnectionGetXController extends GetxController {
           wifiName == _listWifiName.elementAt(0)) {
         //smartPrime_1000
         try {
-          _parsingDataFireplace(url: '');
-
           ///перенесено в отдельный метод куда нужно отправлять SSID wifi data
           print('detected fireplace from searchFireplaceInListWithIdWifi el 0');
           titleModel = 'smartPrime_1000';

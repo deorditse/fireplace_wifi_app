@@ -9,10 +9,46 @@ import '../../data_layout.dart';
 //при использовании пакета freezed будет реализовано
 //регистрируем как LazySingleton (одиночный) но вытаскиваем по запросу ShoppingData
 class ImplementationFireplaceServices {
-  Future<String> getStringWithFireplaceData({required String url}) async {
+  Future<FireplaceDataModel> getFireplaceData({required String url}) async {
     await Future.delayed(Duration(seconds: 2));
+    // List<String> listWithData = stringWithData.split(';').toList();
     //последовательность данных
-    return 'wert;qwert;qwertg;qwer;5342;31324;54tgref;wda;cvdfb';
+    return FireplaceDataModel(
+      //значение температуры
+      temperature: null,
+      //значение уровня топлива
+      percentOil: null,
+      //значение влажности
+      wet: null,
+      //значение CO2
+      CO2value: null,
+      //серийный номер
+      serialNumber: null,
+      //Дс code
+      dcCode: null,
+      //дата производства
+      dateOfManufacture: null,
+      //звук нажатия кнопок
+      isSwitchClickSound: null,
+      //Звуковой эффект потрескивание дров
+      sliderValueCracklingSoundEffect: null,
+      //Голосовые подсказки
+      sliderValueVoicePrompts: null,
+      //если ошибка топливной системы
+      isFuelSystemError: null,
+      //охлаждение камина начато?
+      isCoolingFireplace: null,
+      //кнопка блокирования экрана нажата?
+      isBlocButton: true,
+      //заданный пользователем пароль
+      passwordBlock: 5539,
+      //камин запущен?
+      isPlayFireplace: null,
+      //общее время работы камина
+      dataTimeWorkFireplace: '',
+      //есть таймер и включен или нет
+      isOptionTimer: null,
+    );
   }
 
   ///то что ниже вообще не нужно______________________________________________________________________________________________________
