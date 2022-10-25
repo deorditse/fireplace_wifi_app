@@ -85,7 +85,7 @@ TextField _myTextField() {
     controller: textController.textFieldPassword,
     onChanged: (password) {
       if (password == textController.passwordBlock.toString()) {
-        FireplaceConnectionGetXController.instance.isBlocButton = false;
+        FireplaceConnectionGetXController.instance.changeIsBlocButton(newIsBlocButton: false);
         textController.textFieldPassword.clear();
       }
     },

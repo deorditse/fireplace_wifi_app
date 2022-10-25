@@ -51,16 +51,16 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///инициализация данных на экране
 
-  Future<void> initialFireplaceData({required String url}) async {
-    fireplaceData = await services.getFireplaceData(url: url);
-    print(fireplaceData);
-    update();
-  }
+  // Future<void> initialFireplaceData({required String url}) async {
+  //   fireplaceData = await services.getFireplaceData(url: url);
+  //   print(fireplaceData);
+  //   update();
+  // }
 
   ///общие параметры__________________________________
   //при первом входе в приложение - либо сделать linear bar при загрузке данных
 
-  FireplaceDataModel? fireplaceData;
+  // FireplaceDataModel? fireplaceData;
 
   bool isButtonFor1000Fireplace = false;
 
@@ -139,6 +139,8 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isBlocButton = false;
 
   void changeIsBlocButton({bool? newIsBlocButton}) {
+    // fireplaceData = fireplaceData!.copyWith(
+    //     isBlocButton: newIsBlocButton ?? !fireplaceData!.isBlocButton);
     isBlocButton = newIsBlocButton ?? !isBlocButton;
     update();
   }

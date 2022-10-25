@@ -11,12 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   model:
     path: ../model
-#  injectable: ^1.5.3
-#  get_it: ^7.2.0
-#  cloud_firestore: ^3.3.0
   get: ^4.6.5
 
   # The following adds the Cupertino Icons font to your application.
@@ -26,9 +22,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-#  injectable_generator: ^1.5.3
-#  build_runner: ^2.1.11
-
   flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the

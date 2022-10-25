@@ -20,47 +20,47 @@ class FireplacePage extends StatefulWidget {
 }
 
 class _FireplacePageState extends State<FireplacePage> {
-  String errorMessage = '';
-  bool hasError = false;
-  bool isLoading = false;
-  List<dynamic> dataList = [];
-  Dio _dio = Dio();
-
-  @override
-  void initState() {
-    super.initState();
-    getDataDio();
-  }
-
-  void getDataDio() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    try {
-      final response = await _dio
-          .get('https://run.mocky.io/v3/ac888dc5-d193-4700-b12c-abb43e289301');
-      var data = response.data;
-      print(
-          '_______________________test get data dio from server __________ : ${data}');
-      dataList = data;
-      // .map<String>((hotel) => HotelPreview.fromJson(hotel))
-      // .toList();
-      // print('test get data dio from server __________ : ${dataList.toString()}');
-    } on DioError catch (error) {
-      setState(() {
-        errorMessage =
-            "Контент временно недоступен \nstatus ${error.response?.statusCode!}";
-        print('${error.message}');
-        hasError = true;
-        isLoading = false;
-      });
-    }
-
-    setState(() {
-      isLoading = false;
-    });
-  }
+  // String errorMessage = '';
+  // bool hasError = false;
+  // bool isLoading = false;
+  // List<dynamic> dataList = [];
+  // Dio _dio = Dio();
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getDataDio();
+  // }
+  //
+  // void getDataDio() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //
+  //   try {
+  //     final response = await _dio
+  //         .get('https://run.mocky.io/v3/ac888dc5-d193-4700-b12c-abb43e289301');
+  //     var data = response.data;
+  //     print(
+  //         '_______________________test get data dio from server __________ : ${data}');
+  //     dataList = data;
+  //     // .map<String>((hotel) => HotelPreview.fromJson(hotel))
+  //     // .toList();
+  //     // print('test get data dio from server __________ : ${dataList.toString()}');
+  //   } on DioError catch (error) {
+  //     setState(() {
+  //       errorMessage =
+  //           "Контент временно недоступен \nstatus ${error.response?.statusCode!}";
+  //       print('${error.message}');
+  //       hasError = true;
+  //       isLoading = false;
+  //     });
+  //   }
+  //
+  //   setState(() {
+  //     isLoading = false;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,15 @@ class _FireplacePageState extends State<FireplacePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 appBarFireplace(context: context),
-                BodyPageSmartFireA71000(),
+                GetBuilder<FireplaceConnectionGetXController>(
+                  builder: (controllerApp) =>
+                      // controllerApp.fireplaceData != null
+                      //     ?
+                      BodyPageSmartFireA71000()
+                          // : Center(
+                          //     child: CircularProgressIndicator(),
+                          //   ),
+                ),
               ],
             ),
           ),
@@ -102,7 +110,7 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: GetBuilder<FireplaceConnectionGetXController>(
             builder: (controllerApp) {
-              if (controllerApp.isBlocButton) {
+              if (controllerApp/*.fireplaceData!*/.isBlocButton) {
                 //если камин заблокирован
                 return Column(
                   mainAxisSize: MainAxisSize.min,

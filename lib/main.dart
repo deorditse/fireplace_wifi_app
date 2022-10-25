@@ -11,7 +11,6 @@ import 'packages/ui_layout/all_pages/wifi_off_screen_page/wifi_off_screen_page.d
 
 Future<void> main() async {
   runApp(
-    // MaterialApp(home: MyAppTimerTest()),
     MainPage(),
   );
 }

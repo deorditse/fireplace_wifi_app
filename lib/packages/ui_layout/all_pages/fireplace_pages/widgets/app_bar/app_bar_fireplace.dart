@@ -26,7 +26,7 @@ Widget appBarFireplace({context}) {
                       newIsSettingButton: false);
                 },
                 child: SvgPicture.asset(
-                  controllerApp.isBlocButton
+                  controllerApp/*.fireplaceData!*/.isBlocButton
                       ? 'assets/icons/blocs_2.svg'
                       : 'assets/icons/blocs.svg',
                   semanticsLabel: 'premium-icon-internet',
@@ -51,7 +51,7 @@ Widget appBarFireplace({context}) {
               padding: const EdgeInsets.only(bottom: 8.0, left: 8),
               child: TextButton(
                 onPressed: () {
-                  if (!controllerApp.isBlocButton) {
+                  if (!controllerApp/*.fireplaceData!*/.isBlocButton) {
                     controllerApp.changeIsSettingButton();
                   }
                 },
