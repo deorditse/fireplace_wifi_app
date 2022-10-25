@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:model/model.dart';
+import 'package:models/models.dart';
 
 import '../../data_layout.dart';
 

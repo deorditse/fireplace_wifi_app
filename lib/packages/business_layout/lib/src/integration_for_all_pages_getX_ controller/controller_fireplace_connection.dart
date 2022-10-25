@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_countdown_timer/countdown.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:get/get.dart';
-import 'package:model/model.dart';
+import 'package:models/models.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:flutter/foundation.dart';

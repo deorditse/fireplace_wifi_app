@@ -33,8 +33,8 @@ dependencies:
     sdk: flutter
   business_layout:
     path: lib/packages/business_layout
-  model:
-    path: lib/packages/model
+  models:
+    path: lib/packages/models
   dio: ^4.0.6
   font_awesome_flutter: ^10.1.0
   #  firebase_core: ^1.19.2

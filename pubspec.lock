@@ -387,13 +387,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  model:
+  models:
     dependency: "direct main"
     description:
-      path: "lib/packages/model"
+      path: "lib/packages/models"
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.0.1"
   network_info_plus:
     dependency: "direct main"
     description:

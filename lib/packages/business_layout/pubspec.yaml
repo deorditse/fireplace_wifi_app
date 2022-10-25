@@ -13,8 +13,8 @@ dependencies:
     sdk: flutter
   data_layout:
     path: ../data_layout
-  model:
-    path: ../model
+  models:
+    path: ../models
 #  get_it: ^7.2.0
 #  injectable: ^1.5.3
 #  freezed: ^2.0.3+1
