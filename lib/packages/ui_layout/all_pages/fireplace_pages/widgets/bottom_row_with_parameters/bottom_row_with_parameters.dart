@@ -15,7 +15,7 @@ Widget imageOil() => SvgPicture.asset(
 
 Widget percentOil() =>
     GetBuilder<FireplaceConnectionGetXController>(builder: (controllerApp) {
-      final percentOil = controllerApp.percentOil;
+      final percentOil = controllerApp.fireplaceData?.percentOil;
 
       return Text(
         percentOil != null ? '${percentOil.toInt()}%' : '...%',
@@ -58,24 +58,23 @@ Widget bottomRowWithParameters(BuildContext context) {
                 children: [
                   iconValueDescription(
                     iconPath: 'assets/icons/temperature.svg',
-                    value: controllerApp.temperature != null
-                        ? '${controllerApp.temperature!.toInt()}°C'
+                    value: controllerApp.fireplaceData?.temperature != null
+                        ? '${controllerApp.fireplaceData!.temperature.toInt()}°C'
                         : '...°C',
                     description: 'температура',
                   ),
                   iconValueDescription(
                     iconPath: 'assets/icons/wet.svg',
-                    value: controllerApp.wet != null
-                        ? '${controllerApp.wet!.toInt()}%'
+                    value: controllerApp.fireplaceData?.wet != null
+                        ? '${controllerApp.fireplaceData!.wet.toInt()}%'
                         : '...%',
                     description: 'влажность',
                   ),
-                  if (controllerApp.isOptionCO2level)
+                  if (controllerApp.fireplaceData?.CO2value != null)
                     iconValueDescription(
                       iconPath: 'assets/icons/level_CO2.svg',
-                      value: controllerApp.CO2value != null
-                          ? '${controllerApp.CO2value!.toInt()}%'
-                          : '...%',
+                      value:
+                          '${controllerApp.fireplaceData!.CO2value!.toInt()}%',
                       description: 'уровень CO2',
                     )
                   else

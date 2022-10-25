@@ -53,8 +53,8 @@ Widget appBarFireplace({context}) {
               padding: const EdgeInsets.only(bottom: 8.0, left: 8),
               child: TextButton(
                 onPressed: () {
-                  if (!controllerApp.fireplaceData!.isBlocButton &&
-                      controllerApp.fireplaceData != null) {
+                  if (controllerApp.fireplaceData != null &&
+                      !controllerApp.fireplaceData!.isBlocButton) {
                     controllerApp.changeIsSettingButton();
                   }
                 },

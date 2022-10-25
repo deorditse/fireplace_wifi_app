@@ -84,8 +84,9 @@ TextField _myTextField() {
     maxLength: 4,
     controller: textController.textFieldPassword,
     onChanged: (password) {
-      if (password == textController.passwordBlock.toString()) {
-        FireplaceConnectionGetXController.instance.changeIsBlocButton(newIsBlocButton: false);
+      if (password == textController.fireplaceData!.passwordBlock.toString()) {
+        FireplaceConnectionGetXController.instance
+            .changeIsBlocButton(newIsBlocButton: false);
         textController.textFieldPassword.clear();
       }
     },

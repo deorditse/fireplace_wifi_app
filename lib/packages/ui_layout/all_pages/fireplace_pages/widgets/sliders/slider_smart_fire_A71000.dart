@@ -12,13 +12,15 @@ class SliderSmartFireA71000 extends StatelessWidget {
     return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) {
         final List<int> _labels = List.generate(
-            controllerApp.maxLevelSliderFireplace.toInt(),
+            controllerApp.fireplaceData!.sliderValue![1],
             (index) => index.toInt() + 1);
         //Слайдер (убераю его с экрана, когда идет охдажение камина)
         return !controllerApp.isCoolingFireplace
             ? SizedBox(
                 height: MediaQuery.of(context).size.height /
-                    (controllerApp.maxLevelSliderFireplace > 3 ? 2.4 : 3.1),
+                    (controllerApp.fireplaceData!.sliderValue![1] > 3
+                        ? 2.4
+                        : 3.1),
                 width: MediaQuery.of(context).size.width / 8,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,8 +73,9 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
     // TODO: implement initState
     super.initState();
 
-    divisions =
-        FireplaceConnectionGetXController.instance.maxLevelSliderFireplace - 1;
+    divisions = FireplaceConnectionGetXController
+            .instance.fireplaceData!.sliderValue![1] -
+        1;
   }
 
   @override
@@ -101,7 +104,7 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
             // label: '${sliderValue.value}',
             min: min,
             max: FireplaceConnectionGetXController
-                .instance.maxLevelSliderFireplace
+                .instance.fireplaceData!.sliderValue![1]
                 .toDouble(),
             value: sliderValue.value,
             onChangeEnd: (double value) {

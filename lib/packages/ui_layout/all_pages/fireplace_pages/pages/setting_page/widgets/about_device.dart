@@ -66,7 +66,9 @@ class AboutDeviceWidget extends StatelessWidget {
                 style: myTextStyleFontRoboto(textColor: myTwoColor),
               ),
               TextSpan(
-                text: FireplaceConnectionGetXController.instance.serialNumber,
+                text: FireplaceConnectionGetXController
+                        .instance.fireplaceData?.serialNumber ??
+                    '...',
                 style: myTextStyleFontRoboto(),
               ),
             ],
@@ -84,7 +86,9 @@ class AboutDeviceWidget extends StatelessWidget {
                 style: myTextStyleFontRoboto(textColor: myTwoColor),
               ),
               TextSpan(
-                text: FireplaceConnectionGetXController.instance.dcCode,
+                text: FireplaceConnectionGetXController
+                        .instance.fireplaceData?.dcCode ??
+                    '...',
                 style: myTextStyleFontRoboto(),
               ),
             ],
@@ -103,7 +107,8 @@ class AboutDeviceWidget extends StatelessWidget {
               ),
               TextSpan(
                 text: FireplaceConnectionGetXController
-                    .instance.dateOfManufacture,
+                        .instance.fireplaceData?.dateOfManufacture ??
+                    '...',
                 style: myTextStyleFontRoboto(),
               ),
             ],

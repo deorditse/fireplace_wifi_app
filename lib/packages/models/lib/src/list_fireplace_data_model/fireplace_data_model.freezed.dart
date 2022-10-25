@@ -40,6 +40,10 @@ mixin _$FireplaceDataModel {
   String get dateOfManufacture =>
       throw _privateConstructorUsedError; //дата производства
   set dateOfManufacture(String value) =>
+      throw _privateConstructorUsedError; //значение мощности камина / максимальное значение
+  List<int>? get sliderValue =>
+      throw _privateConstructorUsedError; //значение мощности камина / максимальное значение
+  set sliderValue(List<int>? value) =>
       throw _privateConstructorUsedError; //звук нажатия кнопок
   bool get isSwitchClickSound =>
       throw _privateConstructorUsedError; //звук нажатия кнопок
@@ -102,6 +106,7 @@ abstract class $FireplaceDataModelCopyWith<$Res> {
       String serialNumber,
       String dcCode,
       String dateOfManufacture,
+      List<int>? sliderValue,
       bool isSwitchClickSound,
       double? sliderValueCracklingSoundEffect,
       double? sliderValueVoicePrompts,
@@ -134,6 +139,7 @@ class _$FireplaceDataModelCopyWithImpl<$Res, $Val extends FireplaceDataModel>
     Object? serialNumber = null,
     Object? dcCode = null,
     Object? dateOfManufacture = null,
+    Object? sliderValue = freezed,
     Object? isSwitchClickSound = null,
     Object? sliderValueCracklingSoundEffect = freezed,
     Object? sliderValueVoicePrompts = freezed,
@@ -174,6 +180,10 @@ class _$FireplaceDataModelCopyWithImpl<$Res, $Val extends FireplaceDataModel>
           ? _value.dateOfManufacture
           : dateOfManufacture // ignore: cast_nullable_to_non_nullable
               as String,
+      sliderValue: freezed == sliderValue
+          ? _value.sliderValue
+          : sliderValue // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
       isSwitchClickSound: null == isSwitchClickSound
           ? _value.isSwitchClickSound
           : isSwitchClickSound // ignore: cast_nullable_to_non_nullable
@@ -235,6 +245,7 @@ abstract class _$$_FireplaceDataModelCopyWith<$Res>
       String serialNumber,
       String dcCode,
       String dateOfManufacture,
+      List<int>? sliderValue,
       bool isSwitchClickSound,
       double? sliderValueCracklingSoundEffect,
       double? sliderValueVoicePrompts,
@@ -265,6 +276,7 @@ class __$$_FireplaceDataModelCopyWithImpl<$Res>
     Object? serialNumber = null,
     Object? dcCode = null,
     Object? dateOfManufacture = null,
+    Object? sliderValue = freezed,
     Object? isSwitchClickSound = null,
     Object? sliderValueCracklingSoundEffect = freezed,
     Object? sliderValueVoicePrompts = freezed,
@@ -305,6 +317,10 @@ class __$$_FireplaceDataModelCopyWithImpl<$Res>
           ? _value.dateOfManufacture
           : dateOfManufacture // ignore: cast_nullable_to_non_nullable
               as String,
+      sliderValue: freezed == sliderValue
+          ? _value.sliderValue
+          : sliderValue // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
       isSwitchClickSound: null == isSwitchClickSound
           ? _value.isSwitchClickSound
           : isSwitchClickSound // ignore: cast_nullable_to_non_nullable
@@ -361,6 +377,7 @@ class _$_FireplaceDataModel implements _FireplaceDataModel {
       required this.serialNumber,
       required this.dcCode,
       required this.dateOfManufacture,
+      this.sliderValue,
       this.isSwitchClickSound = false,
       this.sliderValueCracklingSoundEffect,
       this.sliderValueVoicePrompts,
@@ -393,6 +410,9 @@ class _$_FireplaceDataModel implements _FireplaceDataModel {
 //дата производства
   @override
   String dateOfManufacture;
+//значение мощности камина / максимальное значение
+  @override
+  List<int>? sliderValue;
 //звук нажатия кнопок
   @override
   @JsonKey()
@@ -434,7 +454,7 @@ class _$_FireplaceDataModel implements _FireplaceDataModel {
 
   @override
   String toString() {
-    return 'FireplaceDataModel(temperature: $temperature, percentOil: $percentOil, wet: $wet, CO2value: $CO2value, serialNumber: $serialNumber, dcCode: $dcCode, dateOfManufacture: $dateOfManufacture, isSwitchClickSound: $isSwitchClickSound, sliderValueCracklingSoundEffect: $sliderValueCracklingSoundEffect, sliderValueVoicePrompts: $sliderValueVoicePrompts, isFuelSystemError: $isFuelSystemError, isCoolingFireplace: $isCoolingFireplace, isBlocButton: $isBlocButton, passwordBlock: $passwordBlock, isPlayFireplace: $isPlayFireplace, dataTimeWorkFireplace: $dataTimeWorkFireplace, isOptionTimer: $isOptionTimer)';
+    return 'FireplaceDataModel(temperature: $temperature, percentOil: $percentOil, wet: $wet, CO2value: $CO2value, serialNumber: $serialNumber, dcCode: $dcCode, dateOfManufacture: $dateOfManufacture, sliderValue: $sliderValue, isSwitchClickSound: $isSwitchClickSound, sliderValueCracklingSoundEffect: $sliderValueCracklingSoundEffect, sliderValueVoicePrompts: $sliderValueVoicePrompts, isFuelSystemError: $isFuelSystemError, isCoolingFireplace: $isCoolingFireplace, isBlocButton: $isBlocButton, passwordBlock: $passwordBlock, isPlayFireplace: $isPlayFireplace, dataTimeWorkFireplace: $dataTimeWorkFireplace, isOptionTimer: $isOptionTimer)';
   }
 
   @JsonKey(ignore: true)
@@ -454,6 +474,7 @@ abstract class _FireplaceDataModel implements FireplaceDataModel {
       required String serialNumber,
       required String dcCode,
       required String dateOfManufacture,
+      List<int>? sliderValue,
       bool isSwitchClickSound,
       double? sliderValueCracklingSoundEffect,
       double? sliderValueVoicePrompts,
@@ -486,6 +507,9 @@ abstract class _FireplaceDataModel implements FireplaceDataModel {
   @override //дата производства
   String get dateOfManufacture; //дата производства
   set dateOfManufacture(String value);
+  @override //значение мощности камина / максимальное значение
+  List<int>? get sliderValue; //значение мощности камина / максимальное значение
+  set sliderValue(List<int>? value);
   @override //звук нажатия кнопок
   bool get isSwitchClickSound; //звук нажатия кнопок
   set isSwitchClickSound(bool value);

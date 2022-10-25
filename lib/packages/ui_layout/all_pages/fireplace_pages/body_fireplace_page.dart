@@ -46,16 +46,17 @@ class BodyFireplacePage extends StatelessWidget {
                     ),
             ],
           ),
-          controllerApp.fireplaceData != null
-              ? Align(
-                  alignment: Alignment.bottomCenter,
-                  child: bottomRowWithParameters(context),
-                )
-              : Container(),
-          // если опция слайдера включена isOptionSliderFireplace
-          if (FireplaceConnectionGetXController
-                  .instance.isOptionSliderFireplace &&
-              controllerApp.fireplaceData != null)
+          if (controllerApp.fireplaceData != null)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: bottomRowWithParameters(context),
+            ),
+
+          // если опция слайдера включена OptionSliderFireplace
+          if (controllerApp.fireplaceData != null &&
+              FireplaceConnectionGetXController
+                      .instance.fireplaceData?.sliderValue?[0] !=
+                  null)
             Positioned(right: 0, bottom: 70, child: SliderSmartFireA71000()),
         ],
       ),

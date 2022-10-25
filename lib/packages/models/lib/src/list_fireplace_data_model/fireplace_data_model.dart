@@ -29,6 +29,9 @@ class FireplaceDataModel with _$FireplaceDataModel {
     //дата производства
     required String dateOfManufacture,
 
+    //значение мощности камина / максимальное значение
+    List<int>? sliderValue,
+
     //звук нажатия кнопок
     @Default(false) bool isSwitchClickSound,
 
@@ -48,7 +51,7 @@ class FireplaceDataModel with _$FireplaceDataModel {
     @Default(false) bool isBlocButton,
 
     //заданный пользователем пароль
-    @Default(5539) int passwordBlock,  //пароль по умолчанию
+    @Default(5539) int passwordBlock, //пароль по умолчанию
 
     //камин запущен?
     @Default(false) bool isPlayFireplace,

@@ -66,19 +66,16 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isButtonFor1000Fireplace = false;
 
   //значение уровня топлива
-  double? percentOil;
+  // double? percentOil;
 
   //значение температуры
-  double? temperature;
-
-  //опция isOptionCO2level
-  bool isOptionCO2level = false;
+  // double? temperature;
 
   //значение CO2
-  double? CO2value;
+  // double? CO2value;
 
 //значение влажности
-  double? wet;
+//   double? wet;
 
   ///для информационных сообщений___________________________________________________
   //окно с информационным сообщением
@@ -98,25 +95,24 @@ class FireplaceConnectionGetXController extends GetxController {
     update();
   }
 
-  //серийный номер
-  String serialNumber = '';
+  // //серийный номер
+  // String serialNumber = '';
+  //
+  // //Дс code
+  // String dcCode = '';
+  //
+  // //дата производства
+  // String dateOfManufacture = '';
 
-  //Дс code
-  String dcCode = '';
-
-  //дата производства
-  String dateOfManufacture = '';
-
-  //звук нажатия кнопок
-  bool isSwitchClickSound = false;
+  // //звук нажатия кнопок
+  // bool isSwitchClickSound = false;
 
   void changeSwitchButtonClickSound() {
-    isSwitchClickSound = !isSwitchClickSound;
+    fireplaceData!.isSwitchClickSound = !fireplaceData!.isSwitchClickSound;
     update();
   }
 
   //Звуковой эффект потрескивание дров
-  bool isOptionFirewoodCracklingSoundEffect = false;
   bool isSwitchCracklingSoundEffect = false;
   double sliderValueCracklingSoundEffect = 0.0;
 
@@ -126,7 +122,6 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   //Голосовые подсказки
-  bool isOptionVoicePrompts = false;
   bool isSwitchVoicePrompts = false;
   double sliderValueVoicePrompts = 0;
 
@@ -146,7 +141,7 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   //заданный пользователем пароль - сохранить в локальную базу
-  int? passwordBlock = 5539;
+  // int? passwordBlock = 5539;
 
   //пароль, который приходит с тектового поля
   TextEditingController textFieldPassword = TextEditingController();
@@ -163,9 +158,8 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isFuelSystemError = false;
 
   //для слайдера / максимальное значение
-  bool isOptionSliderFireplace = false;
-  double sliderValue = 1.0;
-  int maxLevelSliderFireplace = 3;
+  // double sliderValue = 1.0;
+  // int maxLevelSliderFireplace = 3;
 
   void changeButtonPlayStopFireplace() {
     isPlayFireplace ? stopFireplace() : playFireplace();
@@ -318,30 +312,21 @@ class FireplaceConnectionGetXController extends GetxController {
         //smartPrime_1000
         try {
           initialFireplaceData(url: '');
-
+//delete after testing
           ///перенесено в отдельный метод куда нужно отправлять SSID wifi data
           print('detected fireplace from searchFireplaceInListWithIdWifi el 0');
           titleModel = 'smartPrime_1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
           //опции для камина
-          isOptionCO2level = false;
-          isOptionSliderFireplace = false;
-          isOptionFirewoodCracklingSoundEffect = false;
           isOptionTimer = false;
-          isOptionVoicePrompts = false;
           //
-          temperature = 20;
-          CO2value = null;
-          percentOil = 90;
-          wet = 10;
-          // CO2value = 45;
+          fireplaceData?.temperature = 20;
+          fireplaceData?.CO2value = null;
+          fireplaceData?.percentOil = 90;
+          fireplaceData?.wet = 10;
+          fireplaceData?.CO2value = 234; //null
           isButtonFor1000Fireplace = true;
-          maxLevelSliderFireplace = 0;
-          serialNumber = 'smartPrime_1000';
-          dcCode = 'smartPrime_1000';
-          dateOfManufacture = '21.08.2022';
-          isSwitchClickSound = true;
           isSwitchCracklingSoundEffect = false;
           sliderValueCracklingSoundEffect = 5;
           sliderValueVoicePrompts = 0;
@@ -367,22 +352,20 @@ class FireplaceConnectionGetXController extends GetxController {
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
           //опции для камина
-          isOptionCO2level = true;
-          isOptionFirewoodCracklingSoundEffect = true;
+          fireplaceData?.sliderValueVoicePrompts = 2;
+          fireplaceData?.sliderValueCracklingSoundEffect  = 3;
           isOptionTimer = true;
-          isOptionVoicePrompts = true;
-          isOptionSliderFireplace = true;
-          //
-          wet = 45;
-          CO2value = 45;
-          temperature = 40;
-          percentOil = 50;
+          fireplaceData?.wet = 45;
+          fireplaceData?.CO2value = 45;
+          fireplaceData?.temperature = 40;
+          fireplaceData?.percentOil = 50;
           isButtonFor1000Fireplace = false;
-          maxLevelSliderFireplace = 7;
-          serialNumber = 'smartFireA7_1000';
-          dcCode = 'smartFireA7_1000';
-          dateOfManufacture = '11.01.2022';
-          isSwitchClickSound = true;
+          fireplaceData?.sliderValue?[0] = 3;
+          fireplaceData?.sliderValue?[1] = 7;
+          fireplaceData?.serialNumber = 'smartFireA7_1000';
+          fireplaceData?.dcCode = 'smartFireA7_1000';
+          fireplaceData?.dateOfManufacture = '11.01.2022';
+          fireplaceData?.isSwitchClickSound = true;
           isSwitchCracklingSoundEffect = false;
           sliderValueCracklingSoundEffect = 0;
           sliderValueVoicePrompts = 0;
@@ -407,22 +390,21 @@ class FireplaceConnectionGetXController extends GetxController {
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
           //опции для камина
-          isOptionCO2level = false;
-          isOptionFirewoodCracklingSoundEffect = true;
           isOptionTimer = true;
-          isOptionVoicePrompts = false;
-          isOptionSliderFireplace = true;
           //
           // CO2value = 45;
-          wet = 15;
-          temperature = 120;
-          percentOil = 10;
+          fireplaceData?.sliderValueVoicePrompts = 1;
+          fireplaceData?.sliderValueCracklingSoundEffect  = 2;
+          fireplaceData?.wet = 15;
+          fireplaceData?.temperature = 120;
+          fireplaceData?.percentOil = 10;
           isButtonFor1000Fireplace = false;
-          maxLevelSliderFireplace = 5;
-          serialNumber = 'smartFireA5_1000';
-          dcCode = 'smartFireA5_1000';
-          dateOfManufacture = '12.05.2022';
-          isSwitchClickSound = true;
+          fireplaceData?.sliderValue?[0] = 1;
+          fireplaceData?.sliderValue?[1] = 5;
+          fireplaceData?.serialNumber = 'smartFireA5_1000';
+          fireplaceData?.dcCode = 'smartFireA5_1000';
+          fireplaceData?.dateOfManufacture = '12.05.2022';
+          fireplaceData?.isSwitchClickSound = true;
           isSwitchCracklingSoundEffect = false;
           sliderValueCracklingSoundEffect = 20;
           sliderValueVoicePrompts = 0;
@@ -447,22 +429,21 @@ class FireplaceConnectionGetXController extends GetxController {
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
           //опции для камина
-          isOptionCO2level = false;
-          isOptionFirewoodCracklingSoundEffect = false;
           isOptionTimer = false;
-          isOptionVoicePrompts = false;
-          isOptionSliderFireplace = true;
           //
           // CO2value = 45;
-          wet = 75;
-          temperature = 50;
-          percentOil = 100;
+          fireplaceData?.sliderValueVoicePrompts = 0;
+          fireplaceData?.sliderValueCracklingSoundEffect  = 3;
+          fireplaceData?.wet = 75;
+          fireplaceData?.temperature = 50;
+          fireplaceData?.percentOil = 100;
           isButtonFor1000Fireplace = false;
-          maxLevelSliderFireplace = 3;
-          serialNumber = 'smartFireA3_1000';
-          dcCode = 'smartFireA3_1000';
-          dateOfManufacture = '10.08.2022';
-          isSwitchClickSound = true;
+          fireplaceData?.sliderValue?[0] = 2;
+          fireplaceData?.sliderValue?[1] = 3;
+          fireplaceData?.serialNumber = 'smartFireA3_1000';
+          fireplaceData?.dcCode = 'smartFireA3_1000';
+          fireplaceData?.dateOfManufacture = '10.08.2022';
+          fireplaceData?.isSwitchClickSound = true;
           isSwitchCracklingSoundEffect = false;
           sliderValueCracklingSoundEffect = 20;
           sliderValueVoicePrompts = 0;

@@ -33,13 +33,16 @@ class SetVolumeWidget extends StatelessWidget {
         _optionButtonClickSound(),
         //опция Зв. эффект потрескивание дров
         if (FireplaceConnectionGetXController
-            .instance.isOptionFirewoodCracklingSoundEffect)
+                .instance.fireplaceData?.sliderValueCracklingSoundEffect !=
+            null)
           Padding(
             padding: EdgeInsets.only(top: mySizedHeightBetweenAlert),
             child: _optionSoundFirewoodCrackleEffect(),
           ),
         //опция Голосовые подсказки
-        if (FireplaceConnectionGetXController.instance.isOptionVoicePrompts)
+        if (FireplaceConnectionGetXController
+                .instance.fireplaceData?.sliderValueVoicePrompts !=
+            null)
           Padding(
             padding: EdgeInsets.only(top: mySizedHeightBetweenAlert),
             child: _optionVoicePrompts(),
@@ -58,7 +61,7 @@ class SetVolumeWidget extends StatelessWidget {
               inactiveTextFontWeight: FontWeight.w500,
               activeText: 'off',
               inactiveText: 'on',
-              value: controllerApp.isSwitchClickSound,
+              value: controllerApp.fireplaceData?.isSwitchClickSound ?? false,
               activeColor: Colors.black,
               toggleColor: Color.fromRGBO(113, 109, 109, 1),
               inactiveColor: Colors.black,
@@ -115,7 +118,7 @@ class SetVolumeWidget extends StatelessWidget {
           ),
           if (controllerApp.isSwitchCracklingSoundEffect)
             Padding(
-              padding: EdgeInsets.only(top: mySizedHeightBetweenAlert/2),
+              padding: EdgeInsets.only(top: mySizedHeightBetweenAlert / 2),
               child: MySliderTheme(
                 child: Obx(
                   () => Slider(
@@ -172,7 +175,7 @@ class SetVolumeWidget extends StatelessWidget {
           ),
           if (controllerApp.isSwitchVoicePrompts)
             Padding(
-              padding: EdgeInsets.only(top: mySizedHeightBetweenAlert/2),
+              padding: EdgeInsets.only(top: mySizedHeightBetweenAlert / 2),
               child: MySliderTheme(
                 child: Obx(
                   () => Slider(
