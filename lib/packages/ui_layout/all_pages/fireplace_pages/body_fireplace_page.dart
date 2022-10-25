@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,28 +13,52 @@ class BodyFireplacePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: myTitleModel(),
-            ),
-            const Expanded(
-              child: MainBodyStateFireplace(),
-            ),
-          ],
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: bottomRowWithParameters(context),
-        ),
-        // если опция слайдера включена isOptionSliderFireplace
-        if (FireplaceConnectionGetXController.instance.isOptionSliderFireplace)
-          Positioned(right: 0, bottom: 70, child: SliderSmartFireA71000()),
-      ],
+    return GetBuilder<FireplaceConnectionGetXController>(
+      builder: (controllerApp) => Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: myTitleModel(),
+              ),
+              controllerApp.fireplaceData != null
+                  ? const Expanded(
+                      child: MainBodyStateFireplace(),
+                    )
+                  : Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            color: myColorActivity,
+                          ),
+                          SizedBox(
+                            height: mySizedHeightBetweenAlert,
+                          ),
+                          Text(
+                            'Загрузка данных...',
+                            style: myTextStyleFontRoboto(),
+                          ),
+                        ],
+                      ),
+                    ),
+            ],
+          ),
+          controllerApp.fireplaceData != null
+              ? Align(
+                  alignment: Alignment.bottomCenter,
+                  child: bottomRowWithParameters(context),
+                )
+              : Container(),
+          // если опция слайдера включена isOptionSliderFireplace
+          if (FireplaceConnectionGetXController
+                  .instance.isOptionSliderFireplace &&
+              controllerApp.fireplaceData != null)
+            Positioned(right: 0, bottom: 70, child: SliderSmartFireA71000()),
+        ],
+      ),
     );
   }
 }

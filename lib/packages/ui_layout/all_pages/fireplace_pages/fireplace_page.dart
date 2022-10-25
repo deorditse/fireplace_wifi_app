@@ -81,15 +81,7 @@ class _FireplacePageState extends State<FireplacePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 appBarFireplace(context: context),
-                GetBuilder<FireplaceConnectionGetXController>(
-                  builder: (controllerApp) =>
-                      // controllerApp.fireplaceData != null
-                      //     ?
-                      BodyPageSmartFireA71000()
-                          // : Center(
-                          //     child: CircularProgressIndicator(),
-                          //   ),
-                ),
+                BodyPageSmartFireA71000(),
               ],
             ),
           ),
@@ -110,7 +102,7 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: GetBuilder<FireplaceConnectionGetXController>(
             builder: (controllerApp) {
-              if (controllerApp/*.fireplaceData!*/.isBlocButton) {
+              if (controllerApp.fireplaceData?.isBlocButton ?? false) {
                 //если камин заблокирован
                 return Column(
                   mainAxisSize: MainAxisSize.min,

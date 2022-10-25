@@ -21,12 +21,14 @@ Widget appBarFireplace({context}) {
               padding: const EdgeInsets.only(bottom: 8.0, right: 8),
               child: TextButton(
                 onPressed: () {
-                  controllerApp.changeIsBlocButton(newIsBlocButton: true);
-                  controllerApp.changeIsSettingButton(
-                      newIsSettingButton: false);
+                  if (controllerApp.fireplaceData != null) {
+                    controllerApp.changeIsBlocButton(newIsBlocButton: true);
+                    controllerApp.changeIsSettingButton(
+                        newIsSettingButton: false);
+                  }
                 },
                 child: SvgPicture.asset(
-                  controllerApp/*.fireplaceData!*/.isBlocButton
+                  controllerApp.fireplaceData?.isBlocButton ?? false
                       ? 'assets/icons/blocs_2.svg'
                       : 'assets/icons/blocs.svg',
                   semanticsLabel: 'premium-icon-internet',
@@ -51,7 +53,8 @@ Widget appBarFireplace({context}) {
               padding: const EdgeInsets.only(bottom: 8.0, left: 8),
               child: TextButton(
                 onPressed: () {
-                  if (!controllerApp/*.fireplaceData!*/.isBlocButton) {
+                  if (!controllerApp.fireplaceData!.isBlocButton &&
+                      controllerApp.fireplaceData != null) {
                     controllerApp.changeIsSettingButton();
                   }
                 },

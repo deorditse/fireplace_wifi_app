@@ -51,16 +51,16 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///инициализация данных на экране
 
-  // Future<void> initialFireplaceData({required String url}) async {
-  //   fireplaceData = await services.getFireplaceData(url: url);
-  //   print(fireplaceData);
-  //   update();
-  // }
+  Future<void> initialFireplaceData({required String url}) async {
+    fireplaceData = await services.getFireplaceData(url: url);
+    print(fireplaceData);
+    update();
+  }
 
   ///общие параметры__________________________________
   //при первом входе в приложение - либо сделать linear bar при загрузке данных
 
-  // FireplaceDataModel? fireplaceData;
+  FireplaceDataModel? fireplaceData;
 
   bool isButtonFor1000Fireplace = false;
 
@@ -136,12 +136,11 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///для экрана блокировки___________________________________________________
   //кнопка блокирования экрана нажата?
-  bool isBlocButton = false;
+  // bool isBlocButton = false;
 
   void changeIsBlocButton({bool? newIsBlocButton}) {
-    // fireplaceData = fireplaceData!.copyWith(
-    //     isBlocButton: newIsBlocButton ?? !fireplaceData!.isBlocButton);
-    isBlocButton = newIsBlocButton ?? !isBlocButton;
+    fireplaceData!.isBlocButton =
+        newIsBlocButton ?? !fireplaceData!.isBlocButton;
     update();
   }
 
@@ -317,6 +316,8 @@ class FireplaceConnectionGetXController extends GetxController {
           wifiName == _listWifiName.elementAt(0)) {
         //smartPrime_1000
         try {
+          initialFireplaceData(url: '');
+
           ///перенесено в отдельный метод куда нужно отправлять SSID wifi data
           print('detected fireplace from searchFireplaceInListWithIdWifi el 0');
           titleModel = 'smartPrime_1000';
