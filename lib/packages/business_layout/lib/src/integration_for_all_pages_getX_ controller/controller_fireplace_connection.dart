@@ -62,6 +62,7 @@ class FireplaceConnectionGetXController extends GetxController {
 
   FireplaceDataModel? fireplaceData;
 
+//выбран камин For1000Fireplace
   bool isButtonFor1000Fireplace = false;
 
   //значение уровня топлива
