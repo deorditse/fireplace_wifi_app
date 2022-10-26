@@ -64,8 +64,9 @@ class _SliderSmartFireA71000 extends StatefulWidget {
 }
 
 class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
-  Rx<double> sliderValue = 1.0.obs;
-  final double min = 1.0;
+   Rx<double> sliderValue =  FireplaceConnectionGetXController
+      .instance.fireplaceData!.sliderValue![0]
+      .toDouble().obs;
   late final divisions;
 
   @override
@@ -76,6 +77,10 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
     divisions = FireplaceConnectionGetXController
             .instance.fireplaceData!.sliderValue![1] -
         1;
+
+    sliderValue.value = FireplaceConnectionGetXController
+        .instance.fireplaceData!.sliderValue![0]
+        .toDouble();
   }
 
   @override
@@ -100,9 +105,9 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
         () => RotatedBox(
           quarterTurns: 3,
           child: Slider(
-            divisions: divisions * 2,
+            divisions: divisions,
             // label: '${sliderValue.value}',
-            min: min,
+            min: 1.0,
             max: FireplaceConnectionGetXController
                 .instance.fireplaceData!.sliderValue![1]
                 .toDouble(),

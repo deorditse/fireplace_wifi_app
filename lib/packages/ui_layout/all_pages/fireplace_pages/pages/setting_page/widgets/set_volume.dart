@@ -84,66 +84,75 @@ class SetVolumeWidget extends StatelessWidget {
   }
 
   _optionSoundFirewoodCrackleEffect() {
-    Rx<double> _sliderValue = 1.0.obs;
+    Rx<double>? _sliderValueCracklingSoundEffect =
+        (FireplaceConnectionGetXController
+                    .instance.fireplaceData!.sliderValueCracklingSoundEffect ??
+                0)
+            .obs;
 
     return GetBuilder<FireplaceConnectionGetXController>(
-      builder: (controllerApp) => Column(
-        children: [
-          Row(
-            children: [
-              FlutterSwitch(
-                activeTextFontWeight: FontWeight.w500,
-                inactiveTextFontWeight: FontWeight.w500,
-                activeText: 'off',
-                inactiveText: 'on',
-                value: controllerApp.isSwitchCracklingSoundEffect,
-                activeColor: Colors.black,
-                toggleColor: Color.fromRGBO(113, 109, 109, 1),
-                inactiveColor: Colors.black,
-                borderRadius: 10.0,
-                padding: 3,
-                showOnOff: true,
-                onToggle: (val) {
-                  controllerApp.changeSwitchCracklingSoundEffect();
-                },
-              ),
-              SizedBox(width: mySizedHeightBetweenAlert),
-              FittedBox(
-                child: Text(
-                  'Зв. эффект потрескивание дров',
-                  style: myTextStyleFontRoboto(textColor: myTwoColor),
+      builder: (controllerApp) {
+        return Column(
+          children: [
+            Row(
+              children: [
+                FlutterSwitch(
+                  activeTextFontWeight: FontWeight.w500,
+                  inactiveTextFontWeight: FontWeight.w500,
+                  activeText: 'off',
+                  inactiveText: 'on',
+                  value: controllerApp.isSwitchCracklingSoundEffect,
+                  activeColor: Colors.black,
+                  toggleColor: Color.fromRGBO(113, 109, 109, 1),
+                  inactiveColor: Colors.black,
+                  borderRadius: 10.0,
+                  padding: 3,
+                  showOnOff: true,
+                  onToggle: (val) {
+                    controllerApp.changeSwitchCracklingSoundEffect();
+                  },
                 ),
-              ),
-            ],
-          ),
-          if (controllerApp.isSwitchCracklingSoundEffect)
-            Padding(
-              padding: EdgeInsets.only(top: mySizedHeightBetweenAlert / 2),
-              child: MySliderTheme(
-                child: Obx(
-                  () => Slider(
-                    divisions: 10,
-                    label: '${_sliderValue.value}',
-                    min: 0.0,
-                    max: 10,
-                    value: _sliderValue.value,
-                    onChangeEnd: (double value) {
-                      print(value);
-                    },
-                    onChanged: (double value) {
-                      _sliderValue.value = value;
-                    },
+                SizedBox(width: mySizedHeightBetweenAlert),
+                FittedBox(
+                  child: Text(
+                    'Зв. эффект потрескивание дров',
+                    style: myTextStyleFontRoboto(textColor: myTwoColor),
+                  ),
+                ),
+              ],
+            ),
+            if (controllerApp.isSwitchCracklingSoundEffect)
+              Padding(
+                padding: EdgeInsets.only(top: mySizedHeightBetweenAlert / 2),
+                child: MySliderTheme(
+                  child: Obx(
+                    () => Slider(
+                      divisions: 10,
+                      label: '${_sliderValueCracklingSoundEffect.value}',
+                      min: 0.0,
+                      max: 10,
+                      value: _sliderValueCracklingSoundEffect.value,
+                      onChangeEnd: (double value) {
+                        print(value);
+                      },
+                      onChanged: (double value) {
+                        _sliderValueCracklingSoundEffect.value = value;
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 
   _optionVoicePrompts() {
-    Rx<double> _sliderValue = 1.0.obs;
+    Rx<double>? _sliderValueVoicePrompts = (FireplaceConnectionGetXController
+                .instance.fireplaceData!.sliderValueVoicePrompts ??
+            0)
+        .obs;
 
     return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) => Column(
@@ -180,15 +189,15 @@ class SetVolumeWidget extends StatelessWidget {
                 child: Obx(
                   () => Slider(
                     divisions: 10,
-                    label: '${_sliderValue.value}',
+                    label: '${_sliderValueVoicePrompts.value}',
                     min: 0.0,
                     max: 10,
-                    value: _sliderValue.value,
+                    value: _sliderValueVoicePrompts.value,
                     onChangeEnd: (double value) {
                       print(value);
                     },
                     onChanged: (double value) {
-                      _sliderValue.value = value;
+                      _sliderValueVoicePrompts.value = value;
                     },
                   ),
                 ),

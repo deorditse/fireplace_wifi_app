@@ -28,7 +28,7 @@ class StartBodyScreenFireplace extends StatelessWidget {
             ),
             SizedBox(height: mySizedHeightBetweenAlert),
             timeWorkFireplace(context),
-            controllerApp.isButtonFor1000Fireplace
+            (controllerApp.fireplaceData?.sliderValue == null)
                 ? ButtonsIfFireplaceSmartPrime1000()
                 : Align(
                     alignment: Alignment.topCenter,

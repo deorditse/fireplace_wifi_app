@@ -22,8 +22,9 @@ class BodySettingPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // SizedBox(height: mySizedHeightBetweenAlert),
-          _closeFirepca(),
+          SizedBox(height: mySizedHeightBetweenAlert),
+          _toTheListOfFireplaces(),
+          myDivider(),
           SizedBox(height: mySizedHeightBetweenAlert),
           AboutDeviceWidget(),
           SizedBox(height: mySizedHeightBetweenAlert),
@@ -52,7 +53,7 @@ class BodySettingPage extends StatelessWidget {
     );
   }
 
-  Widget _closeFirepca() {
+  Widget _toTheListOfFireplaces() {
     return TextButton(
       onPressed: () {
         Get.offNamed(SearchFireplacePage.id);
@@ -61,22 +62,18 @@ class BodySettingPage extends StatelessWidget {
         // crossAxisAlignment: CrossAxisAlignment.end,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            'К списку каминов',
+            style: myTextStyleFontRoboto(
+              fontSize: 16,
+              // textColor: myColorActivity,
+            ),
+          ),
+          SizedBox(width: 14),
           SvgPicture.asset(
             'assets/icons/closeFireplace.svg',
             semanticsLabel: 'icon_bottom',
             fit: BoxFit.contain,
-          ),
-          SizedBox(
-            width: 14,
-          ),
-          Expanded(
-            child: Text(
-              'Отключение от камина',
-              style: myTextStyleFontRoboto(
-                fontSize: 16,
-                textColor: myColorActivity,
-              ),
-            ),
           ),
         ],
       ),

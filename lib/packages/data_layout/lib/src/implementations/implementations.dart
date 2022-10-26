@@ -48,6 +48,8 @@ class ImplementationFireplaceServices {
       dataTimeWorkFireplace: '',
       //есть таймер и включен или нет
       isOptionTimer: false,
+      //значение мощности камина / максимальное значение
+      sliderValue: null,
     );
   }
 

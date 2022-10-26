@@ -64,9 +64,6 @@ class FireplaceConnectionGetXController extends GetxController {
 
   FireplaceDataModel? fireplaceData;
 
-//выбран камин For1000Fireplace
-  bool isButtonFor1000Fireplace = false;
-
   //значение уровня топлива
   // double? percentOil;
 
@@ -116,7 +113,6 @@ class FireplaceConnectionGetXController extends GetxController {
 
   //Звуковой эффект потрескивание дров
   bool isSwitchCracklingSoundEffect = false;
-  double sliderValueCracklingSoundEffect = 0.0;
 
   void changeSwitchCracklingSoundEffect() {
     isSwitchCracklingSoundEffect = !isSwitchCracklingSoundEffect;
@@ -306,20 +302,16 @@ class FireplaceConnectionGetXController extends GetxController {
           isFireplaceDetectedInDatabase = true;
           //опции для камина
           isOptionTimer = false;
-          //
-          fireplaceData?.temperature = 20;
-          fireplaceData?.CO2value = null;
-          fireplaceData?.percentOil = 90;
-          fireplaceData?.wet = 10;
-          fireplaceData?.CO2value = 234; //null
-          isButtonFor1000Fireplace = true;
-          isSwitchCracklingSoundEffect = false;
-          sliderValueCracklingSoundEffect = 5;
-          sliderValueVoicePrompts = 0;
           alertMessage = 'камин готов к работе';
-          isFuelSystemError = false;
-          isCoolingFireplace = false;
           isLoadingDataIdWifi = false;
+          isSwitchCracklingSoundEffect =
+              fireplaceData?.sliderValueCracklingSoundEffect != null
+                  ? true
+                  : false;
+
+          isSwitchVoicePrompts =
+          fireplaceData?.sliderValueVoicePrompts != null ? true : false;
+
           update();
           // await getDataForFireplace();
           return;
@@ -331,7 +323,7 @@ class FireplaceConnectionGetXController extends GetxController {
       } else if (wifiName == _listWifiName.elementAt(1)) {
         //smartFireA7_1000
         try {
-          ifIsFireplaceDetectedInDatabase(url: '');
+          // ifIsFireplaceDetectedInDatabase(url: '');
           print('detected fireplace from searchFireplaceInListWithIdWifi el 1');
           titleModel = 'smartFireA7_1000';
           //камин обнаружен и идет переход на главную страницу
@@ -344,15 +336,20 @@ class FireplaceConnectionGetXController extends GetxController {
           fireplaceData?.CO2value = 45;
           fireplaceData?.temperature = 40;
           fireplaceData?.percentOil = 50;
-          isButtonFor1000Fireplace = false;
-          fireplaceData?.sliderValue?[0] = 3;
-          fireplaceData?.sliderValue?[1] = 7;
+          fireplaceData?.sliderValue = [3, 7];
           fireplaceData?.serialNumber = 'smartFireA7_1000';
           fireplaceData?.dcCode = 'smartFireA7_1000';
           fireplaceData?.dateOfManufacture = '11.01.2022';
           fireplaceData?.isSwitchClickSound = true;
-          isSwitchCracklingSoundEffect = false;
-          sliderValueCracklingSoundEffect = 0;
+          fireplaceData?.sliderValueCracklingSoundEffect = 2;
+          isSwitchCracklingSoundEffect =
+              fireplaceData?.sliderValueCracklingSoundEffect != null
+                  ? true
+                  : false;
+          fireplaceData?.sliderValueVoicePrompts = 4;
+          isSwitchVoicePrompts =
+              fireplaceData?.sliderValueVoicePrompts != null ? true : false;
+
           sliderValueVoicePrompts = 0;
           alertMessage = 'камин готов к работе';
           isFuelSystemError = false;
@@ -368,7 +365,7 @@ class FireplaceConnectionGetXController extends GetxController {
       } else if (wifiName == _listWifiName.elementAt(2)) {
         //smartFireA5_1000
         try {
-          ifIsFireplaceDetectedInDatabase(url: '');
+          // ifIsFireplaceDetectedInDatabase(url: '');
           print('detected fireplace from searchFireplaceInListWithIdWifi el 2');
           titleModel = 'smartFireA5_1000';
           //камин обнаружен и идет переход на главную страницу
@@ -382,15 +379,21 @@ class FireplaceConnectionGetXController extends GetxController {
           fireplaceData?.wet = 15;
           fireplaceData?.temperature = 120;
           fireplaceData?.percentOil = 10;
-          isButtonFor1000Fireplace = false;
-          fireplaceData?.sliderValue?[0] = 1;
-          fireplaceData?.sliderValue?[1] = 5;
+          fireplaceData!.sliderValue = [1, 5];
           fireplaceData?.serialNumber = 'smartFireA5_1000';
           fireplaceData?.dcCode = 'smartFireA5_1000';
           fireplaceData?.dateOfManufacture = '12.05.2022';
           fireplaceData?.isSwitchClickSound = true;
-          isSwitchCracklingSoundEffect = false;
-          sliderValueCracklingSoundEffect = 20;
+          fireplaceData?.sliderValueCracklingSoundEffect = 5;
+          isSwitchCracklingSoundEffect =
+              fireplaceData?.sliderValueCracklingSoundEffect != null
+                  ? true
+                  : false;
+
+          fireplaceData?.sliderValueVoicePrompts = 4;
+          isSwitchVoicePrompts =
+              fireplaceData?.sliderValueVoicePrompts != null ? true : false;
+
           sliderValueVoicePrompts = 0;
           alertMessage = 'камин готов к работе';
           isFuelSystemError = false;
@@ -406,7 +409,7 @@ class FireplaceConnectionGetXController extends GetxController {
       } else if (wifiName == _listWifiName.elementAt(3)) {
         //smartFireA3_1000
         try {
-          ifIsFireplaceDetectedInDatabase(url: '');
+          // ifIsFireplaceDetectedInDatabase(url: '');
           print('detected fireplace from searchFireplaceInListWithIdWifi el 3');
           titleModel = 'smartFireA3_1000';
           //камин обнаружен и идет переход на главную страницу
@@ -420,15 +423,20 @@ class FireplaceConnectionGetXController extends GetxController {
           fireplaceData?.wet = 75;
           fireplaceData?.temperature = 50;
           fireplaceData?.percentOil = 100;
-          isButtonFor1000Fireplace = false;
-          fireplaceData?.sliderValue?[0] = 2;
-          fireplaceData?.sliderValue?[1] = 3;
+          fireplaceData!.sliderValue = [2, 3];
           fireplaceData?.serialNumber = 'smartFireA3_1000';
           fireplaceData?.dcCode = 'smartFireA3_1000';
           fireplaceData?.dateOfManufacture = '10.08.2022';
           fireplaceData?.isSwitchClickSound = true;
-          isSwitchCracklingSoundEffect = false;
-          sliderValueCracklingSoundEffect = 20;
+          fireplaceData?.sliderValueCracklingSoundEffect = null;
+          isSwitchCracklingSoundEffect =
+              fireplaceData?.sliderValueCracklingSoundEffect != null
+                  ? true
+                  : false;
+
+          fireplaceData?.sliderValueVoicePrompts = 4;
+          isSwitchVoicePrompts =
+              fireplaceData?.sliderValueVoicePrompts != null ? true : false;
           sliderValueVoicePrompts = 0;
           alertMessage = 'камин готов к работе';
           isFuelSystemError = false;

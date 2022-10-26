@@ -69,6 +69,9 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/network_info_plus/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/network_info_plus/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/network_info_plus/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/packages/models/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/packages/models/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/packages/models/.dart_tool" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
