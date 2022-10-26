@@ -32,28 +32,30 @@ class FireplaceConnectionGetXController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // для начала достаю map данных из локальной памяти с именами домашних сетей и именами id каминов соответственно
-    services
-        .getDataMapWithWifiNameHomeNetworkAndNameFromListWifiName()
-        .then((value) {
-      _mapWithWifiNameHomeNetworkAndNameFromListWifiName = value;
-      update();
-    });
-
-    //сразу проверю данные сети, в которой нахожусь для получения wifi name
-
+    //сначала достаю имя вай вай сети к которой подключен
     _initNetworkInfo().then((_) {
       //   теперь Wifi name известен и можно парсить данные с апи
       //чтобы понять какой камин нужно обращаться к
-      searchFireplaceInListWithIdWifi(wifiName: wifiName);
+      searchFireplaceInListWithIdWifi(wifiName: wifiName).then((value) {
+        print('wifiName _______initNetworkInfo  $wifiName');
+      });
     });
+  }
+
+  ///обновление данных с сервера
+  ifIsFireplaceDetectedInDatabase({required String url}) {
+    // if (isFireplaceDetectedInDatabase) {
+    Timer.periodic(Duration(seconds: 2), (timer) {
+      // initialFireplaceData(url: '');
+      print(timer.toString());
+    });
+    // }
   }
 
   ///инициализация данных на экране
 
   Future<void> initialFireplaceData({required String url}) async {
     fireplaceData = await services.getFireplaceData(url: url);
-    print(fireplaceData);
     update();
   }
 
@@ -290,27 +292,11 @@ class FireplaceConnectionGetXController extends GetxController {
       isFireplaceDetectedInDatabase = false;
       update();
 
-      //сначала проверяю по сохраненному в память листу с именами домашних сетей
-      String? _wifiNameHomeNetworkFromLocalStorage;
-      if (_mapWithWifiNameHomeNetworkAndNameFromListWifiName != null &&
-          _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
-              .contains(wifiName)) {
-        _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
-            .toList()
-            .forEach((key) {
-          if (key == wifiName) {
-            _wifiNameHomeNetworkFromLocalStorage =
-                _mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
-            update();
-          }
-        });
-      }
-
       //первым делом проверю на данные из локальной памяти
-      if (wifiName == _wifiNameHomeNetworkFromLocalStorage ||
-          wifiName == _listWifiName.elementAt(0)) {
+      if (wifiName == _listWifiName.elementAt(0)) {
         //smartPrime_1000
         try {
+          ifIsFireplaceDetectedInDatabase(url: '');
           initialFireplaceData(url: '');
 //delete after testing
           ///перенесено в отдельный метод куда нужно отправлять SSID wifi data
@@ -342,18 +328,17 @@ class FireplaceConnectionGetXController extends GetxController {
               'error from searchFireplaceInListWithIdWifi smartPrime_1000 $error');
           return;
         }
-      }
-      if (wifiName == _wifiNameHomeNetworkFromLocalStorage ||
-          wifiName == _listWifiName.elementAt(1)) {
+      } else if (wifiName == _listWifiName.elementAt(1)) {
         //smartFireA7_1000
         try {
+          ifIsFireplaceDetectedInDatabase(url: '');
           print('detected fireplace from searchFireplaceInListWithIdWifi el 1');
           titleModel = 'smartFireA7_1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
           //опции для камина
           fireplaceData?.sliderValueVoicePrompts = 2;
-          fireplaceData?.sliderValueCracklingSoundEffect  = 3;
+          fireplaceData?.sliderValueCracklingSoundEffect = 3;
           isOptionTimer = true;
           fireplaceData?.wet = 45;
           fireplaceData?.CO2value = 45;
@@ -380,11 +365,10 @@ class FireplaceConnectionGetXController extends GetxController {
               'error from searchFireplaceInListWithIdWifi smartFireA7_1000 $error');
           return;
         }
-      }
-      if (wifiName == _wifiNameHomeNetworkFromLocalStorage ||
-          wifiName == _listWifiName.elementAt(2)) {
+      } else if (wifiName == _listWifiName.elementAt(2)) {
         //smartFireA5_1000
         try {
+          ifIsFireplaceDetectedInDatabase(url: '');
           print('detected fireplace from searchFireplaceInListWithIdWifi el 2');
           titleModel = 'smartFireA5_1000';
           //камин обнаружен и идет переход на главную страницу
@@ -394,7 +378,7 @@ class FireplaceConnectionGetXController extends GetxController {
           //
           // CO2value = 45;
           fireplaceData?.sliderValueVoicePrompts = 1;
-          fireplaceData?.sliderValueCracklingSoundEffect  = 2;
+          fireplaceData?.sliderValueCracklingSoundEffect = 2;
           fireplaceData?.wet = 15;
           fireplaceData?.temperature = 120;
           fireplaceData?.percentOil = 10;
@@ -419,11 +403,10 @@ class FireplaceConnectionGetXController extends GetxController {
               'error from searchFireplaceInListWithIdWifi smartFireA5_1000 $error');
           return;
         }
-      }
-      if (wifiName == _wifiNameHomeNetworkFromLocalStorage ||
-          wifiName == _listWifiName.elementAt(3)) {
+      } else if (wifiName == _listWifiName.elementAt(3)) {
         //smartFireA3_1000
         try {
+          ifIsFireplaceDetectedInDatabase(url: '');
           print('detected fireplace from searchFireplaceInListWithIdWifi el 3');
           titleModel = 'smartFireA3_1000';
           //камин обнаружен и идет переход на главную страницу
@@ -433,7 +416,7 @@ class FireplaceConnectionGetXController extends GetxController {
           //
           // CO2value = 45;
           fireplaceData?.sliderValueVoicePrompts = 0;
-          fireplaceData?.sliderValueCracklingSoundEffect  = 3;
+          fireplaceData?.sliderValueCracklingSoundEffect = 3;
           fireplaceData?.wet = 75;
           fireplaceData?.temperature = 50;
           fireplaceData?.percentOil = 100;
@@ -458,7 +441,52 @@ class FireplaceConnectionGetXController extends GetxController {
               'error from searchFireplaceInListWithIdWifi smartFireA3_1000 $error');
           return;
         }
+      } else {
+        try {
+          // проверяю по сохраненному в память листу с именами домашних сетей
+          _mapWithWifiNameHomeNetworkAndNameFromListWifiName = await services
+              .getDataMapWithWifiNameHomeNetworkAndNameFromListWifiName();
+          update();
+
+          //форматт сохранения в базу Map<имя домашней WiFi, IP камина из _listWifiName> _mapWithWifiNameHomeNetworkAndNameFromListWifiName
+
+          String? _wifiNameHomeNetworkFromLocalStorage;
+          if (_mapWithWifiNameHomeNetworkAndNameFromListWifiName != null &&
+              _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.isNotEmpty &&
+              _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
+                  .contains(wifiName)) {
+            isFireplaceDetectedInDatabase = true;
+
+            _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
+                .toList()
+                .forEach((key) {
+              if (key == wifiName) {
+                _wifiNameHomeNetworkFromLocalStorage =
+                    _mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
+                update();
+
+                wifiName = _wifiNameHomeNetworkFromLocalStorage!;
+                update();
+
+                searchFireplaceInListWithIdWifi(
+                    wifiName: _wifiNameHomeNetworkFromLocalStorage!);
+              }
+            });
+          } else {
+            isFireplaceDetectedInDatabase = false;
+            update();
+
+            Get.defaultDialog(
+                title:
+                    'Камин не найден для этой домашней сети - показать инструкцию');
+          }
+        } catch (error) {
+          print(
+              'error from searchFireplaceInListWithIdWifi _wifiNameHomeNetworkFromLocalStorage $error');
+          return;
+        }
       }
+
       // isLoadingDataIdWifi = false;
       // update();
 
