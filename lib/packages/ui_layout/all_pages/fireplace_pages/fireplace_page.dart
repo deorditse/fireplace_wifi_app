@@ -12,10 +12,22 @@ import 'widgets/bottom_row_with_parameters/bottom_row_with_parameters.dart';
 import 'widgets/tittle_fireplace_model_name.dart';
 import 'package:dio/dio.dart';
 
-class FireplacePage extends StatelessWidget {
+class FireplacePage extends StatefulWidget {
   static const String id = '/fireplacePage';
 
   const FireplacePage({Key? key}) : super(key: key);
+
+  @override
+  State<FireplacePage> createState() => _FireplacePageState();
+}
+
+class _FireplacePageState extends State<FireplacePage> {
+
+  @override
+  void initState() {
+    FireplaceConnectionGetXController.instance.disposeFireplaceData();
+    super.deactivate();
+  }
 
   @override
   Widget build(BuildContext context) {

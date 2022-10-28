@@ -4,6 +4,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/search_fireplace_page/search_fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/widgets_for_all_pages/rowWithDomain.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -18,38 +19,46 @@ class BodySettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _connectWithHomeWifi(),
-          myDivider(),
-          _toTheListOfFireplaces(),
-          myDivider(),
-          SizedBox(height: mySizedHeightBetweenAlert),
-          AboutDeviceWidget(),
-          SizedBox(height: mySizedHeightBetweenAlert),
-          myDivider(),
-          SizedBox(height: mySizedHeightBetweenAlert),
+    return Stack(
+      children: [
 
-          ///подключение опций тут
-          SetVolumeWidget(),
-          SizedBox(height: mySizedHeightBetweenAlert),
-          myDivider(),
-          SizedBox(height: mySizedHeightBetweenAlert),
-          _instructionUser(),
-          SizedBox(height: mySizedHeightBetweenAlert),
-          myDivider(),
-          SizedBox(height: mySizedHeightBetweenAlert),
-          ServiceCenterContacts(),
-          SizedBox(height: mySizedHeightBetweenAlert),
-          myDivider(),
-          SizedBox(height: mySizedHeightBetweenAlert),
+        Container(
+          height: Get.height * 0.76,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _connectWithHomeWifi(),
+                myDivider(),
+                _toTheListOfFireplaces(),
+                myDivider(),
+                SizedBox(height: mySizedHeightBetweenAlert),
+                FittedBox(child: AboutDeviceWidget()),
+                SizedBox(height: mySizedHeightBetweenAlert),
+                myDivider(),
+                SizedBox(height: mySizedHeightBetweenAlert),
 
-          rowWithDomain(context: context),
-        ],
-      ),
+                ///подключение опций тут
+                SetVolumeWidget(),
+                SizedBox(height: mySizedHeightBetweenAlert),
+                myDivider(),
+                SizedBox(height: mySizedHeightBetweenAlert),
+                _instructionUser(),
+                SizedBox(height: mySizedHeightBetweenAlert),
+                myDivider(),
+                SizedBox(height: mySizedHeightBetweenAlert),
+                ServiceCenterContacts(),
+                SizedBox(height: mySizedHeightBetweenAlert),
+                myDivider(),
+              ],
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: rowWithDomain(context: context),
+        ),
+      ],
     );
   }
 
@@ -57,7 +66,6 @@ class BodySettingPage extends StatelessWidget {
     return TextButton(
       onPressed: () {
         Get.offNamed(SearchFireplacePage.id);
-        FireplaceConnectionGetXController.instance.disposeFireplaceData();
       },
       child: Row(
         // crossAxisAlignment: CrossAxisAlignment.end,

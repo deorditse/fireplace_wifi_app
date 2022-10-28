@@ -21,11 +21,11 @@ Widget appBarFireplace({context}) {
               padding: const EdgeInsets.only(bottom: 8.0, right: 8),
               child: TextButton(
                 onPressed: () {
-                  // if (controllerApp.fireplaceData != null) {
-                  controllerApp.changeIsBlocButton(newIsBlocButton: true);
-                  controllerApp.changeIsSettingButton(
-                      newIsSettingButton: false);
-                  // }
+                  if (controllerApp.fireplaceData != null) {
+                    controllerApp.changeIsBlocButton(newIsBlocButton: true);
+                    controllerApp.changeIsSettingButton(
+                        newIsSettingButton: false);
+                  }
                 },
                 child: SvgPicture.asset(
                   controllerApp.isBlocButton
@@ -53,7 +53,7 @@ Widget appBarFireplace({context}) {
               padding: const EdgeInsets.only(bottom: 8.0, left: 8),
               child: TextButton(
                 onPressed: () {
-                  if (/*controllerApp.fireplaceData != null &&*/
+                  if (controllerApp.fireplaceData != null &&
                       !controllerApp.isBlocButton) {
                     controllerApp.changeIsSettingButton();
                   }

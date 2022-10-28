@@ -10,7 +10,7 @@ import '../test_data.dart';
 class ImplementationFireplaceServices {
   Future<FireplaceDataModel> getFireplaceData(
       {required /*String*/ int url}) async {
-    // await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 2));
     // List<String> listWithData = stringWithData.split(';').toList();
     //последовательность данных
     return listFireplaceDataModel[url];

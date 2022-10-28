@@ -36,11 +36,15 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
-  bool _timerDispose = false;
+  bool _timerStart = false;
+
+  void changeStartStopTimer({bool? isTimerStart}) {
+    _timerStart = isTimerStart ?? !_timerStart;
+    update();
+  }
 
   void disposeFireplaceData() async {
-    _timerDispose = true;
-    update();
+    changeStartStopTimer(isTimerStart: false);
     isSettingButton = false;
     fireplaceData = null;
     print(fireplaceData);
@@ -52,6 +56,8 @@ class FireplaceConnectionGetXController extends GetxController {
     required /*String?*/ int? url,
   }) async {
     if (url != null && url != '') {
+      changeStartStopTimer(isTimerStart: true);
+
       fireplaceData = await services.getFireplaceData(url: url);
       update();
       _optionsFireplace();
@@ -62,14 +68,15 @@ class FireplaceConnectionGetXController extends GetxController {
   Future<void> _initialFireplaceData({
     required /*String?*/ int? url,
   }) async {
+
     Timer.periodic(Duration(seconds: 2), (timer) async {
-      if (_timerDispose) {
+      if (!_timerStart) {
         timer.cancel();
         print('stopTimer');
       }
       if (url != null && url != '') {
         fireplaceData = await services.getFireplaceData(url: url);
-        print(_timerDispose);
+        print(_timerStart);
         print(timer);
         update();
       }
@@ -109,6 +116,9 @@ class FireplaceConnectionGetXController extends GetxController {
   void changeIsSettingButton({bool? newIsSettingButton}) {
     isSettingButton = newIsSettingButton ?? !isSettingButton;
     update();
+    // isSettingButton
+    //     ? changeStartStopTimer(isTimerStart: false)
+    //     : changeStartStopTimer(isTimerStart: true);
   }
 
   // //серийный номер
@@ -327,7 +337,8 @@ class FireplaceConnectionGetXController extends GetxController {
     try {
       disposeFireplaceData();
 
-      _timerDispose = true;
+      changeStartStopTimer(isTimerStart: false);
+
       //загрузка камина
       isLoadingDataIdWifi = true;
       //перевожу в состояние не найден с начала
@@ -347,7 +358,6 @@ class FireplaceConnectionGetXController extends GetxController {
           isFireplaceDetectedInDatabase = true;
           alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
-          _timerDispose = false;
           update();
           initFireplaceData(url: 0);
           //опции для камина
@@ -367,8 +377,6 @@ class FireplaceConnectionGetXController extends GetxController {
           isFireplaceDetectedInDatabase = true;
           alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
-          _timerDispose = false;
-
           update();
           initFireplaceData(url: 1);
 
@@ -387,7 +395,6 @@ class FireplaceConnectionGetXController extends GetxController {
           isFireplaceDetectedInDatabase = true;
           alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
-          _timerDispose = false;
           update();
 
           initFireplaceData(url: 2);
@@ -407,7 +414,6 @@ class FireplaceConnectionGetXController extends GetxController {
           isFireplaceDetectedInDatabase = true;
           alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
-          _timerDispose = false;
           update();
           initFireplaceData(url: 3);
 
