@@ -9,20 +9,10 @@ import 'package:get/get.dart';
 import '../../widgets_for_all_pages/rowWithDomain.dart';
 import 'widgets/find_device_screen_widget.dart';
 
-class SearchFireplacePage extends StatefulWidget {
+class SearchFireplacePage extends StatelessWidget {
   static const String id = '/searchFireplacePage';
 
   SearchFireplacePage({Key? key}) : super(key: key);
-
-  @override
-  State<SearchFireplacePage> createState() => _SearchFireplacePageState();
-}
-
-class _SearchFireplacePageState extends State<SearchFireplacePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +23,7 @@ class _SearchFireplacePageState extends State<SearchFireplacePage> {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.1),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -59,45 +48,14 @@ class _SearchFireplacePageState extends State<SearchFireplacePage> {
                   height: 40,
                 ),
                 Text(
-                  'Подключение к камину:',
+                  'Список доступных каминов:',
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  // mainAxisSize: MainAxisSize.min,
+                FindDeviceScreenWidget(),
 
-                  children: [
-                    Text(
-                      '1. Установите камин согласно инструкции пользователя.',
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '2. Подключение к камину',
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '3. Включите сканирование доступных устройств.',
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '4. Выберите ваше устройство.',
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                  ],
-                ),
                 SizedBox(
                   height: 40,
                 ),
@@ -107,7 +65,10 @@ class _SearchFireplacePageState extends State<SearchFireplacePage> {
 
                 ///delete after testing
                 Text(
-                  'имитация получения SSID, для теста номера от 1 до 4',
+                  'TEST TEST имитация получения WIFI NAME, для теста номера от 1 до 4',
+                ),
+                SizedBox(
+                  height: 40,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -115,12 +76,13 @@ class _SearchFireplacePageState extends State<SearchFireplacePage> {
                   ),
                   child: _myTextField(),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                ElevatedButton(
+                    onPressed: () {
+                      print(FireplaceConnectionGetXController
+                          .instance.fireplaceData);
+                    },
+                    child: Text('test')),
 
-                ///
-                FindDeviceScreenWidget(),
                 Expanded(child: SizedBox()),
                 rowWithDomain(context: context),
               ],

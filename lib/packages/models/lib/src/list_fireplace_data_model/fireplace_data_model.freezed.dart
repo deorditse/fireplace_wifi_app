@@ -16,46 +16,162 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FireplaceDataModel {
-//значение температуры
-  double get temperature =>
-      throw _privateConstructorUsedError; //значение температуры
-  set temperature(double value) =>
-      throw _privateConstructorUsedError; //значение уровня топлива
-  double get percentOil =>
-      throw _privateConstructorUsedError; //значение уровня топлива
-  set percentOil(double value) =>
-      throw _privateConstructorUsedError; //значение влажности
-  double get wet => throw _privateConstructorUsedError; //значение влажности
-  set wet(double value) => throw _privateConstructorUsedError; //значение CO2
-  double? get CO2value => throw _privateConstructorUsedError; //значение CO2
-  set CO2value(double? value) =>
-      throw _privateConstructorUsedError; //серийный номер
-  String get serialNumber =>
-      throw _privateConstructorUsedError; //серийный номер
-  set serialNumber(String value) =>
-      throw _privateConstructorUsedError; //Дс code
-  String get dcCode => throw _privateConstructorUsedError; //Дс code
-  set dcCode(String value) =>
-      throw _privateConstructorUsedError; //дата производства
-  String get dateOfManufacture =>
-      throw _privateConstructorUsedError; //дата производства
-  set dateOfManufacture(String value) =>
-      throw _privateConstructorUsedError; //значение мощности камина / максимальное значение
-  List<int>? get sliderValue =>
-      throw _privateConstructorUsedError; //значение мощности камина / максимальное значение
-  set sliderValue(List<int>? value) =>
-      throw _privateConstructorUsedError; //звук нажатия кнопок
-  bool get isSwitchClickSound =>
-      throw _privateConstructorUsedError; //звук нажатия кнопок
-  set isSwitchClickSound(bool value) =>
-      throw _privateConstructorUsedError; //Звуковой эффект потрескивание дров
+  ///Модель
+  String? get model => throw _privateConstructorUsedError;
+
+  ///Модель
+  set model(String? value) => throw _privateConstructorUsedError;
+
+  ///Размер
+  double? get size => throw _privateConstructorUsedError;
+
+  ///Размер
+  set size(double? value) => throw _privateConstructorUsedError;
+
+  ///Статус блокировки
+//кнопка блокирования экрана нажата?
+  bool get isBlocButton => throw _privateConstructorUsedError;
+
+  ///Статус блокировки
+//кнопка блокирования экрана нажата?
+  set isBlocButton(bool value) => throw _privateConstructorUsedError;
+
+  ///Пароль
+//заданный пользователем пароль
+  int get passwordBlock => throw _privateConstructorUsedError;
+
+  ///Пароль
+//заданный пользователем пароль
+  set passwordBlock(int value) =>
+      throw _privateConstructorUsedError; //пароль по умолчанию
+  ///Температура
+  double? get temperature =>
+      throw _privateConstructorUsedError; //пароль по умолчанию
+  ///Температура
+  set temperature(double? value) => throw _privateConstructorUsedError;
+
+  ///Влажность
+  double? get wet => throw _privateConstructorUsedError;
+
+  ///Влажность
+  set wet(double? value) => throw _privateConstructorUsedError;
+
+  ///Уровень CO2
+  double? get CO2value => throw _privateConstructorUsedError;
+
+  ///Уровень CO2
+  set CO2value(double? value) => throw _privateConstructorUsedError;
+
+  ///Статус состояния камина, ошибки
+  Map<bool?, String?> get statusFireplaceAndErrors =>
+      throw _privateConstructorUsedError;
+
+  ///Статус состояния камина, ошибки
+  set statusFireplaceAndErrors(Map<bool?, String?> value) =>
+      throw _privateConstructorUsedError;
+
+  /// Статус кнопки запуска/остановки
+//камин запущен?
+  bool get isPlayFireplace => throw _privateConstructorUsedError;
+
+  /// Статус кнопки запуска/остановки
+//камин запущен?
+  set isPlayFireplace(bool value) => throw _privateConstructorUsedError;
+
+  ///Количество режимов,  номер режима
+// максимальное значение / значение мощности камина
+  Map<int?, int?> get sliderValue => throw _privateConstructorUsedError;
+
+  ///Количество режимов,  номер режима
+// максимальное значение / значение мощности камина
+  set sliderValue(Map<int?, int?> value) => throw _privateConstructorUsedError;
+
+  ///Уровень топлива;
+  double? get percentOil => throw _privateConstructorUsedError;
+
+  ///Уровень топлива;
+  set percentOil(double? value) => throw _privateConstructorUsedError;
+
+  /// S/N - серийный номер
+//серийный номер
+  String? get serialNumber => throw _privateConstructorUsedError;
+
+  /// S/N - серийный номер
+//серийный номер
+  set serialNumber(String? value) => throw _privateConstructorUsedError;
+
+  ///Дата производства
+  String? get dateOfManufacture => throw _privateConstructorUsedError;
+
+  ///Дата производства
+  set dateOfManufacture(String? value) => throw _privateConstructorUsedError;
+
+  ///Статус потрескивание дров, уровень громкости
+//Звуковой эффект потрескивание дров
   double? get sliderValueCracklingSoundEffect =>
-      throw _privateConstructorUsedError; //Звуковой эффект потрескивание дров
+      throw _privateConstructorUsedError;
+
+  ///Статус потрескивание дров, уровень громкости
+//Звуковой эффект потрескивание дров
   set sliderValueCracklingSoundEffect(double? value) =>
-      throw _privateConstructorUsedError; //Голосовые подсказки
-  double? get sliderValueVoicePrompts =>
-      throw _privateConstructorUsedError; //Голосовые подсказки
+      throw _privateConstructorUsedError;
+
+  ///Статус голосовые подсказки, уровень громкости;
+//Голосовые подсказки
+  double? get sliderValueVoicePrompts => throw _privateConstructorUsedError;
+
+  ///Статус голосовые подсказки, уровень громкости;
+//Голосовые подсказки
   set sliderValueVoicePrompts(double? value) =>
+      throw _privateConstructorUsedError;
+
+  ///Статус озвучивания нажатий кнопок;
+  bool get isSwitchClickSound => throw _privateConstructorUsedError;
+
+  ///Статус озвучивания нажатий кнопок;
+  set isSwitchClickSound(bool value) => throw _privateConstructorUsedError;
+
+  ///Ссылка на инструкцию по эксплуатации
+  String? get linkToUserManual => throw _privateConstructorUsedError;
+
+  ///Ссылка на инструкцию по эксплуатации
+  set linkToUserManual(String? value) => throw _privateConstructorUsedError;
+
+  ///Адрес почты сервисного центра;
+  String? get serviceCenterEmailAddress => throw _privateConstructorUsedError;
+
+  ///Адрес почты сервисного центра;
+  set serviceCenterEmailAddress(String? value) =>
+      throw _privateConstructorUsedError;
+
+  ///Ссылка на телефон сервисного центра;
+  String? get phoneNumberServiceCenter => throw _privateConstructorUsedError;
+
+  ///Ссылка на телефон сервисного центра;
+  set phoneNumberServiceCenter(String? value) =>
+      throw _privateConstructorUsedError;
+
+  ///Ссылка на сайт;
+  String? get linkOnSite => throw _privateConstructorUsedError;
+
+  ///Ссылка на сайт;
+  set linkOnSite(String? value) => throw _privateConstructorUsedError;
+
+  ///Статус таймера на отключение, значение таймера на отключение;
+  Map<bool?, String?> get optionTimerStatusAndValue =>
+      throw _privateConstructorUsedError;
+
+  ///Статус таймера на отключение, значение таймера на отключение;
+  set optionTimerStatusAndValue(Map<bool?, String?> value) =>
+      throw _privateConstructorUsedError;
+
+  ///Счет времени работы камина.
+//Дс code
+  String? get dcCode => throw _privateConstructorUsedError;
+
+  ///Счет времени работы камина.
+//Дс code
+  set dcCode(String? value) =>
       throw _privateConstructorUsedError; //если ошибка топливной системы
   bool get isFuelSystemError =>
       throw _privateConstructorUsedError; //если ошибка топливной системы
@@ -64,28 +180,11 @@ mixin _$FireplaceDataModel {
   bool get isCoolingFireplace =>
       throw _privateConstructorUsedError; //охлаждение камина начато?
   set isCoolingFireplace(bool value) =>
-      throw _privateConstructorUsedError; //кнопка блокирования экрана нажата?
-  bool get isBlocButton =>
-      throw _privateConstructorUsedError; //кнопка блокирования экрана нажата?
-  set isBlocButton(bool value) =>
-      throw _privateConstructorUsedError; //заданный пользователем пароль
-  int get passwordBlock =>
-      throw _privateConstructorUsedError; //заданный пользователем пароль
-  set passwordBlock(int value) =>
-      throw _privateConstructorUsedError; //пароль по умолчанию
-//камин запущен?
-  bool get isPlayFireplace =>
-      throw _privateConstructorUsedError; //пароль по умолчанию
-//камин запущен?
-  set isPlayFireplace(bool value) =>
       throw _privateConstructorUsedError; //общее время работы камина
   String? get dataTimeWorkFireplace =>
       throw _privateConstructorUsedError; //общее время работы камина
   set dataTimeWorkFireplace(String? value) =>
-      throw _privateConstructorUsedError; //есть таймер и включен или нет
-  bool get isOptionTimer =>
-      throw _privateConstructorUsedError; //есть таймер и включен или нет
-  set isOptionTimer(bool value) => throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FireplaceDataModelCopyWith<FireplaceDataModel> get copyWith =>
@@ -99,24 +198,31 @@ abstract class $FireplaceDataModelCopyWith<$Res> {
       _$FireplaceDataModelCopyWithImpl<$Res, FireplaceDataModel>;
   @useResult
   $Res call(
-      {double temperature,
-      double percentOil,
-      double wet,
-      double? CO2value,
-      String serialNumber,
-      String dcCode,
-      String dateOfManufacture,
-      List<int>? sliderValue,
-      bool isSwitchClickSound,
-      double? sliderValueCracklingSoundEffect,
-      double? sliderValueVoicePrompts,
-      bool isFuelSystemError,
-      bool isCoolingFireplace,
+      {String? model,
+      double? size,
       bool isBlocButton,
       int passwordBlock,
+      double? temperature,
+      double? wet,
+      double? CO2value,
+      Map<bool?, String?> statusFireplaceAndErrors,
       bool isPlayFireplace,
-      String? dataTimeWorkFireplace,
-      bool isOptionTimer});
+      Map<int?, int?> sliderValue,
+      double? percentOil,
+      String? serialNumber,
+      String? dateOfManufacture,
+      double? sliderValueCracklingSoundEffect,
+      double? sliderValueVoicePrompts,
+      bool isSwitchClickSound,
+      String? linkToUserManual,
+      String? serviceCenterEmailAddress,
+      String? phoneNumberServiceCenter,
+      String? linkOnSite,
+      Map<bool?, String?> optionTimerStatusAndValue,
+      String? dcCode,
+      bool isFuelSystemError,
+      bool isCoolingFireplace,
+      String? dataTimeWorkFireplace});
 }
 
 /// @nodoc
@@ -132,62 +238,85 @@ class _$FireplaceDataModelCopyWithImpl<$Res, $Val extends FireplaceDataModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? temperature = null,
-    Object? percentOil = null,
-    Object? wet = null,
-    Object? CO2value = freezed,
-    Object? serialNumber = null,
-    Object? dcCode = null,
-    Object? dateOfManufacture = null,
-    Object? sliderValue = freezed,
-    Object? isSwitchClickSound = null,
-    Object? sliderValueCracklingSoundEffect = freezed,
-    Object? sliderValueVoicePrompts = freezed,
-    Object? isFuelSystemError = null,
-    Object? isCoolingFireplace = null,
+    Object? model = freezed,
+    Object? size = freezed,
     Object? isBlocButton = null,
     Object? passwordBlock = null,
+    Object? temperature = freezed,
+    Object? wet = freezed,
+    Object? CO2value = freezed,
+    Object? statusFireplaceAndErrors = null,
     Object? isPlayFireplace = null,
+    Object? sliderValue = null,
+    Object? percentOil = freezed,
+    Object? serialNumber = freezed,
+    Object? dateOfManufacture = freezed,
+    Object? sliderValueCracklingSoundEffect = freezed,
+    Object? sliderValueVoicePrompts = freezed,
+    Object? isSwitchClickSound = null,
+    Object? linkToUserManual = freezed,
+    Object? serviceCenterEmailAddress = freezed,
+    Object? phoneNumberServiceCenter = freezed,
+    Object? linkOnSite = freezed,
+    Object? optionTimerStatusAndValue = null,
+    Object? dcCode = freezed,
+    Object? isFuelSystemError = null,
+    Object? isCoolingFireplace = null,
     Object? dataTimeWorkFireplace = freezed,
-    Object? isOptionTimer = null,
   }) {
     return _then(_value.copyWith(
-      temperature: null == temperature
+      model: freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as double?,
+      isBlocButton: null == isBlocButton
+          ? _value.isBlocButton
+          : isBlocButton // ignore: cast_nullable_to_non_nullable
+              as bool,
+      passwordBlock: null == passwordBlock
+          ? _value.passwordBlock
+          : passwordBlock // ignore: cast_nullable_to_non_nullable
+              as int,
+      temperature: freezed == temperature
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentOil: null == percentOil
-          ? _value.percentOil
-          : percentOil // ignore: cast_nullable_to_non_nullable
-              as double,
-      wet: null == wet
+              as double?,
+      wet: freezed == wet
           ? _value.wet
           : wet // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       CO2value: freezed == CO2value
           ? _value.CO2value
           : CO2value // ignore: cast_nullable_to_non_nullable
               as double?,
-      serialNumber: null == serialNumber
-          ? _value.serialNumber
-          : serialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      dcCode: null == dcCode
-          ? _value.dcCode
-          : dcCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateOfManufacture: null == dateOfManufacture
-          ? _value.dateOfManufacture
-          : dateOfManufacture // ignore: cast_nullable_to_non_nullable
-              as String,
-      sliderValue: freezed == sliderValue
+      statusFireplaceAndErrors: null == statusFireplaceAndErrors
+          ? _value.statusFireplaceAndErrors
+          : statusFireplaceAndErrors // ignore: cast_nullable_to_non_nullable
+              as Map<bool?, String?>,
+      isPlayFireplace: null == isPlayFireplace
+          ? _value.isPlayFireplace
+          : isPlayFireplace // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sliderValue: null == sliderValue
           ? _value.sliderValue
           : sliderValue // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-      isSwitchClickSound: null == isSwitchClickSound
-          ? _value.isSwitchClickSound
-          : isSwitchClickSound // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as Map<int?, int?>,
+      percentOil: freezed == percentOil
+          ? _value.percentOil
+          : percentOil // ignore: cast_nullable_to_non_nullable
+              as double?,
+      serialNumber: freezed == serialNumber
+          ? _value.serialNumber
+          : serialNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfManufacture: freezed == dateOfManufacture
+          ? _value.dateOfManufacture
+          : dateOfManufacture // ignore: cast_nullable_to_non_nullable
+              as String?,
       sliderValueCracklingSoundEffect: freezed ==
               sliderValueCracklingSoundEffect
           ? _value.sliderValueCracklingSoundEffect
@@ -197,6 +326,34 @@ class _$FireplaceDataModelCopyWithImpl<$Res, $Val extends FireplaceDataModel>
           ? _value.sliderValueVoicePrompts
           : sliderValueVoicePrompts // ignore: cast_nullable_to_non_nullable
               as double?,
+      isSwitchClickSound: null == isSwitchClickSound
+          ? _value.isSwitchClickSound
+          : isSwitchClickSound // ignore: cast_nullable_to_non_nullable
+              as bool,
+      linkToUserManual: freezed == linkToUserManual
+          ? _value.linkToUserManual
+          : linkToUserManual // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceCenterEmailAddress: freezed == serviceCenterEmailAddress
+          ? _value.serviceCenterEmailAddress
+          : serviceCenterEmailAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumberServiceCenter: freezed == phoneNumberServiceCenter
+          ? _value.phoneNumberServiceCenter
+          : phoneNumberServiceCenter // ignore: cast_nullable_to_non_nullable
+              as String?,
+      linkOnSite: freezed == linkOnSite
+          ? _value.linkOnSite
+          : linkOnSite // ignore: cast_nullable_to_non_nullable
+              as String?,
+      optionTimerStatusAndValue: null == optionTimerStatusAndValue
+          ? _value.optionTimerStatusAndValue
+          : optionTimerStatusAndValue // ignore: cast_nullable_to_non_nullable
+              as Map<bool?, String?>,
+      dcCode: freezed == dcCode
+          ? _value.dcCode
+          : dcCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       isFuelSystemError: null == isFuelSystemError
           ? _value.isFuelSystemError
           : isFuelSystemError // ignore: cast_nullable_to_non_nullable
@@ -205,26 +362,10 @@ class _$FireplaceDataModelCopyWithImpl<$Res, $Val extends FireplaceDataModel>
           ? _value.isCoolingFireplace
           : isCoolingFireplace // ignore: cast_nullable_to_non_nullable
               as bool,
-      isBlocButton: null == isBlocButton
-          ? _value.isBlocButton
-          : isBlocButton // ignore: cast_nullable_to_non_nullable
-              as bool,
-      passwordBlock: null == passwordBlock
-          ? _value.passwordBlock
-          : passwordBlock // ignore: cast_nullable_to_non_nullable
-              as int,
-      isPlayFireplace: null == isPlayFireplace
-          ? _value.isPlayFireplace
-          : isPlayFireplace // ignore: cast_nullable_to_non_nullable
-              as bool,
       dataTimeWorkFireplace: freezed == dataTimeWorkFireplace
           ? _value.dataTimeWorkFireplace
           : dataTimeWorkFireplace // ignore: cast_nullable_to_non_nullable
               as String?,
-      isOptionTimer: null == isOptionTimer
-          ? _value.isOptionTimer
-          : isOptionTimer // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -238,24 +379,31 @@ abstract class _$$_FireplaceDataModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double temperature,
-      double percentOil,
-      double wet,
-      double? CO2value,
-      String serialNumber,
-      String dcCode,
-      String dateOfManufacture,
-      List<int>? sliderValue,
-      bool isSwitchClickSound,
-      double? sliderValueCracklingSoundEffect,
-      double? sliderValueVoicePrompts,
-      bool isFuelSystemError,
-      bool isCoolingFireplace,
+      {String? model,
+      double? size,
       bool isBlocButton,
       int passwordBlock,
+      double? temperature,
+      double? wet,
+      double? CO2value,
+      Map<bool?, String?> statusFireplaceAndErrors,
       bool isPlayFireplace,
-      String? dataTimeWorkFireplace,
-      bool isOptionTimer});
+      Map<int?, int?> sliderValue,
+      double? percentOil,
+      String? serialNumber,
+      String? dateOfManufacture,
+      double? sliderValueCracklingSoundEffect,
+      double? sliderValueVoicePrompts,
+      bool isSwitchClickSound,
+      String? linkToUserManual,
+      String? serviceCenterEmailAddress,
+      String? phoneNumberServiceCenter,
+      String? linkOnSite,
+      Map<bool?, String?> optionTimerStatusAndValue,
+      String? dcCode,
+      bool isFuelSystemError,
+      bool isCoolingFireplace,
+      String? dataTimeWorkFireplace});
 }
 
 /// @nodoc
@@ -269,62 +417,85 @@ class __$$_FireplaceDataModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? temperature = null,
-    Object? percentOil = null,
-    Object? wet = null,
-    Object? CO2value = freezed,
-    Object? serialNumber = null,
-    Object? dcCode = null,
-    Object? dateOfManufacture = null,
-    Object? sliderValue = freezed,
-    Object? isSwitchClickSound = null,
-    Object? sliderValueCracklingSoundEffect = freezed,
-    Object? sliderValueVoicePrompts = freezed,
-    Object? isFuelSystemError = null,
-    Object? isCoolingFireplace = null,
+    Object? model = freezed,
+    Object? size = freezed,
     Object? isBlocButton = null,
     Object? passwordBlock = null,
+    Object? temperature = freezed,
+    Object? wet = freezed,
+    Object? CO2value = freezed,
+    Object? statusFireplaceAndErrors = null,
     Object? isPlayFireplace = null,
+    Object? sliderValue = null,
+    Object? percentOil = freezed,
+    Object? serialNumber = freezed,
+    Object? dateOfManufacture = freezed,
+    Object? sliderValueCracklingSoundEffect = freezed,
+    Object? sliderValueVoicePrompts = freezed,
+    Object? isSwitchClickSound = null,
+    Object? linkToUserManual = freezed,
+    Object? serviceCenterEmailAddress = freezed,
+    Object? phoneNumberServiceCenter = freezed,
+    Object? linkOnSite = freezed,
+    Object? optionTimerStatusAndValue = null,
+    Object? dcCode = freezed,
+    Object? isFuelSystemError = null,
+    Object? isCoolingFireplace = null,
     Object? dataTimeWorkFireplace = freezed,
-    Object? isOptionTimer = null,
   }) {
     return _then(_$_FireplaceDataModel(
-      temperature: null == temperature
+      model: freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as double?,
+      isBlocButton: null == isBlocButton
+          ? _value.isBlocButton
+          : isBlocButton // ignore: cast_nullable_to_non_nullable
+              as bool,
+      passwordBlock: null == passwordBlock
+          ? _value.passwordBlock
+          : passwordBlock // ignore: cast_nullable_to_non_nullable
+              as int,
+      temperature: freezed == temperature
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentOil: null == percentOil
-          ? _value.percentOil
-          : percentOil // ignore: cast_nullable_to_non_nullable
-              as double,
-      wet: null == wet
+              as double?,
+      wet: freezed == wet
           ? _value.wet
           : wet // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       CO2value: freezed == CO2value
           ? _value.CO2value
           : CO2value // ignore: cast_nullable_to_non_nullable
               as double?,
-      serialNumber: null == serialNumber
-          ? _value.serialNumber
-          : serialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      dcCode: null == dcCode
-          ? _value.dcCode
-          : dcCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateOfManufacture: null == dateOfManufacture
-          ? _value.dateOfManufacture
-          : dateOfManufacture // ignore: cast_nullable_to_non_nullable
-              as String,
-      sliderValue: freezed == sliderValue
+      statusFireplaceAndErrors: null == statusFireplaceAndErrors
+          ? _value.statusFireplaceAndErrors
+          : statusFireplaceAndErrors // ignore: cast_nullable_to_non_nullable
+              as Map<bool?, String?>,
+      isPlayFireplace: null == isPlayFireplace
+          ? _value.isPlayFireplace
+          : isPlayFireplace // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sliderValue: null == sliderValue
           ? _value.sliderValue
           : sliderValue // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-      isSwitchClickSound: null == isSwitchClickSound
-          ? _value.isSwitchClickSound
-          : isSwitchClickSound // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as Map<int?, int?>,
+      percentOil: freezed == percentOil
+          ? _value.percentOil
+          : percentOil // ignore: cast_nullable_to_non_nullable
+              as double?,
+      serialNumber: freezed == serialNumber
+          ? _value.serialNumber
+          : serialNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfManufacture: freezed == dateOfManufacture
+          ? _value.dateOfManufacture
+          : dateOfManufacture // ignore: cast_nullable_to_non_nullable
+              as String?,
       sliderValueCracklingSoundEffect: freezed ==
               sliderValueCracklingSoundEffect
           ? _value.sliderValueCracklingSoundEffect
@@ -334,6 +505,34 @@ class __$$_FireplaceDataModelCopyWithImpl<$Res>
           ? _value.sliderValueVoicePrompts
           : sliderValueVoicePrompts // ignore: cast_nullable_to_non_nullable
               as double?,
+      isSwitchClickSound: null == isSwitchClickSound
+          ? _value.isSwitchClickSound
+          : isSwitchClickSound // ignore: cast_nullable_to_non_nullable
+              as bool,
+      linkToUserManual: freezed == linkToUserManual
+          ? _value.linkToUserManual
+          : linkToUserManual // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceCenterEmailAddress: freezed == serviceCenterEmailAddress
+          ? _value.serviceCenterEmailAddress
+          : serviceCenterEmailAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumberServiceCenter: freezed == phoneNumberServiceCenter
+          ? _value.phoneNumberServiceCenter
+          : phoneNumberServiceCenter // ignore: cast_nullable_to_non_nullable
+              as String?,
+      linkOnSite: freezed == linkOnSite
+          ? _value.linkOnSite
+          : linkOnSite // ignore: cast_nullable_to_non_nullable
+              as String?,
+      optionTimerStatusAndValue: null == optionTimerStatusAndValue
+          ? _value.optionTimerStatusAndValue
+          : optionTimerStatusAndValue // ignore: cast_nullable_to_non_nullable
+              as Map<bool?, String?>,
+      dcCode: freezed == dcCode
+          ? _value.dcCode
+          : dcCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       isFuelSystemError: null == isFuelSystemError
           ? _value.isFuelSystemError
           : isFuelSystemError // ignore: cast_nullable_to_non_nullable
@@ -342,26 +541,10 @@ class __$$_FireplaceDataModelCopyWithImpl<$Res>
           ? _value.isCoolingFireplace
           : isCoolingFireplace // ignore: cast_nullable_to_non_nullable
               as bool,
-      isBlocButton: null == isBlocButton
-          ? _value.isBlocButton
-          : isBlocButton // ignore: cast_nullable_to_non_nullable
-              as bool,
-      passwordBlock: null == passwordBlock
-          ? _value.passwordBlock
-          : passwordBlock // ignore: cast_nullable_to_non_nullable
-              as int,
-      isPlayFireplace: null == isPlayFireplace
-          ? _value.isPlayFireplace
-          : isPlayFireplace // ignore: cast_nullable_to_non_nullable
-              as bool,
       dataTimeWorkFireplace: freezed == dataTimeWorkFireplace
           ? _value.dataTimeWorkFireplace
           : dataTimeWorkFireplace // ignore: cast_nullable_to_non_nullable
               as String?,
-      isOptionTimer: null == isOptionTimer
-          ? _value.isOptionTimer
-          : isOptionTimer // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -370,59 +553,131 @@ class __$$_FireplaceDataModelCopyWithImpl<$Res>
 
 class _$_FireplaceDataModel implements _FireplaceDataModel {
   _$_FireplaceDataModel(
-      {required this.temperature,
-      required this.percentOil,
-      required this.wet,
-      this.CO2value,
-      required this.serialNumber,
-      required this.dcCode,
-      required this.dateOfManufacture,
-      this.sliderValue,
-      this.isSwitchClickSound = false,
-      this.sliderValueCracklingSoundEffect,
-      this.sliderValueVoicePrompts,
-      this.isFuelSystemError = false,
-      this.isCoolingFireplace = false,
+      {this.model,
+      this.size,
       this.isBlocButton = false,
       this.passwordBlock = 5539,
+      this.temperature,
+      this.wet,
+      this.CO2value,
+      required this.statusFireplaceAndErrors,
       this.isPlayFireplace = false,
-      this.dataTimeWorkFireplace,
-      this.isOptionTimer = false});
+      required this.sliderValue,
+      this.percentOil,
+      this.serialNumber,
+      this.dateOfManufacture,
+      this.sliderValueCracklingSoundEffect,
+      this.sliderValueVoicePrompts,
+      this.isSwitchClickSound = false,
+      this.linkToUserManual,
+      this.serviceCenterEmailAddress,
+      this.phoneNumberServiceCenter,
+      this.linkOnSite,
+      required this.optionTimerStatusAndValue,
+      this.dcCode,
+      this.isFuelSystemError = false,
+      this.isCoolingFireplace = false,
+      this.dataTimeWorkFireplace});
 
-//значение температуры
+  ///Модель
   @override
-  double temperature;
-//значение уровня топлива
+  String? model;
+
+  ///Размер
   @override
-  double percentOil;
-//значение влажности
-  @override
-  double wet;
-//значение CO2
-  @override
-  double? CO2value;
-//серийный номер
-  @override
-  String serialNumber;
-//Дс code
-  @override
-  String dcCode;
-//дата производства
-  @override
-  String dateOfManufacture;
-//значение мощности камина / максимальное значение
-  @override
-  List<int>? sliderValue;
-//звук нажатия кнопок
+  double? size;
+
+  ///Статус блокировки
+//кнопка блокирования экрана нажата?
   @override
   @JsonKey()
-  bool isSwitchClickSound;
+  bool isBlocButton;
+
+  ///Пароль
+//заданный пользователем пароль
+  @override
+  @JsonKey()
+  int passwordBlock;
+//пароль по умолчанию
+  ///Температура
+  @override
+  double? temperature;
+
+  ///Влажность
+  @override
+  double? wet;
+
+  ///Уровень CO2
+  @override
+  double? CO2value;
+
+  ///Статус состояния камина, ошибки
+  @override
+  Map<bool?, String?> statusFireplaceAndErrors;
+
+  /// Статус кнопки запуска/остановки
+//камин запущен?
+  @override
+  @JsonKey()
+  bool isPlayFireplace;
+
+  ///Количество режимов,  номер режима
+// максимальное значение / значение мощности камина
+  @override
+  Map<int?, int?> sliderValue;
+
+  ///Уровень топлива;
+  @override
+  double? percentOil;
+
+  /// S/N - серийный номер
+//серийный номер
+  @override
+  String? serialNumber;
+
+  ///Дата производства
+  @override
+  String? dateOfManufacture;
+
+  ///Статус потрескивание дров, уровень громкости
 //Звуковой эффект потрескивание дров
   @override
   double? sliderValueCracklingSoundEffect;
+
+  ///Статус голосовые подсказки, уровень громкости;
 //Голосовые подсказки
   @override
   double? sliderValueVoicePrompts;
+
+  ///Статус озвучивания нажатий кнопок;
+  @override
+  @JsonKey()
+  bool isSwitchClickSound;
+
+  ///Ссылка на инструкцию по эксплуатации
+  @override
+  String? linkToUserManual;
+
+  ///Адрес почты сервисного центра;
+  @override
+  String? serviceCenterEmailAddress;
+
+  ///Ссылка на телефон сервисного центра;
+  @override
+  String? phoneNumberServiceCenter;
+
+  ///Ссылка на сайт;
+  @override
+  String? linkOnSite;
+
+  ///Статус таймера на отключение, значение таймера на отключение;
+  @override
+  Map<bool?, String?> optionTimerStatusAndValue;
+
+  ///Счет времени работы камина.
+//Дс code
+  @override
+  String? dcCode;
 //если ошибка топливной системы
   @override
   @JsonKey()
@@ -431,30 +686,13 @@ class _$_FireplaceDataModel implements _FireplaceDataModel {
   @override
   @JsonKey()
   bool isCoolingFireplace;
-//кнопка блокирования экрана нажата?
-  @override
-  @JsonKey()
-  bool isBlocButton;
-//заданный пользователем пароль
-  @override
-  @JsonKey()
-  int passwordBlock;
-//пароль по умолчанию
-//камин запущен?
-  @override
-  @JsonKey()
-  bool isPlayFireplace;
 //общее время работы камина
   @override
   String? dataTimeWorkFireplace;
-//есть таймер и включен или нет
-  @override
-  @JsonKey()
-  bool isOptionTimer;
 
   @override
   String toString() {
-    return 'FireplaceDataModel(temperature: $temperature, percentOil: $percentOil, wet: $wet, CO2value: $CO2value, serialNumber: $serialNumber, dcCode: $dcCode, dateOfManufacture: $dateOfManufacture, sliderValue: $sliderValue, isSwitchClickSound: $isSwitchClickSound, sliderValueCracklingSoundEffect: $sliderValueCracklingSoundEffect, sliderValueVoicePrompts: $sliderValueVoicePrompts, isFuelSystemError: $isFuelSystemError, isCoolingFireplace: $isCoolingFireplace, isBlocButton: $isBlocButton, passwordBlock: $passwordBlock, isPlayFireplace: $isPlayFireplace, dataTimeWorkFireplace: $dataTimeWorkFireplace, isOptionTimer: $isOptionTimer)';
+    return 'FireplaceDataModel(model: $model, size: $size, isBlocButton: $isBlocButton, passwordBlock: $passwordBlock, temperature: $temperature, wet: $wet, CO2value: $CO2value, statusFireplaceAndErrors: $statusFireplaceAndErrors, isPlayFireplace: $isPlayFireplace, sliderValue: $sliderValue, percentOil: $percentOil, serialNumber: $serialNumber, dateOfManufacture: $dateOfManufacture, sliderValueCracklingSoundEffect: $sliderValueCracklingSoundEffect, sliderValueVoicePrompts: $sliderValueVoicePrompts, isSwitchClickSound: $isSwitchClickSound, linkToUserManual: $linkToUserManual, serviceCenterEmailAddress: $serviceCenterEmailAddress, phoneNumberServiceCenter: $phoneNumberServiceCenter, linkOnSite: $linkOnSite, optionTimerStatusAndValue: $optionTimerStatusAndValue, dcCode: $dcCode, isFuelSystemError: $isFuelSystemError, isCoolingFireplace: $isCoolingFireplace, dataTimeWorkFireplace: $dataTimeWorkFireplace)';
   }
 
   @JsonKey(ignore: true)
@@ -467,82 +705,209 @@ class _$_FireplaceDataModel implements _FireplaceDataModel {
 
 abstract class _FireplaceDataModel implements FireplaceDataModel {
   factory _FireplaceDataModel(
-      {required double temperature,
-      required double percentOil,
-      required double wet,
-      double? CO2value,
-      required String serialNumber,
-      required String dcCode,
-      required String dateOfManufacture,
-      List<int>? sliderValue,
-      bool isSwitchClickSound,
-      double? sliderValueCracklingSoundEffect,
-      double? sliderValueVoicePrompts,
-      bool isFuelSystemError,
-      bool isCoolingFireplace,
+      {String? model,
+      double? size,
       bool isBlocButton,
       int passwordBlock,
+      double? temperature,
+      double? wet,
+      double? CO2value,
+      required Map<bool?, String?> statusFireplaceAndErrors,
       bool isPlayFireplace,
-      String? dataTimeWorkFireplace,
-      bool isOptionTimer}) = _$_FireplaceDataModel;
+      required Map<int?, int?> sliderValue,
+      double? percentOil,
+      String? serialNumber,
+      String? dateOfManufacture,
+      double? sliderValueCracklingSoundEffect,
+      double? sliderValueVoicePrompts,
+      bool isSwitchClickSound,
+      String? linkToUserManual,
+      String? serviceCenterEmailAddress,
+      String? phoneNumberServiceCenter,
+      String? linkOnSite,
+      required Map<bool?, String?> optionTimerStatusAndValue,
+      String? dcCode,
+      bool isFuelSystemError,
+      bool isCoolingFireplace,
+      String? dataTimeWorkFireplace}) = _$_FireplaceDataModel;
 
-  @override //значение температуры
-  double get temperature; //значение температуры
-  set temperature(double value);
-  @override //значение уровня топлива
-  double get percentOil; //значение уровня топлива
-  set percentOil(double value);
-  @override //значение влажности
-  double get wet; //значение влажности
-  set wet(double value);
-  @override //значение CO2
-  double? get CO2value; //значение CO2
+  @override
+
+  ///Модель
+  String? get model;
+
+  ///Модель
+  set model(String? value);
+  @override
+
+  ///Размер
+  double? get size;
+
+  ///Размер
+  set size(double? value);
+  @override
+
+  ///Статус блокировки
+//кнопка блокирования экрана нажата?
+  bool get isBlocButton;
+
+  ///Статус блокировки
+//кнопка блокирования экрана нажата?
+  set isBlocButton(bool value);
+  @override
+
+  ///Пароль
+//заданный пользователем пароль
+  int get passwordBlock;
+
+  ///Пароль
+//заданный пользователем пароль
+  set passwordBlock(int value);
+  @override //пароль по умолчанию
+  ///Температура
+  double? get temperature; //пароль по умолчанию
+  ///Температура
+  set temperature(double? value);
+  @override
+
+  ///Влажность
+  double? get wet;
+
+  ///Влажность
+  set wet(double? value);
+  @override
+
+  ///Уровень CO2
+  double? get CO2value;
+
+  ///Уровень CO2
   set CO2value(double? value);
-  @override //серийный номер
-  String get serialNumber; //серийный номер
-  set serialNumber(String value);
-  @override //Дс code
-  String get dcCode; //Дс code
-  set dcCode(String value);
-  @override //дата производства
-  String get dateOfManufacture; //дата производства
-  set dateOfManufacture(String value);
-  @override //значение мощности камина / максимальное значение
-  List<int>? get sliderValue; //значение мощности камина / максимальное значение
-  set sliderValue(List<int>? value);
-  @override //звук нажатия кнопок
-  bool get isSwitchClickSound; //звук нажатия кнопок
-  set isSwitchClickSound(bool value);
-  @override //Звуковой эффект потрескивание дров
-  double?
-      get sliderValueCracklingSoundEffect; //Звуковой эффект потрескивание дров
+  @override
+
+  ///Статус состояния камина, ошибки
+  Map<bool?, String?> get statusFireplaceAndErrors;
+
+  ///Статус состояния камина, ошибки
+  set statusFireplaceAndErrors(Map<bool?, String?> value);
+  @override
+
+  /// Статус кнопки запуска/остановки
+//камин запущен?
+  bool get isPlayFireplace;
+
+  /// Статус кнопки запуска/остановки
+//камин запущен?
+  set isPlayFireplace(bool value);
+  @override
+
+  ///Количество режимов,  номер режима
+// максимальное значение / значение мощности камина
+  Map<int?, int?> get sliderValue;
+
+  ///Количество режимов,  номер режима
+// максимальное значение / значение мощности камина
+  set sliderValue(Map<int?, int?> value);
+  @override
+
+  ///Уровень топлива;
+  double? get percentOil;
+
+  ///Уровень топлива;
+  set percentOil(double? value);
+  @override
+
+  /// S/N - серийный номер
+//серийный номер
+  String? get serialNumber;
+
+  /// S/N - серийный номер
+//серийный номер
+  set serialNumber(String? value);
+  @override
+
+  ///Дата производства
+  String? get dateOfManufacture;
+
+  ///Дата производства
+  set dateOfManufacture(String? value);
+  @override
+
+  ///Статус потрескивание дров, уровень громкости
+//Звуковой эффект потрескивание дров
+  double? get sliderValueCracklingSoundEffect;
+
+  ///Статус потрескивание дров, уровень громкости
+//Звуковой эффект потрескивание дров
   set sliderValueCracklingSoundEffect(double? value);
-  @override //Голосовые подсказки
-  double? get sliderValueVoicePrompts; //Голосовые подсказки
+  @override
+
+  ///Статус голосовые подсказки, уровень громкости;
+//Голосовые подсказки
+  double? get sliderValueVoicePrompts;
+
+  ///Статус голосовые подсказки, уровень громкости;
+//Голосовые подсказки
   set sliderValueVoicePrompts(double? value);
+  @override
+
+  ///Статус озвучивания нажатий кнопок;
+  bool get isSwitchClickSound;
+
+  ///Статус озвучивания нажатий кнопок;
+  set isSwitchClickSound(bool value);
+  @override
+
+  ///Ссылка на инструкцию по эксплуатации
+  String? get linkToUserManual;
+
+  ///Ссылка на инструкцию по эксплуатации
+  set linkToUserManual(String? value);
+  @override
+
+  ///Адрес почты сервисного центра;
+  String? get serviceCenterEmailAddress;
+
+  ///Адрес почты сервисного центра;
+  set serviceCenterEmailAddress(String? value);
+  @override
+
+  ///Ссылка на телефон сервисного центра;
+  String? get phoneNumberServiceCenter;
+
+  ///Ссылка на телефон сервисного центра;
+  set phoneNumberServiceCenter(String? value);
+  @override
+
+  ///Ссылка на сайт;
+  String? get linkOnSite;
+
+  ///Ссылка на сайт;
+  set linkOnSite(String? value);
+  @override
+
+  ///Статус таймера на отключение, значение таймера на отключение;
+  Map<bool?, String?> get optionTimerStatusAndValue;
+
+  ///Статус таймера на отключение, значение таймера на отключение;
+  set optionTimerStatusAndValue(Map<bool?, String?> value);
+  @override
+
+  ///Счет времени работы камина.
+//Дс code
+  String? get dcCode;
+
+  ///Счет времени работы камина.
+//Дс code
+  set dcCode(String? value);
   @override //если ошибка топливной системы
   bool get isFuelSystemError; //если ошибка топливной системы
   set isFuelSystemError(bool value);
   @override //охлаждение камина начато?
   bool get isCoolingFireplace; //охлаждение камина начато?
   set isCoolingFireplace(bool value);
-  @override //кнопка блокирования экрана нажата?
-  bool get isBlocButton; //кнопка блокирования экрана нажата?
-  set isBlocButton(bool value);
-  @override //заданный пользователем пароль
-  int get passwordBlock; //заданный пользователем пароль
-  set passwordBlock(int value);
-  @override //пароль по умолчанию
-//камин запущен?
-  bool get isPlayFireplace; //пароль по умолчанию
-//камин запущен?
-  set isPlayFireplace(bool value);
   @override //общее время работы камина
   String? get dataTimeWorkFireplace; //общее время работы камина
   set dataTimeWorkFireplace(String? value);
-  @override //есть таймер и включен или нет
-  bool get isOptionTimer; //есть таймер и включен или нет
-  set isOptionTimer(bool value);
   @override
   @JsonKey(ignore: true)
   _$$_FireplaceDataModelCopyWith<_$_FireplaceDataModel> get copyWith =>

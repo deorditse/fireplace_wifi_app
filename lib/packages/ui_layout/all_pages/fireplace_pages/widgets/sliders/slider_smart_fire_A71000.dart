@@ -12,13 +12,15 @@ class SliderSmartFireA71000 extends StatelessWidget {
     return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) {
         final List<int> _labels = List.generate(
-            controllerApp.fireplaceData!.sliderValue![1],
+            controllerApp.fireplaceData!.sliderValue.keys.first!,
             (index) => index.toInt() + 1);
         //Слайдер (убераю его с экрана, когда идет охдажение камина)
-        return !controllerApp.isCoolingFireplace
-            ? SizedBox(
+        return Column(
+          children: [
+            if (!controllerApp.isCoolingFireplace)
+              SizedBox(
                 height: MediaQuery.of(context).size.height /
-                    (controllerApp.fireplaceData!.sliderValue![1] > 3
+                    ((controllerApp.fireplaceData!.sliderValue.keys.first!) > 3
                         ? 2.4
                         : 3.1),
                 width: MediaQuery.of(context).size.width / 8,
@@ -47,8 +49,9 @@ class SliderSmartFireA71000 extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
-            : Container();
+              ),
+          ],
+        );
       },
     );
   }
@@ -64,9 +67,11 @@ class _SliderSmartFireA71000 extends StatefulWidget {
 }
 
 class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
-   Rx<double> sliderValue =  FireplaceConnectionGetXController
-      .instance.fireplaceData!.sliderValue![0]
-      .toDouble().obs;
+  Rx<double> sliderValue = (FireplaceConnectionGetXController
+              .instance.fireplaceData!.sliderValue.values.first ??
+          1)
+      .toDouble()
+      .obs;
   late final divisions;
 
   @override
@@ -74,12 +79,13 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
     // TODO: implement initState
     super.initState();
 
-    divisions = FireplaceConnectionGetXController
-            .instance.fireplaceData!.sliderValue![1] -
+    divisions = (FireplaceConnectionGetXController
+            .instance.fireplaceData!.sliderValue.keys.first!) -
         1;
 
-    sliderValue.value = FireplaceConnectionGetXController
-        .instance.fireplaceData!.sliderValue![0]
+    sliderValue.value = (FireplaceConnectionGetXController
+                .instance.fireplaceData!.sliderValue.values.first ??
+            1)
         .toDouble();
   }
 
@@ -108,8 +114,8 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
             divisions: divisions,
             // label: '${sliderValue.value}',
             min: 1.0,
-            max: FireplaceConnectionGetXController
-                .instance.fireplaceData!.sliderValue![1]
+            max: (FireplaceConnectionGetXController
+                    .instance.fireplaceData!.sliderValue.keys.first!)
                 .toDouble(),
             value: sliderValue.value,
             onChangeEnd: (double value) {

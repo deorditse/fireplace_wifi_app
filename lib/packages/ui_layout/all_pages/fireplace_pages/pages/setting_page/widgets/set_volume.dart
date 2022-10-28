@@ -1,10 +1,7 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/sliders/style/gradient_slider.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/widgets_for_all_pages/rowWithDomain.dart';
+import 'package:models/models.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +12,8 @@ class SetVolumeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FireplaceDataModel? controllerApp =
+        FireplaceConnectionGetXController.instance.fireplaceData;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,9 +31,7 @@ class SetVolumeWidget extends StatelessWidget {
         //эта опция есть во всех каминах по умолчанию
         _optionButtonClickSound(),
         //опция Зв. эффект потрескивание дров
-        if (FireplaceConnectionGetXController
-                .instance.fireplaceData?.sliderValueCracklingSoundEffect !=
-            null)
+        if (controllerApp?.sliderValueCracklingSoundEffect != null)
           Padding(
             padding: EdgeInsets.only(top: mySizedHeightBetweenAlert),
             child: _optionSoundFirewoodCrackleEffect(),
@@ -127,10 +124,10 @@ class SetVolumeWidget extends StatelessWidget {
                 child: MySliderTheme(
                   child: Obx(
                     () => Slider(
-                      divisions: 10,
+                      divisions: 4,
                       label: '${_sliderValueCracklingSoundEffect.value}',
-                      min: 0.0,
-                      max: 10,
+                      min: 1.0,
+                      max: 5,
                       value: _sliderValueCracklingSoundEffect.value,
                       onChangeEnd: (double value) {
                         print(value);
@@ -188,10 +185,10 @@ class SetVolumeWidget extends StatelessWidget {
               child: MySliderTheme(
                 child: Obx(
                   () => Slider(
-                    divisions: 10,
+                    divisions: 4,
                     label: '${_sliderValueVoicePrompts.value}',
-                    min: 0.0,
-                    max: 10,
+                    min: 1.0,
+                    max: 5,
                     value: _sliderValueVoicePrompts.value,
                     onChangeEnd: (double value) {
                       print(value);

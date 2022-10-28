@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:models/models.dart';
-
-import '../../data_layout.dart';
+import '../test_data.dart';
 
 //каждый раз при изменении запускать кодогенерацию
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
@@ -9,48 +8,12 @@ import '../../data_layout.dart';
 //при использовании пакета freezed будет реализовано
 //регистрируем как LazySingleton (одиночный) но вытаскиваем по запросу ShoppingData
 class ImplementationFireplaceServices {
-  Future<FireplaceDataModel> getFireplaceData({required String url}) async {
-    await Future.delayed(Duration(seconds: 2));
+  Future<FireplaceDataModel> getFireplaceData(
+      {required /*String*/ int url}) async {
+    // await Future.delayed(Duration(seconds: 2));
     // List<String> listWithData = stringWithData.split(';').toList();
     //последовательность данных
-    return FireplaceDataModel(
-      //значение температуры
-      temperature: 87,
-      //значение уровня топлива
-      percentOil: 99,
-      //значение влажности
-      wet: 23,
-      //значение CO2
-      CO2value: null,
-      //серийный номер
-      serialNumber: '',
-      //Дс code
-      dcCode: '',
-      //дата производства
-      dateOfManufacture: 'null',
-      //звук нажатия кнопок
-      isSwitchClickSound: false,
-      //Звуковой эффект потрескивание дров
-      sliderValueCracklingSoundEffect: null,
-      //Голосовые подсказки
-      sliderValueVoicePrompts: null,
-      //если ошибка топливной системы
-      isFuelSystemError: false,
-      //охлаждение камина начато?
-      isCoolingFireplace: false,
-      //кнопка блокирования экрана нажата?
-      isBlocButton: true,
-      //заданный пользователем пароль
-      passwordBlock: 5539,
-      //камин запущен?
-      isPlayFireplace: false,
-      //общее время работы камина
-      dataTimeWorkFireplace: '',
-      //есть таймер и включен или нет
-      isOptionTimer: false,
-      //значение мощности камина / максимальное значение
-      sliderValue: null,
-    );
+    return listFireplaceDataModel[url];
   }
 
   ///то что ниже вообще не нужно______________________________________________________________________________________________________

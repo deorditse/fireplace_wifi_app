@@ -28,28 +28,29 @@ class StartBodyScreenFireplace extends StatelessWidget {
             ),
             SizedBox(height: mySizedHeightBetweenAlert),
             timeWorkFireplace(context),
-            (controllerApp.fireplaceData?.sliderValue == null)
-                ? ButtonsIfFireplaceSmartPrime1000()
-                : Align(
-                    alignment: Alignment.topCenter,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      radius: MediaQuery.of(context).size.width / 5,
-                      child: TextButton(
-                        onPressed: () {
-                          controllerApp.changeButtonPlayStopFireplace();
-                        },
-                        child: SvgPicture.asset(
-                          (controllerApp.isPlayFireplace == false &&
-                                  !controllerApp.isFuelSystemError)
-                              ? 'assets/button_fireplace/play.svg'
-                              : 'assets/button_fireplace/stop.svg',
-                          semanticsLabel: 'icon_bottom',
-                          fit: BoxFit.none,
-                        ),
-                      ),
-                    ),
+            // (controllerApp.fireplaceData?.sliderValue == null)
+            //     ? ButtonsIfFireplaceSmartPrime1000()
+            //     :
+            Align(
+              alignment: Alignment.topCenter,
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: MediaQuery.of(context).size.width / 5,
+                child: TextButton(
+                  onPressed: () {
+                    controllerApp.changeButtonPlayStopFireplace();
+                  },
+                  child: SvgPicture.asset(
+                    (controllerApp.isPlayFireplace == false &&
+                            !controllerApp.isFuelSystemError)
+                        ? 'assets/button_fireplace/play.svg'
+                        : 'assets/button_fireplace/stop.svg',
+                    semanticsLabel: 'icon_bottom',
+                    fit: BoxFit.none,
                   ),
+                ),
+              ),
+            ),
           ],
         );
       },

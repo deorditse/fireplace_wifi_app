@@ -55,7 +55,7 @@ class BodyFireplacePage extends StatelessWidget {
           // если опция слайдера включена OptionSliderFireplace
           if (controllerApp.fireplaceData != null &&
               FireplaceConnectionGetXController
-                      .instance.fireplaceData?.sliderValue?[0] !=
+                      .instance.fireplaceData?.sliderValue.keys.first !=
                   null)
             Positioned(right: 0, bottom: 70, child: SliderSmartFireA71000()),
         ],

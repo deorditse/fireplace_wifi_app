@@ -1,4 +1,5 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/connect_homeWiFi_page/connect_homeWiFi_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/pages/setting_page/widgets/service_center_contacts.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/search_fireplace_page/search_fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/widgets_for_all_pages/rowWithDomain.dart';
@@ -17,12 +18,13 @@ class BodySettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: mySizedHeightBetweenAlert),
+          _connectWithHomeWifi(),
+          myDivider(),
           _toTheListOfFireplaces(),
           myDivider(),
           SizedBox(height: mySizedHeightBetweenAlert),
@@ -43,10 +45,8 @@ class BodySettingPage extends StatelessWidget {
           ServiceCenterContacts(),
           SizedBox(height: mySizedHeightBetweenAlert),
           myDivider(),
-          Expanded(
-            child: SizedBox(),
-          ),
           SizedBox(height: mySizedHeightBetweenAlert),
+
           rowWithDomain(context: context),
         ],
       ),
@@ -57,13 +57,14 @@ class BodySettingPage extends StatelessWidget {
     return TextButton(
       onPressed: () {
         Get.offNamed(SearchFireplacePage.id);
+        FireplaceConnectionGetXController.instance.disposeFireplaceData();
       },
       child: Row(
         // crossAxisAlignment: CrossAxisAlignment.end,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'К списку каминов',
+            'К списку подключенных каминов',
             style: myTextStyleFontRoboto(
               fontSize: 16,
               // textColor: myColorActivity,
@@ -71,7 +72,7 @@ class BodySettingPage extends StatelessWidget {
           ),
           SizedBox(width: 14),
           SvgPicture.asset(
-            'assets/icons/closeFireplace.svg',
+            'assets/icons/forward.svg',
             semanticsLabel: 'icon_bottom',
             fit: BoxFit.contain,
           ),
@@ -103,6 +104,33 @@ class BodySettingPage extends StatelessWidget {
       color: myTwoColor,
       height: 2,
       thickness: 1,
+    );
+  }
+
+  _connectWithHomeWifi() {
+    return TextButton(
+      onPressed: () {
+        Get.toNamed(ConnectHomeWiFiPage.id);
+      },
+      child: Row(
+        // crossAxisAlignment: CrossAxisAlignment.end,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Подключить в локальную сеть',
+            style: myTextStyleFontRoboto(
+              fontSize: 16,
+              // textColor: myColorActivity,
+            ),
+          ),
+          SizedBox(width: 14),
+          SvgPicture.asset(
+            'assets/icons/home_icon.svg',
+            semanticsLabel: 'home_icon.svg',
+            fit: BoxFit.contain,
+          ),
+        ],
+      ),
     );
   }
 }

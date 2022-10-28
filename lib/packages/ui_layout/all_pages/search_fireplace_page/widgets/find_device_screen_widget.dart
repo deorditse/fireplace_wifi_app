@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../style_app/style.dart';
+import 'row_with_name_and_title_fireplace.dart';
 
 class FindDeviceScreenWidget extends StatelessWidget {
   const FindDeviceScreenWidget({super.key});
@@ -12,9 +13,9 @@ class FindDeviceScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: MediaQuery.of(context).size.width / 2.5,
       width: MediaQuery.of(context).size.width,
       child: MyContainerAlert(
+        height: MediaQuery.of(context).size.height / 3.5,
         child: GetBuilder<FireplaceConnectionGetXController>(
             builder: (controllerApp) {
           if (controllerApp.isLoadingDataIdWifi) {
@@ -29,7 +30,7 @@ class FindDeviceScreenWidget extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    'Подключение к камину ${controllerApp.wifiName}',
+                    'Подключение к камину ${controllerApp.titleModel}',
                     style: Theme.of(context).textTheme.headline2,
                     textAlign: TextAlign.center,
                   ),
@@ -38,47 +39,33 @@ class FindDeviceScreenWidget extends StatelessWidget {
             );
           } else {
             if (controllerApp.isFireplaceDetectedInDatabase) {
-              return GestureDetector(
-                onTap: () {
-                  try {
-                    Get.toNamed(FireplacePage.id,
-                        preventDuplicates: false);
-                  } catch (error) {
-                    print(error);
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${controllerApp.wifiName}',
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.headline2,
-                          textAlign: TextAlign.left,
-                        ),
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    _rowWithTitle(context: context),
+                    SizedBox(height: mySizedHeightBetweenAlert),
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: EdgeInsets.zero,
+                        itemCount: 15,
+                        itemBuilder: (context, index) {
+                          return TextButton(
+                            style: ButtonStyle(
+                                padding:
+                                    MaterialStateProperty.all(EdgeInsets.zero)),
+                            child: RowWithNameAndTitleFireplace(),
+                            onPressed: () {
+                              Get.toNamed(FireplacePage.id,
+                                  preventDuplicates: false);
+                            },
+                          );
+                        },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: FittedBox(
-                          child: Text(
-                            'подключено',
-                            style:
-                                Theme.of(context).textTheme.headline2!.copyWith(
-                                      color: myColorActivity,
-                                    ),
-                          ),
-                        ),
-                      ),
-                      FittedBox(
-                        child: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: myColorActivity,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             } else {
@@ -90,6 +77,24 @@ class FindDeviceScreenWidget extends StatelessWidget {
           }
         }),
       ),
+    );
+  }
+
+  _rowWithTitle({required BuildContext context}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'Модель:',
+          style: Theme.of(context).textTheme.headline2,
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          'Название',
+          style: Theme.of(context).textTheme.headline2,
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

@@ -1,12 +1,15 @@
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
+import 'package:models/models.dart';
 
 class AboutDeviceWidget extends StatelessWidget {
   const AboutDeviceWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    FireplaceDataModel? controllerApp =
+        FireplaceConnectionGetXController.instance.fireplaceData;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +29,7 @@ class AboutDeviceWidget extends StatelessWidget {
             style: myTextStyleFontRoboto(fontSize: 14),
             children: [
               TextSpan(
-                text: 'Страна производства: ',
+                text: 'Страна производства:',
                 style: myTextStyleFontRoboto(textColor: myTwoColor),
               ),
               TextSpan(
@@ -66,9 +69,7 @@ class AboutDeviceWidget extends StatelessWidget {
                 style: myTextStyleFontRoboto(textColor: myTwoColor),
               ),
               TextSpan(
-                text: FireplaceConnectionGetXController
-                        .instance.fireplaceData?.serialNumber ??
-                    '...',
+                text: controllerApp?.serialNumber ?? '...',
                 style: myTextStyleFontRoboto(),
               ),
             ],
@@ -86,9 +87,7 @@ class AboutDeviceWidget extends StatelessWidget {
                 style: myTextStyleFontRoboto(textColor: myTwoColor),
               ),
               TextSpan(
-                text: FireplaceConnectionGetXController
-                        .instance.fireplaceData?.dcCode ??
-                    '...',
+                text: controllerApp?.dcCode ?? '...',
                 style: myTextStyleFontRoboto(),
               ),
             ],
@@ -106,9 +105,7 @@ class AboutDeviceWidget extends StatelessWidget {
                 style: myTextStyleFontRoboto(textColor: myTwoColor),
               ),
               TextSpan(
-                text: FireplaceConnectionGetXController
-                        .instance.fireplaceData?.dateOfManufacture ??
-                    '...',
+                text: controllerApp?.dateOfManufacture ?? '...',
                 style: myTextStyleFontRoboto(),
               ),
             ],

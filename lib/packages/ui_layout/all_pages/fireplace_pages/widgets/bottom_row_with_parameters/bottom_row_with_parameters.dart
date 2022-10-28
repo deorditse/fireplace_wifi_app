@@ -59,14 +59,14 @@ Widget bottomRowWithParameters(BuildContext context) {
                   iconValueDescription(
                     iconPath: 'assets/icons/temperature.svg',
                     value: controllerApp.fireplaceData?.temperature != null
-                        ? '${controllerApp.fireplaceData!.temperature.toInt()}°C'
+                        ? '${controllerApp.fireplaceData!.temperature!.toInt()}°C'
                         : '...°C',
                     description: 'температура',
                   ),
                   iconValueDescription(
                     iconPath: 'assets/icons/wet.svg',
                     value: controllerApp.fireplaceData?.wet != null
-                        ? '${controllerApp.fireplaceData!.wet.toInt()}%'
+                        ? '${controllerApp.fireplaceData!.wet!.toInt()}%'
                         : '...%',
                     description: 'влажность',
                   ),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'packages/ui_layout/all_pages/connect_homeWiFi_page/connect_homeWiFi_page.dart';
 import 'packages/ui_layout/all_pages/fireplace_pages/pages/block_page/block_page.dart';
 import 'packages/ui_layout/all_pages/fireplace_pages/pages/setting_page/setting_page.dart';
 import 'packages/ui_layout/all_pages/search_fireplace_page/search_fireplace_page.dart';
@@ -55,6 +56,12 @@ class MyGetApp extends StatelessWidget {
           page: () => FireplacePage(),
           binding: BasicsExampleBinding(),
         ),
+        GetPage(
+          name: ConnectHomeWiFiPage.id,
+          page: () => ConnectHomeWiFiPage(),
+          binding: BasicsExampleBinding(),
+        ),
+
         GetPage(
           name: BodyBlockFireplace.id,
           page: () => BodyBlockFireplace(),
