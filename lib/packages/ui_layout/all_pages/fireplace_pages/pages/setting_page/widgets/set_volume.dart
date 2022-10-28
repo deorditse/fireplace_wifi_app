@@ -58,7 +58,7 @@ class SetVolumeWidget extends StatelessWidget {
               inactiveTextFontWeight: FontWeight.w500,
               activeText: 'off',
               inactiveText: 'on',
-              value: controllerApp.fireplaceData?.isSwitchClickSound ?? false,
+              value: controllerApp.isSwitchClickSound,
               activeColor: Colors.black,
               toggleColor: Color.fromRGBO(113, 109, 109, 1),
               inactiveColor: Colors.black,

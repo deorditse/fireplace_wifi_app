@@ -66,6 +66,7 @@ class BodySettingPage extends StatelessWidget {
     return TextButton(
       onPressed: () {
         Get.offNamed(SearchFireplacePage.id);
+        FireplaceConnectionGetXController.instance.changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
       },
       child: Row(
         // crossAxisAlignment: CrossAxisAlignment.end,

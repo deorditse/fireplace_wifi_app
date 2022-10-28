@@ -15,12 +15,8 @@ class MainBodyStateFireplace extends StatelessWidget {
       builder: (controllerApp) {
         String alertMessage = controllerApp.alertMessage;
 
-        if (controllerApp.isCoolingFireplace &&
-            !controllerApp.isFuelSystemError) {
-//если камин в режиме охлаждения - можно конечно просто менять сообщение на экране
-          return MyContainerAlert(message: alertMessage);
-        } else if (controllerApp.isFuelSystemError) {
-//если ОШИБКА
+        if (controllerApp.isFuelSystemError) {
+//если ОШИБКА камина
           //прописать логику ошибки
           return MyContainerAlert(
             borderColor: myColorActivity,

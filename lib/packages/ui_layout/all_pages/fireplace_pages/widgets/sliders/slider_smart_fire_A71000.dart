@@ -67,27 +67,12 @@ class _SliderSmartFireA71000 extends StatefulWidget {
 }
 
 class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
-  Rx<double> sliderValue = (FireplaceConnectionGetXController
-              .instance.fireplaceData!.sliderValue.values.first ??
-          1)
-      .toDouble()
-      .obs;
-  late final divisions;
+  Rx<double> sliderValue =
+      (FireplaceConnectionGetXController.instance.valuePowerFireplace).obs;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    divisions = (FireplaceConnectionGetXController
-            .instance.fireplaceData!.sliderValue.keys.first!) -
-        1;
-
-    sliderValue.value = (FireplaceConnectionGetXController
-                .instance.fireplaceData!.sliderValue.values.first ??
-            1)
-        .toDouble();
-  }
+  final double maxValue = (FireplaceConnectionGetXController
+          .instance.fireplaceData!.sliderValue.keys.first!)
+      .toDouble();
 
   @override
   Widget build(BuildContext context) {
@@ -111,15 +96,14 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
         () => RotatedBox(
           quarterTurns: 3,
           child: Slider(
-            divisions: divisions,
+            divisions: maxValue.toInt() - 1,
             // label: '${sliderValue.value}',
             min: 1.0,
-            max: (FireplaceConnectionGetXController
-                    .instance.fireplaceData!.sliderValue.keys.first!)
-                .toDouble(),
+            max: maxValue,
             value: sliderValue.value,
             onChangeEnd: (double value) {
-              print(value);
+              FireplaceConnectionGetXController.instance
+                  .changePowerSliderFireplace(newValuePowerFireplace: value);
             },
             onChanged: (double value) {
               sliderValue.value = value;

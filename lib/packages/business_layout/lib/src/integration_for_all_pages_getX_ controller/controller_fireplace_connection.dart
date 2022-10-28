@@ -36,47 +36,43 @@ class FireplaceConnectionGetXController extends GetxController {
     });
   }
 
-  bool _timerStart = false;
+  bool _isTimerUpdateDataBase = false;
 
-  void changeStartStopTimer({bool? isTimerStart}) {
-    _timerStart = isTimerStart ?? !_timerStart;
+  void changeIsTimerUpdateDataBase({bool? isTimerUpdateDataBase}) {
+    _isTimerUpdateDataBase = isTimerUpdateDataBase ?? !_isTimerUpdateDataBase;
     update();
   }
 
   void disposeFireplaceData() async {
-    changeStartStopTimer(isTimerStart: false);
+    changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
     isSettingButton = false;
     fireplaceData = null;
-    print(fireplaceData);
     update();
   }
 
   ///инициализация данных на экране
-  void initFireplaceData({
-    required /*String?*/ int? url,
-  }) async {
+  Future<void> initFireplaceData({required /*String?*/ int? url}) async {
     if (url != null && url != '') {
-      changeStartStopTimer(isTimerStart: true);
-
-      fireplaceData = await services.getFireplaceData(url: url);
+      fireplaceData =
+          await services.getFireplaceData(url: url).whenComplete(() async {
+        changeIsTimerUpdateDataBase(isTimerUpdateDataBase: true);
+        await _initialFireplaceData(url: url);
+      });
       update();
-      _optionsFireplace();
-      await _initialFireplaceData(url: url);
+      await _optionsFireplace();
     }
   }
 
   Future<void> _initialFireplaceData({
     required /*String?*/ int? url,
   }) async {
-
     Timer.periodic(Duration(seconds: 2), (timer) async {
-      if (!_timerStart) {
+      if (!_isTimerUpdateDataBase) {
         timer.cancel();
         print('stopTimer');
-      }
-      if (url != null && url != '') {
+      } else if (url != null && url != '') {
         fireplaceData = await services.getFireplaceData(url: url);
-        print(_timerStart);
+        print(_isTimerUpdateDataBase);
         print(timer);
         update();
       }
@@ -131,10 +127,10 @@ class FireplaceConnectionGetXController extends GetxController {
   // String dateOfManufacture = '';
 
   // //звук нажатия кнопок
-  // bool isSwitchClickSound = false;
+  bool isSwitchClickSound = false;
 
   void changeSwitchButtonClickSound() {
-    fireplaceData!.isSwitchClickSound = !fireplaceData!.isSwitchClickSound;
+    isSwitchClickSound = !isSwitchClickSound;
     update();
   }
 
@@ -189,26 +185,48 @@ class FireplaceConnectionGetXController extends GetxController {
     isPlayFireplace ? stopFireplace() : playFireplace();
   }
 
-  void playFireplace() {
-    alertMessage =
-        /* isButtonFor1000Fireplace ? 'уровень пламени NORM' :*/ 'розжиг камина';
+  changeAlertMessage({required String? newAlertMessage}) {
+    alertMessage = newAlertMessage ?? "камин готов к работе";
+    update();
+  }
+
+  Future<void> playFireplace() async {
+    changeAlertMessage(newAlertMessage: 'розжиг камина');
     isPlayFireplace = true;
     update();
+    await Future.delayed(Duration(seconds: 4)).whenComplete(
+      () => changeAlertMessage(
+          newAlertMessage: (isPlayFireplace)
+              ? "уровень пламени №${valuePowerFireplace.toInt()}"
+              : null),
+    );
   }
 
   void stopFireplace() async {
     //запуск озлаждения камина
     await startCoolingFireplace();
     //после чего обновляем стейт
-    alertMessage = 'камин готов к работе';
+    changeAlertMessage(newAlertMessage: null);
+
     isPlayFireplace = false;
     update();
+  }
+
+  double valuePowerFireplace = 1;
+
+  changePowerSliderFireplace({required double newValuePowerFireplace}) {
+    valuePowerFireplace = newValuePowerFireplace;
+    update();
+    changeAlertMessage(
+        newAlertMessage: isPlayFireplace
+            ? "уровень пламени №${newValuePowerFireplace.toInt()}"
+            : null);
   }
 
   //запуск озлаждения камина
   Future<void> startCoolingFireplace() async {
     isCoolingFireplace = true;
-    alertMessage = 'охлаждение камина';
+    changeAlertMessage(newAlertMessage: 'охлаждение камина');
     update();
     await Future.delayed(
       const Duration(seconds: 3),
@@ -223,10 +241,9 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isOptionTimer = false;
 
   //общее время работы камина
-  String dataTimeWorkFireplace = '00 : 00 : 00';
+  String dataTimerFireplace = '00 : 00 : 00';
 
   //данные таймера обратного отсчета
-  String dataCountdownTimer = '00 : 10 : 00';
   List<String> dataTimer = ['00', '00', '00']; //часы _ минуты _секунды
   bool timerIsRunning = false;
   CountdownController? _countdownController;
@@ -236,6 +253,8 @@ class FireplaceConnectionGetXController extends GetxController {
       dataTimer[0] = '${hours ?? dataTimer[0]}';
       dataTimer[1] = '${minutes ?? dataTimer[1]}';
       dataTimer[2] = '${seconds ?? dataTimer[2]}';
+      dataTimerFireplace =
+          "${hours ?? dataTimer[0]} : ${minutes ?? dataTimer[1]} : ${seconds ?? dataTimer[2]}";
       update();
 
       if (dataTimer[0] == '00' &&
@@ -244,6 +263,7 @@ class FireplaceConnectionGetXController extends GetxController {
         Get.snackbar('Установите таймер', 'не может быть 00 : 00 : 00');
       } else {
         timerIsRunning = true;
+
         update();
       }
 
@@ -279,6 +299,9 @@ class FireplaceConnectionGetXController extends GetxController {
       minutes ?? dataTimer[1],
       seconds ?? dataTimer[2],
     ];
+
+    dataTimerFireplace =
+        "${hour ?? dataTimer[0]} : ${minutes ?? dataTimer[1]} : ${seconds ?? dataTimer[2]} ";
     print('newDataTimer');
     update();
   }
@@ -303,8 +326,8 @@ class FireplaceConnectionGetXController extends GetxController {
   String wifiName = '';
   String wifiBSSID = '';
 
-  void _optionsFireplace() {
-    print('___________$fireplaceData');
+  Future<void> _optionsFireplace() async {
+    print('____________optionsFireplace $fireplaceData');
 
     isBlocButton = fireplaceData?.isBlocButton ?? false;
 
@@ -319,8 +342,13 @@ class FireplaceConnectionGetXController extends GetxController {
             ? true
             : false;
 
+    isSwitchClickSound = fireplaceData?.isSwitchClickSound ?? false;
+
     //камин запущен?
     isPlayFireplace = fireplaceData?.isPlayFireplace ?? false;
+
+    valuePowerFireplace =
+        (fireplaceData?.sliderValue.values.first ?? 1).toDouble();
 
     //охлаждение камина начато?
     // isCoolingFireplace = fireplaceData?.isPlayFireplace ?? false;;
@@ -328,6 +356,10 @@ class FireplaceConnectionGetXController extends GetxController {
     //если ошибка топливной системы
     // isFuelSystemError = false;
     update();
+    changeAlertMessage(
+        newAlertMessage: (isPlayFireplace)
+            ? "уровень пламени №${valuePowerFireplace.toInt()}"
+            : null);
   }
 
   Future<void> searchFireplaceInListWithIdWifi({
@@ -335,10 +367,8 @@ class FireplaceConnectionGetXController extends GetxController {
     /*String? wifiBSSID*/
   }) async {
     try {
+      changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
       disposeFireplaceData();
-
-      changeStartStopTimer(isTimerStart: false);
-
       //загрузка камина
       isLoadingDataIdWifi = true;
       //перевожу в состояние не найден с начала
@@ -356,10 +386,9 @@ class FireplaceConnectionGetXController extends GetxController {
           titleModel = 'smartPrime_1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
           update();
-          initFireplaceData(url: 0);
+          await initFireplaceData(url: 0);
           //опции для камина
 
           return;
@@ -375,10 +404,9 @@ class FireplaceConnectionGetXController extends GetxController {
           titleModel = 'smartFireA7_1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
           update();
-          initFireplaceData(url: 1);
+          await initFireplaceData(url: 1);
 
           return;
         } catch (error) {
@@ -393,11 +421,10 @@ class FireplaceConnectionGetXController extends GetxController {
           titleModel = 'smartFireA5_1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
           update();
 
-          initFireplaceData(url: 2);
+          await initFireplaceData(url: 2);
 
           return;
         } catch (error) {
@@ -412,10 +439,9 @@ class FireplaceConnectionGetXController extends GetxController {
           titleModel = 'smartFireA3_1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          alertMessage = 'камин готов к работе';
           isLoadingDataIdWifi = false;
           update();
-          initFireplaceData(url: 3);
+          await initFireplaceData(url: 3);
 
           return;
         } catch (error) {

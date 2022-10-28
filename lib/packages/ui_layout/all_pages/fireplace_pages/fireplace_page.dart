@@ -22,11 +22,10 @@ class FireplacePage extends StatefulWidget {
 }
 
 class _FireplacePageState extends State<FireplacePage> {
-
   @override
-  void initState() {
+  void dispose() {
     FireplaceConnectionGetXController.instance.disposeFireplaceData();
-    super.deactivate();
+    super.dispose();
   }
 
   @override

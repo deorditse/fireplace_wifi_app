@@ -139,7 +139,8 @@ class _DefaultDialogIfDayHasNotComeState
                             textAlign: TextAlign.left,
                             style: myTextStyleFontSarpanch(
                               fontSize: 24,
-                              textColor: const Color.fromRGBO(255, 0, 0, 1),
+                              textColor:
+                                  myColorActivity, //const Color.fromRGBO(255, 0, 0, 1),
                             ),
                           ),
                         ),
@@ -177,9 +178,15 @@ class _DefaultDialogIfDayHasNotComeState
                               backgroundColor: MaterialStateProperty.all(
                                   Colors.transparent)),
                           onPressed: () {
-                            isRunning
-                                ? controllerApp.dataTimerStop()
-                                : controllerApp.dataTimerStart();
+                            if (isRunning) {
+                              controllerApp.dataTimerStop();
+                            } else {
+                              controllerApp.dataTimerStart();
+                              Future.delayed(Duration(milliseconds: 200))
+                                  .whenComplete(() {
+                                Get.back(canPop: true);
+                              });
+                            }
                           },
                           child: FittedBox(
                             child: Text(
@@ -187,9 +194,11 @@ class _DefaultDialogIfDayHasNotComeState
                               textAlign: TextAlign.right,
                               style: myTextStyleFontSarpanch(
                                 fontSize: 24,
-                                textColor: !isRunning
-                                    ? const Color.fromRGBO(0, 255, 71, 1)
-                                    : myColorActivity, //const Color.fromRGBO(253, 133, 0, 1),
+                                textColor:
+                                    // !isRunning
+                                    //     ? const Color.fromRGBO(0, 255, 71, 1)
+                                    //     :
+                                    myColorActivity, //const Color.fromRGBO(253, 133, 0, 1),
                               ),
                             ),
                           ),
