@@ -309,7 +309,7 @@ class FireplaceConnectionGetXController extends GetxController {
   ///для добавления камина в домашнюю сеть Wifi___________________________________________________
 
   //сохранять этот  map в локальную память и первым делом проверять его при инициации и проверке на совпадение со списком имен
-  Map<String, String>? _mapWithWifiNameHomeNetworkAndNameFromListWifiName;
+  Map<String, String>? mapWithWifiNameHomeNetworkAndNameFromListWifiName;
 
   ///для поиска и подключение к камину с установкой параметров___________________________________________________
   //тут будут лежать id каминов
@@ -317,13 +317,10 @@ class FireplaceConnectionGetXController extends GetxController {
 
   String titleModel = '';
 
-  //загрузка данных фай фай чтобы отобразить circular progress indicator
-  bool isLoadingDataIdWifi = true;
-
-  //если обнаружен id в базе
+  //если обнаружен id в базе или в мапе локальных данных
   bool isFireplaceDetectedInDatabase = false;
 
-  String wifiName = '';
+  String wifiName = 'null';
   String wifiBSSID = '';
 
   Future<void> _optionsFireplace() async {
@@ -369,8 +366,6 @@ class FireplaceConnectionGetXController extends GetxController {
     try {
       changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
       disposeFireplaceData();
-      //загрузка камина
-      isLoadingDataIdWifi = true;
       //перевожу в состояние не найден с начала
       isFireplaceDetectedInDatabase = false;
 
@@ -383,10 +378,9 @@ class FireplaceConnectionGetXController extends GetxController {
           //обнуляю таймер
           ///перенесено в отдельный метод куда нужно отправлять SSID wifi data
           print('detected fireplace from searchFireplaceInListWithIdWifi el 0');
-          titleModel = 'smartPrime_1000';
+          titleModel = 'smart Prime 1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          isLoadingDataIdWifi = false;
           update();
           await initFireplaceData(url: 0);
           //опции для камина
@@ -401,10 +395,9 @@ class FireplaceConnectionGetXController extends GetxController {
         //smartFireA7_1000
         try {
           print('detected fireplace from searchFireplaceInListWithIdWifi el 1');
-          titleModel = 'smartFireA7_1000';
+          titleModel = 'smart Fire A7 1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          isLoadingDataIdWifi = false;
           update();
           await initFireplaceData(url: 1);
 
@@ -418,10 +411,9 @@ class FireplaceConnectionGetXController extends GetxController {
         //smartFireA5_1000
         try {
           print('detected fireplace from searchFireplaceInListWithIdWifi el 2');
-          titleModel = 'smartFireA5_1000';
+          titleModel = 'smart Fire A5 1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          isLoadingDataIdWifi = false;
           update();
 
           await initFireplaceData(url: 2);
@@ -436,10 +428,9 @@ class FireplaceConnectionGetXController extends GetxController {
         //smartFireA3_1000
         try {
           print('detected fireplace from searchFireplaceInListWithIdWifi el 3');
-          titleModel = 'smartFireA3_1000';
+          titleModel = 'smart Fire A3 1000';
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
-          isLoadingDataIdWifi = false;
           update();
           await initFireplaceData(url: 3);
 
@@ -452,25 +443,25 @@ class FireplaceConnectionGetXController extends GetxController {
       } else {
         try {
           // проверяю по сохраненному в память листу с именами домашних сетей
-          _mapWithWifiNameHomeNetworkAndNameFromListWifiName = await services
+          mapWithWifiNameHomeNetworkAndNameFromListWifiName = await services
               .getDataMapWithWifiNameHomeNetworkAndNameFromListWifiName();
           update();
 
           //форматт сохранения в базу Map<имя домашней WiFi, IP камина из _listWifiName> _mapWithWifiNameHomeNetworkAndNameFromListWifiName
 
           String? _wifiNameHomeNetworkFromLocalStorage;
-          if (_mapWithWifiNameHomeNetworkAndNameFromListWifiName != null &&
-              _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.isNotEmpty &&
-              _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
+          if (mapWithWifiNameHomeNetworkAndNameFromListWifiName != null &&
+              mapWithWifiNameHomeNetworkAndNameFromListWifiName!.isNotEmpty &&
+              mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
                   .contains(wifiName)) {
             isFireplaceDetectedInDatabase = true;
 
-            _mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
+            mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
                 .toList()
                 .forEach((key) {
               if (key == wifiName) {
                 _wifiNameHomeNetworkFromLocalStorage =
-                    _mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
+                    mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
                 update();
 
                 wifiName = _wifiNameHomeNetworkFromLocalStorage!;
@@ -602,8 +593,8 @@ class FireplaceConnectionGetXController extends GetxController {
     }
 
     ///все доступные данные
-    wifiName = thisWifiName ?? '';
-    wifiBSSID = thisWifiBSSID ?? '';
+    wifiName = thisWifiName ?? 'null';
+    wifiBSSID = thisWifiBSSID ?? 'null';
     update();
   }
 

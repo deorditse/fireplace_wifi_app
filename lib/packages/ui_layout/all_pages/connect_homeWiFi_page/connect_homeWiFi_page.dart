@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'widgets/fireplace_added_to_the_network.dart';
+import 'widgets/text_fields_added_to_the_network_widgets.dart';
 
 class ConnectHomeWiFiPage extends StatefulWidget {
   static const String id = '/connectHomeWiFiPage';
@@ -49,20 +50,14 @@ class _ConnectHomeWiFiPageState extends State<ConnectHomeWiFiPage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 40,
-                ),
+                SizedBox(height: 40),
                 Text(
                   'Подключение к локальной сети:',
-                  style: Theme.of(context).textTheme.headline1,
+                  style: myTextStyleFontRoboto(),
                 ),
-                SizedBox(
-                  height: 100,
-                ),
-                FireplaceAddedToTheNetwork(),
-                SizedBox(
-                  height: 30,
-                ),
+                SizedBox(height: 30),
+                TextFieldsAddedToTheNetworkWidgets(),
+                SizedBox(height: 40),
                 _buttonWithBack(),
                 Expanded(child: SizedBox()),
                 rowWithDomain(context: context),
@@ -75,14 +70,17 @@ class _ConnectHomeWiFiPageState extends State<ConnectHomeWiFiPage> {
   }
 
   _buttonWithBack() {
-    return GestureDetector(
-      onTap: () {
+    return TextButton(
+      onPressed: () {
         Get.back();
       },
-      child: SvgPicture.asset(
-        'assets/icons/back.svg',
-        semanticsLabel: 'back',
-        fit: BoxFit.contain,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SvgPicture.asset(
+          'assets/icons/back.svg',
+          semanticsLabel: 'back',
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }

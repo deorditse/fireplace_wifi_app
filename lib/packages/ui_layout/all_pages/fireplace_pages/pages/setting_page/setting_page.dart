@@ -21,7 +21,6 @@ class BodySettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         Container(
           height: Get.height * 0.76,
           child: SingleChildScrollView(
@@ -33,13 +32,11 @@ class BodySettingPage extends StatelessWidget {
                 _toTheListOfFireplaces(),
                 myDivider(),
                 SizedBox(height: mySizedHeightBetweenAlert),
-                FittedBox(child: AboutDeviceWidget()),
+                SetVolumeWidget(),
                 SizedBox(height: mySizedHeightBetweenAlert),
                 myDivider(),
                 SizedBox(height: mySizedHeightBetweenAlert),
-
-                ///подключение опций тут
-                SetVolumeWidget(),
+                FittedBox(child: AboutDeviceWidget()),
                 SizedBox(height: mySizedHeightBetweenAlert),
                 myDivider(),
                 SizedBox(height: mySizedHeightBetweenAlert),
@@ -66,7 +63,8 @@ class BodySettingPage extends StatelessWidget {
     return TextButton(
       onPressed: () {
         Get.offNamed(SearchFireplacePage.id);
-        FireplaceConnectionGetXController.instance.changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
+        FireplaceConnectionGetXController.instance
+            .changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
       },
       child: Row(
         // crossAxisAlignment: CrossAxisAlignment.end,

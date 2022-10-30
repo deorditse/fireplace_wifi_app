@@ -18,7 +18,10 @@ class FireplaceAddedToTheNetwork extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             'Камин добавлен в сеть,\n\nвыйдите из приложения,\n\nподключителсь к домашней сети\n\nи зайдите в приложение заново.',
-            style: myTextStyleFontRoboto(fontSize: 18),
+            style: myTextStyleFontRoboto(
+              fontSize: 18,
+              textColor: myTwoColor,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
