@@ -1,8 +1,6 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
-import 'package:fireplace_wifi_app/packages/ui_layout/style_app/text_field_style.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/widgets_for_all_pages/my_default_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 defaultDialogRemoveFireplace(
