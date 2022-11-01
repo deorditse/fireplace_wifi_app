@@ -19,42 +19,45 @@ Widget percentOil() =>
 
       return Text(
         percentOil != null ? '${percentOil.toInt()}%' : '...%',
-        style: myTextStyleFontSarpanch(fontSize: 30),
-        textAlign: TextAlign.center,
+        style: myTextStyleFontSarpanch(fontSize: 39).copyWith(height: 0.01),
       );
     });
 
 Widget bottomRowWithParameters(BuildContext context) {
   return SizedBox(
-    height: MediaQuery.of(context).size.width / 2,
+    height: Get.height / 4.3,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Flexible(
-          flex: 5,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Flexible(child: imageOil()),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: percentOil(),
-                )
-              ],
-            ),
+        Expanded(
+          flex: 3,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(width: 100, child: FittedBox(child: imageOil())),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Expanded(child: Container()),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: percentOil(),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
-        Flexible(
-          flex: 2,
+        SizedBox(
+          height: 30,
+        ),
+        Expanded(
           child: GetBuilder<FireplaceConnectionGetXController>(
             builder: (controllerApp) {
               return Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   iconValueDescription(
                     iconPath: 'assets/icons/temperature.svg',
@@ -70,17 +73,16 @@ Widget bottomRowWithParameters(BuildContext context) {
                         : '...%',
                     description: 'влажность',
                   ),
-                  if (controllerApp.fireplaceData?.CO2value != null)
-                    iconValueDescription(
-                      iconPath: 'assets/icons/level_CO2.svg',
-                      value:
-                          '${controllerApp.fireplaceData!.CO2value!.toInt()}%',
-                      description: 'уровень CO2',
-                    )
-                  else
-                    Flexible(
-                      child: Container(),
-                    )
+                  controllerApp.fireplaceData?.CO2value != null
+                      ? iconValueDescription(
+                          iconPath: 'assets/icons/level_CO2.svg',
+                          value:
+                              '${controllerApp.fireplaceData!.CO2value!.toInt()}%',
+                          description: 'уровень CO2',
+                        )
+                      : Expanded(
+                          child: Container(),
+                        )
                 ],
               );
             },

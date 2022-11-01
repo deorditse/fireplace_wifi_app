@@ -5,99 +5,57 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-// Widget myNavigationBar(context) {
-//   return Container(
-//     // color: Colors.teal,
-//     child: SizedBox(
-//       height: MediaQuery.of(context).size.width / 3,
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.end,
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Expanded(
-//             flex: 2,
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.start,
-//               crossAxisAlignment: CrossAxisAlignment.end,
-//               children: [
-//                 Flexible(
-//                   child: imageOil(),
-//                 ),
-//                 SizedBox(
-//                   width: 10,
-//                 ),
-//                 Align(
-//                   alignment: Alignment.bottomCenter,
-//                   child: percentOil(),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.end,
-//               mainAxisAlignment: MainAxisAlignment.end,
-//               children: [
-//                 iconValueDescription(
-//                   iconPath: 'assets/icons/temperature.png',
-//                   value: '24°C',
-//                   description: 'температура',
-//                 ),
-//                 SizedBox(
-//                   height: 15,
-//                 ),
-//                 iconValueDescription(
-//                   iconPath: 'assets/icons/wet.png',
-//                   value: '45%',
-//                   description: 'влажность',
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
-
 Widget iconValueDescription(
     {required String iconPath, required value, required String description}) {
   return Flexible(
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
+    child: Column(
       children: [
-        FittedBox(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 18.0, right: 8.0, bottom: 18),
-            child: SvgPicture.asset(
-              iconPath,
-              semanticsLabel: 'icon_bottom',
-              fit: BoxFit.contain,
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  iconPath,
+                  semanticsLabel: 'icon_bottom',
+                  fit: BoxFit.scaleDown,
+                ),
+                SizedBox(width: 6),
+                Expanded(
+                  flex: 10,
+                  child: Text(
+                    '$value',
+                    style: myTextStyleFontSarpanch(fontSize: 27)
+                        .copyWith(height: 1),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
         Expanded(
-          // flex: 3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
+          flex: 1,
+          child: Row(
             children: [
-              Flexible(
-                child: Text(
-                  '$value',
-                  style: myTextStyleFontSarpanch(fontSize: 24),
-                ),
+              SvgPicture.asset(
+                iconPath,
+                semanticsLabel: 'icon_bottom',
+                fit: BoxFit.scaleDown,
+                color: Colors.transparent,
               ),
-              FittedBox(
+              SizedBox(width: 6),
+              Expanded(
+                flex: 10,
                 child: Text(
                   '$description',
                   style: myTextStyleFontSarpanch(
-                    fontSize: 14,
+                    fontSize: 15,
                     textColor: myTreeColor,
-                  ),
+                  ).copyWith(height: 0.9),
+                  overflow: TextOverflow.clip,
                 ),
               ),
             ],

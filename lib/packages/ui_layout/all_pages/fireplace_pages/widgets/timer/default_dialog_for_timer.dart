@@ -4,6 +4,7 @@ import 'package:fireplace_wifi_app/packages/ui_layout/widgets_for_all_pages/my_d
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 defaultDialogIfDayHasNotCome({required context}) {
   myDefaultDialog(
@@ -47,17 +48,10 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                   Expanded(
                     child: TextButton(
                       onPressed: () {
-                        if (!isRunning) {
-                          int _hour = int.parse(controllerApp.dataTimer[0]);
-                          if (_hour < 24) {
-                            controllerApp.updateDataTimer(
-                                hour: (_hour + 1).toString());
-                          }
-                        }
+                        controllerApp.updateTimerFireplace(isIncrement: true);
                       },
                       child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: SvgPicture.asset(
                           'assets/icons/icon_up.svg',
                           semanticsLabel: 'icon_bottom',
@@ -87,12 +81,15 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                '${controllerApp.dataTimer[0]} : ${controllerApp.dataTimer[1]} : ${controllerApp.dataTimer[2]}',
-                textAlign: TextAlign.center,
-                style: myTextStyleFontSarpanch(
-                  fontSize: 36,
-                  textColor: myTwoColor,
+              child: Center(
+                child: Text(
+                  controllerApp.timerDateInHHMMSS,
+                  // '${controllerApp.dataTimer[0].length < 2 ? '0${controllerApp.dataTimer[0]}' : controllerApp.dataTimer[0]} : ${controllerApp.dataTimer[1]} : ${controllerApp.dataTimer[2]}',
+                  textAlign: TextAlign.center,
+                  style: myTextStyleFontSarpanch(
+                    fontSize: 36,
+                    textColor: myTwoColor,
+                  ),
                 ),
               ),
             ),
@@ -105,18 +102,13 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                     child: TextButton(
                       style: ButtonStyle(
                         overlayColor: MaterialStateProperty.all(
-                          const Color.fromRGBO(255, 0, 0, 1)
-                              .withOpacity(0.1),
+                          const Color.fromRGBO(255, 0, 0, 1).withOpacity(0.1),
                         ),
                         backgroundColor:
                             MaterialStateProperty.all(Colors.transparent),
                       ),
                       onPressed: () {
-                        controllerApp.updateDataTimer(
-                          hour: '00',
-                          minutes: '00',
-                          seconds: '00',
-                        );
+                        controllerApp.updateTimerFireplace(cancel: true);
                       },
                       child: Text(
                         isRunning ? '' : 'Сброс.',
@@ -134,18 +126,11 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                       quarterTurns: 2,
                       child: TextButton(
                         onPressed: () {
-                          if (!isRunning) {
-                            int _hour =
-                                int.parse(controllerApp.dataTimer[0]);
-                            if (_hour > 0) {
-                              controllerApp.updateDataTimer(
-                                  hour: (_hour - 1).toString());
-                            }
-                          }
+                          controllerApp.updateTimerFireplace(
+                              isIncrement: false);
                         },
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: SvgPicture.asset(
                             'assets/icons/icon_up.svg',
                             semanticsLabel: 'icon_bottom',
@@ -159,17 +144,14 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                     flex: 2,
                     child: TextButton(
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Colors.transparent)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent)),
                       onPressed: () {
                         if (isRunning) {
-                          controllerApp.dataTimerStop();
+                          controllerApp.updateTimerFireplace(cancel: true);
+                          return;
                         } else {
-                          controllerApp.dataTimerStart();
-                          Future.delayed(Duration(milliseconds: 200))
-                              .whenComplete(() {
-                            Get.back(canPop: true);
-                          });
+                          controllerApp.startTimer();
                         }
                       },
                       child: FittedBox(

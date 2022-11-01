@@ -11,9 +11,7 @@ import 'packages/ui_layout/all_pages/search_fireplace_page/search_fireplace_page
 import 'packages/ui_layout/all_pages/wifi_off_screen_page/wifi_off_screen_page.dart';
 
 Future<void> main() async {
-  runApp(
-    MainPage(),
-  );
+  runApp(MainPage());
 }
 
 class MainPage extends StatelessWidget {

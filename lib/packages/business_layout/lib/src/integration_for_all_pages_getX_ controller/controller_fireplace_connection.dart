@@ -240,69 +240,84 @@ class FireplaceConnectionGetXController extends GetxController {
   //данные таймера
   bool isOptionTimer = false;
 
-  //общее время работы камина
-  String dataTimerFireplace = '00 : 00 : 00';
-
   //данные таймера обратного отсчета
-  List<String> dataTimer = ['00', '00', '00']; //часы _ минуты _секунды
+
   bool timerIsRunning = false;
-  CountdownController? _countdownController;
 
-  void dataTimerStart({int? hours, int? minutes, int? seconds}) {
-    try {
-      dataTimer[0] = '${hours ?? dataTimer[0]}';
-      dataTimer[1] = '${minutes ?? dataTimer[1]}';
-      dataTimer[2] = '${seconds ?? dataTimer[2]}';
-      dataTimerFireplace =
-          "${hours ?? dataTimer[0]} : ${minutes ?? dataTimer[1]} : ${seconds ?? dataTimer[2]}";
+  Timer? _timer;
+  int _timerStart = 0; // 10 min
+  String timerDateInHHMMSS = "00 : 00 : 00";
+
+  void _formatHHMMSS(int seconds) {
+    final hours = (seconds / 3600).truncate();
+    seconds = (seconds % 3600).truncate();
+    final minutes = (seconds / 60).truncate();
+
+    final hoursStr = (hours).toString().padLeft(2, '0');
+    final minutesStr = (minutes).toString().padLeft(2, '0');
+    final secondsStr = (seconds % 60).toString().padLeft(2, '0');
+
+    if (hours == 0) {
+      timerDateInHHMMSS = '00 : $minutesStr : $secondsStr';
       update();
-
-      if (dataTimer[0] == '00' &&
-          dataTimer[1] == '00' &&
-          dataTimer[2] == '00') {
-        Get.snackbar('Установите таймер', 'не может быть 00 : 00 : 00');
-      } else {
-        timerIsRunning = true;
-
-        update();
-      }
-
-      _countdownController = CountdownController(
-          duration: Duration(
-            hours: hours ?? 0,
-            minutes: minutes ?? 0,
-            seconds: seconds ?? 0,
-          ),
-          onEnd: () {
-            print('onEnd');
-          });
-      update();
-      Countdown(
-        countdownController: _countdownController!,
-        builder: (_, Duration time) {
-          return Container();
-        },
-      );
-    } catch (error) {
-      throw Exception('$error from dataTimerStart Business Layout');
+      return;
     }
-  }
 
-  void dataTimerStop() {
-    timerIsRunning = false;
+    timerDateInHHMMSS = '$hoursStr : $minutesStr : $secondsStr';
     update();
   }
 
-  void updateDataTimer({String? hour, String? minutes, String? seconds}) {
-    dataTimer = [
-      hour ?? dataTimer[0],
-      minutes ?? dataTimer[1],
-      seconds ?? dataTimer[2],
-    ];
+  void updateTimerFireplace({bool? cancel, bool? isIncrement}) {
+    if (cancel != null && cancel) {
+      _timerStart = 0;
+      timerIsRunning = false;
+      _timer?.cancel();
+      update();
+      _formatHHMMSS(_timerStart);
+      return;
+    }
+    if (isIncrement != null && isIncrement) {
+      _timerStart += 600;
+      update();
+      _formatHHMMSS(_timerStart);
+      return;
+    } else {
+      if (_timerStart >= 0) {
+        _timerStart -= 600;
+        update();
+        _formatHHMMSS(_timerStart);
+      }
+      return;
+    }
+  }
 
-    dataTimerFireplace =
-        "${hour ?? dataTimer[0]} : ${minutes ?? dataTimer[1]} : ${seconds ?? dataTimer[2]} ";
-    print('newDataTimer');
+  void startTimer() {
+    if (_timerStart == 0) {
+      Get.snackbar('Установите таймер', '');
+      return;
+    }
+
+    timerIsRunning = true;
+
+    _timer = Timer.periodic(
+      Duration(seconds: 1),
+      (Timer timer) {
+        if (_timerStart == 0) {
+          timerIsRunning = false;
+          timer.cancel();
+          update();
+          return;
+        } else {
+          _timerStart -= 1;
+          _formatHHMMSS(_timerStart);
+          update();
+        }
+      },
+    );
+
+    Future.delayed(Duration(milliseconds: 200)).whenComplete(() {
+      Get.back(canPop: true);
+    });
     update();
   }
 

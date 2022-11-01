@@ -21,8 +21,8 @@ class RowWithNameAndTitleFireplace extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          // flex: 2,
+        Flexible(
+          flex: 2,
           child: TextButton(
             style: ButtonStyle(
                 padding: MaterialStateProperty.all(EdgeInsets.zero)),
@@ -30,10 +30,9 @@ class RowWithNameAndTitleFireplace extends StatelessWidget {
               Get.toNamed(FireplacePage.id, preventDuplicates: false);
             },
             child: Text(
-              '${titleModel}',
+              '${titleModel.capitalizeFirst}',
               overflow: TextOverflow.ellipsis,
               style: myTextStyleFontRoboto(),
-              textAlign: TextAlign.left,
             ),
           ),
         ),

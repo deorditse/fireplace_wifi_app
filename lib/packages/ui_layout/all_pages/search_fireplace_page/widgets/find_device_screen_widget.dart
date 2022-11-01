@@ -25,6 +25,8 @@ class FindDeviceScreenWidget extends StatelessWidget {
               children: [
                 _rowWithTitle(context: context),
                 if (!controllerApp.isFireplaceDetectedInDatabase)
+
+                  ///первый экран
                   _searchConnectedFireplaces(context: context)
                 else if (controllerApp.isFireplaceDetectedInDatabase)
 
@@ -61,11 +63,11 @@ class FindDeviceScreenWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // FittedBox(
-          //   child: CircularProgressIndicator(
-          //     color: myColorActivity,
-          //   ),
-          // ),
+          FittedBox(
+            child: CircularProgressIndicator(
+              color: myColorActivity,
+            ),
+          ),
           SizedBox(
             height: 10,
           ),

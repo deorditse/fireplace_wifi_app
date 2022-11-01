@@ -10,13 +10,16 @@ import 'timer/default_dialog_for_timer.dart';
 Widget timeWorkFireplace(BuildContext context) {
   return FireplaceConnectionGetXController.instance.isOptionTimer
       ? MyContainerAlert(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width * 0.64,
+          height: 80,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                flex: 3,
+              FittedBox(
                 child: GetBuilder<FireplaceConnectionGetXController>(
                   builder: (controllerApp) => TextButton(
+                    style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.zero)),
                     onPressed: () {
                       if (!FireplaceConnectionGetXController
                           .instance.isBlocButton) {
@@ -42,7 +45,7 @@ Widget timeWorkFireplace(BuildContext context) {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FittedBox(
@@ -56,13 +59,11 @@ Widget timeWorkFireplace(BuildContext context) {
                       ),
                       Flexible(
                         child: GetBuilder<FireplaceConnectionGetXController>(
-                          builder: (controllerApp) => FittedBox(
-                            child: Text(
-                              controllerApp.dataTimerFireplace.toString(),
-                              style: myTextStyleFontSarpanch(
-                                fontSize: 28,
-                                textColor: myTwoColor,
-                              ),
+                          builder: (controllerApp) => Text(
+                            controllerApp.timerDateInHHMMSS,
+                            style: myTextStyleFontSarpanch(
+                              fontSize: 28,
+                              textColor: myTwoColor,
                             ),
                           ),
                         ),
