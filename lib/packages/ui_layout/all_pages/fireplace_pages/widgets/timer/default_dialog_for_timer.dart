@@ -81,15 +81,18 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  controllerApp.timerDateInHHMMSS,
-                  textAlign: TextAlign.center,
-                  style: myTextStyleFontSarpanch(
-                    fontSize: 36,
-                    textColor: myTwoColor,
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    controllerApp.timerDateInHHMMSS,
+                    textAlign: TextAlign.center,
+                    style: myTextStyleFontSarpanch(
+                      fontSize: 36,
+                      textColor: myTwoColor,
+                    ),
                   ),
                 ),
               ),

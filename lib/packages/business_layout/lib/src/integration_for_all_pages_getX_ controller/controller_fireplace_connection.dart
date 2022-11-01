@@ -203,13 +203,12 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   void stopFireplace() async {
+    isPlayFireplace = false;
+    update();
     //запуск озлаждения камина
     await startCoolingFireplace();
     //после чего обновляем стейт
     changeAlertMessage(newAlertMessage: null);
-
-    isPlayFireplace = false;
-    update();
   }
 
   double valuePowerFireplace = 1;

@@ -15,14 +15,16 @@ class SliderSmartFireA71000 extends StatelessWidget {
             controllerApp.fireplaceData!.sliderValue.keys.first!,
             (index) => index.toInt() + 1);
         //Слайдер (убераю его с экрана, когда идет охдажение камина)
+
+        double heightSlider = MediaQuery.of(context).size.height /
+            ((controllerApp.fireplaceData!.sliderValue.keys.first!) > 3
+                ? 2.2
+                : 3);
         return Column(
           children: [
             if (!controllerApp.isCoolingFireplace)
               SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    ((controllerApp.fireplaceData!.sliderValue.keys.first!) > 3
-                        ? 2.4
-                        : 3.1),
+                height: heightSlider,
                 width: MediaQuery.of(context).size.width / 8,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,18 +32,23 @@ class SliderSmartFireA71000 extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        padding: EdgeInsets.only(
+                            top: 15,
+                            bottom: (heightSlider /
+                                        controllerApp.fireplaceData!.sliderValue
+                                            .keys.first!)
+                                    .toDouble() -
+                                3),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ..._labels.reversed.map(
-                              (e) => Text(
-                                e.toString(),
-                                style: myTextStyleFontRoboto(fontSize: 20),
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ..._labels.reversed.map(
+                                (e) => Text(
+                                  e.toString(),
+                                  style: myTextStyleFontRoboto(fontSize: 22, textColor: myTwoColor),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ]),
                       ),
                     ),
                     Expanded(
@@ -79,14 +86,18 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
     return SliderTheme(
       data: SliderThemeData().copyWith(
         trackHeight: 15,
-        thumbShape:
-            RoundSliderThumbShape(enabledThumbRadius: 15, elevation: 10),
+        thumbShape: RoundSliderThumbShape(
+          enabledThumbRadius: 20,
+          pressedElevation: 20,
+        ),
         overlayShape:
             RoundSliderThumbShape(enabledThumbRadius: 10, elevation: 10),
         activeTickMarkColor: Colors.transparent,
-        inactiveTickMarkColor: myTreeColor,
-        thumbColor: Color.fromRGBO(113, 109, 109, 1),
-        inactiveTrackColor: Color.fromRGBO(189, 189, 189, 1),
+        inactiveTickMarkColor:  Colors.grey,
+        thumbColor: myTreeColor,
+        //Color.fromRGBO(113, 109, 109, 1),
+        inactiveTrackColor: myTreeColor,
+        // Color.fromRGBO(189, 189, 189, 1),
         trackShape: GradientRectSliderTrackShape(
           gradient: gradientForSlider,
           darkenInactive: true,
@@ -96,17 +107,26 @@ class _SliderSmartFireA71000State extends State<_SliderSmartFireA71000> {
         () => RotatedBox(
           quarterTurns: 3,
           child: Slider(
-            divisions: maxValue.toInt() - 1,
+            divisions: maxValue.toInt(),
             // label: '${sliderValue.value}',
-            min: 1.0,
+            min: 0.0,
             max: maxValue,
             value: sliderValue.value,
             onChangeEnd: (double value) {
-              FireplaceConnectionGetXController.instance
-                  .changePowerSliderFireplace(newValuePowerFireplace: value);
+              if (value >= 1) {
+                FireplaceConnectionGetXController.instance
+                    .changePowerSliderFireplace(newValuePowerFireplace: value);
+              } else {
+                FireplaceConnectionGetXController.instance
+                    .changePowerSliderFireplace(newValuePowerFireplace: 1);
+              }
             },
             onChanged: (double value) {
-              sliderValue.value = value;
+              if (value >= 1) {
+                sliderValue.value = value;
+              } else {
+                sliderValue.value = 1;
+              }
             },
           ),
         ),
