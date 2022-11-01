@@ -52,13 +52,17 @@ class _TextFieldsAddedToTheNetworkWidgetsState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 1,
-                  child: Text(
-                    'Имя сети:',
-                    style: myTextStyleFontRoboto(fontSize: 18),
-                    textAlign: TextAlign.right,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 6.0),
+                    child: Text(
+                      'Имя сети:',
+                      style: myTextStyleFontRoboto(fontSize: 18),
+                      textAlign: TextAlign.right,
+                    ),
                   ),
                 ),
                 SizedBox(width: mySizedHeightBetweenAlert),
@@ -84,13 +88,17 @@ class _TextFieldsAddedToTheNetworkWidgetsState
             ),
             SizedBox(height: mySizedHeightBetweenAlert * 2),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 1,
-                  child: Text(
-                    'Пароль:',
-                    style: myTextStyleFontRoboto(fontSize: 18),
-                    textAlign: TextAlign.right,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 6.0),
+                    child: Text(
+                      'Пароль:',
+                      style: myTextStyleFontRoboto(fontSize: 18),
+                      textAlign: TextAlign.right,
+                    ),
                   ),
                 ),
                 SizedBox(width: mySizedHeightBetweenAlert),
@@ -114,7 +122,7 @@ class _TextFieldsAddedToTheNetworkWidgetsState
                       // helperText: 'Поле для поиска заметок',
                     ),
                     keyboardType: TextInputType.visiblePassword,
-                    obscuringCharacter: '*',
+                    // obscuringCharacter: '*',
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.singleLineFormatter,
                     ],

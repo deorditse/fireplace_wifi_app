@@ -282,7 +282,7 @@ class FireplaceConnectionGetXController extends GetxController {
       _formatHHMMSS(_timerStart);
       return;
     } else {
-      if (_timerStart >= 0) {
+      if (_timerStart > 0) {
         _timerStart -= 600;
         update();
         _formatHHMMSS(_timerStart);

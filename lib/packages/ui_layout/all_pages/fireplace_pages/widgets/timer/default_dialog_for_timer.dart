@@ -48,7 +48,9 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                   Expanded(
                     child: TextButton(
                       onPressed: () {
-                        controllerApp.updateTimerFireplace(isIncrement: true);
+                        if (!isRunning) {
+                          controllerApp.updateTimerFireplace(isIncrement: true);
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -84,7 +86,6 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
               child: Center(
                 child: Text(
                   controllerApp.timerDateInHHMMSS,
-                  // '${controllerApp.dataTimer[0].length < 2 ? '0${controllerApp.dataTimer[0]}' : controllerApp.dataTimer[0]} : ${controllerApp.dataTimer[1]} : ${controllerApp.dataTimer[2]}',
                   textAlign: TextAlign.center,
                   style: myTextStyleFontSarpanch(
                     fontSize: 36,
@@ -126,8 +127,10 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                       quarterTurns: 2,
                       child: TextButton(
                         onPressed: () {
-                          controllerApp.updateTimerFireplace(
-                              isIncrement: false);
+                          if (!isRunning) {
+                            controllerApp.updateTimerFireplace(
+                                isIncrement: false);
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
