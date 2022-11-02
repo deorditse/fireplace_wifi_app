@@ -1,4 +1,4 @@
-import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:models/models.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
@@ -60,9 +60,9 @@ class SetVolumeWidget extends StatelessWidget {
               inactiveText: 'on',
               value: controllerApp.isSwitchClickSound,
               activeColor: Colors.black,
-              toggleColor: Color.fromRGBO(113, 109, 109, 1),
+              toggleColor: myTreeColor,
               inactiveColor: Colors.black,
-              borderRadius: 10.0,
+              borderRadius: 14.0,
               padding: 3,
               showOnOff: true,
               onToggle: (val) {
@@ -100,9 +100,9 @@ class SetVolumeWidget extends StatelessWidget {
                   inactiveText: 'on',
                   value: controllerApp.isSwitchCracklingSoundEffect,
                   activeColor: Colors.black,
-                  toggleColor: Color.fromRGBO(113, 109, 109, 1),
+                  toggleColor: myTreeColor,
                   inactiveColor: Colors.black,
-                  borderRadius: 10.0,
+                  borderRadius: 14.0,
                   padding: 3,
                   showOnOff: true,
                   onToggle: (val) {
@@ -163,9 +163,9 @@ class SetVolumeWidget extends StatelessWidget {
                 inactiveText: 'on',
                 value: controllerApp.isSwitchVoicePrompts,
                 activeColor: Colors.black,
-                toggleColor: Color.fromRGBO(113, 109, 109, 1),
+                toggleColor: myTreeColor,
                 inactiveColor: Colors.black,
-                borderRadius: 10.0,
+                borderRadius: 14.0,
                 padding: 3,
                 showOnOff: true,
                 onToggle: (val) {

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/body_fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
-import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:get/get.dart';
 import 'pages/block_page/block_page.dart';
 import 'pages/setting_page/setting_page.dart';
@@ -72,7 +72,8 @@ class BodyPageSmartFireA71000 extends StatelessWidget {
               if (controllerApp.isBlocButton) {
                 //если камин заблокирован
                 return Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // mainAxisSize: MainAxisSize.min,
                   children: [
                     myTitleModel(),
                     Expanded(

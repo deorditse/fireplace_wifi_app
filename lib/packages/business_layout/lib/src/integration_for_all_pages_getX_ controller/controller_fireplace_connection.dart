@@ -245,7 +245,7 @@ class FireplaceConnectionGetXController extends GetxController {
 
   Timer? _timer;
   int _timerStart = 0; // 10 min
-  String timerDateInHHMMSS = "00 : 00 : 00";
+  List<String> timerDateInHHMMSS = ['00', '00', '00'];
 
   void _formatHHMMSS(int seconds) {
     final hours = (seconds / 3600).truncate();
@@ -257,12 +257,12 @@ class FireplaceConnectionGetXController extends GetxController {
     final secondsStr = (seconds % 60).toString().padLeft(2, '0');
 
     if (hours == 0) {
-      timerDateInHHMMSS = '00 : $minutesStr : $secondsStr';
+      timerDateInHHMMSS = ['00', '$minutesStr', '$secondsStr'];
       update();
       return;
     }
 
-    timerDateInHHMMSS = '$hoursStr : $minutesStr : $secondsStr';
+    timerDateInHHMMSS = ['$hoursStr', '$minutesStr', '$secondsStr'];
     update();
   }
 

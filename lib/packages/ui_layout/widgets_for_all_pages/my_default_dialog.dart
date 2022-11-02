@@ -1,4 +1,4 @@
-import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,15 +28,27 @@ class DefaultDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration:
-          myDefaultDialogBackground(context: context, colorBorder: myTwoColor),
-      height: height ?? MediaQuery.of(context).size.height / 4,
-      width: MediaQuery.of(context).size.width,
-      child: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: bodyWidget,
-      ),
+    return Column(
+      children: [
+        Container(
+          decoration: myDefaultDialogBackground(
+              context: context, colorBorder: myTwoColor),
+          height: height ?? MediaQuery.of(context).size.height / 4,
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: bodyWidget,
+          ),
+        ),
+        GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Container(
+              height: 167,
+              color: Colors.transparent,
+            )),
+      ],
     );
   }
 }

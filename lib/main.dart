@@ -1,7 +1,7 @@
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/fireplace_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'packages/ui_layout/all_pages/connect_homeWiFi_page/connect_homeWiFi_page.dart';

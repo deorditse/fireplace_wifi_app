@@ -1,4 +1,4 @@
-import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/container_alert.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/timer_work_fireplace.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';

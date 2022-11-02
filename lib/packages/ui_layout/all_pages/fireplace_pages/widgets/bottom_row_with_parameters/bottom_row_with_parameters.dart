@@ -1,4 +1,4 @@
-import 'package:fireplace_wifi_app/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ Widget bottomRowWithParameters(BuildContext context) {
         SizedBox(
           height: 30,
         ),
-        Expanded(
+        Flexible(
           child: GetBuilder<FireplaceConnectionGetXController>(
             builder: (controllerApp) {
               return Row(
@@ -66,6 +66,7 @@ Widget bottomRowWithParameters(BuildContext context) {
                         : '...°C',
                     description: 'температура',
                   ),
+                  SizedBox(width: 10),
                   iconValueDescription(
                     iconPath: 'assets/icons/wet.svg',
                     value: controllerApp.fireplaceData?.wet != null
@@ -73,14 +74,15 @@ Widget bottomRowWithParameters(BuildContext context) {
                         : '...%',
                     description: 'влажность',
                   ),
+                  SizedBox(width: 10),
                   controllerApp.fireplaceData?.CO2value != null
                       ? iconValueDescription(
-                          iconPath: 'assets/icons/level_CO2.svg',
-                          value:
-                              '${controllerApp.fireplaceData!.CO2value!.toInt()}%',
-                          description: 'уровень CO2',
-                        )
-                      : Expanded(
+                        iconPath: 'assets/icons/level_CO2.svg',
+                        value:
+                            '${controllerApp.fireplaceData!.CO2value!.toInt()}%',
+                        description: 'уровень CO2',
+                      )
+                      : Flexible(
                           child: Container(),
                         )
                 ],
