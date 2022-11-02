@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../style_app/style.dart';
-import 'fireplace_added_to_the_network.dart';
 
 class TextFieldsAddedToTheNetworkWidgets extends StatefulWidget {
   const TextFieldsAddedToTheNetworkWidgets({super.key});
@@ -32,12 +31,16 @@ class _TextFieldsAddedToTheNetworkWidgetsState
       _isSuccess = false;
     });
     if (_formKey.currentState!.validate()) {
-      //сначала проверим прохождение валидации
       setState(() {
         _isSuccess = true;
       });
-      // EmailAuthController.instance.register(
-      //     _emailController.text.trim(), _passwordController.text.trim());
+
+      FireplaceConnectionGetXController.instance.addHomeLocalNetworksData(
+        customName: _nameController.text,
+        nameHomeWifiNetwork: _nameController.text,
+        nameFromListListWifiName:
+            FireplaceConnectionGetXController.instance.wifiName,
+      );
     }
   }
 
@@ -169,9 +172,29 @@ class _TextFieldsAddedToTheNetworkWidgetsState
             if (_isSuccess)
               Padding(
                 padding: const EdgeInsets.only(top: 30),
-                child: FireplaceAddedToTheNetwork(),
+                child: _fireplaceAddedToTheNetwork(),
               ),
           ],
+        ),
+      ),
+    );
+  }
+
+  _fireplaceAddedToTheNetwork() {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: MyContainerAlert(
+        height: MediaQuery.of(context).size.height / 4,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Камин добавлен в сеть,\n\nвыйдите из приложения,\n\nподключителсь к домашней сети\n\nи зайдите в приложение заново.',
+            style: myTextStyleFontRoboto(
+              fontSize: 18,
+              textColor: myTwoColor,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_countdown_timer/countdown.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:models/models.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:network_info_plus/network_info_plus.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:io';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
 
@@ -25,7 +28,6 @@ class FireplaceConnectionGetXController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     //сначала достаю имя вай вай сети к которой подключен
     _initNetworkInfo().then((_) {
       //   теперь Wifi name известен и можно парсить данные с апи
@@ -192,8 +194,11 @@ class FireplaceConnectionGetXController extends GetxController {
 
   Future<void> playFireplace() async {
     changeAlertMessage(newAlertMessage: 'розжиг камина');
-    isPlayFireplace = true;
-    update();
+    if (!isCoolingFireplace) {
+      isPlayFireplace = true;
+      update();
+    }
+
     await Future.delayed(Duration(seconds: 4)).whenComplete(
       () => changeAlertMessage(
           newAlertMessage: (isPlayFireplace)
@@ -322,8 +327,42 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///для добавления камина в домашнюю сеть Wifi___________________________________________________
 
-  //сохранять этот  map в локальную память и первым делом проверять его при инициации и проверке на совпадение со списком имен
-  Map<String, String>? mapWithWifiNameHomeNetworkAndNameFromListWifiName;
+  //храню в таком виде
+  ///Map<кастомное имя : Map<имя сохраненной домашней wifi : название из _listWifiName>>
+
+  Box<HomeNetworkModel>? homeLocalNetworksData;
+
+  Future<void> _getInstanceHive({required String keyWifiName}) async {
+    homeLocalNetworksData = await services.getInstanceHiveHomeLocalNetworksData(
+        keyWifiName: keyWifiName);
+    update();
+  }
+
+  void addHomeLocalNetworksData({
+    required String customName,
+    required String nameHomeWifiNetwork,
+    required String nameFromListListWifiName,
+  }) {
+    homeLocalNetworksData?.add(HomeNetworkModel(
+      customName: customName,
+      nameHomeWifiNetwork: nameHomeWifiNetwork,
+      nameFromListListWifiName: nameFromListListWifiName,
+    ));
+  }
+
+  void removeHomeLocalNetworksData(int indexCategory) async {
+    final rec = homeLocalNetworksData?.values.elementAt(indexCategory);
+    rec?.delete();
+  }
+
+  void renameHomeLocalNetworksData(
+      {required int indexCategory, required customName}) async {
+    final rec = homeLocalNetworksData!.values.elementAt(indexCategory);
+    rec.customName = customName;
+
+    rec.save(); //запишет как раз все изменения
+    update();
+  }
 
   ///для поиска и подключение к камину с установкой параметров___________________________________________________
   //тут будут лежать id каминов
@@ -334,8 +373,8 @@ class FireplaceConnectionGetXController extends GetxController {
   //если обнаружен id в базе или в мапе локальных данных
   bool isFireplaceDetectedInDatabase = false;
 
-  String wifiName = 'null';
-  String wifiBSSID = '';
+  String wifiName = 'null wifiName';
+  String wifiBSSID = 'null wifiBSSID';
 
   Future<void> _optionsFireplace() async {
     print('____________optionsFireplace $fireplaceData');
@@ -457,41 +496,46 @@ class FireplaceConnectionGetXController extends GetxController {
       } else {
         try {
           // проверяю по сохраненному в память листу с именами домашних сетей
-          mapWithWifiNameHomeNetworkAndNameFromListWifiName = await services
-              .getDataMapWithWifiNameHomeNetworkAndNameFromListWifiName();
-          update();
+          await _getInstanceHive(
+              keyWifiName: wifiName); //получаю данные по локальным сетям
 
-          //форматт сохранения в базу Map<имя домашней WiFi, IP камина из _listWifiName> _mapWithWifiNameHomeNetworkAndNameFromListWifiName
+          ///delete after test
+          wifiName == _listWifiName.elementAt(int.parse(wifiName));
+
+          ///
 
           String? _wifiNameHomeNetworkFromLocalStorage;
-          if (mapWithWifiNameHomeNetworkAndNameFromListWifiName != null &&
-              mapWithWifiNameHomeNetworkAndNameFromListWifiName!.isNotEmpty &&
-              mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
-                  .contains(wifiName)) {
+
+          if (homeLocalNetworksData != null &&
+              homeLocalNetworksData!.isNotEmpty) {
             isFireplaceDetectedInDatabase = true;
 
-            mapWithWifiNameHomeNetworkAndNameFromListWifiName!.keys
-                .toList()
-                .forEach((key) {
-              if (key == wifiName) {
-                _wifiNameHomeNetworkFromLocalStorage =
-                    mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
-                update();
-
-                wifiName = _wifiNameHomeNetworkFromLocalStorage!;
-                update();
-
-                searchFireplaceInListWithIdWifi(
-                    wifiName: _wifiNameHomeNetworkFromLocalStorage!);
-              }
-            });
+            // homeLocalNetworksData!.values
+            //     .toList()
+            //     .forEach((key) {
+            //   if (key == wifiName) {
+            //     _wifiNameHomeNetworkFromLocalStorage =
+            //         mapWithWifiNameHomeNetworkAndNameFromListWifiName![key];
+            //     update();
+            //
+            //     wifiName = _wifiNameHomeNetworkFromLocalStorage!;
+            //     update();
+            //
+            //     searchFireplaceInListWithIdWifi(
+            //         wifiName: _wifiNameHomeNetworkFromLocalStorage!);
+            //   }
+            // });
           } else {
             isFireplaceDetectedInDatabase = false;
             update();
 
             Get.defaultDialog(
-                title:
-                    'Камин не найден для этой домашней сети - показать инструкцию');
+              titlePadding: EdgeInsets.zero,
+              content: Text(
+                'Камин с именем ${wifiName} не распознан',
+                style: Get.textTheme.headline2,
+              ),
+            );
           }
         } catch (error) {
           print(

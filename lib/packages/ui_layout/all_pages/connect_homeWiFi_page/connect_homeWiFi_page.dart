@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import 'widgets/fireplace_added_to_the_network.dart';
 import 'widgets/text_fields_added_to_the_network_widgets.dart';
 
 class ConnectHomeWiFiPage extends StatefulWidget {
@@ -25,6 +23,7 @@ class _ConnectHomeWiFiPageState extends State<ConnectHomeWiFiPage> {
     return Container(
       decoration: myDecorationBackground,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Padding(

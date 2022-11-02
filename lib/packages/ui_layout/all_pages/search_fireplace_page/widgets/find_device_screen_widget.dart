@@ -24,31 +24,25 @@ class FindDeviceScreenWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _rowWithTitle(context: context),
-                if (!controllerApp.isFireplaceDetectedInDatabase)
+                !controllerApp.isFireplaceDetectedInDatabase
+                    ?
 
-                  ///первый экран
-                  _searchConnectedFireplaces(context: context)
-                else if (controllerApp.isFireplaceDetectedInDatabase)
+                    ///первый экран
+                    _searchConnectedFireplaces(context: context)
+                    : Column(
+                        children: [
+                          ///если камин подключен напрямую
+                          RowWithNameAndTitleFireplace(
+                              titleModel: controllerApp.titleModel),
 
-                  ///если камин подключен напрямую
-                  RowWithNameAndTitleFireplace(
-                    titleModel: controllerApp.titleModel,
-                  )
-                else if (controllerApp
-                            .mapWithWifiNameHomeNetworkAndNameFromListWifiName !=
-                        null &&
-                    controllerApp
-                        .mapWithWifiNameHomeNetworkAndNameFromListWifiName!
-                        .isNotEmpty)
+                          if (controllerApp.homeLocalNetworksData != null &&
+                              controllerApp.homeLocalNetworksData!.isNotEmpty)
 
-                  ///если камин подключен через точку доступа в сети wifi
-                  _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
-                      context: context)
-                else
-                  Text(
-                    'Камин с именем ${controllerApp.wifiName} не распознан',
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
+                            ///если камин подключен через точку доступа в сети wifi
+                            _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
+                                context: context)
+                        ],
+                      ),
               ],
             ),
           );
@@ -93,8 +87,7 @@ class FindDeviceScreenWidget extends StatelessWidget {
             shrinkWrap: true,
             primary: false,
             padding: EdgeInsets.zero,
-            itemCount: controllerApp
-                .mapWithWifiNameHomeNetworkAndNameFromListWifiName!.length,
+            itemCount: controllerApp.homeLocalNetworksData?.values.length,
             itemBuilder: (context, index) {
               // final fireplace = controllerApp
               //     .mapWithWifiNameHomeNetworkAndNameFromListWifiName![index];
