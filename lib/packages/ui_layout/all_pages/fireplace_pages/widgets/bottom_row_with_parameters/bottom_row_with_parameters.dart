@@ -66,7 +66,6 @@ Widget bottomRowWithParameters(BuildContext context) {
                         : '...°C',
                     description: 'температура',
                   ),
-                  SizedBox(width: 10),
                   iconValueDescription(
                     iconPath: 'assets/icons/wet.svg',
                     value: controllerApp.fireplaceData?.wet != null
@@ -74,14 +73,13 @@ Widget bottomRowWithParameters(BuildContext context) {
                         : '...%',
                     description: 'влажность',
                   ),
-                  SizedBox(width: 10),
                   controllerApp.fireplaceData?.CO2value != null
                       ? iconValueDescription(
-                        iconPath: 'assets/icons/level_CO2.svg',
-                        value:
-                            '${controllerApp.fireplaceData!.CO2value!.toInt()}%',
-                        description: 'уровень CO2',
-                      )
+                          iconPath: 'assets/icons/level_CO2.svg',
+                          value:
+                              '${controllerApp.fireplaceData!.CO2value!.toInt()}%',
+                          description: 'уровень CO2',
+                        )
                       : Flexible(
                           child: Container(),
                         )

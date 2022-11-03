@@ -193,8 +193,8 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   Future<void> playFireplace() async {
-    changeAlertMessage(newAlertMessage: 'розжиг камина');
     if (!isCoolingFireplace) {
+      changeAlertMessage(newAlertMessage: 'розжиг камина');
       isPlayFireplace = true;
       update();
     }
@@ -208,12 +208,14 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   void stopFireplace() async {
-    isPlayFireplace = false;
-    update();
-    //запуск озлаждения камина
-    await startCoolingFireplace();
-    //после чего обновляем стейт
-    changeAlertMessage(newAlertMessage: null);
+    if (!isCoolingFireplace) {
+      isPlayFireplace = false;
+      update();
+      //запуск озлаждения камина
+      await startCoolingFireplace();
+      //после чего обновляем стейт
+      changeAlertMessage(newAlertMessage: null);
+    }
   }
 
   double valuePowerFireplace = 1;

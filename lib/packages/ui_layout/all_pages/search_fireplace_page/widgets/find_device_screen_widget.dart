@@ -9,7 +9,6 @@ import 'row_with_name_and_title_fireplace.dart';
 
 class FindDeviceScreenWidget extends StatelessWidget {
   const FindDeviceScreenWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

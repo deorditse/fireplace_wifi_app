@@ -64,7 +64,7 @@ Widget _textField(context) {
             SizedBox(
               height: 20,
             ),
-            Flexible(
+            Expanded(
               child: SvgPicture.asset(
                 'assets/icons/mainBlock.svg',
                 semanticsLabel: 'icon_bottom',
