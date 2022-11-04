@@ -19,6 +19,7 @@ class SearchFireplacePage extends StatelessWidget {
     return Container(
       decoration: myDecorationBackground,
       child: Scaffold(
+
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: SafeArea(

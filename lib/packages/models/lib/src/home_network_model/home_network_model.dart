@@ -5,7 +5,6 @@ part 'home_network_model.g.dart';
 // flutter pub run build_runner build --delete-conflicting-outputs
 @HiveType(typeId: 0)
 //для хранения объекта целиком - эти аннотации нужны для hive_generator
-
 class HomeNetworkModel extends HiveObject {
   //храню в таком виде
   ///Map<кастомное имя : Map<имя сохраненной домашней wifi : название из _listWifiName>>

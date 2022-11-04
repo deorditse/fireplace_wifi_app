@@ -22,17 +22,13 @@ class ImplementationFireplaceServices {
   ///получение данных домашней сети
   Future<Box<HomeNetworkModel>> getInstanceHiveHomeLocalNetworksData(
       {required String keyWifiName}) async {
-    await Hive.initFlutter(); //иннициализируем
-
-    // для сложных типов нужно зарегистрировать адаптеры
-    Hive.registerAdapter(HomeNetworkModelAdapter());
 
     return await Hive.openBox<HomeNetworkModel>(keyWifiName);
   }
 
   Future<void>
       saveInLocalStorageInMapWithWifiNameHomeNetworkAndNameFromListWifiName(
-          {required Map<String, String> newMapHomeWifi}) async {
+          {required HomeNetworkModel newHomeLocalNetworksData}) async {
     try {
       await Future.delayed(Duration(seconds: 2));
 

@@ -1,14 +1,16 @@
 import 'package:business_layout/business_layout.dart';
+import 'package:models/models.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/fireplace_page.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/container_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:hive/hive.dart';
 import '../../../style_app/style.dart';
 import 'row_with_name_and_title_fireplace.dart';
 
 class FindDeviceScreenWidget extends StatelessWidget {
   const FindDeviceScreenWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -24,22 +26,30 @@ class FindDeviceScreenWidget extends StatelessWidget {
               children: [
                 _rowWithTitle(context: context),
                 !controllerApp.isFireplaceDetectedInDatabase
-                    ?
+                    ? _searchConnectedFireplaces(context: context)
 
                     ///первый экран
-                    _searchConnectedFireplaces(context: context)
                     : Column(
                         children: [
-                          ///если камин подключен напрямую
-                          RowWithNameAndTitleFireplace(
-                              titleModel: controllerApp.titleModel),
-
-                          if (controllerApp.homeLocalNetworksData != null &&
+                          ///если камин подключен через точку доступа в сети wifi
+                          if (controllerApp.homeLocalNetworksData?.values !=
+                                  null &&
                               controllerApp.homeLocalNetworksData!.isNotEmpty)
-
-                            ///если камин подключен через точку доступа в сети wifi
                             _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
                                 context: context)
+                          else
+
+                            ///если камин подключен напрямую
+                            RowWithNameAndTitleFireplace(
+                              titleModel: controllerApp.titleModel,
+                              voidCallback: () {
+                                Get.toNamed(FireplacePage.id,
+                                    preventDuplicates: false);
+
+                                print(
+                                    "${controllerApp.homeLocalNetworksData?.values.toList()}");
+                              },
+                            ),
                         ],
                       ),
               ],
@@ -78,25 +88,39 @@ class FindDeviceScreenWidget extends StatelessWidget {
 
   Widget _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
       {required BuildContext context}) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GetBuilder<FireplaceConnectionGetXController>(
-          builder: (controllerApp) => ListView.builder(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GetBuilder<FireplaceConnectionGetXController>(
+        builder: (controllerApp) {
+          Box<HomeNetworkModel> boxHomeNetworkModel =
+              controllerApp.homeLocalNetworksData!;
+          return ListView.builder(
             shrinkWrap: true,
             primary: false,
             padding: EdgeInsets.zero,
-            itemCount: controllerApp.homeLocalNetworksData?.values.length,
+            itemCount: boxHomeNetworkModel.values.length,
             itemBuilder: (context, index) {
               // final fireplace = controllerApp
               //     .mapWithWifiNameHomeNetworkAndNameFromListWifiName![index];
               return RowWithNameAndTitleFireplace(
                 titleModel: controllerApp.titleModel,
                 customName: null,
+                isHomelWifi: true,
+                voidCallback: () {
+                  String _fireplaceDataNameFromListListWifiName = controllerApp
+                      .homeLocalNetworksData!.values
+                      .toList()[index]
+                      .nameFromListListWifiName
+                      .toString();
+                  print(_fireplaceDataNameFromListListWifiName);
+
+                  controllerApp.searchFireplaceInListWithIdWifi(
+                      wifiName: _fireplaceDataNameFromListListWifiName);
+                },
               );
             },
-          ),
-        ),
+          );
+        },
       ),
     );
   }
