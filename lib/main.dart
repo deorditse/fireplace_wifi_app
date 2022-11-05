@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/fireplace_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +25,7 @@ class MainPage extends StatelessWidget {
       builder: (c, AsyncSnapshot<ConnectivityResult> snapshot) {
         final state = snapshot.data;
         return state == ConnectivityResult.wifi
-            ? TestPremiss() //MyGetApp()
+            ? MyGetApp()
             : WifiOffScreenPage(
                 state: state,
               );
@@ -35,8 +34,19 @@ class MainPage extends StatelessWidget {
   }
 }
 
-class MyGetApp extends StatelessWidget {
+class MyGetApp extends StatefulWidget {
   MyGetApp({super.key});
+
+  @override
+  State<MyGetApp> createState() => _MyGetAppState();
+}
+
+class _MyGetAppState extends State<MyGetApp> {
+  @override
+  void initState() {
+    super.initState();
+    _initPermissions();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,130 +91,32 @@ class MyGetApp extends StatelessWidget {
       ],
     );
   }
-}
 
-class TestPremiss extends StatelessWidget {
-  const TestPremiss({Key? key}) : super(key: key);
+  Future<void> _initPermissions() async {
+    if (await Permission.location.serviceStatus.isEnabled) {
+      //проверяю какой статус у разрешение на геопозицию
+      var status = await Permission.location.request();
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ListView(
-          children: Permission.values
-              .where((permission) {
-                if (Platform.isIOS) {
-                  return permission != Permission.unknown &&
-                      permission != Permission.sms &&
-                      permission != Permission.storage &&
-                      permission != Permission.ignoreBatteryOptimizations &&
-                      permission != Permission.accessMediaLocation &&
-                      permission != Permission.activityRecognition &&
-                      permission != Permission.manageExternalStorage &&
-                      permission != Permission.systemAlertWindow &&
-                      permission != Permission.requestInstallPackages &&
-                      permission != Permission.accessNotificationPolicy &&
-                      permission != Permission.bluetoothScan &&
-                      permission != Permission.bluetoothAdvertise &&
-                      permission != Permission.bluetoothConnect;
-                } else {
-                  return permission != Permission.unknown &&
-                      permission != Permission.mediaLibrary &&
-                      permission != Permission.photos &&
-                      permission != Permission.photosAddOnly &&
-                      permission != Permission.reminders &&
-                      permission != Permission.appTrackingTransparency &&
-                      permission != Permission.criticalAlerts;
-                }
-              })
-              .map((permission) => PermissionWidget(permission))
-              .toList()),
-    );
-  }
-}
+      if (status.isGranted) {
+        print('Location is Granted');
+      } else if (status.isDenied) {
+        print('Location is Denied');
+        Get.snackbar(
+          'Необходим доступ к локации',
+          'Для корректного определения WiFi сети',
+        );
 
-// Permission widget containing information about the passed [Permission]
-class PermissionWidget extends StatefulWidget {
-  const PermissionWidget(this._permission);
-
-  final Permission _permission;
-
-  @override
-  _PermissionState createState() => _PermissionState(_permission);
-}
-
-class _PermissionState extends State<PermissionWidget> {
-  _PermissionState(this._permission);
-
-  final Permission _permission;
-  PermissionStatus _permissionStatus = PermissionStatus.denied;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _listenForPermissionStatus();
-  }
-
-  void _listenForPermissionStatus() async {
-    final status = await _permission.status;
-    setState(() => _permissionStatus = status);
-  }
-
-  Color getPermissionColor() {
-    switch (_permissionStatus) {
-      case PermissionStatus.denied:
-        return Colors.red;
-      case PermissionStatus.granted:
-        return Colors.green;
-      case PermissionStatus.limited:
-        return Colors.orange;
-      default:
-        return Colors.grey;
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.location,
+          // Permission.storage,
+        ].request();
+        print(statuses[Permission.location]);
+      }
+    } else if (await Permission.location.isPermanentlyDenied) {
+      //если навсегда отключена геопозиция
+      openAppSettings();
+    } else {
+      print('location.serviceStatus.isDisable');
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        _permission.toString(),
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
-      subtitle: Text(
-        _permissionStatus.toString(),
-        style: TextStyle(color: getPermissionColor()),
-      ),
-      trailing: (_permission is PermissionWithService)
-          ? IconButton(
-              icon: const Icon(
-                Icons.info,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                checkServiceStatus(
-                    context, _permission as PermissionWithService);
-              })
-          : null,
-      onTap: () {
-        requestPermission(_permission);
-      },
-    );
-  }
-
-  void checkServiceStatus(
-      BuildContext context, PermissionWithService permission) async {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text((await permission.serviceStatus).toString()),
-    ));
-  }
-
-  Future<void> requestPermission(Permission permission) async {
-    final status = await permission.request();
-
-    setState(() {
-      print(status);
-      _permissionStatus = status;
-      print(_permissionStatus);
-    });
   }
 }

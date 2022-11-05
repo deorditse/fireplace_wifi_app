@@ -29,28 +29,32 @@ class FindDeviceScreenWidget extends StatelessWidget {
                     ? _searchConnectedFireplaces(context: context)
 
                     ///первый экран
-                    : Column(
-                        children: [
-                          ///если камин подключен через точку доступа в сети wifi
-                          if (controllerApp.homeLocalNetworksData?.values !=
-                                  null &&
-                              controllerApp.homeLocalNetworksData!.isNotEmpty)
-                            _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
-                                context: context)
-                          else
+                    : Expanded(
+                        child: Column(
+                          children: [
+                            ///если камин подключен через точку доступа в сети wifi
+                            if (controllerApp.homeLocalNetworksData?.values !=
+                                    null &&
+                                controllerApp.homeLocalNetworksData!.isNotEmpty)
+                              Expanded(
+                                child: _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
+                                    context: context),
+                              )
+                            else
 
-                            ///если камин подключен напрямую
-                            RowWithNameAndTitleFireplace(
-                              titleModel: controllerApp.titleModel,
-                              voidCallback: () {
-                                Get.toNamed(FireplacePage.id,
-                                    preventDuplicates: false);
+                              ///если камин подключен напрямую
+                              RowWithNameAndTitleFireplace(
+                                titleModel: controllerApp.titleModel,
+                                voidCallback: () {
+                                  Get.toNamed(FireplacePage.id,
+                                      preventDuplicates: false);
 
-                                print(
-                                    "${controllerApp.homeLocalNetworksData?.values.toList()}");
-                              },
-                            ),
-                        ],
+                                  print(
+                                      "${controllerApp.homeLocalNetworksData?.values.toList()}");
+                                },
+                              ),
+                          ],
+                        ),
                       ),
               ],
             ),

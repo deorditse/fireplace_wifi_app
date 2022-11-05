@@ -35,18 +35,23 @@ class _TextFieldsAddedToTheNetworkWidgetsState
         _isSuccess = true;
       });
 
-      FireplaceConnectionGetXController.instance.wifiName != null
-          ? FireplaceConnectionGetXController.instance.addHomeLocalNetworksData(
-              customName: _nameController.text,
-              nameHomeWifiNetwork: _nameController.text,
-              nameFromListListWifiName:
-                  FireplaceConnectionGetXController.instance.wifiName!,
-            )
-          : Get.snackbar(
-              'wifi name is null',
-              '',
-              snackPosition: SnackPosition.TOP,
-            );
+      if (FireplaceConnectionGetXController.instance.wifiName != null) {
+        FireplaceConnectionGetXController.instance.addHomeLocalNetworksData(
+          customName: _nameController.text,
+          nameHomeWifiNetwork: _nameController.text,
+          nameFromListListWifiName:
+              FireplaceConnectionGetXController.instance.wifiName!,
+        );
+
+        _nameController.clear();
+        _passwordController.clear();
+      } else {
+        Get.snackbar(
+          'wifi name is null',
+          '',
+          snackPosition: SnackPosition.TOP,
+        );
+      }
     }
   }
 

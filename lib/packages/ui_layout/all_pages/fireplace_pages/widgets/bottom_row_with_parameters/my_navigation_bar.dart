@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:business_layout/business_layout.dart';
@@ -33,8 +34,8 @@ Widget iconValueDescription(
                   flex: 10,
                   child: Text(
                     '$value',
-                    style:
-                        myTextStyleFontSarpanch(fontSize: 27).copyWith(height: 1),
+                    style: myTextStyleFontSarpanch(fontSize: 27)
+                        .copyWith(height: Platform.isIOS ? 1 : 0.9),
                     textAlign: TextAlign.start,
                   ),
                 ),

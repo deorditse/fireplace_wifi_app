@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 Widget timerFormat({double? padding, double? myFontSize}) {
   return GetBuilder<FireplaceConnectionGetXController>(
       builder: (controllerApp) {
-        final constFontSize = myFontSize ?? 45;
+    final constFontSize = myFontSize ?? 45;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding ?? 0),
       child: Row(

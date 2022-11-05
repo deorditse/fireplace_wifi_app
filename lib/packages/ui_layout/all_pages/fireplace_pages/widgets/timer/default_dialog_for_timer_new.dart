@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:business_layout/business_layout.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/all_pages/fireplace_pages/widgets/timer/timer_format.dart';
 import 'package:fireplace_wifi_app/packages/ui_layout/style_app/style.dart';
@@ -36,7 +38,7 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
             Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.only(top: 12.0),
+                padding: EdgeInsets.only(top: Platform.isIOS ? 12.0 : 2),
                 child: TextButton(
                   onPressed: () {
                     if (!isRunning) {
@@ -93,7 +95,7 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
+                padding: EdgeInsets.only(bottom: Platform.isIOS ? 12.0 : 2),
                 child: RotatedBox(
                   quarterTurns: 2,
                   child: TextButton(
