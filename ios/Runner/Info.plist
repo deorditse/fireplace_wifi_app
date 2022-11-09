@@ -24,8 +24,6 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict/>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_googlecast._tcp</string>
@@ -33,16 +31,14 @@
 	</array>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Always and when in use!</string>
-	<key>CNCopyCurrentNetworkInfo</key>
-	<string>Always and when in use!</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Can I haz location always?</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Older devices need location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<key>com.apple.developer.networking.wifi-info</key>
-    <true/>
 	<string>Need location when in use</string>
+    <key>CNCopyCurrentNetworkInfo</key>
+    <string>Always and when in use!</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -70,4 +66,3 @@
 	<true/>
 </dict>
 </plist>
-
