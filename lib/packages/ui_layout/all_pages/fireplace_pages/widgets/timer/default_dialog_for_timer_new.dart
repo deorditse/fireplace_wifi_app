@@ -122,7 +122,6 @@ class DefaultDialogIfDayHasNotCome extends StatelessWidget {
                 onPressed: () {
                   if (isRunning) {
                     controllerApp.updateTimerFireplace(cancel: true);
-                    return;
                   } else {
                     controllerApp.startTimer();
                   }

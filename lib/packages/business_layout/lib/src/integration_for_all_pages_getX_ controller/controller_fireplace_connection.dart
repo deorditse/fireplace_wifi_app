@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:data_layout/data_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -189,13 +188,15 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   Future<void> playFireplace() async {
-    if (!isCoolingFireplace) {
+    if (!isCoolingFireplace && !isPlayFireplace) {
       changeAlertMessage(newAlertMessage: 'розжиг камина');
       isPlayFireplace = true;
       update();
     }
 
-    await Future.delayed(Duration(seconds: 4)).whenComplete(
+    ///todo play fireplace
+
+    await Future.delayed(const Duration(seconds: 4)).whenComplete(
       () => changeAlertMessage(
           newAlertMessage: (isPlayFireplace)
               ? "уровень пламени №${valuePowerFireplace.toInt()}"
@@ -204,12 +205,13 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   void stopFireplace() async {
-    if (!isCoolingFireplace) {
+    if (!isCoolingFireplace && isPlayFireplace) {
       isPlayFireplace = false;
       update();
+      updateTimerFireplace(cancel: true);
+
       //запуск озлаждения камина
       await startCoolingFireplace();
-      //после чего обновляем стейт
       changeAlertMessage(newAlertMessage: null);
     }
   }
@@ -228,14 +230,17 @@ class FireplaceConnectionGetXController extends GetxController {
   //запуск озлаждения камина
   Future<void> startCoolingFireplace() async {
     isCoolingFireplace = true;
-    changeAlertMessage(newAlertMessage: 'охлаждение камина');
     update();
+    changeAlertMessage(newAlertMessage: 'охлаждение камина');
+
     await Future.delayed(
-      const Duration(seconds: 3),
-    ).then((value) {
-      isCoolingFireplace = false;
-      update();
-    });
+      const Duration(seconds: 4),
+    ).then(
+      (value) {
+        isCoolingFireplace = false;
+        update();
+      },
+    );
   }
 
   ///для таймера___________________________________________________
@@ -247,7 +252,7 @@ class FireplaceConnectionGetXController extends GetxController {
   bool timerIsRunning = false;
 
   Timer? _timer;
-  int _timerStart = 0; // 10 min
+  int _timerFireplaceValue = 0; // 10 min
   List<String> timerDateInHHMMSS = ['00', '00', '00'];
 
   void _formatHHMMSS(int seconds) {
@@ -271,47 +276,47 @@ class FireplaceConnectionGetXController extends GetxController {
 
   void updateTimerFireplace({bool? cancel, bool? isIncrement}) {
     if (cancel != null && cancel) {
-      _timerStart = 0;
+      _timerFireplaceValue = 0;
       timerIsRunning = false;
       _timer?.cancel();
       update();
-      _formatHHMMSS(_timerStart);
+      _formatHHMMSS(_timerFireplaceValue);
       return;
-    }
-    if (isIncrement != null && isIncrement) {
-      _timerStart += 600;
+    } else if (isIncrement != null && isIncrement) {
+      _timerFireplaceValue += 600;
       update();
-      _formatHHMMSS(_timerStart);
-      return;
+      _formatHHMMSS(_timerFireplaceValue);
     } else {
-      if (_timerStart > 0) {
-        _timerStart -= 600;
+      if (_timerFireplaceValue > 0) {
+        _timerFireplaceValue -= 600;
         update();
-        _formatHHMMSS(_timerStart);
+        _formatHHMMSS(_timerFireplaceValue);
       }
-      return;
     }
   }
 
   void startTimer() {
-    if (_timerStart == 0) {
-      Get.snackbar('Установите таймер', '');
+    if (_timerFireplaceValue == 0) {
+      Get.snackbar('Время не установлено', '');
       return;
     }
 
     timerIsRunning = true;
+    playFireplace();
+    update();
 
     _timer = Timer.periodic(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
       (Timer timer) {
-        if (_timerStart == 0) {
+        if (_timerFireplaceValue == 0) {
+          stopFireplace();
           timerIsRunning = false;
           timer.cancel();
           update();
           return;
         } else {
-          _timerStart -= 1;
-          _formatHHMMSS(_timerStart);
+          _timerFireplaceValue -= 1;
+          _formatHHMMSS(_timerFireplaceValue);
           update();
         }
       },
@@ -369,7 +374,6 @@ class FireplaceConnectionGetXController extends GetxController {
   bool? isFireplaceDetectedInDatabase;
 
   String? wifiName = 'null wifiName';
-  String wifiBSSID = 'null wifiBSSID';
 
   Future<void> _optionsFireplace() async {
     isBlocButton = fireplaceData?.isBlocButton ?? false;
@@ -511,9 +515,26 @@ class FireplaceConnectionGetXController extends GetxController {
 
                 Get.defaultDialog(
                   titlePadding: EdgeInsets.zero,
-                  content: Text(
-                    'Камин с именем $wifiName не распознан',
-                    style: Get.textTheme.headline2,
+                  content: Column(
+                    children: [
+                      Text(
+                        'Камин с именем $wifiName не распознан',
+                        style: Get.textTheme.headline2,
+                        textAlign: TextAlign.center,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          print('todo url instruction');
+
+                          ///todo url instruction
+                        },
+                        child: Text(
+                          "ИНСТРУКЦИЯ",
+                          style: Get.textTheme.headline2,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }
