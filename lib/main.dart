@@ -26,9 +26,7 @@ class MainPage extends StatelessWidget {
         final state = snapshot.data;
         return state == ConnectivityResult.wifi
             ? MyGetApp()
-            : WifiOffScreenPage(
-                state: state,
-              );
+            : WifiOffScreenPage(state: state);
       },
     );
   }

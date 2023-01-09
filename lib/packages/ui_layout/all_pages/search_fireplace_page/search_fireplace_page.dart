@@ -19,7 +19,6 @@ class SearchFireplacePage extends StatelessWidget {
     return Container(
       decoration: myDecorationBackground,
       child: Scaffold(
-
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: SafeArea(
@@ -106,7 +105,8 @@ TextField _myTextField() {
         wifiName: wifiName,
       );
       try {
-        FireplaceConnectionGetXController.instance.isFireplaceDetectedInDatabase
+        FireplaceConnectionGetXController
+                .instance.isFireplaceDetectedInDatabase!
             ? Get.toNamed(FireplacePage.id, preventDuplicates: false)
             : null;
       } catch (error) {

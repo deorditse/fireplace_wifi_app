@@ -54,7 +54,9 @@ class RowWithNameAndTitleFireplace extends StatelessWidget {
                   padding: MaterialStateProperty.all(EdgeInsets.zero)),
               onPressed: () {
                 defaultDialogEditNameFireplace(
-                    context: context, oldNameFireplace: 'Test name name name');
+                  context: context,
+                  oldNameFireplace: 'Test name name name',
+                );
               },
               child: Row(
                 children: [

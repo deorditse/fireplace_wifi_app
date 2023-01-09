@@ -1,18 +1,11 @@
 import 'package:data_layout/data_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:get/get.dart';
 import 'package:models/models.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:network_info_plus/network_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'dart:async';
-import 'dart:developer' as developer;
-import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
-
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
 
 // в этом файле лежат общие настройки состояний для всех моделей, c отдельными модификациями будет свои контроллеры у каждой модели
@@ -111,19 +104,7 @@ class FireplaceConnectionGetXController extends GetxController {
   void changeIsSettingButton({bool? newIsSettingButton}) {
     isSettingButton = newIsSettingButton ?? !isSettingButton;
     update();
-    // isSettingButton
-    //     ? changeStartStopTimer(isTimerStart: false)
-    //     : changeStartStopTimer(isTimerStart: true);
   }
-
-  // //серийный номер
-  // String serialNumber = '';
-  //
-  // //Дс code
-  // String dcCode = '';
-  //
-  // //дата производства
-  // String dateOfManufacture = '';
 
   // //звук нажатия кнопок
   bool isSwitchClickSound = false;
@@ -177,8 +158,6 @@ class FireplaceConnectionGetXController extends GetxController {
   bool isFuelSystemError = false;
 
   //для слайдера / максимальное значение
-  // double sliderValue = 1.0;
-  // int maxLevelSliderFireplace = 3;
 
   void changeButtonPlayStopFireplace() {
     isPlayFireplace ? stopFireplace() : playFireplace();
@@ -333,7 +312,8 @@ class FireplaceConnectionGetXController extends GetxController {
 
   Future<void> _getInstanceHive({required String keyWifiName}) async {
     homeLocalNetworksData = await services.getInstanceHiveHomeLocalNetworksData(
-        keyWifiName: keyWifiName);
+      keyWifiName: keyWifiName,
+    );
     update();
   }
 
@@ -368,12 +348,12 @@ class FireplaceConnectionGetXController extends GetxController {
 
   ///для поиска и подключение к камину с установкой параметров___________________________________________________
   //тут будут лежать id каминов
-  Set<String> _listWifiName = {'1', '2', '3', '4'};
+  static const Set<String> _listWifiName = <String>{'1', '2', '3', '4'};
 
   String titleModel = '';
 
   //если обнаружен id в базе или в мапе локальных данных
-  bool isFireplaceDetectedInDatabase = false;
+  bool? isFireplaceDetectedInDatabase;
 
   String? wifiName = 'null wifiName';
   String wifiBSSID = 'null wifiBSSID';
@@ -412,132 +392,124 @@ class FireplaceConnectionGetXController extends GetxController {
             : null);
   }
 
+  Future<void> detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+      {required int indexInIdFireplace}) async {
+    try {
+      printTitle({required String title}) => print(
+          'detected fireplace from searchFireplaceInListWithIdWifi el $indexInIdFireplace $title');
+      await initFireplaceData(url: indexInIdFireplace);
+      //опции для камина
+      switch (indexInIdFireplace) {
+        case 0:
+          titleModel = 'smart Prime 1000';
+          printTitle(title: titleModel);
+          update();
+          break;
+        case 1:
+          titleModel = 'smart Fire A7 1000';
+          printTitle(title: titleModel);
+          update();
+          break;
+        case 2:
+          titleModel = 'smart Fire A5 1000';
+          printTitle(title: titleModel);
+          update();
+          break;
+        case 3:
+          titleModel = 'smart Fire A3 1000';
+          printTitle(title: titleModel);
+          update();
+          break;
+      }
+
+      return;
+    } catch (error) {
+      print(
+          'error from detectedFireplaceFromSearchFireplaceInListWithIdWifi $titleModel $error');
+      return;
+    }
+  }
+
   Future<void> searchFireplaceInListWithIdWifi({
     required String? wifiName,
-    /*String? wifiBSSID*/
   }) async {
     if (wifiName != null) {
       try {
         changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
         disposeFireplaceData();
         //перевожу в состояние не найден с начала
-        isFireplaceDetectedInDatabase = false;
-
+        isFireplaceDetectedInDatabase = null;
         update();
 
         //первым делом проверю на данные из локальной памяти
-        if (wifiName == _listWifiName.elementAt(0)) {
-          //smartPrime_1000
+        if (_listWifiName.contains(wifiName)) {
+          //камин обнаружен и идет переход на главную страницу
+          isFireplaceDetectedInDatabase = true;
+          update();
+
           try {
-            //обнуляю таймер
-            ///перенесено в отдельный метод куда нужно отправлять SSID wifi data
-            print(
-                'detected fireplace from searchFireplaceInListWithIdWifi el 0');
-            titleModel = 'smart Prime 1000';
-            //камин обнаружен и идет переход на главную страницу
-            isFireplaceDetectedInDatabase = true;
-            update();
-            await initFireplaceData(url: 0);
-            //опции для камина
-
-            return;
-          } catch (error) {
-            print(
-                'error from searchFireplaceInListWithIdWifi smartPrime_1000 $error');
-            return;
-          }
-        } else if (wifiName == _listWifiName.elementAt(1)) {
-          //smartFireA7_1000
-          try {
-            print(
-                'detected fireplace from searchFireplaceInListWithIdWifi el 1');
-            titleModel = 'smart Fire A7 1000';
-            //камин обнаружен и идет переход на главную страницу
-            isFireplaceDetectedInDatabase = true;
-            update();
-            await initFireplaceData(url: 1);
-
-            return;
-          } catch (error) {
-            print(
-                'error from searchFireplaceInListWithIdWifi smartFireA7_1000 $error');
-            return;
-          }
-        } else if (wifiName == _listWifiName.elementAt(2)) {
-          //smartFireA5_1000
-          try {
-            print(
-                'detected fireplace from searchFireplaceInListWithIdWifi el 2');
-            titleModel = 'smart Fire A5 1000';
-            //камин обнаружен и идет переход на главную страницу
-            isFireplaceDetectedInDatabase = true;
-            update();
-
-            await initFireplaceData(url: 2);
-
-            return;
-          } catch (error) {
-            print(
-                'error from searchFireplaceInListWithIdWifi smartFireA5_1000 $error');
-            return;
-          }
-        } else if (wifiName == _listWifiName.elementAt(3)) {
-          //smartFireA3_1000
-          try {
-            print(
-                'detected fireplace from searchFireplaceInListWithIdWifi el 3');
-            titleModel = 'smart Fire A3 1000';
-            //камин обнаружен и идет переход на главную страницу
-            isFireplaceDetectedInDatabase = true;
-            update();
-            await initFireplaceData(url: 3);
-
-            return;
-          } catch (error) {
-            print(
-                'error from searchFireplaceInListWithIdWifi smartFireA3_1000 $error');
-            return;
-          }
-        } else {
-          try {
-            // проверяю по сохраненному в память листу с именами домашних сетей
-            await _getInstanceHive(
-                keyWifiName: wifiName); //получаю данные по локальным сетям
-
-            if (homeLocalNetworksData != null &&
-                homeLocalNetworksData!.isNotEmpty &&
-                _listWifiName.contains(wifiName)) {
-              isFireplaceDetectedInDatabase = true;
-
-              _listWifiName.forEach((element) {
-                if (element == wifiName) {
-                  wifiName = element;
-                  update();
-                  return;
-                }
-              });
-            } else {
-              isFireplaceDetectedInDatabase = false;
-              update();
-
-              Get.defaultDialog(
-                titlePadding: EdgeInsets.zero,
-                content: Text(
-                  'Камин с именем ${wifiName} не распознан',
-                  style: Get.textTheme.headline2,
-                ),
+            if (wifiName == _listWifiName.elementAt(0)) {
+              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+                indexInIdFireplace: 0,
               );
+              return;
+            } else if (wifiName == _listWifiName.elementAt(1)) {
+              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+                indexInIdFireplace: 1,
+              );
+              return;
+            } else if (wifiName == _listWifiName.elementAt(2)) {
+              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+                indexInIdFireplace: 2,
+              );
+              return;
+            } else if (wifiName == _listWifiName.elementAt(3)) {
+              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+                indexInIdFireplace: 3,
+              );
+              return;
+            } else {
+              // проверяю по сохраненному в память листу с именами домашних сетей
+              await _getInstanceHive(keyWifiName: wifiName).whenComplete(
+                () {
+                  if (homeLocalNetworksData != null &&
+                      homeLocalNetworksData!.isNotEmpty) {
+                    isFireplaceDetectedInDatabase = true;
+
+                    _listWifiName.forEach(
+                      (element) {
+                        if (element == wifiName) {
+                          wifiName = element;
+                          update();
+                          return;
+                        }
+                      },
+                    );
+                  } else {
+                    isFireplaceDetectedInDatabase = false;
+                    update();
+
+                    Get.defaultDialog(
+                      titlePadding: EdgeInsets.zero,
+                      content: Text(
+                        'Камин с именем $wifiName не распознан',
+                        style: Get.textTheme.headline2,
+                      ),
+                    );
+                  }
+                },
+              ); //получаю данные по локальным сетям
             }
           } catch (error) {
             print(
                 'error from searchFireplaceInListWithIdWifi _wifiNameHomeNetworkFromLocalStorage $error');
             return;
           }
+        } else {
+          isFireplaceDetectedInDatabase = null;
+
+          ///todo dialog with instruction
         }
-
-        // isLoadingDataIdWifi = false;
-        // update();
-
       } catch (error) {
         throw Exception(
             '$error from searchFireplaceInListWithIdWifi Business Layout');
