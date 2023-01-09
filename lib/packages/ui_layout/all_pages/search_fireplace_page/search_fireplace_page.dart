@@ -120,7 +120,7 @@ TextField _myTextField() {
       hoverColor: myColorActivity,
       filled: true,
       fillColor: myTwoColor,
-      border: UnderlineInputBorder(
+      border: const UnderlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
     ),
     keyboardType: TextInputType.visiblePassword,

@@ -18,61 +18,82 @@ class FindDeviceScreenWidget extends StatelessWidget {
       child: MyContainerAlert(
         height: MediaQuery.of(context).size.height / 3.5,
         child: GetBuilder<FireplaceConnectionGetXController>(
-            builder: (controllerApp) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _rowWithTitle(context: context),
-                if (controllerApp.isFireplaceDetectedInDatabase == null)
-                  _searchConnectedFireplaces(context: context)
-                else
+          builder: (controllerApp) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _rowWithTitle(context: context),
+                  if (controllerApp.isFireplaceDetectedInDatabase == null)
+                    _searchConnectedFireplaces(context: context)
+                  else
 
-                  ///первый экран
-                  controllerApp.isFireplaceDetectedInDatabase!
-                      ? Expanded(
-                          child: Column(
-                            children: [
-                              ///если камин подключен через точку доступа (save in local storage) в сети wifi
-                              if (controllerApp.homeLocalNetworksData?.values !=
-                                      null &&
-                                  controllerApp
-                                      .homeLocalNetworksData!.isNotEmpty)
-                                Expanded(
-                                  child:
-                                      _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
-                                    context: context,
+                    ///первый экран
+                    controllerApp.isFireplaceDetectedInDatabase!
+                        ? Expanded(
+                            child: Column(
+                              children: [
+                                ///если камин подключен через точку доступа (save in local storage) в сети wifi
+                                if (controllerApp
+                                            .homeLocalNetworksData?.values !=
+                                        null &&
+                                    controllerApp
+                                        .homeLocalNetworksData!.isNotEmpty)
+                                  Expanded(
+                                    child:
+                                        _listMapWithWifiNameHomeNetworkAndNameFromListWifiName(
+                                      context: context,
+                                    ),
+                                  )
+                                else
+
+                                  ///если камин подключен напрямую
+                                  RowWithNameAndTitleFireplace(
+                                    titleModel: controllerApp.titleModel,
+                                    voidCallback: () {
+                                      Get.toNamed(
+                                        FireplacePage.id,
+                                        preventDuplicates: false,
+                                      );
+
+                                      print(
+                                          "${controllerApp.homeLocalNetworksData?.values.toList()}");
+                                    },
                                   ),
-                                )
-                              else
-
-                                ///если камин подключен напрямую
-                                RowWithNameAndTitleFireplace(
-                                  titleModel: controllerApp.titleModel,
-                                  voidCallback: () {
-                                    Get.toNamed(
-                                      FireplacePage.id,
-                                      preventDuplicates: false,
-                                    );
-
-                                    print(
-                                        "${controllerApp.homeLocalNetworksData?.values.toList()}");
-                                  },
+                              ],
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 18.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Ошибка подключения, посмотрите интсрукцию\n",
+                                  style: myTextStyleFontRoboto(
+                                    textColor: myTwoColor,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                            ],
+                                GestureDetector(
+                                  onTap: () {
+                                    print('todo url instruction');
+                                    ///todo url instruction
+                                  },
+                                  child: Text(
+                                    "ИНСТРУКЦИЯ",
+                                    style: myTextStyleFontRoboto(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        )
-                      : Container(
-                          child: Text(
-                            "Камины не найдены, посмотрите интсрукцию подключения",
-                            style: myTextStyleFontRoboto(),
-                          ),
-                        )
-              ],
-            ),
-          );
-        }),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

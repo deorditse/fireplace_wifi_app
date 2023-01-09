@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:data_layout/data_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,11 +21,14 @@ class FireplaceConnectionGetXController extends GetxController {
   void onInit() {
     super.onInit();
     //сначала достаю имя вай вай сети к которой подключен
-    _initNetworkInfo().then((_) {
+
+    _initNetworkInfo().then((wifiNameInfo) {
+      wifiName = wifiNameInfo;
+      update();
       //   теперь Wifi name известен и можно парсить данные с апи
       //чтобы понять какой камин нужно обращаться к
-      searchFireplaceInListWithIdWifi(wifiName: wifiName).then((value) {
-        print('wifiName _______initNetworkInfo  $wifiName');
+      searchFireplaceInListWithIdWifi(wifiName: wifiNameInfo).then((value) {
+        print('wifiName _______initNetworkInfo  $wifiNameInfo');
       });
     });
   }
@@ -43,22 +48,37 @@ class FireplaceConnectionGetXController extends GetxController {
   }
 
   ///инициализация данных на экране
-  Future<void> initFireplaceData({required /*String?*/ int? url}) async {
-    if (url != null && url != '') {
-      fireplaceData =
-          await services.getFireplaceData(url: url).whenComplete(() async {
-        changeIsTimerUpdateDataBase(isTimerUpdateDataBase: true);
-        await _initialFireplaceData(url: url);
-      });
-      update();
-      await _optionsFireplace();
+  Future<void> initFireplaceData({required ListNamesFireplace wifiName}) async {
+    ///delete after todo api
+    int url = 0;
+    switch (wifiName) {
+      case ListNamesFireplace.smartPrime1000:
+        url = 0;
+        break;
+      case ListNamesFireplace.smartFireA71000:
+        url = 1;
+        break;
+      case ListNamesFireplace.smartFireA51000:
+        url = 2;
+        break;
+      case ListNamesFireplace.smartFireA31000:
+        url = 3;
+        break;
     }
+    fireplaceData =
+        await services.getFireplaceData(url: url).whenComplete(() async {
+      changeIsTimerUpdateDataBase(isTimerUpdateDataBase: true);
+      await _initialFireplaceData(url: url);
+    });
+    update();
+    await _optionsFireplace();
   }
 
   Future<void> _initialFireplaceData({
     required /*String?*/ int? url,
   }) async {
-    Timer.periodic(Duration(seconds: 2), (timer) async {
+    Timer.periodic(const Duration(seconds: 2), (timer) async {
+      //для обновление данных каждые 2 секунды
       if (!_isTimerUpdateDataBase) {
         timer.cancel();
         print('stopTimer');
@@ -310,13 +330,6 @@ class FireplaceConnectionGetXController extends GetxController {
 
   Box<HomeNetworkModel>? homeLocalNetworksData;
 
-  Future<void> _getInstanceHive({required String keyWifiName}) async {
-    homeLocalNetworksData = await services.getInstanceHiveHomeLocalNetworksData(
-      keyWifiName: keyWifiName,
-    );
-    update();
-  }
-
   void addHomeLocalNetworksData({
     required String customName,
     required String nameHomeWifiNetwork,
@@ -332,14 +345,14 @@ class FireplaceConnectionGetXController extends GetxController {
     update();
   }
 
-  void removeHomeLocalNetworksData(int indexCategory) async {
-    final rec = homeLocalNetworksData?.values.elementAt(indexCategory);
+  void removeHomeLocalNetworksData(int indexFireplace) async {
+    final rec = homeLocalNetworksData?.values.elementAt(indexFireplace);
     rec?.delete();
   }
 
   void renameHomeLocalNetworksData(
-      {required int indexCategory, required customName}) async {
-    final rec = homeLocalNetworksData!.values.elementAt(indexCategory);
+      {required int indexFireplace, required customName}) async {
+    final rec = homeLocalNetworksData!.values.elementAt(indexFireplace);
     rec.customName = customName;
 
     rec.save(); //запишет как раз все изменения
@@ -392,30 +405,31 @@ class FireplaceConnectionGetXController extends GetxController {
             : null);
   }
 
-  Future<void> detectedFireplaceFromSearchFireplaceInListWithIdWifi(
-      {required int indexInIdFireplace}) async {
+  Future<void> detectedFireplaceFromSearchFireplaceInListWithIdWifi({
+    required ListNamesFireplace nameFireplace,
+  }) async {
     try {
       printTitle({required String title}) => print(
-          'detected fireplace from searchFireplaceInListWithIdWifi el $indexInIdFireplace $title');
-      await initFireplaceData(url: indexInIdFireplace);
+          'detected fireplace from searchFireplaceInListWithIdWifi el $nameFireplace $title');
+      await initFireplaceData(wifiName: nameFireplace);
       //опции для камина
-      switch (indexInIdFireplace) {
-        case 0:
+      switch (nameFireplace) {
+        case ListNamesFireplace.smartPrime1000:
           titleModel = 'smart Prime 1000';
           printTitle(title: titleModel);
           update();
           break;
-        case 1:
+        case ListNamesFireplace.smartFireA71000:
           titleModel = 'smart Fire A7 1000';
           printTitle(title: titleModel);
           update();
           break;
-        case 2:
+        case ListNamesFireplace.smartFireA51000:
           titleModel = 'smart Fire A5 1000';
           printTitle(title: titleModel);
           update();
           break;
-        case 3:
+        case ListNamesFireplace.smartFireA31000:
           titleModel = 'smart Fire A3 1000';
           printTitle(title: titleModel);
           update();
@@ -434,6 +448,7 @@ class FireplaceConnectionGetXController extends GetxController {
     required String? wifiName,
   }) async {
     if (wifiName != null) {
+      wifiName = wifiName.removeAllWhitespace.toLowerCase();
       try {
         changeIsTimerUpdateDataBase(isTimerUpdateDataBase: false);
         disposeFireplaceData();
@@ -441,90 +456,111 @@ class FireplaceConnectionGetXController extends GetxController {
         isFireplaceDetectedInDatabase = null;
         update();
 
-        //первым делом проверю на данные из локальной памяти
+        //первым делом проверю на данные из списка констант id wifi
         if (_listWifiName.contains(wifiName)) {
+          log("идет поиск каимна напрямую по сравнению имени wifi и списка костант имен сетей");
           //камин обнаружен и идет переход на главную страницу
           isFireplaceDetectedInDatabase = true;
           update();
 
-          try {
-            if (wifiName == _listWifiName.elementAt(0)) {
-              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
-                indexInIdFireplace: 0,
-              );
-              return;
-            } else if (wifiName == _listWifiName.elementAt(1)) {
-              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
-                indexInIdFireplace: 1,
-              );
-              return;
-            } else if (wifiName == _listWifiName.elementAt(2)) {
-              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
-                indexInIdFireplace: 2,
-              );
-              return;
-            } else if (wifiName == _listWifiName.elementAt(3)) {
-              detectedFireplaceFromSearchFireplaceInListWithIdWifi(
-                indexInIdFireplace: 3,
-              );
-              return;
-            } else {
-              // проверяю по сохраненному в память листу с именами домашних сетей
-              await _getInstanceHive(keyWifiName: wifiName).whenComplete(
-                () {
-                  if (homeLocalNetworksData != null &&
-                      homeLocalNetworksData!.isNotEmpty) {
-                    isFireplaceDetectedInDatabase = true;
-
-                    _listWifiName.forEach(
-                      (element) {
-                        if (element == wifiName) {
-                          wifiName = element;
-                          update();
-                          return;
-                        }
-                      },
-                    );
-                  } else {
-                    isFireplaceDetectedInDatabase = false;
-                    update();
-
-                    Get.defaultDialog(
-                      titlePadding: EdgeInsets.zero,
-                      content: Text(
-                        'Камин с именем $wifiName не распознан',
-                        style: Get.textTheme.headline2,
-                      ),
-                    );
-                  }
-                },
-              ); //получаю данные по локальным сетям
-            }
-          } catch (error) {
-            print(
-                'error from searchFireplaceInListWithIdWifi _wifiNameHomeNetworkFromLocalStorage $error');
+          //проверка всех типов камина  ///delete after test
+          if (wifiName == _listWifiName.elementAt(0)) {
+            detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+              nameFireplace: ListNamesFireplace.smartPrime1000,
+            );
+            return;
+          } else if (wifiName == _listWifiName.elementAt(1)) {
+            detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+              nameFireplace: ListNamesFireplace.smartFireA71000,
+            );
+            return;
+          } else if (wifiName == _listWifiName.elementAt(2)) {
+            detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+              nameFireplace: ListNamesFireplace.smartFireA51000,
+            );
+            return;
+          } else if (wifiName == _listWifiName.elementAt(3)) {
+            detectedFireplaceFromSearchFireplaceInListWithIdWifi(
+              nameFireplace: ListNamesFireplace.smartFireA31000,
+            );
             return;
           }
         } else {
-          isFireplaceDetectedInDatabase = null;
+          /// проверяю по сохраненному в память листу с именами домашних сетей
+          log("проверяю по сохраненному в память листу с именами домашних сетей");
 
-          ///todo dialog with instruction
+          await services
+              .getInstanceHiveHomeLocalNetworksData(keyWifiName: wifiName)
+              .then(
+            (Box<HomeNetworkModel>? newHomeLocalNetworksData) {
+              if (newHomeLocalNetworksData != null &&
+                  newHomeLocalNetworksData.isNotEmpty) {
+                homeLocalNetworksData = newHomeLocalNetworksData;
+                update();
+                isFireplaceDetectedInDatabase = true;
+                for (var homeNetwork in newHomeLocalNetworksData.values) {
+                  if (homeNetwork.nameHomeWifiNetwork.toLowerCase() ==
+                      wifiName!.toLowerCase()) {
+                    wifiName = homeNetwork.nameFromListListWifiName;
+                    update();
+                  }
+                }
+              } else {
+                isFireplaceDetectedInDatabase = false;
+                update();
+
+                Get.defaultDialog(
+                  titlePadding: EdgeInsets.zero,
+                  content: Text(
+                    'Камин с именем $wifiName не распознан',
+                    style: Get.textTheme.headline2,
+                  ),
+                );
+              }
+            },
+          ); //получаю данные по локальным сетям
         }
       } catch (error) {
         throw Exception(
             '$error from searchFireplaceInListWithIdWifi Business Layout');
       }
+    } else {
+      isFireplaceDetectedInDatabase = false;
+      update();
+      Get.defaultDialog(
+        titlePadding: EdgeInsets.zero,
+        content: Column(
+          children: [
+            Text(
+              "Ошибка подключения, посмотрите интсрукцию\n",
+              style: Get.textTheme.headline2,
+              textAlign: TextAlign.center,
+            ),
+            GestureDetector(
+              onTap: () {
+                print('todo url instruction');
+
+                ///todo url instruction
+              },
+              child: Text(
+                "ИНСТРУКЦИЯ",
+                style: Get.textTheme.headline2,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+        title: 'WiFi is null',
+      );
     }
   }
 
   //получение данных о сети wifi через пакет network_info_plus
-  Future<void> _initNetworkInfo() async {
+  Future<String?> _initNetworkInfo() async {
     await Hive.initFlutter(); //иннициализируем
     // для сложных типов нужно зарегистрировать адаптеры
     Hive.registerAdapter(HomeNetworkModelAdapter());
-
-    wifiName = await NetworkInfo().getWifiName();
-    update();
+    return await NetworkInfo().getWifiName();
   }
 
   ///отдельно для контроллера SmartA1000
